@@ -98,10 +98,11 @@ body.light-mode .hero-glow-2 {
 }
 body.light-mode .scroll-indicator span { color: rgba(15,10,40,0.45); }
 
-/* Cards & sections — darken the card thumb gradients for readability */
-/* Real screenshot thumbs must NOT be filtered (was for dark CSS gradient placeholders only) */
-body.light-mode .project-thumb-real { filter: none !important; }
-body.light-mode .blog-thumb         { filter: brightness(2.8) saturate(0.35); }
+/* Cards & sections — Real photography & screenshot thumbs must NOT be filtered */
+body.light-mode .project-thumb-real,
+body.light-mode .blog-thumb {
+  filter: none !important;
+}
 
 /* Project card body: explicit dark text in light mode to prevent gradient bleed */
 body.light-mode .project-card {
@@ -2461,7 +2462,8 @@ body.light-mode .cta-strip-title {
 }
 
 body.light-mode .photo-badge {
-  background: rgba(255,255,255,0.9);
-  color: var(--accent-purple);
-  border-color: rgba(99,102,241,0.25);
+  background: rgba(15, 10, 40, 0.82);
+  color: #a78bfa;
+  border-color: rgba(167,139,250,0.3);
+  font-weight: 600;
 }
