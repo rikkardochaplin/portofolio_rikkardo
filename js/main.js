@@ -553,17 +553,17 @@ function initContactForm() {
 function initThemeToggle() {
   const btn  = document.getElementById('theme-toggle');
   const icon = document.getElementById('theme-icon');
-  if (!btn || !icon) return;
 
-  // Apply saved theme on load
+  // Apply saved theme on load regardless of toggle button presence
   const savedTheme = localStorage.getItem('portfolio-theme');
   if (savedTheme === 'light') {
     document.body.classList.add('light-mode');
-    icon.className = 'fa-solid fa-sun';
+    if (icon) icon.className = 'fa-solid fa-sun';
   }
 
+  if (!btn || !icon) return;
+
   btn.addEventListener('click', () => {
-    // Add transition class, toggle theme, remove class after animation
     document.body.classList.add('theme-transitioning');
     document.body.classList.toggle('light-mode');
 
@@ -571,7 +571,6 @@ function initThemeToggle() {
     icon.className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
     localStorage.setItem('portfolio-theme', isLight ? 'light' : 'dark');
 
-    // Remove transition helper after animation completes
     setTimeout(() => document.body.classList.remove('theme-transitioning'), 420);
   });
 }
