@@ -1912,6 +1912,19 @@ section { padding: var(--section-pad); position: relative; }
 @media (max-width: 768px) {
   :root { --section-pad: 80px 0; }
 
+  /* Defer off-screen section rendering on mobile for 60fps smooth scrolling */
+  #services,
+  #skills,
+  #portfolio,
+  #experience,
+  #testimonials,
+  #blog,
+  #contact,
+  .cta-strip {
+    content-visibility: auto;
+    contain-intrinsic-size: 1px 600px;
+  }
+
   .nav-links { display: none; flex-direction: column; }
   .nav-links.open {
     display: flex;

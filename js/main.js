@@ -33,6 +33,13 @@ function initCursor() {
   const follower = document.getElementById('cursor-follower');
   if (!cursor || !follower) return;
 
+  // Disable custom cursor on mobile/touchscreens to boost rendering FPS
+  if (window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches) {
+    cursor.style.display = 'none';
+    follower.style.display = 'none';
+    return;
+  }
+
   let mouseX = 0, mouseY = 0;
   let followerX = 0, followerY = 0;
   let rafId;
@@ -216,12 +223,14 @@ function initParticles() {
   }
 
   function createParticles() {
-    const count = Math.min(Math.floor((canvas.width * canvas.height) / 12000), 120);
+    const isMobile = window.innerWidth < 768;
+    const count = isMobile ? 14 : Math.min(Math.floor((canvas.width * canvas.height) / 12000), 90);
     particles = Array.from({ length: count }, () => new Particle());
   }
   createParticles();
 
   function connectParticles() {
+    if (window.innerWidth < 768) return; // Skip line connecting loop on mobile GPUs
     const maxDist = 110;
     const isLight = document.body.classList.contains('light-mode');
     const rgb = isLight ? '79,70,229' : '129,140,248';
@@ -641,7 +650,7 @@ function initScrollProgress() {
    3D TILT EFFECT ON CARDS
    ============================================ */
 function initTiltEffect() {
-  if ('ontouchstart' in window) return;
+  if ('ontouchstart' in window || window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches) return;
 
   const cards = document.querySelectorAll('.project-card:not(.project-card--featured), .service-card');
 
@@ -675,7 +684,7 @@ function initTiltEffect() {
    MAGNETIC BUTTON EFFECT
    ============================================ */
 function initMagneticButtons() {
-  if ('ontouchstart' in window) return;
+  if ('ontouchstart' in window || window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches) return;
 
   const btns = document.querySelectorAll('.hero-btns .btn, .cta-strip-btns .btn');
 
