@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Visual Story — Rikkardo L. Tobing</title>
+  <meta name="description" content="Photography &amp; Visual Story by Rikkardo L. Tobing" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+  <style>
+    .article-hero {
+      padding: 140px 0 60px;
+    }
+    .back-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+      color: var(--accent-violet);
+      margin-bottom: 30px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .back-btn:hover {
+      transform: translateX(-6px);
+      color: var(--text-primary);
+    }
+    .article-header {
+      max-width: 840px;
+      margin-bottom: 40px;
+    }
+    .article-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-mono);
+      font-size: 0.75rem;
+      color: var(--accent-cyan);
+      background: rgba(167,139,250,0.1);
+      border: 1px solid rgba(167,139,250,0.2);
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 20px;
+      text-transform: uppercase;
+    }
+    .article-title {
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 800;
+      line-height: 1.2;
+      margin-bottom: 20px;
+      letter-spacing: -0.02em;
+    }
+    .article-meta {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      font-family: var(--font-mono);
+    }
+    .article-meta span {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .article-image-box {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto 50px;
+      border-radius: 24px;
+      overflow: hidden;
+      border: 1px solid var(--glass-border);
+      box-shadow: 0 30px 80px rgba(0,0,0,0.5);
+    }
+    .article-image-box img {
+      width: 100%;
+      height: auto;
+      max-height: 75vh;
+      object-fit: contain;
+      background: rgba(0,0,0,0.4);
+      display: block;
+    }
+    .article-body-container {
+      max-width: 760px;
+      margin: 0 auto 100px;
+      font-size: 1.1rem;
+      line-height: 1.9;
+      color: var(--text-secondary);
+    }
+    .article-body-container p {
+      margin-bottom: 24px;
+    }
+    .article-quote {
+      border-left: 3px solid var(--accent-violet);
+      padding-left: 24px;
+      margin: 36px 0;
+      font-style: italic;
+      font-size: 1.2rem;
+      color: var(--text-primary);
+    }
+    .photo-details-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      padding: 24px;
+      border-radius: 16px;
+      margin: 40px 0;
+    }
+    .photo-detail-item {
+      font-family: var(--font-mono);
+    }
+    .detail-label {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+    .detail-val {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-top: 4px;
+    }
+    @media (max-width: 600px) {
+      .photo-details-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Scroll Progress -->
+  <div id="scroll-progress"></div>
+
+  <!-- Navbar -->
+  <nav id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="index.html" class="nav-logo">Rikkardo<span> L. Tobing</span></a>
+        <ul class="nav-links">
+          <li><a href="index.html#hero" class="nav-link">Home</a></li>
+          <li><a href="index.html#portfolio" class="nav-link">Work</a></li>
+          <li><a href="index.html#blog" class="nav-link">Visual Stories</a></li>
+          <li><a href="index.html#contact" class="nav-cta nav-link">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main class="article-hero">
+    <div class="container">
+      
+      <a href="index.html#blog" class="back-btn">
+        <i class="fa-solid fa-arrow-left"></i> Back to Visual Stories
+      </a>
+
+      <div class="article-header">
+        <span class="article-tag" id="art-tag"><i class="fa-solid fa-camera"></i> Street Photography</span>
+        <h1 class="article-title" id="art-title">Gold in the Mist: The Unseen Workers of Jakarta</h1>
+        <div class="article-meta">
+          <span><i class="fa-solid fa-location-dot"></i> <span id="art-location">Jakarta, Indonesia</span></span>
+          <span><i class="fa-solid fa-calendar"></i> <span id="art-date">August 2026</span></span>
+          <span><i class="fa-solid fa-user"></i> Photo &amp; Story by Rikkardo L. Tobing</span>
+        </div>
+      </div>
+
+      <div class="article-image-box">
+        <img id="art-img" src="Photo/f732741c-ebf2-44c7-a695-bb22e67b1b09.jpeg" alt="Story Photo" />
+      </div>
+
+      <div class="article-body-container">
+
+        <div class="photo-details-grid">
+          <div class="photo-detail-item">
+            <div class="detail-label">Location</div>
+            <div class="detail-val" id="det-location">Jakarta, Indonesia</div>
+          </div>
+          <div class="photo-detail-item">
+            <div class="detail-label">Mood / Lighting</div>
+            <div class="detail-val" id="det-mood">Golden Hour Sunset</div>
+          </div>
+          <div class="photo-detail-item">
+            <div class="detail-label">Category</div>
+            <div class="detail-val" id="det-cat">Street Photography</div>
+          </div>
+        </div>
+
+        <div id="art-content">
+          <p>
+            Di tengah teriknya siang menjelang sore kota Jakarta, ritme kehidupan terus berjalan tanpa henti. Foto ini mengabadikan momen sederhana namun sarat makna tentang perjuangan dan kerja keras para pekerja di bawah kilauan cahaya sore.
+          </p>
+          <div class="article-quote">
+            "Cahaya matahari tidak pernah memilih tempat untuk bersinar — ia menyinari setiap tetes air dan keringat dengan keindahan yang sama."
+          </div>
+          <p>
+            Ketika cipratan air disemprotkan untuk membersihkan area jalanan, siluet air berpadu dengan sinar matahari sore yang hangat, menciptakan efek seperti tirai emas cair. Momen ini berlangsung sangat cepat — hanya hitungan detik sebelum angin bertiup dan mengubah bentuknya.
+          </p>
+          <p>
+            Lewat lensa ini, saya ingin merekam keindahan di tempat-tempat yang paling jarang diperhatikan orang. Bahwa di balik hiruk-pikuk ibu kota, selalu ada harmoni antara manusia, cahaya, dan momen.
+          </p>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="index.html" class="footer-logo">Rikkardo L. Tobing</a>
+        <p class="footer-copy">© 2026 <span>Rikkardo L. Tobing</span>. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Stories Database
+    const stories = {
+      'gold-in-the-mist': {
+        title: 'Gold in the Mist: The Unseen Workers',
+        tag: 'Street Photography',
+        location: 'Jakarta, Indonesia',
+        date: '2026',
+        mood: 'Golden Hour Sunset',
+        cat: 'Street & Human Interest',
+        img: 'Photo/f732741c-ebf2-44c7-a695-bb22e67b1b09.jpeg',
+        content: `
+          <p>Di tengah teriknya siang menjelang sore kota Jakarta, ritme kehidupan terus berjalan tanpa henti. Foto ini mengabadikan momen sederhana namun sarat makna tentang perjuangan dan kerja keras para pekerja di bawah kilauan cahaya sore.</p>
+          <div class="article-quote">"Cahaya matahari tidak pernah memilih tempat untuk bersinar — ia menyinari setiap tetes air dan keringat dengan keindahan yang sama."</div>
+          <p>Ketika cipratan air disemprotkan untuk membersihkan jalanan, siluet air berpadu dengan sinar matahari sore yang hangat, menciptakan efek seperti tirai emas cair. Momen ini berlangsung sangat cepat — hanya hitungan detik sebelum angin bertiup dan mengubah bentuknya.</p>
+          <p>Lewat lensa ini, saya ingin merekam keindahan di tempat-tempat yang paling jarang diperhatikan orang. Bahwa di balik hiruk-pikuk ibu kota, selalu ada harmoni antara manusia, cahaya, dan momen.</p>
+        `
+      },
+      'silhouettes-scbd': {
+        title: 'Silhouettes of Ambition: Sunset Over SCBD',
+        tag: 'Urban Landscape',
+        location: 'SCBD, Jakarta',
+        date: '2026',
+        mood: 'Dusk & City Skyline',
+        cat: 'Architecture & Sunset',
+        img: 'Photo/70422342-1920-42e3-93aa-901bd73044f4.jpeg',
+        content: `
+          <p>Sudut pandang kota Jakarta saat bola matahari terbenam tepat di celah antara pencakar langit megah kawasan bisnis SCBD. Siluet gedung-gedung tinggi berdiri kokoh menantang senja.</p>
+          <div class="article-quote">"Setiap gedung bertingkat menyimpan ribuan impian, dan senja hadir untuk mengingatkan bahwa setiap usaha layak mendapatkan waktu untuk beristirahat."</div>
+          <p>Gradasi warna langit dari keemasan hingga keabu-abuan menciptakan suasana kontemplatif di tengah megahnya arsitektur modern Jakarta. Pengingat betapa kecilnya kita di hadapan waktu dan besarnya lanskap yang kita bangun.</p>
+        `
+      },
+      'kebayoran-station': {
+        title: 'Golden Hour at Platform 2: Kebayoran Station',
+        tag: 'Transit & Urban Life',
+        location: 'Stasiun Kebayoran, Jakarta',
+        date: '2026',
+        mood: 'Warm Amber Sunset',
+        cat: 'Urban Commute',
+        img: 'Photo/1c5ec77c-2dbb-4c94-8972-b37be21b970b.jpeg',
+        content: `
+          <p>Stasiun kereta api di kala sore selalu menyimpan sejuta cerita perjalanan. Sinar matahari senja menerobos tiang-tiang kanopi Stasiun Kebayoran, memproyeksikan bayangan panjang di atas peron dan rel kereta.</p>
+          <div class="article-quote">"Rel kereta adalah simbol tujuan, namun peron dan cahaya senja adalah tempat di mana kita merenungkan ke mana arah perjalanan kita sesungguhnya."</div>
+          <p>Suasana tenang di peron 2 sesaat sebelum kereta berikutnya tiba. Perpaduan antara struktur besi industrial dengan hangatnya alam.</p>
+        `
+      },
+      'welcome-to-isekai': {
+        title: 'Welcome to Isekai: Among Books & Dreams',
+        tag: 'Culture & Lifestyle',
+        location: 'Jakarta',
+        date: '2026',
+        mood: 'Warm Wooden Interiors',
+        cat: 'Interior & Literature',
+        img: 'Photo/ac62e452-a485-48c3-8910-3121f9d75b12.jpeg',
+        content: `
+          <p>Deretan rak kayu yang menjulang tinggi diisi dengan ribuan buku dan komik. Tempat ini terasa seperti gerbang menuju dunia lain — sebuah pelarian sejenak dari bisingnya aktivitas kota.</p>
+          <div class="article-quote">"Membaca adalah petualangan tanpa batas tempat. Di antara rak-rak ini, setiap judul adalah pintu menuju petualangan baru."</div>
+          <p>Sudut ruangan ini menghadirkan estetika visual yang rapi dan menenangkan. Setiap kategori menyambut siapapun yang ingin tenggelam dalam kehangatan kisah dan imajinasi.</p>
+        `
+      },
+      'sun-and-bulb': {
+        title: 'Two Sources of Light: Sun & Bulb',
+        tag: 'Conceptual Photography',
+        location: 'Jakarta Sky View',
+        date: '2026',
+        mood: 'Overcast Atmospheric',
+        cat: 'Minimalist & Perspective',
+        img: 'Photo/927d476c-ebb0-4711-a1b9-5663bb9dc8e8.jpeg',
+        content: `
+          <p>Sebuah eksperimen sudut pandang (perspective play). Bohlam gantung buatan manusia berjejer persis di atas bola matahari alami yang bersinar terhalang awan tipis.</p>
+          <div class="article-quote">"Manusia menciptakan lampu untuk menerangi kegelapan, namun alam selalu menjadi sumber cahaya sejati."</div>
+          <p>Komposisi ini mengajak kita melihat interaksi unik antara karya manusia dan keagungan ciptaan alam dalam satu bingkai.</p>
+        `
+      },
+      'jiexpo-dusk': {
+        title: 'Dusk Over JIEXPO Kemayoran',
+        tag: 'Architecture & Event',
+        location: 'JIEXPO Kemayoran',
+        date: '2026',
+        mood: 'Dusty Orange Horizon',
+        cat: 'Exhibition & Skyline',
+        img: 'Photo/d4b42879-a92f-4b67-b5ab-276e1b17499b.jpeg',
+        content: `
+          <p>Setelah hiruk-pikuk pameran internasional mereda dan ribuan pengunjung meninggalkan area hall, matahari senja hinggap perlahan di atas bangunan JIEXPO Kemayoran.</p>
+          <div class="article-quote">"Pameran bisnis adalah tentang pertemuan manusia dan ide-ide baru; senja adalah penutup anggun bagi hari yang penuh produktivitas."</div>
+          <p>Sebagai seseorang yang mengelola platform digital untuk pameran B2B di sini, momen senja di Kemayoran selalu membawa kesan tersendiri bagi saya.</p>
+        `
+      }
+    };
+
+    // Parse URL params
+    const params = new URLSearchParams(window.location.search);
+    const storyId = params.get('id') || 'gold-in-the-mist';
+    const data = stories[storyId] || stories['gold-in-the-mist'];
+
+    // Render Page Data
+    document.getElementById('art-title').innerText = data.title;
+    document.title = data.title + ' — Rikkardo L. Tobing';
+    document.getElementById('art-tag').innerHTML = `<i class="fa-solid fa-camera"></i> ${data.tag}`;
+    document.getElementById('art-location').innerText = data.location;
+    document.getElementById('art-date').innerText = data.date;
+    document.getElementById('art-img').src = data.img;
+    document.getElementById('art-img').alt = data.title;
+    document.getElementById('det-location').innerText = data.location;
+    document.getElementById('det-mood').innerText = data.mood;
+    document.getElementById('det-cat').innerText = data.cat;
+    document.getElementById('art-content').innerHTML = data.content;
+
+    // Scroll progress
+    window.addEventListener('scroll', () => {
+      const scrolled = window.scrollY;
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      document.getElementById('scroll-progress').style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+    });
+  </script>
+</body>
+</html>
