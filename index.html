@@ -1,0 +1,1097 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rikkardo L. Tobing — Web Developer &amp; CMS Specialist Jakarta</title>
+  <meta name="description"
+    content="Portfolio of Rikkardo L. Tobing — Data &amp; Tech Support Executive and Web Developer at Informa Markets Asia. Managing 8 international B2B event websites across Southeast Asia." />
+  <meta name="keywords"
+    content="web developer, wordpress, CMS specialist, SEO, Informa Markets, Pamerindo, Jakarta, Indonesia, frontend developer, rikkardo tobing" />
+  <meta property="og:title" content="Rikkardo L. Tobing — Web Developer &amp; CMS Specialist" />
+  <meta property="og:description"
+    content="Data &amp; Tech Support Executive and Web Developer managing 8 international B2B event websites across Southeast Asia." />
+  <meta property="og:type" content="website" />
+  <!-- Fonts & Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Fira+Code:wght@300;400;500&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <!-- ── Scroll Progress ── -->
+  <div id="scroll-progress"></div>
+
+  <!-- ── Custom Cursor ── -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursor-follower"></div>
+
+  <!-- ── Back to Top ── -->
+  <button id="back-top" aria-label="Back to top">
+    <i class="fa-solid fa-arrow-up"></i>
+  </button>
+
+  <!-- ============================================
+       NAVIGATION
+       ============================================ -->
+  <nav id="navbar">
+    <div class="container">
+      <div class="nav-inner">
+        <a href="#hero" class="nav-logo">Rikkardo<span> L. Tobing</span></a>
+
+        <ul class="nav-links" id="nav-links">
+          <li><a href="#about" class="nav-link">About</a></li>
+          <li><a href="#services" class="nav-link">Services</a></li>
+          <li><a href="#skills" class="nav-link">Skills</a></li>
+          <li><a href="#portfolio" class="nav-link">Work</a></li>
+          <li><a href="#experience" class="nav-link">Experience</a></li>
+          <li><a href="#contact" class="nav-cta nav-link">Let's Talk</a></li>
+        </ul>
+
+        <!-- Theme Toggle -->
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle theme">
+          <i class="fa-solid fa-moon" id="theme-icon"></i>
+        </button>
+
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+          <span></span><span></span><span></span>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ============================================
+       HERO SECTION
+       ============================================ -->
+  <section id="hero">
+    <canvas id="particles-canvas"></canvas>
+    <div class="hero-glow hero-glow-1"></div>
+    <div class="hero-glow hero-glow-2"></div>
+
+    <div class="container">
+      <div class="hero-grid">
+
+        <!-- Left: Content -->
+        <div class="hero-content">
+          <div class="hero-eyebrow">
+            <span class="dot"></span> Available for new projects
+          </div>
+
+          <p class="hero-greeting">Hello, World! 👋 I'm</p>
+
+          <h1 class="hero-name">
+            <span class="highlight">Rikkardo L. Tobing</span>
+          </h1>
+
+          <p class="hero-title">
+            &lt; <span class="typewriter-text" id="typewriter"></span><span class="typewriter-cursor"></span> /&gt;
+          </p>
+
+          <p class="hero-description">
+            Data &amp; Tech Support Executive and Web Developer at Informa Markets Asia.
+            Managing 8 international B2B event websites across Southeast Asia.
+          </p>
+
+          <div class="hero-btns">
+            <a href="#portfolio" class="btn btn-primary">
+              <i class="fa-solid fa-rocket"></i> View My Work
+            </a>
+            <a href="#contact" class="btn btn-outline">
+              <i class="fa-solid fa-paper-plane"></i> Get In Touch
+            </a>
+          </div>
+
+          <div class="hero-socials">
+            <span>// find me on</span>
+            <a href="https://rikkardochaplin.github.io/portofolio_rikkardo/" target="_blank" rel="noopener noreferrer"
+              id="hero-github" aria-label="GitHub" title="GitHub">
+              <i class="fa-brands fa-github"></i>
+            </a>
+            <a href="https://id.linkedin.com/in/rikkardo-l-tobing" target="_blank" rel="noopener noreferrer"
+              id="hero-linkedin" aria-label="LinkedIn" title="LinkedIn">
+              <i class="fa-brands fa-linkedin-in"></i>
+            </a>
+            <a href="mailto:rikkardotobing1@gmail.com" id="hero-twitter" aria-label="Email" title="Email">
+              <i class="fa-solid fa-envelope"></i>
+            </a>
+          </div>
+        </div>
+
+        <!-- Right: Profile Visual -->
+        <div class="hero-visual">
+          <div class="hero-profile-wrap">
+            <div class="hero-profile-ring"></div>
+            <div class="hero-profile-img-container">
+              <img src="assets/images/profile.png" alt="Rikkardo L. Tobing — Web Developer" />
+            </div>
+
+            <div class="hero-float-badge badge-1">
+              <span class="flt-icon">🌐</span>
+              <div class="flt-info">
+                <div class="flt-val">8</div>
+                <div class="flt-label">Websites Managed</div>
+              </div>
+            </div>
+
+            <div class="hero-float-badge badge-2">
+              <span class="flt-icon">👥</span>
+              <div class="flt-info">
+                <div class="flt-val">100K+</div>
+                <div class="flt-label">Visitors / Year</div>
+              </div>
+            </div>
+
+            <div class="hero-float-badge badge-3">
+              <span class="flt-icon">⭐</span>
+              <div class="flt-info">
+                <div class="flt-val">2+</div>
+                <div class="flt-label">Years Exp.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="scroll-indicator">
+      <div class="scroll-line"></div>
+      <span>scroll</span>
+    </div>
+  </section>
+
+  <!-- ============================================
+       ABOUT SECTION
+       ============================================ -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+
+        <!-- Image -->
+        <div class="reveal-left">
+          <div class="about-img-wrap">
+            <div class="about-img-frame">
+              <img src="assets/images/profile.png" alt="Rikkardo L. Tobing — Web Developer" />
+            </div>
+            <div class="about-img-badge">
+              <div class="badge-num">2+</div>
+              <div class="badge-label">Years of<br>Experience</div>
+            </div>
+            <div class="about-img-glow"></div>
+          </div>
+        </div>
+
+        <!-- Content -->
+        <div class="reveal-right">
+          <div class="section-tag about-tag">About Me</div>
+          <h2 class="about-title">
+            Building impactful<br>
+            <span class="highlight">digital experiences</span>
+          </h2>
+          <p class="about-text">
+            Hi! I'm <strong>Rikkardo L. Tobing</strong>, a Data &amp; Tech Support Executive and Web Developer based in
+            Jakarta, Indonesia.
+            I specialize in WordPress CMS, system optimization, and building high-performance event platforms for
+            international B2B trade exhibitions.
+          </p>
+          <p class="about-text">
+            Currently at <strong>Informa Markets Asia</strong>, I oversee 8 major event websites serving 100,000+
+            visitors and 7,000+ exhibitors across Southeast Asia.
+            I leverage Google Analytics, ITIL best practices, and modern web technologies to deliver scalable,
+            data-driven digital solutions.
+          </p>
+
+          <div class="about-stats">
+            <div class="stat-card">
+              <div class="stat-num" data-target="2">0</div>
+              <div class="stat-label">Years Exp.</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num" data-target="8">0</div>
+              <div class="stat-label">Websites Managed</div>
+            </div>
+            <div class="stat-card">
+              <div class="stat-num" data-target="100">0</div>
+              <div class="stat-label">K+ Visitors/Year</div>
+            </div>
+          </div>
+
+          <div style="display:flex; gap:12px; flex-wrap:wrap;">
+            <a href="assets/data/Rikkardo L. Tobing - Resume.pdf" target="_blank" class="btn btn-primary"
+              id="download-cv" download>
+              <i class="fa-solid fa-download"></i> Download CV
+            </a>
+            <a href="#contact" class="btn btn-outline">
+              <i class="fa-solid fa-envelope"></i> Hire Me
+            </a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SERVICES SECTION
+       ============================================ -->
+  <section id="services">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">What I Do</div>
+        <h2 class="section-title">My <span class="highlight">Services</span></h2>
+        <p class="section-subtitle">Tailored digital solutions to help your business thrive and grow online.</p>
+      </div>
+
+      <div class="services-grid">
+
+        <div class="service-card reveal" style="transition-delay:0.1s">
+          <div class="service-icon"><i class="fa-solid fa-code"></i></div>
+          <h3 class="service-title">Web Development</h3>
+          <p class="service-desc">Building fast, responsive, and visually stunning websites that convert visitors into
+            loyal clients and partners.</p>
+          <ul class="service-features">
+            <li>WordPress &amp; Custom Sites</li>
+            <li>HTML / CSS / JavaScript</li>
+            <li>Responsive &amp; Mobile-First</li>
+            <li>Performance Optimization</li>
+          </ul>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay:0.2s">
+          <div class="service-icon"><i class="fa-solid fa-layer-group"></i></div>
+          <h3 class="service-title">CMS Management</h3>
+          <p class="service-desc">Expert WordPress setup, customization, and ongoing management for event platforms and
+            business websites.</p>
+          <ul class="service-features">
+            <li>WordPress &amp; Elementor</li>
+            <li>Plugin &amp; Theme Setup</li>
+            <li>WooCommerce Integration</li>
+            <li>Content &amp; Media Updates</li>
+          </ul>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay:0.3s">
+          <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
+          <h3 class="service-title">SEO &amp; Analytics</h3>
+          <p class="service-desc">Data-driven strategies to boost your search rankings and track digital performance
+            with precision and clarity.</p>
+          <ul class="service-features">
+            <li>On-Page SEO Optimization</li>
+            <li>Google Analytics Setup</li>
+            <li>Performance Audits</li>
+            <li>Conversion Rate Analysis</li>
+          </ul>
+        </div>
+
+        <div class="service-card reveal" style="transition-delay:0.4s">
+          <div class="service-icon"><i class="fa-solid fa-headset"></i></div>
+          <h3 class="service-title">IT &amp; Tech Support</h3>
+          <p class="service-desc">Reliable technical support and system optimization to keep your digital infrastructure
+            running at peak performance.</p>
+          <ul class="service-features">
+            <li>System Troubleshooting</li>
+            <li>ITIL Best Practices</li>
+            <li>Data Analysis &amp; Reports</li>
+            <li>Platform Optimization</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       SKILLS SECTION
+       ============================================ -->
+  <section id="skills">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Tech Stack</div>
+        <h2 class="section-title">My <span class="highlight">Skills</span> &amp; Expertise</h2>
+        <p class="section-subtitle">Technologies and tools I've worked with and am comfortable using in production.</p>
+      </div>
+
+      <div class="skills-grid">
+
+        <!-- Web Development -->
+        <div class="skill-category reveal" style="transition-delay:0.1s">
+          <div class="skill-cat-icon">🌐</div>
+          <h3 class="skill-cat-title">Web Development</h3>
+          <p class="skill-cat-sub">// build & structure</p>
+          <div class="skill-list">
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">WordPress CMS</span><span class="skill-pct">95%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="95"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">HTML / CSS</span><span class="skill-pct">90%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="90"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">JavaScript</span><span class="skill-pct">78%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="78"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">Elementor / Gutenberg</span><span
+                  class="skill-pct">88%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="88"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">Responsive Design</span><span
+                  class="skill-pct">92%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="92"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CMS & Digital -->
+        <div class="skill-category reveal" style="transition-delay:0.2s">
+          <div class="skill-cat-icon">📊</div>
+          <h3 class="skill-cat-title">CMS & Digital</h3>
+          <p class="skill-cat-sub">// content & performance</p>
+          <div class="skill-list">
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">SEO Optimization</span><span class="skill-pct">85%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="85"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">Google Analytics</span><span class="skill-pct">80%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="80"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">WooCommerce</span><span class="skill-pct">75%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="75"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">Email Marketing</span><span class="skill-pct">72%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="72"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">PHP / MySQL</span><span class="skill-pct">68%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="68"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Design & Tools -->
+        <div class="skill-category reveal" style="transition-delay:0.3s">
+          <div class="skill-cat-icon">🎨</div>
+          <h3 class="skill-cat-title">Design & Tools</h3>
+          <p class="skill-cat-sub">// visual & workflow</p>
+          <div class="skill-list">
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">Figma</span><span class="skill-pct">82%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="82"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">Adobe Photoshop</span><span class="skill-pct">78%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="78"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">Canva</span><span class="skill-pct">90%</span></div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="90"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">Git / GitHub</span><span class="skill-pct">72%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="72"></div>
+              </div>
+            </div>
+            <div class="skill-item">
+              <div class="skill-info"><span class="skill-name">Microsoft 365</span><span class="skill-pct">88%</span>
+              </div>
+              <div class="skill-bar">
+                <div class="skill-fill" data-width="88"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Tech Badges -->
+      <div class="tech-badges reveal" style="margin-top:48px; justify-content:center;">
+        <span class="tech-badge">WordPress</span>
+        <span class="tech-badge">HTML / CSS</span>
+        <span class="tech-badge">JavaScript</span>
+        <span class="tech-badge">Elementor</span>
+        <span class="tech-badge">SEO</span>
+        <span class="tech-badge">Google Analytics</span>
+        <span class="tech-badge">Figma</span>
+        <span class="tech-badge">Adobe Photoshop</span>
+        <span class="tech-badge">Canva</span>
+        <span class="tech-badge">WooCommerce</span>
+        <span class="tech-badge">PHP</span>
+        <span class="tech-badge">MySQL</span>
+        <span class="tech-badge">Git</span>
+        <span class="tech-badge">Microsoft 365</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       PORTFOLIO SECTION
+       ============================================ -->
+  <section id="portfolio">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Portfolio</div>
+        <h2 class="section-title">Featured <span class="highlight">Projects</span></h2>
+        <p class="section-subtitle">A curated selection of my recent work — from frontend experiments to full-stack
+          applications.</p>
+      </div>
+
+
+      <div class="portfolio-grid">
+
+        <div class="project-card project-card--featured reveal" data-category="fullstack" style="transition-delay:0.1s">
+          <div class="project-thumb project-thumb-real">
+            <img src="assets/images/project-pamerindo.png" alt="Pamerindo Indonesia Website" loading="lazy" />
+            <div class="project-thumb-overlay">
+              <a href="https://www.pamerindo.com" target="_blank" rel="noopener noreferrer" class="project-link-btn"
+                title="Live Demo">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="featured-badge">
+              <i class="fa-solid fa-star"></i> Featured Project
+            </div>
+            <div class="project-tags">
+              <span class="project-tag">WordPress</span>
+              <span class="project-tag">CMS</span>
+              <span class="project-tag">B2B</span>
+              <span class="project-tag">Informa Markets</span>
+            </div>
+            <h3 class="project-title">Pamerindo Indonesia</h3>
+            <p class="project-desc">Official website for PT Pamerindo Indonesia — Southeast Asia's leading B2B trade
+              exhibition organizer. Part of Informa Markets, featuring 200+ events, 500K+ visitors across 60+ countries.
+            </p>
+            <a href="https://www.pamerindo.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary"
+              style="margin-top:20px; width:fit-content;" title="Visit Live Site">
+              <i class="fa-solid fa-arrow-up-right-from-square"></i> Visit Live Site
+            </a>
+          </div>
+        </div>
+
+
+        <div class="project-card reveal" data-category="frontend" style="transition-delay:0.15s">
+          <div class="project-thumb project-thumb-real">
+            <img src="assets/images/project-fhi.png" alt="Food & Hospitality Indonesia 2026" loading="lazy" />
+            <div class="project-thumb-overlay">
+              <a href="https://www.foodhospitalityindonesia.com" target="_blank" rel="noopener noreferrer"
+                class="project-link-btn" title="Live Demo">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">WordPress</span>
+              <span class="project-tag">CMS</span>
+              <span class="project-tag">B2B</span>
+              <span class="project-tag">Event Platform</span>
+            </div>
+            <h3 class="project-title">Food & Hospitality Indonesia</h3>
+            <p class="project-desc">Indonesia's premier B2B trade exhibition for F&B and hospitality. 20th edition (July
+              2026, JIEXPO Jakarta) — 700+ exhibitors, 40,000+ trade visitors, organized by Pamerindo · Informa Markets.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="project-card reveal" data-category="frontend" style="transition-delay:0.2s">
+          <div class="project-thumb project-thumb-real">
+            <img src="assets/images/project-labindo.png" alt="Lab Indonesia 2028" loading="lazy" />
+            <div class="project-thumb-overlay">
+              <a href="https://www.lab-indo.com" target="_blank" rel="noopener noreferrer" class="project-link-btn"
+                title="Live Demo">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">WordPress</span>
+              <span class="project-tag">CMS</span>
+              <span class="project-tag">B2B</span>
+              <span class="project-tag">Scientific</span>
+            </div>
+            <h3 class="project-title">Lab Indonesia</h3>
+            <p class="project-desc">Southeast Asia's largest trade exhibition for laboratory equipment & scientific
+              tech. Held biennially at ICE BSD — featuring 350+ exhibitors, 22,000+ professional attendees from 20+
+              countries.</p>
+          </div>
+        </div>
+
+
+        <div class="project-card reveal" data-category="fullstack" style="transition-delay:0.25s">
+          <div class="project-thumb project-thumb-real">
+            <img src="assets/images/project-fhtbali.png" alt="Food Hotel & Tourism Bali" loading="lazy" />
+            <div class="project-thumb-overlay">
+              <a href="https://www.fhtbali.com" target="_blank" rel="noopener noreferrer" class="project-link-btn"
+                title="Live Demo">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">WordPress</span>
+              <span class="project-tag">CMS</span>
+              <span class="project-tag">B2B</span>
+              <span class="project-tag">HoReCa</span>
+            </div>
+            <h3 class="project-title">Food, Hotel & Tourism Bali</h3>
+            <p class="project-desc">Eastern Indonesia's leading B2B trade exhibition for hospitality, F&B & tourism.
+              Held biennially at BNDCC Bali — connecting global suppliers with hoteliers, resort managers & culinary
+              professionals.</p>
+          </div>
+        </div>
+
+
+        <div class="project-card reveal" data-category="frontend" style="transition-delay:0.3s">
+          <div class="project-thumb project-thumb-real">
+            <img src="assets/images/project-cosmobeaute.png" alt="Cosmobeauté Indonesia" loading="lazy" />
+            <div class="project-thumb-overlay">
+              <a href="https://www.cosmobeauteasia.com/indonesia/" target="_blank" rel="noopener noreferrer"
+                class="project-link-btn" title="Live Demo">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">WordPress</span>
+              <span class="project-tag">CMS</span>
+              <span class="project-tag">B2B</span>
+              <span class="project-tag">Beauty & Wellness</span>
+            </div>
+            <h3 class="project-title">Cosmobeauté Indonesia</h3>
+            <p class="project-desc">Indonesia's largest B2B beauty trade exhibition. Held at ICE BSD — covering
+              cosmetics, skincare, aesthetics, hair, spa & beauty tech, connecting global brands with distributors &
+              salon owners.</p>
+          </div>
+        </div>
+
+
+        <div class="project-card reveal" data-category="backend" style="transition-delay:0.35s">
+          <div class="project-thumb project-thumb-real">
+            <img src="assets/images/project-vapefair.png" alt="Vape Fair Indonesia" loading="lazy" />
+            <div class="project-thumb-overlay">
+              <a href="https://www.vapefair.id" target="_blank" rel="noopener noreferrer" class="project-link-btn"
+                title="Live Demo">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">WordPress</span>
+              <span class="project-tag">CMS</span>
+              <span class="project-tag">B2C / B2B</span>
+              <span class="project-tag">Vaping Industry</span>
+            </div>
+            <h3 class="project-title">Vape Fair Indonesia</h3>
+            <p class="project-desc">Indonesia's dedicated vaping industry exhibition hub. Connecting brands,
+              manufacturers & distributors — featuring exhibitor directories, ticketing, and age-verified access
+              management.</p>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-category="fullstack" style="transition-delay:0.4s">
+          <div class="project-thumb project-thumb-real">
+            <img src="assets/images/project-cloudsfest.png" alt="Clouds Fest" loading="lazy" />
+            <div class="project-thumb-overlay">
+              <a href="https://www.cloudsfest.com" target="_blank" rel="noopener noreferrer" class="project-link-btn"
+                title="Live Demo">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">WordPress</span>
+              <span class="project-tag">CMS</span>
+              <span class="project-tag">B2B / B2C</span>
+              <span class="project-tag">Lifestyle & Trade</span>
+            </div>
+            <h3 class="project-title">Clouds Fest</h3>
+            <p class="project-desc">The next evolution of Vape Fair — a flagship lifestyle & trade exhibition for the
+              alternative nicotine sector in Southeast Asia, organized by Pamerindo · Informa Markets.</p>
+          </div>
+        </div>
+
+        <div class="project-card reveal" data-category="frontend" style="transition-delay:0.45s">
+          <div class="project-thumb project-thumb-real">
+            <img src="assets/images/project-beautefestival.png" alt="Beauté Festival" loading="lazy" />
+            <div class="project-thumb-overlay">
+              <a href="https://www.beautefestival.com" target="_blank" rel="noopener noreferrer"
+                class="project-link-btn" title="Live Demo">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+              </a>
+            </div>
+          </div>
+          <div class="project-body">
+            <div class="project-tags">
+              <span class="project-tag">WordPress</span>
+              <span class="project-tag">CMS</span>
+              <span class="project-tag">B2C / D2C</span>
+              <span class="project-tag">Beauty Lifestyle</span>
+            </div>
+            <h3 class="project-title">Beauté Festival</h3>
+            <p class="project-desc">Consumer-facing spin-off of Cosmobeauté Indonesia — a beauty lifestyle festival
+              blending retail, brand activations, masterclasses & influencer experiences for beauty enthusiasts.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       EXPERIENCE SECTION
+       ============================================ -->
+  <section id="experience">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Journey</div>
+        <h2 class="section-title">Experience & <span class="highlight">Education</span></h2>
+        <p class="section-subtitle">My professional journey and the academic foundation that shaped my skills.</p>
+      </div>
+
+      <div class="exp-grid">
+
+        <!-- Work -->
+        <div class="reveal-left">
+          <p class="exp-col-title"><i class="fa-solid fa-briefcase"></i> Work Experience</p>
+          <div class="timeline">
+
+            <div class="timeline-item">
+              <div class="timeline-dot">💼</div>
+              <div class="timeline-content">
+                <p class="timeline-period">Jul 2024 — Present</p>
+                <h4 class="timeline-title">Data & Tech Support Executive</h4>
+                <p class="timeline-org">Informa Markets Asia · Full-time · Jakarta</p>
+                <p class="timeline-desc">Data & Tech Support specialist handling IT troubleshooting, system
+                  optimization, and data analysis. Collaborates with cross-functional teams to ensure high availability
+                  of trade exhibition platforms across Southeast Asia.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot">🌐</div>
+              <div class="timeline-content">
+                <p class="timeline-period">Oct 2023 — Present</p>
+                <h4 class="timeline-title">Web Developer</h4>
+                <p class="timeline-org">Pamerindo Indonesia · Full-time · Jakarta</p>
+                <p class="timeline-desc">Managed 8 international event websites (100,000+ visitors, 7,000+ exhibitors).
+                  Improved site load speed by 30%, redesigned UI/UX, and launched new platforms for Lab Indonesia, Lab
+                  Vietnam &amp; Cosmobeauté Indonesia.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="reveal-right">
+          <p class="exp-col-title"><i class="fa-solid fa-graduation-cap"></i> Education</p>
+          <div class="timeline">
+
+            <div class="timeline-item">
+              <div class="timeline-dot">🎓</div>
+              <div class="timeline-content">
+                <p class="timeline-period">Apr 2023 — Feb 2024</p>
+                <h4 class="timeline-title">S1 — Sistem Komputer</h4>
+                <p class="timeline-org">Universitas Gunadarma · GPA 3.78/4.00 · Full Scholarship</p>
+                <p class="timeline-desc">Thesis: Traveling Violation Detection System in Basketball Matches using Deep
+                  Learning (YOLOv8 Algorithm).</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot">📜</div>
+              <div class="timeline-content">
+                <p class="timeline-period">Sep 2019 — Aug 2022</p>
+                <h4 class="timeline-title">D3 — Teknik Komputer</h4>
+                <p class="timeline-org">Universitas Gunadarma · GPA 3.77/4.00 · Full Scholarship</p>
+                <p class="timeline-desc">Head of Computer Engineering Student Association (Himatekkom). Recipient of
+                  Full Education Scholarship D3 Computer Engineering.</p>
+              </div>
+            </div>
+
+            <div class="timeline-item">
+              <div class="timeline-dot">🏆</div>
+              <div class="timeline-content">
+                <p class="timeline-period">2022 — 2024</p>
+                <h4 class="timeline-title">Certifications</h4>
+                <p class="timeline-org">Fortinet NSE 1 &amp; 2 · BNSP Junior Network Technician · ServiceNow · Azure
+                  Fundamentals · TOEFL 513</p>
+                <p class="timeline-desc">Fortinet Certified Fundamentals in Cybersecurity, BNSP 2022 Junior Computer
+                  Network Technician, ServiceNow Fundamentals, Azure Fundamentals AZ-900.</p>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       TESTIMONIALS SECTION
+       ============================================ -->
+  <section id="testimonials">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Testimonials</div>
+        <h2 class="section-title">What <span class="highlight">Clients Say</span></h2>
+        <p class="section-subtitle">Feedback from people I've had the pleasure of working with.</p>
+      </div>
+
+      <div class="testimonials-slider reveal">
+        <div class="testimonials-track" id="testimonials-track">
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-text">"Working with this developer was an absolute pleasure. They delivered our
+              e-commerce platform on time, with zero bugs, and the UI is simply stunning. Highly recommended!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar">AR</div>
+              <div>
+                <p class="author-name">Alex Richardson</p>
+                <p class="author-role">CEO · ShopNow Indonesia</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-text">"Exceptional technical skills combined with great communication. They understood
+              our requirements perfectly and turned our vision into a beautiful, functional product."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar" style="background: linear-gradient(135deg,#4f46e5,#6366f1)">SP</div>
+              <div>
+                <p class="author-name">Sarah Pratiwi</p>
+                <p class="author-role">Product Manager · TechVenture</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
+            </div>
+            <p class="testimonial-text">"Our dashboard's performance improved dramatically after the refactor. The code
+              is clean, well-documented, and easy for our team to maintain. Great investment!"</p>
+            <div class="testimonial-author">
+              <div class="author-avatar" style="background: linear-gradient(135deg,#818cf8,#6366f1)">MB</div>
+              <div>
+                <p class="author-name">Michael Budiman</p>
+                <p class="author-role">CTO · DataFlow Analytics</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="testimonial-card">
+            <div class="testimonial-stars">
+              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
+                class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+            </div>
+            <p class="testimonial-text">"Delivered a complex real-time application ahead of schedule. The attention to
+              detail in both the backend architecture and frontend polish is truly impressive."</p>
+            <div class="testimonial-author">
+              <div class="author-avatar" style="background: linear-gradient(135deg,#f59e0b,#ef4444)">DW</div>
+              <div>
+                <p class="author-name">Diana Wijaya</p>
+                <p class="author-role">Founder · ConnectHub</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="slider-controls">
+        <button class="slider-btn" id="prev-slide" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
+        <div class="slider-dots" id="slider-dots">
+          <div class="slider-dot active" data-index="0"></div>
+          <div class="slider-dot" data-index="1"></div>
+          <div class="slider-dot" data-index="2"></div>
+          <div class="slider-dot" data-index="3"></div>
+        </div>
+        <button class="slider-btn" id="next-slide" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       BLOG SECTION
+       ============================================ -->
+  <section id="blog">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Blog</div>
+        <h2 class="section-title">Latest <span class="highlight">Articles</span></h2>
+        <p class="section-subtitle">I write about web development, performance, and building great software.</p>
+      </div>
+
+      <div class="blog-grid">
+
+        <div class="blog-card reveal" style="transition-delay:0.1s">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#0c1730,#050b18);">
+            <span style="opacity:0.25;font-size:4rem;position:absolute;">⚡</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat">Performance</span>
+              <span class="blog-date">July 10, 2026</span>
+            </div>
+            <h3 class="blog-title">10 Techniques to Boost React App Performance in 2026</h3>
+            <p class="blog-excerpt">Dive deep into memoization, code splitting, virtual DOM optimization, and server
+              components to make your React apps blazing fast.</p>
+            <a href="#" class="blog-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="blog-card reveal" style="transition-delay:0.2s">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#0a1628,#0c1730);">
+            <span style="opacity:0.25;font-size:4rem;position:absolute;">🎨</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat">Design</span>
+              <span class="blog-date">June 28, 2026</span>
+            </div>
+            <h3 class="blog-title">Glassmorphism in 2026: The Complete UI Design Guide</h3>
+            <p class="blog-excerpt">A comprehensive guide to implementing glassmorphism in modern web apps — from CSS
+              backdrop-filter to browser compatibility tips.</p>
+            <a href="#" class="blog-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+        <div class="blog-card reveal" style="transition-delay:0.3s">
+          <div class="blog-thumb" style="background:linear-gradient(135deg,#080f20,#050b18);">
+            <span style="opacity:0.25;font-size:4rem;position:absolute;">🔗</span>
+          </div>
+          <div class="blog-body">
+            <div class="blog-meta">
+              <span class="blog-cat">Backend</span>
+              <span class="blog-date">June 15, 2026</span>
+            </div>
+            <h3 class="blog-title">REST vs GraphQL vs tRPC: Choosing Your API Strategy</h3>
+            <p class="blog-excerpt">A practical comparison of the three most popular API paradigms in 2026 — when to use
+              each one and why it matters for your project.</p>
+            <a href="#" class="blog-read-more">Read More <i class="fa-solid fa-arrow-right"></i></a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CONTACT SECTION
+       ============================================ -->
+  <section id="contact">
+    <div class="container">
+      <div class="section-header reveal">
+        <div class="section-tag">Contact</div>
+        <h2 class="section-title">Let's <span class="highlight">Work Together</span></h2>
+        <p class="section-subtitle">Have a project in mind? I'd love to hear about it. Let's build something great
+          together.</p>
+      </div>
+
+      <div class="contact-grid">
+
+        <!-- Info -->
+        <div class="reveal-left">
+          <h3 class="contact-info-title">Get in <span class="highlight">touch</span></h3>
+          <p class="contact-info-text">
+            I'm currently open to freelance projects and full-time opportunities.
+            Whether you have a question or just want to say hi — my inbox is always open!
+          </p>
+
+          <div class="contact-details">
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
+              <div>
+                <p class="contact-item-label">// email</p>
+                <p class="contact-item-value">rikkardotobing1@gmail.com</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
+              <div>
+                <p class="contact-item-label">// phone</p>
+                <p class="contact-item-value">+62 822-3174-5213</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
+              <div>
+                <p class="contact-item-label">// location</p>
+                <p class="contact-item-value">Jakarta, Indonesia 🇮🇩</p>
+              </div>
+            </div>
+            <div class="contact-item">
+              <div class="contact-icon"><i class="fa-solid fa-clock"></i></div>
+              <div>
+                <p class="contact-item-label">// availability</p>
+                <p class="contact-item-value">Mon–Fri, 09:00 – 18:00 WIB</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="social-links">
+            <a href="https://id.linkedin.com/in/rikkardo-l-tobing" target="_blank" rel="noopener noreferrer"
+              class="social-link" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+            <a href="https://rikkardochaplin.github.io/portofolio_rikkardo/" target="_blank" rel="noopener noreferrer"
+              class="social-link" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+            <a href="mailto:rikkardotobing1@gmail.com" class="social-link" aria-label="Email"><i
+                class="fa-solid fa-envelope"></i></a>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div class="reveal-right">
+          <form class="contact-form" id="contact-form" novalidate>
+            <div class="form-row">
+              <div class="form-group">
+                <label for="cf-name">Your Name</label>
+                <input type="text" id="cf-name" name="name" placeholder="John Doe" required />
+              </div>
+              <div class="form-group">
+                <label for="cf-email">Email Address</label>
+                <input type="email" id="cf-email" name="email" placeholder="john@example.com" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="cf-subject">Subject</label>
+              <input type="text" id="cf-subject" name="subject" placeholder="Project Inquiry" />
+            </div>
+            <div class="form-group">
+              <label for="cf-message">Message</label>
+              <textarea id="cf-message" name="message" placeholder="Tell me about your project..." required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary form-submit" id="form-submit-btn">
+              <i class="fa-solid fa-paper-plane"></i> Send Message
+            </button>
+            <div class="form-success" id="form-success">
+              <i class="fa-solid fa-circle-check"></i> Message sent successfully! I'll get back to you soon.
+            </div>
+          </form>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+       CTA STRIP
+       ============================================ -->
+  <div class="cta-strip" id="cta-strip">
+    <div class="container">
+      <div class="section-tag" style="margin: 0 auto 20px; display:table;">Let's Collaborate</div>
+      <h2 class="cta-strip-title">Ready to Build Something <span class="highlight">Amazing</span>?</h2>
+      <p class="cta-strip-sub">I'm currently open to freelance projects and exciting new opportunities. Let's turn your
+        vision into a stunning digital reality.</p>
+      <div class="cta-strip-btns">
+        <a href="#contact" class="btn btn-primary">
+          <i class="fa-solid fa-paper-plane"></i> Get In Touch
+        </a>
+        <a href="assets/data/Rikkardo L. Tobing - Resume.pdf" target="_blank" class="btn btn-outline" download>
+          <i class="fa-solid fa-download"></i> Download CV
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================
+       FOOTER
+       ============================================ -->
+  <footer id="footer">
+    <div class="container">
+      <div class="footer-inner">
+        <a href="#hero" class="footer-logo">Rikkardo L. Tobing</a>
+
+        <nav class="footer-links" aria-label="Footer navigation">
+          <a href="#about">About</a>
+          <a href="#services">Services</a>
+          <a href="#skills">Skills</a>
+          <a href="#portfolio">Work</a>
+          <a href="#experience">Experience</a>
+          <a href="#contact">Contact</a>
+        </nav>
+
+        <div class="footer-socials">
+          <a href="https://id.linkedin.com/in/rikkardo-l-tobing" target="_blank" rel="noopener noreferrer"
+            aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+          <a href="https://github.com/rikkardochaplin" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i
+              class="fa-brands fa-github"></i></a>
+          <a href="mailto:rikkardotobing1@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+        </div>
+
+        <div class="footer-divider"></div>
+
+        <div class="footer-bottom">
+          <p class="footer-copy">© 2026 <span>Rikkardo L. Tobing</span>. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+
+</html>
