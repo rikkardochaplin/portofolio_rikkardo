@@ -526,21 +526,53 @@ function initContactForm() {
 
     if (!valid) return;
 
-    // Simulate send
     submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
     submitBtn.classList.add('sending');
+    submitBtn.disabled = true;
 
-    setTimeout(() => {
+    // Send REAL email via FormSubmit API to rikkardotobing1@gmail.com
+    fetch('https://formsubmit.co/ajax/rikkardotobing1@gmail.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name.value,
+        email: email.value,
+        _subject: subject && subject.value.trim() ? subject.value.trim() : `Portfolio Message from ${name.value}`,
+        message: message.value,
+        _template: 'table'
+      })
+    })
+    .then(res => res.json())
+    .then(data => {
       submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Sent!';
       submitBtn.classList.remove('sending');
+      submitBtn.disabled = false;
       successMsg.classList.add('show');
       form.reset();
 
       setTimeout(() => {
         submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
         successMsg.classList.remove('show');
+      }, 5000);
+    })
+    .catch(err => {
+      console.warn('FormSubmit AJAX fallback:', err);
+      // Fallback: open mail client prefilled with message
+      const mailSubject = encodeURIComponent(subject && subject.value ? subject.value : 'Portfolio Message');
+      const mailBody = encodeURIComponent(`From: ${name.value} <${email.value}>\n\nMessage:\n${message.value}`);
+      window.location.href = `mailto:rikkardotobing1@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+
+      submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Opened Email Client';
+      submitBtn.classList.remove('sending');
+      submitBtn.disabled = false;
+
+      setTimeout(() => {
+        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
       }, 4000);
-    }, 1800);
+    });
   });
 }
 
