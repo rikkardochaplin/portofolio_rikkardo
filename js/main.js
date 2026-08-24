@@ -192,15 +192,48 @@ function initContactForm() {
     const btn = form.querySelector('button[type="submit"]');
     if (!btn) return;
 
+    const nameInput = document.getElementById('cf-name');
+    const emailInput = document.getElementById('cf-email');
+    const subjectInput = document.getElementById('cf-subject');
+    const messageInput = document.getElementById('cf-message');
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const subject = subjectInput ? subjectInput.value.trim() : '';
+    const message = messageInput ? messageInput.value.trim() : '';
+
+    if (!name || !email || !message) return;
+
     const originalText = btn.innerHTML;
     btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Transmitting Message...';
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending to Executive Email...';
 
-    setTimeout(() => {
-      btn.innerHTML = '<i class="fa-solid fa-check"></i> Inquiry Received';
+    // Real email transmission to rikkardotobing1@gmail.com via FormSubmit API
+    fetch('https://formsubmit.co/ajax/rikkardotobing1@gmail.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        _subject: subject ? `[Executive Portfolio] ${subject} - from ${name}` : `[Executive Portfolio Inquiry] from ${name}`,
+        message: message,
+        _template: 'table',
+        _captcha: 'false'
+      })
+    })
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      throw new Error('Network response was not ok');
+    })
+    .then(() => {
+      btn.innerHTML = '<i class="fa-solid fa-check-double"></i> Inquiry Sent to Email!';
       btn.style.background = '#10B981';
       btn.style.color = '#fff';
-
       form.reset();
 
       setTimeout(() => {
@@ -208,8 +241,26 @@ function initContactForm() {
         btn.innerHTML = originalText;
         btn.style.background = '';
         btn.style.color = '';
-      }, 4000);
-    }, 1200);
+      }, 5000);
+    })
+    .catch(err => {
+      console.warn('FormSubmit AJAX fallback triggered:', err);
+      // Fallback: Open mailto client directly with prefilled body
+      const mailSubject = encodeURIComponent(subject ? `[Executive Inquiry] ${subject}` : `Executive Inquiry from ${name}`);
+      const mailBody = encodeURIComponent(`Sender: ${name} (${email})\n\nMessage:\n${message}`);
+      window.location.href = `mailto:rikkardotobing1@gmail.com?subject=${mailSubject}&body=${mailBody}`;
+
+      btn.innerHTML = '<i class="fa-solid fa-envelope-open-text"></i> Opening Email App...';
+      btn.style.background = '#6366F1';
+      btn.style.color = '#fff';
+
+      setTimeout(() => {
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+        btn.style.background = '';
+        btn.style.color = '';
+      }, 5000);
+    });
   });
 }
 
