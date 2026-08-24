@@ -1,703 +1,831 @@
 /* ============================================
-   PORTFOLIO WEBSITE — MAIN JAVASCRIPT
+   EXECUTIVE PORTFOLIO INTERACTIVE CONTROLLER
+   Rikkardo L. Tobing | Executive Portfolio
    ============================================ */
 
-'use strict';
-
-// ── DOM ready ──────────────────────────────────
 document.addEventListener('DOMContentLoaded', () => {
-  initCursor();
   initNavbar();
-  initMobileMenu();
-  initParticles();
-  initTypewriter();
-  initScrollReveal();
-  initSkillBars();
-  initCounters();
+  initScrollProgress();
+  initBackToTop();
   initPortfolioFilter();
   initTestimonialsSlider();
-  initContactForm();
-  initBackToTop();
-  initSmoothScroll();
   initThemeToggle();
-  initScrollProgress();
-  initTiltEffect();
-  initMagneticButtons();
+  initContactForm();
+  initArchitectureModal();
 });
 
-/* ============================================
-   CUSTOM CURSOR
-   ============================================ */
-function initCursor() {
-  const cursor = document.getElementById('cursor');
-  const follower = document.getElementById('cursor-follower');
-  if (!cursor || !follower) return;
-
-  // Disable custom cursor on mobile/touchscreens to boost rendering FPS
-  if (window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches) {
-    cursor.style.display = 'none';
-    follower.style.display = 'none';
-    return;
-  }
-
-  let mouseX = 0, mouseY = 0;
-  let followerX = 0, followerY = 0;
-  let rafId;
-
-  document.addEventListener('mousemove', (e) => {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-    cursor.style.left = mouseX + 'px';
-    cursor.style.top  = mouseY + 'px';
-  });
-
-  function animateFollower() {
-    followerX += (mouseX - followerX) * 0.14;
-    followerY += (mouseY - followerY) * 0.14;
-    follower.style.left = followerX + 'px';
-    follower.style.top  = followerY + 'px';
-    rafId = requestAnimationFrame(animateFollower);
-  }
-  animateFollower();
-
-  // Hover effect on interactive elements
-  const hoverEls = document.querySelectorAll('a, button, .filter-btn, .slider-btn, .tech-badge');
-  hoverEls.forEach(el => {
-    el.addEventListener('mouseenter', () => {
-      cursor.classList.add('active');
-      follower.classList.add('active');
-    });
-    el.addEventListener('mouseleave', () => {
-      cursor.classList.remove('active');
-      follower.classList.remove('active');
-    });
-  });
-
-  // Hide on mobile
-  if ('ontouchstart' in window) {
-    cursor.style.display = 'none';
-    follower.style.display = 'none';
-    document.body.style.cursor = 'auto';
-  }
-}
-
-/* ============================================
-   NAVBAR — Scroll Behavior & Active Link
-   ============================================ */
+/* ── 1. Navbar Sticky & Mobile Toggle ── */
 function initNavbar() {
   const navbar = document.getElementById('navbar');
-  const navLinks = document.querySelectorAll('.nav-link');
-  const sections = document.querySelectorAll('section[id]');
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  if (navbar) {
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 40) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+    });
+  }
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      hamburger.classList.toggle('active');
+    });
+
+    document.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        hamburger.classList.remove('active');
+      });
+    });
+  }
+}
+
+/* ── 2. Scroll Progress Bar ── */
+function initScrollProgress() {
+  const progressBar = document.getElementById('scroll-progress');
+  if (!progressBar) return;
 
   window.addEventListener('scroll', () => {
-    // Scrolled class
-    if (window.scrollY > 60) {
-      navbar.classList.add('scrolled');
+    const windowHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    if (windowHeight <= 0) return;
+    const progress = (window.scrollY / windowHeight) * 100;
+    progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+  });
+}
+
+/* ── 3. Back to Top Button ── */
+function initBackToTop() {
+  const backTopBtn = document.getElementById('back-top');
+  if (!backTopBtn) return;
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 400) {
+      backTopBtn.classList.add('visible');
     } else {
-      navbar.classList.remove('scrolled');
+      backTopBtn.classList.remove('visible');
     }
+  });
 
-    // Active section highlight
-    let currentSection = '';
-    sections.forEach(section => {
-      const sectionTop = section.offsetTop - 120;
-      if (window.scrollY >= sectionTop) {
-        currentSection = section.id;
-      }
-    });
-
-    navLinks.forEach(link => {
-      link.classList.remove('active');
-      if (link.getAttribute('href') === '#' + currentSection) {
-        link.classList.add('active');
-      }
+  backTopBtn.addEventListener('click', () => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
     });
   });
 }
 
-/* ============================================
-   MOBILE MENU
-   ============================================ */
-function initMobileMenu() {
-  const hamburger = document.getElementById('hamburger');
-  const navLinks  = document.getElementById('nav-links');
-  if (!hamburger || !navLinks) return;
-
-  hamburger.addEventListener('click', () => {
-    hamburger.classList.toggle('open');
-    navLinks.classList.toggle('open');
-    document.body.style.overflow = navLinks.classList.contains('open') ? 'hidden' : '';
-  });
-
-  // Close on link click
-  navLinks.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', () => {
-      hamburger.classList.remove('open');
-      navLinks.classList.remove('open');
-      document.body.style.overflow = '';
-    });
-  });
-}
-
-/* ============================================
-   SMOOTH SCROLL
-   ============================================ */
-function initSmoothScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', (e) => {
-      const href = anchor.getAttribute('href');
-      if (href === '#') return;
-      const target = document.querySelector(href);
-      if (target) {
-        e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
-    });
-  });
-}
-
-/* ============================================
-   PARTICLE CANVAS
-   ============================================ */
-function initParticles() {
-  const canvas = document.getElementById('particles-canvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
-
-  let particles = [];
-  let animationFrame;
-  let mouse = { x: null, y: null };
-
-  function resize() {
-    canvas.width  = window.innerWidth;
-    canvas.height = window.innerHeight;
-  }
-  resize();
-  window.addEventListener('resize', () => { resize(); createParticles(); });
-
-  document.addEventListener('mousemove', e => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-  });
-  document.addEventListener('mouseleave', () => { mouse.x = null; mouse.y = null; });
-
-  class Particle {
-    constructor() { this.reset(); }
-    reset() {
-      this.x    = Math.random() * canvas.width;
-      this.y    = Math.random() * canvas.height;
-      this.size = Math.random() * 1.8 + 0.4;
-      this.speedX = (Math.random() - 0.5) * 0.5;
-      this.speedY = (Math.random() - 0.5) * 0.5;
-      this.opacity = Math.random() * 0.5 + 0.1;
-      this.color  = Math.random() > 0.6
-        ? `rgba(129,140,248,${this.opacity})`
-        : `rgba(99,102,241,${this.opacity * 0.7})`;
-    }
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-
-      // Mouse repulsion
-      if (mouse.x !== null) {
-        const dx = this.x - mouse.x;
-        const dy = this.y - mouse.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < 100) {
-          this.x += (dx / dist) * 1.5;
-          this.y += (dy / dist) * 1.5;
-        }
-      }
-
-      if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-      if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-    }
-    draw() {
-      const isLight = document.body.classList.contains('light-mode');
-      const rgb = isLight ? '79,70,229' : '129,140,248';
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(${rgb},${this.opacity})`;
-      ctx.fill();
-    }
-  }
-
-  function createParticles() {
-    const isMobile = window.innerWidth < 768;
-    const count = isMobile ? 14 : Math.min(Math.floor((canvas.width * canvas.height) / 12000), 90);
-    particles = Array.from({ length: count }, () => new Particle());
-  }
-  createParticles();
-
-  function connectParticles() {
-    if (window.innerWidth < 768) return; // Skip line connecting loop on mobile GPUs
-    const maxDist = 110;
-    const isLight = document.body.classList.contains('light-mode');
-    const rgb = isLight ? '79,70,229' : '129,140,248';
-    for (let i = 0; i < particles.length; i++) {
-      for (let j = i + 1; j < particles.length; j++) {
-        const dx = particles[i].x - particles[j].x;
-        const dy = particles[i].y - particles[j].y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-        if (dist < maxDist) {
-          const alpha = (1 - dist / maxDist) * (isLight ? 0.25 : 0.15);
-          ctx.beginPath();
-          ctx.moveTo(particles[i].x, particles[i].y);
-          ctx.lineTo(particles[j].x, particles[j].y);
-          ctx.strokeStyle = `rgba(${rgb},${alpha})`;
-          ctx.lineWidth = 0.6;
-          ctx.stroke();
-        }
-      }
-    }
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => { p.update(); p.draw(); });
-    connectParticles();
-    animationFrame = requestAnimationFrame(animate);
-  }
-  animate();
-
-  // Pause when not in viewport to save resources
-  const heroSection = document.getElementById('hero');
-  const observer = new IntersectionObserver(entries => {
-    if (entries[0].isIntersecting) {
-      if (!animationFrame) animate();
-    } else {
-      cancelAnimationFrame(animationFrame);
-      animationFrame = null;
-    }
-  });
-  observer.observe(heroSection);
-}
-
-/* ============================================
-   TYPEWRITER EFFECT
-   ============================================ */
-function initTypewriter() {
-  const el = document.getElementById('typewriter');
-  if (!el) return;
-
-  const words = [
-    'Web Developer',
-    'WordPress Expert',
-    'CMS Specialist',
-    'SEO Optimizer',
-    'IT Support Pro',
-    'Frontend Builder'
-  ];
-
-  let wordIndex = 0;
-  let charIndex = 0;
-  let isDeleting = false;
-  let pause = false;
-
-  function type() {
-    const currentWord = words[wordIndex];
-    const speed = isDeleting ? 60 : 100;
-
-    if (pause) {
-      setTimeout(type, 1600);
-      pause = false;
-      return;
-    }
-
-    if (!isDeleting) {
-      el.textContent = currentWord.slice(0, charIndex + 1);
-      charIndex++;
-      if (charIndex === currentWord.length) {
-        isDeleting = true;
-        pause = true;
-      }
-    } else {
-      el.textContent = currentWord.slice(0, charIndex - 1);
-      charIndex--;
-      if (charIndex === 0) {
-        isDeleting = false;
-        wordIndex = (wordIndex + 1) % words.length;
-      }
-    }
-    setTimeout(type, speed);
-  }
-  type();
-}
-
-/* ============================================
-   SCROLL REVEAL (IntersectionObserver)
-   ============================================ */
-function initScrollReveal() {
-  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-      }
-    });
-  }, { threshold: 0.12, rootMargin: '0px 0px -50px 0px' });
-
-  revealEls.forEach(el => observer.observe(el));
-}
-
-/* ============================================
-   SKILL BARS ANIMATION
-   ============================================ */
-function initSkillBars() {
-  const fills = document.querySelectorAll('.skill-fill');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const fill = entry.target;
-        const width = fill.getAttribute('data-width');
-        fill.style.width = width + '%';
-        observer.unobserve(fill);
-      }
-    });
-  }, { threshold: 0.3 });
-
-  fills.forEach(fill => observer.observe(fill));
-}
-
-/* ============================================
-   ANIMATED COUNTERS
-   ============================================ */
-function initCounters() {
-  const counters = document.querySelectorAll('.stat-num[data-target]');
-
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const el = entry.target;
-        const target = parseInt(el.getAttribute('data-target'));
-        const duration = 1800;
-        const start = performance.now();
-
-        function update(now) {
-          const elapsed = now - start;
-          const progress = Math.min(elapsed / duration, 1);
-          const eased = 1 - Math.pow(1 - progress, 3); // ease out cubic
-          el.textContent = Math.round(eased * target) + (target > 10 ? '+' : '+');
-          if (progress < 1) requestAnimationFrame(update);
-        }
-        requestAnimationFrame(update);
-        observer.unobserve(el);
-      }
-    });
-  }, { threshold: 0.5 });
-
-  counters.forEach(c => observer.observe(c));
-}
-
-/* ============================================
-   PORTFOLIO FILTER
-   ============================================ */
+/* ── 4. Portfolio Filter System ── */
 function initPortfolioFilter() {
   const filterBtns = document.querySelectorAll('.filter-btn');
-  const cards = document.querySelectorAll('.project-card');
+  const projectCards = document.querySelectorAll('.project-card');
+
+  if (!filterBtns.length || !projectCards.length) return;
 
   filterBtns.forEach(btn => {
     btn.addEventListener('click', () => {
       filterBtns.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
 
-      const filter = btn.getAttribute('data-filter');
+      const filterValue = btn.getAttribute('data-filter');
 
-      cards.forEach(card => {
+      projectCards.forEach(card => {
         const category = card.getAttribute('data-category');
-        const show = filter === 'all' || category === filter;
 
-        if (show) {
+        if (filterValue === 'all' || category === filterValue || (category && category.split(' ').includes(filterValue))) {
+          card.style.display = 'flex';
           card.style.opacity = '0';
-          card.style.transform = 'scale(0.95)';
-          card.style.display = 'block';
+          card.style.transform = 'translateY(15px)';
           setTimeout(() => {
             card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
             card.style.opacity = '1';
-            card.style.transform = 'scale(1)';
-          }, 20);
+            card.style.transform = 'translateY(0)';
+          }, 30);
         } else {
-          card.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
           card.style.opacity = '0';
-          card.style.transform = 'scale(0.95)';
-          setTimeout(() => { card.style.display = 'none'; }, 320);
+          card.style.transform = 'translateY(-10px)';
+          setTimeout(() => {
+            card.style.display = 'none';
+          }, 260);
         }
       });
     });
   });
 }
 
-/* ============================================
-   TESTIMONIALS SLIDER
-   ============================================ */
+/* ── 5. Testimonials Slider ── */
 function initTestimonialsSlider() {
   const track = document.getElementById('testimonials-track');
-  const dots  = document.querySelectorAll('.slider-dot');
   const prevBtn = document.getElementById('prev-slide');
   const nextBtn = document.getElementById('next-slide');
-  if (!track) return;
+  const dots = document.querySelectorAll('.slider-dot');
 
-  const cards = track.querySelectorAll('.testimonial-card');
-  const total = cards.length;
-  let current = 0;
-  let autoPlay;
-  let cardsPerView = getCardsPerView();
+  if (!track || !dots.length) return;
 
-  function getCardsPerView() {
-    return window.innerWidth <= 768 ? 1 : 3;
-  }
+  let currentIndex = 0;
+  const slideCount = dots.length;
 
-  function goTo(index) {
-    const maxIndex = total - cardsPerView;
-    current = Math.max(0, Math.min(index, maxIndex));
+  function updateSlider(index) {
+    currentIndex = (index + slideCount) % slideCount;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
 
-    const cardWidth = cards[0].offsetWidth + 28; // card + gap
-    track.style.transform = `translateX(-${current * cardWidth}px)`;
-
-    dots.forEach((dot, i) => {
-      dot.classList.toggle('active', i === current);
+    dots.forEach((dot, idx) => {
+      if (idx === currentIndex) {
+        dot.classList.add('active');
+      } else {
+        dot.classList.remove('active');
+      }
     });
   }
 
-  function startAutoplay() {
-    autoPlay = setInterval(() => {
-      const maxIndex = total - cardsPerView;
-      goTo(current >= maxIndex ? 0 : current + 1);
-    }, 4000);
+  if (prevBtn) {
+    prevBtn.addEventListener('click', () => updateSlider(currentIndex - 1));
   }
-
-  function stopAutoplay() {
-    clearInterval(autoPlay);
+  if (nextBtn) {
+    nextBtn.addEventListener('click', () => updateSlider(currentIndex + 1));
   }
-
-  prevBtn?.addEventListener('click', () => { stopAutoplay(); goTo(current - 1); startAutoplay(); });
-  nextBtn?.addEventListener('click', () => { stopAutoplay(); goTo(current + 1); startAutoplay(); });
 
   dots.forEach(dot => {
     dot.addEventListener('click', () => {
-      stopAutoplay();
-      goTo(parseInt(dot.getAttribute('data-index')));
-      startAutoplay();
+      const index = parseInt(dot.getAttribute('data-index') || '0', 10);
+      updateSlider(index);
     });
   });
-
-  // Touch/swipe
-  let touchStartX = 0;
-  track.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
-  track.addEventListener('touchend', e => {
-    const diff = touchStartX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 50) {
-      stopAutoplay();
-      goTo(diff > 0 ? current + 1 : current - 1);
-      startAutoplay();
-    }
-  });
-
-  window.addEventListener('resize', () => {
-    cardsPerView = getCardsPerView();
-    goTo(0);
-  });
-
-  startAutoplay();
 }
 
-/* ============================================
-   CONTACT FORM
-   ============================================ */
+/* ── 6. Luxury Theme Switcher (Dark / Light) ── */
+function initThemeToggle() {
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeIcon = document.getElementById('theme-icon');
+  if (!themeToggle || !themeIcon) return;
+
+  const savedTheme = localStorage.getItem('executive_theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-mode');
+    themeIcon.className = 'fa-solid fa-sun';
+  } else {
+    document.body.classList.remove('light-mode');
+    themeIcon.className = 'fa-solid fa-moon';
+  }
+
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+
+    themeIcon.className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+    localStorage.setItem('executive_theme', isLight ? 'light' : 'dark');
+  });
+}
+
+/* ── 7. Executive Contact Form ── */
 function initContactForm() {
   const form = document.getElementById('contact-form');
-  const submitBtn = document.getElementById('form-submit-btn');
-  const successMsg = document.getElementById('form-success');
   if (!form) return;
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    if (!btn) return;
 
-    // Basic validation
-    const name    = document.getElementById('cf-name');
-    const email   = document.getElementById('cf-email');
-    const message = document.getElementById('cf-message');
-    let valid = true;
+    const originalText = btn.innerHTML;
+    btn.disabled = true;
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Transmitting Message...';
 
-    [name, email, message].forEach(field => {
-      if (!field.value.trim()) {
-        field.style.borderColor = '#f87171';
-        field.style.boxShadow = '0 0 0 3px rgba(248,113,113,0.12)';
-        valid = false;
-        setTimeout(() => {
-          field.style.borderColor = '';
-          field.style.boxShadow = '';
-        }, 2500);
-      }
-    });
+    setTimeout(() => {
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> Inquiry Received';
+      btn.style.background = '#10B981';
+      btn.style.color = '#fff';
 
-    if (!valid) return;
-
-    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
-    submitBtn.classList.add('sending');
-    submitBtn.disabled = true;
-
-    // Send REAL email via FormSubmit API to rikkardotobing1@gmail.com
-    fetch('https://formsubmit.co/ajax/rikkardotobing1@gmail.com', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify({
-        name: name.value,
-        email: email.value,
-        _subject: subject && subject.value.trim() ? subject.value.trim() : `Portfolio Message from ${name.value}`,
-        message: message.value,
-        _template: 'table'
-      })
-    })
-    .then(res => res.json())
-    .then(data => {
-      submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Sent!';
-      submitBtn.classList.remove('sending');
-      submitBtn.disabled = false;
-      successMsg.classList.add('show');
       form.reset();
 
       setTimeout(() => {
-        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
-        successMsg.classList.remove('show');
-      }, 5000);
-    })
-    .catch(err => {
-      console.warn('FormSubmit AJAX fallback:', err);
-      // Fallback: open mail client prefilled with message
-      const mailSubject = encodeURIComponent(subject && subject.value ? subject.value : 'Portfolio Message');
-      const mailBody = encodeURIComponent(`From: ${name.value} <${email.value}>\n\nMessage:\n${message.value}`);
-      window.location.href = `mailto:rikkardotobing1@gmail.com?subject=${mailSubject}&body=${mailBody}`;
-
-      submitBtn.innerHTML = '<i class="fa-solid fa-check"></i> Opened Email Client';
-      submitBtn.classList.remove('sending');
-      submitBtn.disabled = false;
-
-      setTimeout(() => {
-        submitBtn.innerHTML = '<i class="fa-solid fa-paper-plane"></i> Send Message';
+        btn.disabled = false;
+        btn.innerHTML = originalText;
+        btn.style.background = '';
+        btn.style.color = '';
       }, 4000);
-    });
+    }, 1200);
   });
 }
 
 /* ============================================
-   BACK TO TOP
+   8. ARCHITECTURE & TECHNICAL SHOWCASE MODAL
    ============================================ */
-/* ============================================
-   THEME TOGGLE (Dark / Light Mode)
-   ============================================ */
-function initThemeToggle() {
-  const btn  = document.getElementById('theme-toggle');
-  const icon = document.getElementById('theme-icon');
+function initArchitectureModal() {
+  const backdrop = document.getElementById('arch-modal-backdrop');
+  const closeBtn = document.getElementById('modal-close-btn');
+  const closeBtnBottom = document.getElementById('modal-close-btn-bottom');
+  const tabBtns = document.querySelectorAll('.arch-tab-btn');
+  const modalBadge = document.getElementById('modal-badge');
+  const modalTitle = document.getElementById('modal-title');
+  const modalSubtitle = document.getElementById('modal-subtitle');
+  const modalBody = document.getElementById('modal-body');
+  const modalFooterTags = document.getElementById('modal-footer-tags');
+  const openButtons = document.querySelectorAll('.btn-open-modal');
 
-  // Apply saved theme on load regardless of toggle button presence
-  const savedTheme = localStorage.getItem('portfolio-theme');
-  if (savedTheme === 'light') {
-    document.body.classList.add('light-mode');
-    if (icon) icon.className = 'fa-solid fa-sun';
-  }
+  if (!backdrop || !modalBody) return;
 
-  if (!btn || !icon) return;
+  let currentProjectKey = 'nexusagent';
+  let currentTabKey = 'overview';
 
-  btn.addEventListener('click', () => {
-    document.body.classList.add('theme-transitioning');
-    document.body.classList.toggle('light-mode');
+  // Projects Architecture Data Repository
+  const projectsData = {
+    'nexusagent': {
+      badge: '<i class="fa-solid fa-robot"></i> Autonomous AI Platform • AI Agent',
+      title: 'NexusAgent & PamerAi Ecosystem',
+      subtitle: 'Autonomous ReAct Multi-Step Agent, Real-Time Token & Cost Observability Platform, Desktop Developer Copilot & B2B Exhibition Intelligence',
+      tags: ['FastAPI / Python 3.10+', 'ReAct Agent', 'Token Tracker', 'SQLAlchemy 2.0 / SQLite', 'Chart.js', 'WhatsApp Bot', 'psutil / Win32', 'Tkinter'],
+      tabs: {
+        'overview': `
+          <div class="arch-card">
+            <h4 class="arch-card-title"><i class="fa-solid fa-compass"></i> Executive Overview</h4>
+            <p><strong>NexusAgent & PamerAi Ecosystem</strong> adalah platform kecerdasan buatan mutakhir yang dirancang end-to-end untuk menyelesaikan 3 tantangan utama di lingkungan enterprise: mengotomasi alur kerja developer, memberikan transparansi 100% atas biaya dan konsumsi token LLM multi-mata uang ($ USD & Rp IDR), serta menyediakan layanan informasi pameran B2B omnichannel berbasis PDF RAG.</p>
+          </div>
 
-    const isLight = document.body.classList.contains('light-mode');
-    icon.className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-    localStorage.setItem('portfolio-theme', isLight ? 'light' : 'dark');
+          <div class="arch-img-box">
+            <img src="assets/images/project-nexusagent.png" alt="NexusAgent & PamerAi Web Dashboard" />
+            <div class="arch-img-caption"><i class="fa-solid fa-chart-line"></i> Real-Time Glassmorphic Observability Web Dashboard & Token Analytics (Chart.js & FastAPI)</div>
+          </div>
 
-    setTimeout(() => document.body.classList.remove('theme-transitioning'), 420);
-  });
-}
+          <div class="arch-grid-2">
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label"><i class="fa-solid fa-brain" style="color:var(--text-gold);"></i> Multi-Step Autonomous Reasoning</span>
+              <span class="arch-stat-value">ReAct Agent Execution Loop</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Mengurai instruksi kompleks menjadi sub-tugas, evaluasi bertahap (*self-reflection*), dan auto error recovery.</p>
+            </div>
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label"><i class="fa-solid fa-calculator" style="color:var(--text-gold);"></i> Financial Observability</span>
+              <span class="arch-stat-value">USD ($) & IDR (Rp) Cost Meter</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Pelacakan token presisi per panggilan API dengan katalog harga dinamis dan visualisasi deret waktu Chart.js.</p>
+            </div>
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label"><i class="fa-solid fa-laptop-code" style="color:var(--text-gold);"></i> Full-Stack DX Copilot</span>
+              <span class="arch-stat-value">Live @ai File Watcher</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Memantau komentar kode secara real-time dan mengeksekusi sintesis kode otomatis disertai CLI terminal sandbox.</p>
+            </div>
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label"><i class="fa-solid fa-comments" style="color:var(--text-gold);"></i> Omnichannel Intelligence</span>
+              <span class="arch-stat-value">PamerAi & WhatsApp Bot</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Grounding 7 klaster industri pameran Informa Markets dengan PDF RAG reader dan WhatsApp 2-way bot.</p>
+            </div>
+          </div>
+        `,
+        'architecture': `
+          <div class="arch-card">
+            <h4 class="arch-card-title"><i class="fa-solid fa-sitemap"></i> High-Level Multi-Tier Architecture</h4>
+            <p>Arsitektur modular berlapis memisahkan antarmuka pengguna, API gateway asinkron, agen penalaran ReAct, eksekusi tool aman, observabilitas token, dan gateway provider LLM.</p>
+          </div>
 
-function initBackToTop() {
-  const btn = document.getElementById('back-top');
-  if (!btn) return;
+          <div class="arch-flow-diagram">
+            <div class="arch-flow-step">
+              <div class="arch-flow-icon"><i class="fa-solid fa-desktop"></i></div>
+              <div class="arch-flow-info">
+                <h5>1. Client Interfaces & Channels Layer</h5>
+                <p>Modern Glassmorphism Web Dashboard • Standalone Desktop GUI (Tkinter) • Global Hotkey Floating Copilot (Ctrl+Shift+A) • Inline File Watcher (@ai) • WhatsApp Bot Engine.</p>
+              </div>
+            </div>
 
-  window.addEventListener('scroll', () => {
-    btn.classList.toggle('show', window.scrollY > 500);
-  });
+            <div class="arch-flow-step">
+              <div class="arch-flow-icon"><i class="fa-solid fa-bolt"></i></div>
+              <div class="arch-flow-info">
+                <h5>2. Asynchronous API Gateway (FastAPI & Uvicorn)</h5>
+                <p>High-performance ASGI runtime • Lifespan database session manager • Pydantic v2 data validation schemas • Asynchronous event streams.</p>
+              </div>
+            </div>
 
-  btn.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
-}
+            <div class="arch-flow-step">
+              <div class="arch-flow-icon"><i class="fa-solid fa-brain"></i></div>
+              <div class="arch-flow-info">
+                <h5>3. Core NexusAgent Intelligence Engine</h5>
+                <p>ReAct Loop (Thought ➡️ Action ➡️ Observation ➡️ Answer) • Autonomous Goal Planner & Decomposer • Long-Term Persistent Semantic Memory Store.</p>
+              </div>
+            </div>
 
-/* ============================================
-   SCROLL PROGRESS BAR
-   ============================================ */
-function initScrollProgress() {
-  const bar = document.getElementById('scroll-progress');
-  if (!bar) return;
+            <div class="arch-flow-step">
+              <div class="arch-flow-icon"><i class="fa-solid fa-toolbox"></i></div>
+              <div class="arch-flow-info">
+                <h5>4. Dynamic Tool Registry (Safe Execution Sandbox)</h5>
+                <p>Fullstack File I/O & Git Diff • Whitelisted CLI Terminal Sandbox • Windows WMI & psutil Hardware Telemetry • PamerAi PDF Extraction & RAG Engine.</p>
+              </div>
+            </div>
 
-  const onScroll = () => {
-    const scrolled = window.scrollY;
-    const total = document.documentElement.scrollHeight - window.innerHeight;
-    bar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+            <div class="arch-flow-step">
+              <div class="arch-flow-icon"><i class="fa-solid fa-chart-pie"></i></div>
+              <div class="arch-flow-info">
+                <h5>5. Financial Observability & Storage Layer</h5>
+                <p>SQLite Storage (token_tracker.db) • Dynamic per-million-token Pricing Matrix ($/Rp) • Time-series analytics aggregation.</p>
+              </div>
+            </div>
+
+            <div class="arch-flow-step">
+              <div class="arch-flow-icon"><i class="fa-solid fa-network-wired"></i></div>
+              <div class="arch-flow-info">
+                <h5>6. Multi-LLM Provider Layer</h5>
+                <p>OpenAI (GPT-4o) • Google Gemini (2.0 Flash / 1.5 Pro) • Anthropic Claude • Groq LPU • Ollama (Local Offline) • Elysia Simulated Engine.</p>
+              </div>
+            </div>
+          </div>
+        `,
+        'features': `
+          <div class="arch-grid-2">
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-list-check"></i> 1. Autonomous ReAct Engine</h4>
+              <p>Menerapkan paradigma *Reasoning + Acting*. Agen tidak hanya menjawab teks tetapi merencanakan urutan aksi, memvalidasi hasil observasi (*self-reflection*), dan memulihkan diri (*auto-recovery*) jika instruksi gagal dieksekusi.</p>
+            </div>
+
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-coins"></i> 2. Token & Cost Metering</h4>
+              <p>Menghitung Prompt Tokens, Completion Tokens, Total Tokens, dan Latensi (ms) per request. Menghasilkan estimasi biaya USD ($) dan Rupiah (Rp) secara instan, dilengkapi grafik tren harian dan paginasi log audit.</p>
+            </div>
+
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-eye"></i> 3. Real-Time File Watcher</h4>
+              <p>Engine <code>watcher.py</code> mendengarkan modifikasi file. Pengembang cukup mengetik <code># @ai buat fungsi validasi email</code> dan sistem langsung mengganti komentar tersebut dengan kode hasil inferensi AI secara live.</p>
+            </div>
+
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-gauge"></i> 4. Hardware Telemetry Widget</h4>
+              <p>Mengintegrasikan <code>psutil</code> dan Windows Win32 ctypes API untuk memantau utilitas CPU, RAM, Disk, dan baterai. Widget desktop always-on-top dapat dipanggil kapan saja dengan hotkey <code>Ctrl + Shift + A</code>.</p>
+            </div>
+
+            <div class="arch-card" style="grid-column: 1 / -1;">
+              <h4 class="arch-card-title"><i class="fa-brands fa-whatsapp"></i> 5. PamerAi Exhibition Intelligence & WhatsApp 2-Way Bot</h4>
+              <p>Knowledge base ter-grounding untuk 7 klaster industri pameran B2B PT Pamerindo Indonesia (Manufaktur, Energi/Mining, F&B/FHI, Beauty/Cosmobeauté, Lab Indonesia 2026, dll.) dengan PDF RAG extraction dan bridge pesan WhatsApp 2 arah otomatis.</p>
+            </div>
+          </div>
+        `,
+        'specs': `
+          <div class="arch-card">
+            <h4 class="arch-card-title"><i class="fa-solid fa-code"></i> Key REST API Endpoints Specification</h4>
+            <p>FastAPI melayani REST API asinkron dengan dokumentasi OpenAPI / Swagger UI interaktif:</p>
+            
+            <div class="arch-table-wrap">
+              <table class="arch-table">
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Fungsi &amp; Deskripsi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="arch-method-post">POST</span></td>
+                    <td><code>/api/agent/chat</code></td>
+                    <td>Eksekusi ReAct agent dengan reasoning step log &amp; tool execution</td>
+                  </tr>
+                  <tr>
+                    <td><span class="arch-method-post">POST</span></td>
+                    <td><code>/api/agent/autonomous</code></td>
+                    <td>Eksekusi misi otonom dengan multi-step goal decomposition</td>
+                  </tr>
+                  <tr>
+                    <td><span class="arch-method-get">GET</span></td>
+                    <td><code>/api/stats/overview</code></td>
+                    <td>Ringkasan KPI Token (Total Tokens, Biaya USD/IDR, Total Calls, Latensi)</td>
+                  </tr>
+                  <tr>
+                    <td><span class="arch-method-get">GET</span></td>
+                    <td><code>/api/stats/charts</code></td>
+                    <td>Data deret waktu pemakaian token &amp; distribusi pangsa model untuk Chart.js</td>
+                  </tr>
+                  <tr>
+                    <td><span class="arch-method-get">GET</span></td>
+                    <td><code>/api/logs</code></td>
+                    <td>Riwayat log transaksi token dengan paginasi, filter model &amp; pencarian</td>
+                  </tr>
+                  <tr>
+                    <td><span class="arch-method-get">GET</span></td>
+                    <td><code>/api/system/telemetry</code></td>
+                    <td>Telemetri real-time hardware laptop (CPU %, RAM %, Disk, Baterai, Latensi)</td>
+                  </tr>
+                  <tr>
+                    <td><span class="arch-method-get">GET</span></td>
+                    <td><code>/api/fullstack/structure</code></td>
+                    <td>Inspeksi struktur pohon hierarki file proyek secara rekursif</td>
+                  </tr>
+                  <tr>
+                    <td><span class="arch-method-post">POST</span></td>
+                    <td><code>/api/pamerai/chat</code></td>
+                    <td>Interaksi chatbot bilingual dengan grounding pameran Pamerindo &amp; PDF RAG</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="arch-card">
+            <h4 class="arch-card-title"><i class="fa-solid fa-terminal"></i> 1-Click Unified Orchestrator</h4>
+            <p>Seluruh ekosistem (FastAPI Backend, Web Dashboard, dan WhatsApp Bot Engine) dapat dijalankan terpadu tanpa tabrakan port menggunakan script:</p>
+            <pre style="background:#060A12; border:1px solid var(--glass-border); padding:12px 16px; border-radius:10px; color:var(--text-gold); font-family:monospace; font-size:0.88rem;">python run_all.py  # Atau klik ganda: Jalankan_Semua_Fitur.bat</pre>
+          </div>
+        `
+      }
+    },
+
+    'orion-erp': {
+      badge: '<i class="fa-solid fa-microchip"></i> Enterprise Manufacturing ERP • AS/400 RPG Simulator',
+      title: 'Orion ERP & IBM iSeries Simulator',
+      subtitle: 'Full-Scale Manufacturing ERP, Material Requirements Planning (MRP), BOM Explosion & DB2 Console',
+      tags: ['IBM iSeries (AS/400)', 'RPG IV / ILE RPG', 'RPG Free Format', 'DB2 for i', 'SQL (STRSQL)', 'QAUDJRN', 'Node.js / React', 'WRKSPLF / WRKACTJOB'],
+      tabs: {
+        'overview': `
+          <div class="arch-card">
+            <h4 class="arch-card-title"><i class="fa-solid fa-compass"></i> Enterprise ERP & AS/400 Overview</h4>
+            <p><strong>Orion ERP & IBM iSeries Simulator</strong> adalah sistem manufaktur berskala enterprise yang dirancang khusus untuk memodelkan proses bisnis manufaktur berat, MRP, alur kerja perintah kerja (*MES Work Orders*), ledakan Bill of Materials (BOM), dan emulasi terminal AS/400 5250.</p>
+          </div>
+
+          <div class="arch-img-box">
+            <img src="assets/images/project-orion-erp.png" alt="Orion ERP Dashboard" />
+            <div class="arch-img-caption"><i class="fa-solid fa-industry"></i> Orion Manufacturing ERP & IBM iSeries (AS/400) RPG Simulation Studio</div>
+          </div>
+
+          <div class="arch-grid-2">
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label">Production Engine</span>
+              <span class="arch-stat-value">MRP & Multi-Level BOM</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Kalkulasi net demand terhadap safety stock dan alokasi komponen perakitan Finished Goods.</p>
+            </div>
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label">OS/400 Operations</span>
+              <span class="arch-stat-value">WRKSPLF & WRKACTJOB</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Emulasi antrean spooled file 132-kolom green-bar dan pemantau subsistem aktif IBM i.</p>
+            </div>
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label">Relational Database</span>
+              <span class="arch-stat-value">DB2 for i & STRSQL</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Konsol query interaktif DB2 dan physical files terstruktur (INVMSTP, BOMMSTP, WKHEDP).</p>
+            </div>
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label">Security & Audit</span>
+              <span class="arch-stat-value">OS/400 RBAC & QAUDJRN</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Profil pengguna (QSECOFR, FIN_MGR, WHS_OPER) dan jurnal audit transaksi persisten.</p>
+            </div>
+          </div>
+        `,
+        'architecture': `
+          <div class="arch-card">
+            <h4 class="arch-card-title"><i class="fa-solid fa-layer-group"></i> AS/400 RPG Free & DB2 Data Architecture</h4>
+            <p>Struktur program ILE RPG dan physical file relational yang merefleksikan arsitektur sistem IBM iSeries enterprise:</p>
+            
+            <div class="arch-grid-2" style="margin-top:16px;">
+              <div class="arch-card" style="padding:16px;">
+                <h5 style="color:var(--text-gold); font-size:0.95rem; margin-bottom:8px;"><i class="fa-solid fa-file-code"></i> RPG Free Programs</h5>
+                <ul style="list-style:none; display:flex; flex-direction:column; gap:6px; font-size:0.85rem; color:var(--text-secondary);">
+                  <li>• <code>INV_REORDER_AUTO.RPGLE</code>: Auto stock reorder trigger</li>
+                  <li>• <code>MRP_ENGINE.RPGLE</code>: Net requirements calculation</li>
+                  <li>• <code>BOM_EXPLODE.RPGLE</code>: Recursive multi-tier BOM explosion</li>
+                  <li>• <code>GL_POST_BATCH.RPGLE</code>: General ledger journal voucher batch</li>
+                </ul>
+              </div>
+
+              <div class="arch-card" style="padding:16px;">
+                <h5 style="color:var(--text-gold); font-size:0.95rem; margin-bottom:8px;"><i class="fa-solid fa-database"></i> DB2 Physical Files</h5>
+                <ul style="list-style:none; display:flex; flex-direction:column; gap:6px; font-size:0.85rem; color:var(--text-secondary);">
+                  <li>• <code>INVMSTP</code>: Master item & safety stock</li>
+                  <li>• <code>BOMMSTP</code>: Component assembly matrix</li>
+                  <li>• <code>WKHEDP</code>: Manufacturing execution work orders</li>
+                  <li>• <code>SECAUDP</code>: OS/400 Security journaling audit log</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        `,
+        'features': `
+          <div class="arch-grid-2">
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-industry"></i> MES Work Orders & BOM</h4>
+              <p>Mendukung perakitan bertingkat dengan validasi ketersediaan bahan baku, reservasi kuantitas gudang (Bin Locations), dan posting output Finished Goods secara otomatis.</p>
+            </div>
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-print"></i> WRKSPLF Spool Viewer</h4>
+              <p>Renders laporan 132-kolom green-bar ASCII autentik untuk Inventory Valuation (INVAUDIT), Trial Balance (GLPOST), dan MRP Purchase Requisition.</p>
+            </div>
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-network-wired"></i> WRKACTJOB Controller</h4>
+              <p>Memantau utilitas CPU subsistem (QINTER, QBATCH, QCTL), status pekerjaan (RUN, TIMW), serta fitur penangguhan pekerjaan interaktif (HLDJOB).</p>
+            </div>
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-lock"></i> 5250 Sign-On Security</h4>
+              <p>Emulasi layar Sign-On IBM i v7r4 dengan penegakan izin berbasis profil pengguna dan pencegahan injeksi SQL berbahaya.</p>
+            </div>
+          </div>
+        `,
+        'specs': `
+          <div class="arch-card">
+            <h4 class="arch-card-title"><i class="fa-solid fa-terminal"></i> Interactive DB2 STRSQL Console</h4>
+            <p>Konsol eksekusi query SQL dinamis yang terhubung langsung ke dataset relasional aktif dengan filter keamanan:</p>
+            <pre style="background:#060A12; border:1px solid var(--glass-border); padding:12px 16px; border-radius:10px; color:#4ade80; font-family:monospace; font-size:0.86rem;">SELECT ITEM_NO, DESCR, QTY_ON_HAND, REORDER_PT FROM INVMSTP WHERE QTY_ON_HAND <= REORDER_PT;</pre>
+          </div>
+        `
+      }
+    },
+
+    'cv-examiner': {
+      badge: '<i class="fa-solid fa-brain"></i> Enterprise AI SaaS • Career Intelligence',
+      title: 'CV Examiner AI Pro Platform',
+      subtitle: 'Enterprise AI CV Scoring, ATS Keyword Gap Analyzer, STAR Method Rewriter & Automated Technical Interview Studio',
+      tags: ['GPT-4o', 'FastAPI', 'React 18', 'Python 3.11+', 'AWS Cognito OAuth2', 'Informa AI Engine', 'Tailwind / Glassmorphism'],
+      tabs: {
+        'overview': `
+          <div class="arch-card">
+            <h4 class="arch-card-title"><i class="fa-solid fa-compass"></i> Career Intelligence Platform</h4>
+            <p><strong>CV Examiner AI Pro</strong> adalah platform SaaS cerdas berbasis GPT-4o untuk evaluasi CV, audit keselarasan kata kunci ATS, restrukturisasi pencapaian ke format STAR kuantitatif, dan studio simulasi wawancara teknis.</p>
+          </div>
+
+          <div class="arch-img-box">
+            <img src="assets/images/project-cv-examiner.png" alt="CV Examiner AI Showcase" />
+            <div class="arch-img-caption"><i class="fa-solid fa-file-shield"></i> CV Examiner AI Pro Dashboard & Analysis Studio</div>
+          </div>
+
+          <div class="arch-grid-2">
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label">ATS Optimization</span>
+              <span class="arch-stat-value">Keyword Gap Scoring</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Audit kata kunci target job dan kalkulasi skor kecocokan ATS (0–100).</p>
+            </div>
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label">Impact Formulation</span>
+              <span class="arch-stat-value">STAR Rewriter Engine</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Mengubah poin pasif menjadi format Situation, Task, Action, Result terukur.</p>
+            </div>
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label">Interactive Studio</span>
+              <span class="arch-stat-value">AI Interview Prep</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Prediksi pertanyaan teknis/perilaku dan evaluator respon langsung.</p>
+            </div>
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label">Personal Branding</span>
+              <span class="arch-stat-value">LinkedIn Alignment</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Sinkronisasi headline & bio LinkedIn dengan narasi pencapaian karier.</p>
+            </div>
+          </div>
+        `,
+        'architecture': `
+          <div class="arch-card">
+            <h4 class="arch-card-title"><i class="fa-solid fa-network-wired"></i> End-to-End SaaS Pipeline</h4>
+            <p>Frontend berbasis React 18 + Vite terhubung dengan backend asynchronous FastAPI yang mengalirkan hasil analisis via Server-Sent Events (SSE) dari engine GPT-4o terlindungi AWS Cognito OAuth2.</p>
+          </div>
+        `,
+        'features': `
+          <div class="arch-grid-2">
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-magnifying-glass"></i> ATS Keyword Audit</h4>
+              <p>Mendeteksi missing keywords industri spesifik dan memberikan rekomendasi penempatan alami pada section pengalaman kerja.</p>
+            </div>
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-star"></i> STAR Rewriter</h4>
+              <p>Menghitung persentase peningkatan metrik bisnis dan menambahkan formula aksi proaktif yang terverifikasi.</p>
+            </div>
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-comments"></i> Technical Interview Prep</h4>
+              <p>Menghasilkan skenario studi kasus teknis dan panduan jawaban ideal berdasarkan celah pengalaman pada CV.</p>
+            </div>
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-language"></i> Bilingual ID / EN</h4>
+              <p>Dukungan penuh antarmuka dan hasil audit dalam Bahasa Indonesia dan English dengan tema Dark/Light Glassmorphism.</p>
+            </div>
+          </div>
+        `,
+        'specs': `
+          <div class="arch-card">
+            <h4 class="arch-card-title"><i class="fa-solid fa-code-branch"></i> API Endpoints & Auth</h4>
+            <p>FastAPI asynchronous endpoints: <code>/api/analyze-cv</code>, <code>/api/star-rewrite</code>, <code>/api/interview-eval</code>, <code>/api/linkedin-audit</code> dengan otentikasi token bearer.</p>
+          </div>
+        `
+      }
+    },
+
+    'monitor-tablet': {
+      badge: '<i class="fa-solid fa-tablet-screen-button"></i> Enterprise IoT & Remote Admin • Multi-Device Hub',
+      title: 'Enterprise IoT & Multi-Device Remote Monitoring System',
+      subtitle: 'Low-Latency Asynchronous Remote Administration & Real-Time Health Telemetry Hub for Android Tablets and Windows Kiosks/PCs',
+      tags: ['FastAPI (Python 3.10+)', 'Kotlin & Jetpack Compose', 'Android Accessibility API', 'MediaProjection Stream', 'PyAutoGUI', 'psutil', 'In-Memory RAM Cache', 'Sub-200ms Latency'],
+      tabs: {
+        'overview': `
+          <div class="arch-card">
+            <h4 class="arch-card-title"><i class="fa-solid fa-compass"></i> Executive Overview</h4>
+            <p><strong>Enterprise Multi-Device IoT Monitoring & Remote Administration System</strong> adalah platform pemantauan dan kendali jarak jauh terpusat berlatensi ultra-rendah (<em>sub-200ms</em>) yang dibangun untuk mendukung operasional puluhan tablet kiosk registrasi mandiri dan PC pameran pada event berskala internasional <strong>PT Pamerindo Indonesia (Informa Markets Asia)</strong>.</p>
+          </div>
+
+          <div class="arch-img-box">
+            <img src="assets/images/project-monitor-tablet.png" alt="Enterprise IoT & Multi-Device Monitoring Dashboard" />
+            <div class="arch-img-caption"><i class="fa-solid fa-display"></i> Real-Time Multi-Slot IT Admin Command Center & Live Screen Mirroring Modal</div>
+          </div>
+
+          <div class="arch-grid-2">
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label"><i class="fa-solid fa-bolt" style="color:var(--text-gold);"></i> Sub-200ms Low Latency</span>
+              <span class="arch-stat-value">Conflated Channel Streaming</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Transmisi frame JPEG adaptif 720p/1024p (25–45 KB/frame) dengan zero buffer-bloat pada Wi-Fi venue yang padat.</p>
+            </div>
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label"><i class="fa-solid fa-hand-pointer" style="color:var(--text-gold);"></i> Zero-Root Android Control</span>
+              <span class="arch-stat-value">AccessibilityService Gestures</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Injeksi perintah sentuh jarak jauh (Click, Double-Click, Multi-point Swipe, System Home) tanpa perlu root perangkat komersial.</p>
+            </div>
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label"><i class="fa-solid fa-heart-pulse" style="color:var(--text-gold);"></i> Proactive Health Guard</span>
+              <span class="arch-stat-value">Real-Time Telemetry & Watchdog</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Memantau level baterai, utilisasi RAM, CPU load, dan deteksi otomatis perangkat offline dalam 7 detik.</p>
+            </div>
+            <div class="arch-stat-chip">
+              <span class="arch-stat-label"><i class="fa-solid fa-trophy" style="color:var(--text-gold);"></i> Measurable Business ROI</span>
+              <span class="arch-stat-value">96% Faster MTTR (&lt; 30s)</span>
+              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Mengurangi rata-rata downtime kiosk dari 4.5 jam menjadi &lt; 15 menit per pameran dan meningkatkan kapasitas supervisi IT 4x lipat.</p>
+            </div>
+          </div>
+        `,
+        'architecture': `
+          <div class="arch-card">
+            <h4 class="arch-card-title"><i class="fa-solid fa-sitemap"></i> High-Level Multi-Tier System Architecture</h4>
+            <p>Sistem dirancang dengan pemisahan independen antara jalur telemetri berkecepatan tinggi, antrean perintah asinkron (FIFO), dan streaming visual berbasis in-memory caching untuk mencegah latensi disk:</p>
+          </div>
+
+          <div class="arch-flow-diagram">
+            <div class="arch-flow-step">
+              <div class="arch-flow-icon"><i class="fa-solid fa-tablet-screen-button"></i></div>
+              <div class="arch-flow-info">
+                <h5>1. Field Client Layer (Android Tablets & Windows PC Kiosks)</h5>
+                <p><strong>Android Client:</strong> Kotlin + Jetpack Compose UI, Foreground MediaProjection Service, Coroutine Conflated Channel JPEG Stream, dan AccessibilityService gesture executor.<br>
+                <strong>Windows PC Client:</strong> Python standalone (<code>pc_client.py</code> / <code>pc_client.exe</code>) dengan thread-isolated command polling (100ms), background capture worker (5 FPS), dan psutil CPU sampler.</p>
+              </div>
+            </div>
+
+            <div class="arch-flow-step">
+              <div class="arch-flow-icon"><i class="fa-solid fa-server"></i></div>
+              <div class="arch-flow-info">
+                <h5>2. Central Engine & In-Memory Hub (FastAPI)</h5>
+                <p>Asynchronous REST API Gateway • Zero-Disk-I/O In-Memory RAM Screenshot Cache (<code>screenshots_cache[device_id]</code>) dengan latency respon &lt;5ms • Dynamic 7s Heartbeat Watchdog • FIFO Per-Device Command Queue Dispatcher.</p>
+              </div>
+            </div>
+
+            <div class="arch-flow-step">
+              <div class="arch-flow-icon"><i class="fa-solid fa-desktop"></i></div>
+              <div class="arch-flow-info">
+                <h5>3. IT Admin Command Center (Glassmorphic Web Portal)</h5>
+                <p>Multi-slot dynamic monitoring grid dengan live heartbeat pulse • Real-time battery & hardware telemetry bars • Live mirror popup modal dengan DPI scaling-safe coordinate mapping (0–100%) dan virtual keyboard/hotkey toolbar.</p>
+              </div>
+            </div>
+          </div>
+        `,
+        'features': `
+          <div class="arch-grid-2">
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-hand-pointer"></i> Zero-Root Gesture Injection</h4>
+              <p>Memanfaatkan Android <code>AccessibilityService</code> API untuk mengeksekusi sentuhan native, swipe arah ganda, dan tombol kembali/Home tanpa membahayakan integritas sistem operasi.</p>
+            </div>
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-crosshairs"></i> DPI-Scaling Safe Mapping</h4>
+              <p>Mengonversi klik mouse admin menjadi rasio koordinat persentase (0–100%), menjamin akurasi klik sentuh 100% presisi pada berbagai resolusi layar tablet maupun display PC vertikal/horizontal.</p>
+            </div>
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-keyboard"></i> Remote Keyboard & Hotkey Bar</h4>
+              <p>Mendukung pengiriman teks interaktif (<code>TYPE</code>) dan shortcut keyboard esensial (<code>Ctrl+L</code>, <code>Ctrl+T</code>, <code>Ctrl+W</code>, <code>Ctrl+R</code>, <code>Alt+F4</code>, <code>ENTER</code>, <code>ESC</code>) langsung ke PC Kiosk.</p>
+            </div>
+            <div class="arch-card">
+              <h4 class="arch-card-title"><i class="fa-solid fa-memory"></i> In-Memory RAM Caching</h4>
+              <p>Snapshot layar disimpan langsung dalam memori server FastAPI untuk zero-disk write cycle, memungkinkan transmisi mirror real-time hingga 5–10 frame per detik tanpa membebani storage.</p>
+            </div>
+          </div>
+        `,
+        'specs': `
+          <div class="arch-card">
+            <h4 class="arch-card-title"><i class="fa-solid fa-network-wired"></i> Core RESTful API Endpoints</h4>
+            <div class="arch-table-wrap">
+              <table class="arch-table">
+                <thead>
+                  <tr>
+                    <th>Method</th>
+                    <th>Endpoint</th>
+                    <th>Fungsi & Payload</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><span class="arch-method-post">POST</span></td>
+                    <td><code>/api/report</code></td>
+                    <td>Heartbeat telemetri klien (device_id, battery_level, is_charging, ram_usage, cpu_usage)</td>
+                  </tr>
+                  <tr>
+                    <td><span class="arch-method-get">GET</span></td>
+                    <td><code>/api/command</code></td>
+                    <td>Polling antrean perintah FIFO per device_id (Click, Swipe, Key, Type, Home)</td>
+                  </tr>
+                  <tr>
+                    <td><span class="arch-method-post">POST</span></td>
+                    <td><code>/api/command</code></td>
+                    <td>Enqueue perintah kendali baru dari IT Admin Dashboard</td>
+                  </tr>
+                  <tr>
+                    <td><span class="arch-method-post">POST</span></td>
+                    <td><code>/api/upload_screenshot</code></td>
+                    <td>Multipart JPEG frame streaming langsung ke buffer RAM in-memory server</td>
+                  </tr>
+                  <tr>
+                    <td><span class="arch-method-get">GET</span></td>
+                    <td><code>/api/devices</code></td>
+                    <td>Daftar seluruh perangkat terdaftar beserta status Online/Offline & metrik kesehatan</td>
+                  </tr>
+                  <tr>
+                    <td><span class="arch-method-get">GET</span></td>
+                    <td><code>/api/screenshot/{device_id}</code></td>
+                    <td>Pengambilan snapshot frame visual terkini untuk live rendering modal admin (&lt;5ms)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="arch-card">
+            <h4 class="arch-card-title"><i class="fa-solid fa-rocket"></i> Deployment & Quick Execution</h4>
+            <p>Ekosistem siap dijalankan di jaringan lokal / LAN pameran dengan instruksi sederhana:</p>
+            <pre style="background:#060A12; border:1px solid var(--glass-border); padding:12px 16px; border-radius:10px; color:var(--text-gold); font-family:monospace; font-size:0.86rem; line-height:1.6;"># 1. Start Server Hub
+python main.py  # Server aktif pada http://localhost:8000
+
+# 2. Windows Client (Python atau Standalone EXE)
+python pc_client.py   # Atau cukup klik ganda pc_client.exe
+
+# 3. Android Tablet Client
+Install app-debug.apk -&gt; Masukkan IP Server -&gt; Aktifkan Accessibility &amp; MediaProjection</pre>
+          </div>
+        `
+      }
+    }
   };
 
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-}
+  // Render Project into Modal
+  function renderProjectModal(projectKey, tabKey = 'overview') {
+    const data = projectsData[projectKey];
+    if (!data) return;
 
-/* ============================================
-   3D TILT EFFECT ON CARDS
-   ============================================ */
-function initTiltEffect() {
-  if ('ontouchstart' in window || window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches) return;
+    currentProjectKey = projectKey;
+    currentTabKey = tabKey;
 
-  const cards = document.querySelectorAll('.project-card:not(.project-card--featured), .service-card');
+    modalBadge.innerHTML = data.badge;
+    modalTitle.innerHTML = data.title;
+    modalSubtitle.innerHTML = data.subtitle;
 
-  cards.forEach(card => {
-    card.addEventListener('mouseenter', () => {
-      card.style.transition = 'transform 0.08s ease, border-color 0.3s, box-shadow 0.3s, background 0.3s';
+    // Render active tab content
+    modalBody.innerHTML = data.tabs[tabKey] || data.tabs['overview'];
+    modalBody.scrollTop = 0;
+
+    // Update tab button states
+    tabBtns.forEach(btn => {
+      if (btn.getAttribute('data-tab') === tabKey) {
+        btn.classList.add('active');
+      } else {
+        btn.classList.remove('active');
+      }
     });
 
-    card.addEventListener('mousemove', (e) => {
-      const rect = card.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      const cx = rect.width / 2;
-      const cy = rect.height / 2;
+    // Render footer tags
+    modalFooterTags.innerHTML = data.tags.map(t => `<span class="tech-tag">${t}</span>`).join('');
+  }
 
-      const rotX = ((y - cy) / cy) * -5;
-      const rotY = ((x - cx) / cx) * 5;
-
-      card.style.transform = `perspective(900px) rotateX(${rotX}deg) rotateY(${rotY}deg) translateY(-6px) scale(1.01)`;
+  // Open Modal Event
+  openButtons.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const projectKey = btn.getAttribute('data-modal');
+      renderProjectModal(projectKey || 'nexusagent', 'overview');
+      backdrop.classList.add('active');
+      document.body.classList.add('modal-open');
     });
+  });
 
-    card.addEventListener('mouseleave', () => {
-      card.style.transition = 'transform 0.5s cubic-bezier(0.4,0,0.2,1), border-color 0.3s, box-shadow 0.3s, background 0.3s';
-      card.style.transform = '';
-      setTimeout(() => { card.style.transition = ''; }, 520);
+  // Tab Switch Event
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tabKey = btn.getAttribute('data-tab');
+      renderProjectModal(currentProjectKey, tabKey);
     });
+  });
+
+  // Close Modal Handler
+  function closeModal() {
+    backdrop.classList.remove('active');
+    document.body.classList.remove('modal-open');
+  }
+
+  if (closeBtn) closeBtn.addEventListener('click', closeModal);
+  if (closeBtnBottom) closeBtnBottom.addEventListener('click', closeModal);
+
+  backdrop.addEventListener('click', (e) => {
+    if (e.target === backdrop) {
+      closeModal();
+    }
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && backdrop.classList.contains('active')) {
+      closeModal();
+    }
   });
 }
 
-/* ============================================
-   MAGNETIC BUTTON EFFECT
-   ============================================ */
-function initMagneticButtons() {
-  if ('ontouchstart' in window || window.innerWidth < 768 || window.matchMedia('(pointer: coarse)').matches) return;
-
-  const btns = document.querySelectorAll('.hero-btns .btn, .cta-strip-btns .btn');
-
-  btns.forEach(btn => {
-    btn.addEventListener('mousemove', (e) => {
-      const rect = btn.getBoundingClientRect();
-      const x = e.clientX - rect.left - rect.width / 2;
-      const y = e.clientY - rect.top - rect.height / 2;
-      btn.style.transform = `translate(${x * 0.15}px, ${y * 0.15}px) translateY(-2px)`;
-    });
-
-    btn.addEventListener('mouseleave', () => {
-      btn.style.transform = '';
-    });
-  });
-}
