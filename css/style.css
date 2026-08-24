@@ -550,6 +550,41 @@ footer { padding: 50px 0 30px; background: var(--bg-primary); border-top: 1px so
   .timeline-dot { left: 5px; }
 }
 
+@media (max-width: 480px) {
+  .container { padding: 0 16px; }
+  .hero-name { font-size: clamp(2.1rem, 9vw, 2.5rem); }
+  .hero-subtitle { font-size: 1.05rem; }
+  .hero-description { font-size: 0.96rem; }
+  .hero-btns { flex-direction: column; width: 100%; }
+  .hero-btns .btn { width: 100%; }
+  .hero-stat-strip { padding: 20px 14px; gap: 16px; margin-top: 40px; }
+  .stat-number { font-size: 1.8rem; }
+  .stat-label { font-size: 0.78rem; }
+  .metric-chip { padding: 10px 14px; gap: 10px; border-radius: 12px; }
+  .metric-chip-1 { bottom: -10px; left: 0; }
+  .metric-chip-2 { top: 10px; right: 0; }
+  .chip-icon { width: 34px; height: 34px; font-size: 0.95rem; }
+  .chip-val { font-size: 1.1rem; }
+  .chip-label { font-size: 0.72rem; }
+  .about-highlights { grid-template-columns: 1fr; }
+  .section-title { font-size: 1.75rem; }
+  .section-subtitle { font-size: 0.95rem; }
+  .project-body { padding: 20px 16px; }
+  .project-title { font-size: 1.18rem; }
+  .project-desc { font-size: 0.88rem; }
+  .cta-strip-title { font-size: 1.8rem; }
+  .cta-strip-sub { font-size: 0.95rem; }
+  .cta-strip-btns .btn { width: 100%; }
+  .portfolio-filters { gap: 8px; }
+  .filter-btn { padding: 8px 16px; font-size: 0.82rem; }
+}
+
+@media (max-width: 360px) {
+  .hero-name { font-size: 1.95rem; }
+  .hero-stat-strip { grid-template-columns: 1fr; gap: 14px; }
+  .stat-item:not(:last-child)::after { display: none; }
+}
+
 /* ============================================
    16. ARCHITECTURE & TECHNICAL SHOWCASE MODAL
    ============================================ */
