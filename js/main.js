@@ -1,48 +1,57 @@
-/* ============================================
-   EXECUTIVE PORTFOLIO INTERACTIVE CONTROLLER
+/* ==========================================================================
+   STARTBOOTSTRAP GRAYSCALE — EXECUTIVE & ENGINEERING JAVASCRIPT
    Rikkardo L. Tobing | Executive Portfolio
-   ============================================ */
+   ========================================================================== */
 
 document.addEventListener('DOMContentLoaded', () => {
-  initNavbar();
+  initNavbarShrink();
   initScrollProgress();
   initBackToTop();
   initPortfolioFilter();
-  initTestimonialsSlider();
+  initPhotoGalleryFilter();
+  initPhotoLightbox();
+  initCardTilt();
   initThemeToggle();
   initContactForm();
   initArchitectureModal();
 });
 
-/* ── 1. Navbar Sticky & Mobile Toggle ── */
-function initNavbar() {
-  const navbar = document.getElementById('navbar');
-  const hamburger = document.getElementById('hamburger');
-  const navLinks = document.getElementById('nav-links');
+/* ── 1. Navbar Shrink Function (Iconic Grayscale Effect) ── */
+function initNavbarShrink() {
+  const mainNav = document.getElementById('mainNav');
+  if (!mainNav) return;
 
-  if (navbar) {
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 40) {
-        navbar.classList.add('scrolled');
-      } else {
-        navbar.classList.remove('scrolled');
+  const navbarShrink = () => {
+    if (window.scrollY > 60) {
+      mainNav.classList.add('navbar-shrink');
+    } else {
+      mainNav.classList.remove('navbar-shrink');
+    }
+  };
+
+  // Shrink now if page is not at top
+  navbarShrink();
+  window.addEventListener('scroll', navbarShrink);
+
+  // Collapse responsive navbar when toggler is visible and link is clicked
+  const navbarToggler = document.querySelector('.navbar-toggler');
+  const responsiveNavItems = [].slice.call(
+    document.querySelectorAll('#navbarResponsive .nav-link')
+  );
+
+  responsiveNavItems.forEach((item) => {
+    item.addEventListener('click', () => {
+      if (navbarToggler && window.getComputedStyle(navbarToggler).display !== 'none') {
+        const navbarCollapse = document.getElementById('navbarResponsive');
+        if (navbarCollapse && typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
+          const bsCollapse = bootstrap.Collapse.getInstance(navbarCollapse);
+          if (bsCollapse) {
+            bsCollapse.hide();
+          }
+        }
       }
     });
-  }
-
-  if (hamburger && navLinks) {
-    hamburger.addEventListener('click', () => {
-      navLinks.classList.toggle('open');
-      hamburger.classList.toggle('active');
-    });
-
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        navLinks.classList.remove('open');
-        hamburger.classList.remove('active');
-      });
-    });
-  }
+  });
 }
 
 /* ── 2. Scroll Progress Bar ── */
@@ -79,10 +88,13 @@ function initBackToTop() {
   });
 }
 
-/* ── 4. Portfolio Filter System ── */
+/* ── 4. Portfolio Filter System (Scoped to #projects ONLY) ── */
 function initPortfolioFilter() {
-  const filterBtns = document.querySelectorAll('.filter-btn');
-  const projectCards = document.querySelectorAll('.project-card');
+  const projectsSection = document.getElementById('projects');
+  if (!projectsSection) return;
+
+  const filterBtns = projectsSection.querySelectorAll('.filter-btn');
+  const projectCards = projectsSection.querySelectorAll('.project-card');
 
   if (!filterBtns.length || !projectCards.length) return;
 
@@ -95,9 +107,10 @@ function initPortfolioFilter() {
 
       projectCards.forEach(card => {
         const category = card.getAttribute('data-category');
+        const parentCol = card.closest('.col-lg-4, .col-md-6') || card;
 
         if (filterValue === 'all' || category === filterValue || (category && category.split(' ').includes(filterValue))) {
-          card.style.display = 'flex';
+          parentCol.style.display = '';
           card.style.opacity = '0';
           card.style.transform = 'translateY(15px)';
           setTimeout(() => {
@@ -110,7 +123,7 @@ function initPortfolioFilter() {
           card.style.opacity = '0';
           card.style.transform = 'translateY(-10px)';
           setTimeout(() => {
-            card.style.display = 'none';
+            parentCol.style.display = 'none';
           }, 260);
         }
       });
@@ -118,47 +131,233 @@ function initPortfolioFilter() {
   });
 }
 
-/* ── 5. Testimonials Slider ── */
-function initTestimonialsSlider() {
-  const track = document.getElementById('testimonials-track');
-  const prevBtn = document.getElementById('prev-slide');
-  const nextBtn = document.getElementById('next-slide');
-  const dots = document.querySelectorAll('.slider-dot');
+/* ── 5. Visual Stories Photo Gallery Filter (Scoped to #stories ONLY) ── */
+function initPhotoGalleryFilter() {
+  const storiesSection = document.getElementById('stories');
+  if (!storiesSection) return;
 
-  if (!track || !dots.length) return;
+  const filterBtns = storiesSection.querySelectorAll('.photo-filter-btn');
+  const photoCards = storiesSection.querySelectorAll('.photo-card');
 
-  let currentIndex = 0;
-  const slideCount = dots.length;
+  if (!filterBtns.length || !photoCards.length) return;
 
-  function updateSlider(index) {
-    currentIndex = (index + slideCount) % slideCount;
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
 
-    dots.forEach((dot, idx) => {
-      if (idx === currentIndex) {
-        dot.classList.add('active');
-      } else {
-        dot.classList.remove('active');
-      }
-    });
-  }
+      const filterValue = btn.getAttribute('data-filter');
 
-  if (prevBtn) {
-    prevBtn.addEventListener('click', () => updateSlider(currentIndex - 1));
-  }
-  if (nextBtn) {
-    nextBtn.addEventListener('click', () => updateSlider(currentIndex + 1));
-  }
+      photoCards.forEach(card => {
+        const category = card.getAttribute('data-category');
+        const parentCol = card.closest('.col-lg-4, .col-md-6') || card;
 
-  dots.forEach(dot => {
-    dot.addEventListener('click', () => {
-      const index = parseInt(dot.getAttribute('data-index') || '0', 10);
-      updateSlider(index);
+        if (filterValue === 'all' || category === filterValue || (category && category.split(' ').includes(filterValue))) {
+          parentCol.style.display = '';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(15px)';
+          setTimeout(() => {
+            card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+            card.style.opacity = '1';
+            card.style.transform = 'translateY(0)';
+          }, 30);
+        } else {
+          card.style.transition = 'opacity 0.25s ease, transform 0.25s ease';
+          card.style.opacity = '0';
+          card.style.transform = 'translateY(-10px)';
+          setTimeout(() => {
+            parentCol.style.display = 'none';
+          }, 260);
+        }
+      });
     });
   });
 }
 
-/* ── 6. Luxury Theme Switcher (Dark / Light) ── */
+/* ── 6. Fullscreen Photo Lightbox Modal ── */
+const photoGalleryData = [
+  {
+    id: 'gold-in-the-mist',
+    title: 'Gold in the Mist: The Unseen Workers',
+    category: 'Street Photography',
+    location: 'Jakarta, Indonesia',
+    date: 'August 2026',
+    img: 'Photo/f732741c-ebf2-44c7-a695-bb22e67b1b09.jpeg',
+    desc: 'Under harsh afternoon heat, water sprays turn into a veil of liquid gold — capturing an authentic, fleeting moment of urban labor.'
+  },
+  {
+    id: 'silhouettes-scbd',
+    title: 'Silhouettes of Ambition: Sunset Over SCBD',
+    category: 'Urban Sunset',
+    location: 'SCBD Sudirman, Jakarta',
+    date: 'July 2026',
+    img: 'Photo/70422342-1920-42e3-93aa-901bd73044f4.jpeg',
+    desc: 'As the sun dips between concrete giants, the city pauses in dramatic silhouette before the nocturnal pulse ignites.'
+  },
+  {
+    id: 'kebayoran-station',
+    title: 'Golden Hour at Platform 2 Kebayoran',
+    category: 'Transit Series',
+    location: 'Kebayoran Station, Jakarta',
+    date: 'June 2026',
+    img: 'Photo/1c5ec77c-2dbb-4c94-8972-b37be21b970b.jpeg',
+    desc: 'Long shadows stretching across quiet tracks, warm amber light reminding commuters of another day of honest effort accomplished.'
+  },
+  {
+    id: 'welcome-to-isekai',
+    title: 'Welcome to Isekai: Among Books & Dreams',
+    category: 'Culture & Dreams',
+    location: 'Gramedia Jakarta',
+    date: 'May 2026',
+    img: 'Photo/ac62e452-a485-48c3-8910-3121f9d75b12.jpeg',
+    desc: 'Shelves towering with stories of heroes and parallel worlds — finding quiet solace and imagination inside a bustling metropolis.'
+  },
+  {
+    id: 'sun-and-bulb',
+    title: 'Two Sources of Light: Sun & Filament',
+    category: 'Minimalist View',
+    location: 'Rooftop Vista, Jakarta',
+    date: 'April 2026',
+    img: 'Photo/927d476c-ebb0-4711-a1b9-5663bb9dc8e8.jpeg',
+    desc: 'An artificial bulb hanging in vertical harmony above the natural sun behind clouded skies — a reflection on human vs natural illumination.'
+  },
+  {
+    id: 'jiexpo-dusk',
+    title: 'Dusk Over JIEXPO Kemayoran',
+    category: 'Architecture',
+    location: 'JIEXPO Kemayoran, Jakarta',
+    date: 'March 2026',
+    img: 'Photo/d4b42879-a92f-4b67-b5ab-276e1b17499b.jpeg',
+    desc: 'After thousands of trade delegates depart the exhibition halls, evening twilight rests peacefully above Southeast Asia’s trade hub.'
+  },
+  {
+    id: 'crimson-skyline',
+    title: 'Crimson Skyline: Fiery Horizon Over Jakarta',
+    category: 'Sunset Series',
+    location: 'South Jakarta Canopy',
+    date: 'February 2026',
+    img: 'Photo/670a2ccb-33de-4b97-b830-467f1d16b05f.jpeg',
+    desc: 'A vibrant fiery band cutting across evening clouds above silhouetted tree canopies, revealing Jakarta’s dramatic twilight palette.'
+  },
+  {
+    id: 'golden-corona',
+    title: 'Golden Corona: The Piercing Sun',
+    category: 'Golden Hour',
+    location: 'West Jakarta Sky',
+    date: 'January 2026',
+    img: 'Photo/cab028f6-9277-47ab-863f-b52cd385f268.jpeg',
+    desc: 'The afternoon sun burning intensely through atmospheric dust and clouds, casting an ethereal, surreal corona above the urban landscape.'
+  },
+  {
+    id: 'amber-horizon',
+    title: 'Amber Horizon: Solitude of the Street Lamp',
+    category: 'Urban Geometry',
+    location: 'Central Jakarta Promenade',
+    date: 'August 2026',
+    img: 'Photo/cb5bf88a-7803-481b-a2e6-abdaa241dadb.jpeg',
+    desc: 'A solitary Y-shaped street lamp framing a glowing blood-orange sun nestled between delicate branches and clean architectural pillars.'
+  }
+];
+
+function initPhotoLightbox() {
+  const backdrop = document.getElementById('lightbox-backdrop');
+  const imgEl = document.getElementById('lightbox-img');
+  const titleEl = document.getElementById('lightbox-title');
+  const metaEl = document.getElementById('lightbox-meta');
+  const storyLinkEl = document.getElementById('lightbox-story-link');
+  const closeBtn = document.getElementById('lightbox-close-btn');
+  const prevBtn = document.getElementById('lightbox-prev-btn');
+  const nextBtn = document.getElementById('lightbox-next-btn');
+
+  if (!backdrop || !imgEl) return;
+
+  let currentPhotoIndex = 0;
+
+  function openLightbox(index) {
+    currentPhotoIndex = (index + photoGalleryData.length) % photoGalleryData.length;
+    const item = photoGalleryData[currentPhotoIndex];
+
+    imgEl.src = item.img;
+    imgEl.alt = item.title;
+    if (titleEl) titleEl.textContent = item.title;
+    if (metaEl) {
+      metaEl.innerHTML = `
+        <span class="me-3"><i class="fa-solid fa-location-dot" style="color:var(--accent-gold);"></i> ${item.location}</span>
+        <span class="me-3"><i class="fa-solid fa-camera" style="color:var(--accent-cyan);"></i> ${item.category}</span>
+        <span><i class="fa-solid fa-calendar" style="color:var(--accent-indigo);"></i> ${item.date}</span>
+      `;
+    }
+    if (storyLinkEl) {
+      storyLinkEl.href = `article.html?id=${item.id}`;
+    }
+
+    backdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  function nextPhoto() {
+    openLightbox(currentPhotoIndex + 1);
+  }
+
+  function prevPhoto() {
+    openLightbox(currentPhotoIndex - 1);
+  }
+
+  // Bind click on all photo media containers & preview buttons
+  document.querySelectorAll('[data-photo-index]').forEach(trigger => {
+    trigger.addEventListener('click', (e) => {
+      e.preventDefault();
+      const idx = parseInt(trigger.getAttribute('data-photo-index'), 10);
+      openLightbox(idx);
+    });
+  });
+
+  if (closeBtn) closeBtn.addEventListener('click', closeLightbox);
+  if (prevBtn) prevBtn.addEventListener('click', prevPhoto);
+  if (nextBtn) nextBtn.addEventListener('click', nextPhoto);
+
+  backdrop.addEventListener('click', (e) => {
+    if (e.target === backdrop) closeLightbox();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (!backdrop.classList.contains('active')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowRight') nextPhoto();
+    if (e.key === 'ArrowLeft') prevPhoto();
+  });
+}
+
+/* ── 7. 3D Card Perspective Tilt Effect ── */
+function initCardTilt() {
+  const tiltElements = document.querySelectorAll('.project-card, .photo-card, .featured-project-row, .about-card');
+
+  tiltElements.forEach(card => {
+    card.addEventListener('mousemove', (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+
+      const rotateX = ((y - centerY) / centerY) * -4;
+      const rotateY = ((x - centerX) / centerX) * 4;
+
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-6px)`;
+    });
+
+    card.addEventListener('mouseleave', () => {
+      card.style.transform = '';
+    });
+  });
+}
+
+/* ── 8. Theme Switcher (Dark / Light Mode) ── */
 function initThemeToggle() {
   const themeToggle = document.getElementById('theme-toggle');
   const themeIcon = document.getElementById('theme-icon');
@@ -182,9 +381,9 @@ function initThemeToggle() {
   });
 }
 
-/* ── 7. Executive Contact Form ── */
+/* ── 9. Executive Contact Form Transmission ── */
 function initContactForm() {
-  const form = document.getElementById('contact-form');
+  const form = document.getElementById('contactForm');
   if (!form) return;
 
   form.addEventListener('submit', (e) => {
@@ -192,10 +391,10 @@ function initContactForm() {
     const btn = form.querySelector('button[type="submit"]');
     if (!btn) return;
 
-    const nameInput = document.getElementById('cf-name');
-    const emailInput = document.getElementById('cf-email');
-    const subjectInput = document.getElementById('cf-subject');
-    const messageInput = document.getElementById('cf-message');
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const subjectInput = document.getElementById('subject');
+    const messageInput = document.getElementById('message');
 
     const name = nameInput ? nameInput.value.trim() : '';
     const email = emailInput ? emailInput.value.trim() : '';
@@ -206,9 +405,9 @@ function initContactForm() {
 
     const originalText = btn.innerHTML;
     btn.disabled = true;
-    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sending to Executive Email...';
+    btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin me-2"></i> Transmitting...';
 
-    // Real email transmission to rikkardotobing1@gmail.com via FormSubmit API
+    // Real email transmission via FormSubmit API to rikkardotobing1@gmail.com
     fetch('https://formsubmit.co/ajax/rikkardotobing1@gmail.com', {
       method: 'POST',
       headers: {
@@ -218,7 +417,7 @@ function initContactForm() {
       body: JSON.stringify({
         name: name,
         email: email,
-        _subject: subject ? `[Executive Portfolio] ${subject} - from ${name}` : `[Executive Portfolio Inquiry] from ${name}`,
+        _subject: subject ? `[Grayscale Executive Inquiry] ${subject} - from ${name}` : `[Grayscale Portfolio Inquiry] from ${name}`,
         message: message,
         _template: 'table',
         _captcha: 'false'
@@ -231,7 +430,7 @@ function initContactForm() {
       throw new Error('Network response was not ok');
     })
     .then(() => {
-      btn.innerHTML = '<i class="fa-solid fa-check-double"></i> Inquiry Sent to Email!';
+      btn.innerHTML = '<i class="fa-solid fa-check-double me-2"></i> Inquiry Transmitted Successfully!';
       btn.style.background = '#10B981';
       btn.style.color = '#fff';
       form.reset();
@@ -244,13 +443,12 @@ function initContactForm() {
       }, 5000);
     })
     .catch(err => {
-      console.warn('FormSubmit AJAX fallback triggered:', err);
-      // Fallback: Open mailto client directly with prefilled body
+      console.warn('FormSubmit AJAX fallback:', err);
       const mailSubject = encodeURIComponent(subject ? `[Executive Inquiry] ${subject}` : `Executive Inquiry from ${name}`);
       const mailBody = encodeURIComponent(`Sender: ${name} (${email})\n\nMessage:\n${message}`);
       window.location.href = `mailto:rikkardotobing1@gmail.com?subject=${mailSubject}&body=${mailBody}`;
 
-      btn.innerHTML = '<i class="fa-solid fa-envelope-open-text"></i> Opening Email App...';
+      btn.innerHTML = '<i class="fa-solid fa-envelope-open-text me-2"></i> Opening Mail Client...';
       btn.style.background = '#6366F1';
       btn.style.color = '#fff';
 
@@ -264,14 +462,14 @@ function initContactForm() {
   });
 }
 
-/* ============================================
-   8. ARCHITECTURE & TECHNICAL SHOWCASE MODAL
-   ============================================ */
+/* ==========================================================================
+   10. ARCHITECTURE & TECHNICAL BLUEPRINT MODAL CONTROLLER
+   ========================================================================== */
 function initArchitectureModal() {
   const backdrop = document.getElementById('arch-modal-backdrop');
   const closeBtn = document.getElementById('modal-close-btn');
   const closeBtnBottom = document.getElementById('modal-close-btn-bottom');
-  const tabBtns = document.querySelectorAll('.arch-tab-btn');
+  const tabBtns = document.querySelectorAll('.modal-tab-btn');
   const modalBadge = document.getElementById('modal-badge');
   const modalTitle = document.getElementById('modal-title');
   const modalSubtitle = document.getElementById('modal-subtitle');
@@ -284,139 +482,128 @@ function initArchitectureModal() {
   let currentProjectKey = 'nexusagent';
   let currentTabKey = 'overview';
 
-  // Projects Architecture Data Repository
   const projectsData = {
     'nexusagent': {
-      badge: '<i class="fa-solid fa-robot"></i> Autonomous AI Platform • AI Agent',
+      badge: '<i class="fa-solid fa-robot me-1"></i> Autonomous AI Platform • AI Agent',
       title: 'NexusAgent & PamerAi Ecosystem',
       subtitle: 'Autonomous ReAct Multi-Step Agent, Real-Time Token & Cost Observability Platform, Desktop Developer Copilot & B2B Exhibition Intelligence',
-      tags: ['FastAPI / Python 3.10+', 'ReAct Agent', 'Token Tracker', 'SQLAlchemy 2.0 / SQLite', 'Chart.js', 'WhatsApp Bot', 'psutil / Win32', 'Tkinter'],
+      tags: ['FastAPI / Python 3.10+', 'ReAct Agent Loop', 'Token Financial Meter ($/Rp)', 'SQLite / SQLAlchemy 2.0', 'Chart.js Analytics', 'WhatsApp Bot Gateway', 'psutil / Win32', 'Tkinter GUI'],
       tabs: {
         'overview': `
-          <div class="arch-card">
-            <h4 class="arch-card-title"><i class="fa-solid fa-compass"></i> Executive Overview</h4>
-            <p><strong>NexusAgent & PamerAi Ecosystem</strong> adalah platform kecerdasan buatan mutakhir yang dirancang end-to-end untuk menyelesaikan 3 tantangan utama di lingkungan enterprise: mengotomasi alur kerja developer, memberikan transparansi 100% atas biaya dan konsumsi token LLM multi-mata uang ($ USD & Rp IDR), serta menyediakan layanan informasi pameran B2B omnichannel berbasis PDF RAG.</p>
+          <div class="mb-4">
+            <h5 class="text-warning mb-2"><i class="fa-solid fa-compass me-2"></i> Executive Overview</h5>
+            <p><strong>NexusAgent &amp; PamerAi Ecosystem</strong> adalah platform kecerdasan buatan enterprise end-to-end yang mengotomasi alur kerja developer, memberikan transparansi 100% atas biaya dan konsumsi token LLM multi-mata uang ($ USD &amp; Rp IDR), serta menyediakan layanan informasi pameran B2B omnichannel berbasis PDF RAG.</p>
           </div>
 
-          <div class="arch-img-box">
-            <img src="assets/images/project-nexusagent.png" alt="NexusAgent & PamerAi Web Dashboard" />
-            <div class="arch-img-caption"><i class="fa-solid fa-chart-line"></i> Real-Time Glassmorphic Observability Web Dashboard & Token Analytics (Chart.js & FastAPI)</div>
+          <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
+            <img src="assets/images/project-nexusagent.png" alt="NexusAgent Web Dashboard" class="w-100" />
+            <div class="p-2 bg-dark text-center text-muted small"><i class="fa-solid fa-chart-line me-1"></i> Real-Time Glassmorphic Observability Web Dashboard &amp; Token Analytics (Chart.js &amp; FastAPI)</div>
           </div>
 
-          <div class="arch-grid-2">
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label"><i class="fa-solid fa-brain" style="color:var(--text-gold);"></i> Multi-Step Autonomous Reasoning</span>
-              <span class="arch-stat-value">ReAct Agent Execution Loop</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Mengurai instruksi kompleks menjadi sub-tugas, evaluasi bertahap (*self-reflection*), dan auto error recovery.</p>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
+                <div class="text-warning fw-bold small mb-1"><i class="fa-solid fa-brain me-1"></i> Multi-Step Autonomous Reasoning</div>
+                <div class="h6 mb-2">ReAct Agent Execution Loop</div>
+                <p class="small text-muted mb-0">Mengurai instruksi kompleks menjadi sub-tugas, evaluasi bertahap (*self-reflection*), dan auto error recovery.</p>
+              </div>
             </div>
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label"><i class="fa-solid fa-calculator" style="color:var(--text-gold);"></i> Financial Observability</span>
-              <span class="arch-stat-value">USD ($) & IDR (Rp) Cost Meter</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Pelacakan token presisi per panggilan API dengan katalog harga dinamis dan visualisasi deret waktu Chart.js.</p>
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
+                <div class="text-warning fw-bold small mb-1"><i class="fa-solid fa-calculator me-1"></i> Financial Observability</div>
+                <div class="h6 mb-2">USD ($) &amp; IDR (Rp) Cost Meter</div>
+                <p class="small text-muted mb-0">Pelacakan token presisi per panggilan API dengan katalog harga dinamis dan visualisasi deret waktu Chart.js.</p>
+              </div>
             </div>
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label"><i class="fa-solid fa-laptop-code" style="color:var(--text-gold);"></i> Full-Stack DX Copilot</span>
-              <span class="arch-stat-value">Live @ai File Watcher</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Memantau komentar kode secara real-time dan mengeksekusi sintesis kode otomatis disertai CLI terminal sandbox.</p>
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
+                <div class="text-warning fw-bold small mb-1"><i class="fa-solid fa-laptop-code me-1"></i> Full-Stack DX Copilot</div>
+                <div class="h6 mb-2">Live @ai File Watcher</div>
+                <p class="small text-muted mb-0">Memantau komentar kode secara real-time dan mengeksekusi sintesis kode otomatis disertai CLI terminal sandbox.</p>
+              </div>
             </div>
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label"><i class="fa-solid fa-comments" style="color:var(--text-gold);"></i> Omnichannel Intelligence</span>
-              <span class="arch-stat-value">PamerAi & WhatsApp Bot</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Grounding 7 klaster industri pameran Informa Markets dengan PDF RAG reader dan WhatsApp 2-way bot.</p>
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
+                <div class="text-warning fw-bold small mb-1"><i class="fa-solid fa-comments me-1"></i> Omnichannel Intelligence</div>
+                <div class="h6 mb-2">PamerAi &amp; WhatsApp Bot</div>
+                <p class="small text-muted mb-0">Grounding 7 klaster industri pameran Informa Markets dengan PDF RAG reader dan WhatsApp 2-way bot.</p>
+              </div>
             </div>
           </div>
         `,
         'architecture': `
-          <div class="arch-card">
-            <h4 class="arch-card-title"><i class="fa-solid fa-sitemap"></i> High-Level Multi-Tier Architecture</h4>
+          <div class="mb-4">
+            <h5 class="text-warning mb-2"><i class="fa-solid fa-sitemap me-2"></i> High-Level Multi-Tier Architecture</h5>
             <p>Arsitektur modular berlapis memisahkan antarmuka pengguna, API gateway asinkron, agen penalaran ReAct, eksekusi tool aman, observabilitas token, dan gateway provider LLM.</p>
           </div>
 
-          <div class="arch-flow-diagram">
-            <div class="arch-flow-step">
-              <div class="arch-flow-icon"><i class="fa-solid fa-desktop"></i></div>
-              <div class="arch-flow-info">
-                <h5>1. Client Interfaces & Channels Layer</h5>
-                <p>Modern Glassmorphism Web Dashboard • Standalone Desktop GUI (Tkinter) • Global Hotkey Floating Copilot (Ctrl+Shift+A) • Inline File Watcher (@ai) • WhatsApp Bot Engine.</p>
+          <div class="d-flex flex-column gap-3">
+            <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary d-flex gap-3 align-items-center">
+              <div class="fs-3 text-warning"><i class="fa-solid fa-desktop"></i></div>
+              <div>
+                <h6 class="mb-1 text-white">1. Client Interfaces &amp; Channels Layer</h6>
+                <p class="small text-muted mb-0">Modern Glassmorphism Web Dashboard • Standalone Desktop GUI (Tkinter) • Global Hotkey Floating Copilot (Ctrl+Shift+A) • Inline File Watcher (@ai) • WhatsApp Bot Engine.</p>
               </div>
             </div>
 
-            <div class="arch-flow-step">
-              <div class="arch-flow-icon"><i class="fa-solid fa-bolt"></i></div>
-              <div class="arch-flow-info">
-                <h5>2. Asynchronous API Gateway (FastAPI & Uvicorn)</h5>
-                <p>High-performance ASGI runtime • Lifespan database session manager • Pydantic v2 data validation schemas • Asynchronous event streams.</p>
+            <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary d-flex gap-3 align-items-center">
+              <div class="fs-3 text-info"><i class="fa-solid fa-bolt"></i></div>
+              <div>
+                <h6 class="mb-1 text-white">2. Asynchronous API Gateway (FastAPI &amp; Uvicorn)</h6>
+                <p class="small text-muted mb-0">High-performance ASGI runtime • Lifespan database session manager • Pydantic v2 schemas • Asynchronous event streams.</p>
               </div>
             </div>
 
-            <div class="arch-flow-step">
-              <div class="arch-flow-icon"><i class="fa-solid fa-brain"></i></div>
-              <div class="arch-flow-info">
-                <h5>3. Core NexusAgent Intelligence Engine</h5>
-                <p>ReAct Loop (Thought ➡️ Action ➡️ Observation ➡️ Answer) • Autonomous Goal Planner & Decomposer • Long-Term Persistent Semantic Memory Store.</p>
+            <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary d-flex gap-3 align-items-center">
+              <div class="fs-3 text-primary"><i class="fa-solid fa-brain"></i></div>
+              <div>
+                <h6 class="mb-1 text-white">3. Core NexusAgent Intelligence Engine</h6>
+                <p class="small text-muted mb-0">ReAct Loop (Thought ➡️ Action ➡️ Observation ➡️ Answer) • Autonomous Goal Planner &amp; Decomposer • Long-Term Persistent Semantic Memory.</p>
               </div>
             </div>
 
-            <div class="arch-flow-step">
-              <div class="arch-flow-icon"><i class="fa-solid fa-toolbox"></i></div>
-              <div class="arch-flow-info">
-                <h5>4. Dynamic Tool Registry (Safe Execution Sandbox)</h5>
-                <p>Fullstack File I/O & Git Diff • Whitelisted CLI Terminal Sandbox • Windows WMI & psutil Hardware Telemetry • PamerAi PDF Extraction & RAG Engine.</p>
-              </div>
-            </div>
-
-            <div class="arch-flow-step">
-              <div class="arch-flow-icon"><i class="fa-solid fa-chart-pie"></i></div>
-              <div class="arch-flow-info">
-                <h5>5. Financial Observability & Storage Layer</h5>
-                <p>SQLite Storage (token_tracker.db) • Dynamic per-million-token Pricing Matrix ($/Rp) • Time-series analytics aggregation.</p>
-              </div>
-            </div>
-
-            <div class="arch-flow-step">
-              <div class="arch-flow-icon"><i class="fa-solid fa-network-wired"></i></div>
-              <div class="arch-flow-info">
-                <h5>6. Multi-LLM Provider Layer</h5>
-                <p>OpenAI (GPT-4o) • Google Gemini (2.0 Flash / 1.5 Pro) • Anthropic Claude • Groq LPU • Ollama (Local Offline) • Elysia Simulated Engine.</p>
+            <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary d-flex gap-3 align-items-center">
+              <div class="fs-3 text-success"><i class="fa-solid fa-toolbox"></i></div>
+              <div>
+                <h6 class="mb-1 text-white">4. Dynamic Tool Registry (Safe Execution Sandbox)</h6>
+                <p class="small text-muted mb-0">Fullstack File I/O &amp; Git Diff • Whitelisted CLI Terminal Sandbox • Windows WMI &amp; psutil Hardware Telemetry • PamerAi PDF Extraction &amp; RAG.</p>
               </div>
             </div>
           </div>
         `,
         'features': `
-          <div class="arch-grid-2">
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-list-check"></i> 1. Autonomous ReAct Engine</h4>
-              <p>Menerapkan paradigma *Reasoning + Acting*. Agen tidak hanya menjawab teks tetapi merencanakan urutan aksi, memvalidasi hasil observasi (*self-reflection*), dan memulihkan diri (*auto-recovery*) jika instruksi gagal dieksekusi.</p>
+          <div class="row g-3">
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
+                <h6 class="text-warning mb-2"><i class="fa-solid fa-list-check me-2"></i> 1. Autonomous ReAct Engine</h6>
+                <p class="small text-muted mb-0">Menerapkan paradigma Reasoning + Acting. Agen merencanakan urutan aksi, memvalidasi hasil observasi, dan melakukan auto-recovery jika instruksi gagal dieksekusi.</p>
+              </div>
             </div>
-
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-coins"></i> 2. Token & Cost Metering</h4>
-              <p>Menghitung Prompt Tokens, Completion Tokens, Total Tokens, dan Latensi (ms) per request. Menghasilkan estimasi biaya USD ($) dan Rupiah (Rp) secara instan, dilengkapi grafik tren harian dan paginasi log audit.</p>
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
+                <h6 class="text-warning mb-2"><i class="fa-solid fa-coins me-2"></i> 2. Token &amp; Cost Metering</h6>
+                <p class="small text-muted mb-0">Menghitung Prompt Tokens, Completion Tokens, Total Tokens, dan Latensi (ms) per request. Menghasilkan estimasi biaya USD ($) dan Rupiah (Rp) instan.</p>
+              </div>
             </div>
-
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-eye"></i> 3. Real-Time File Watcher</h4>
-              <p>Engine <code>watcher.py</code> mendengarkan modifikasi file. Pengembang cukup mengetik <code># @ai buat fungsi validasi email</code> dan sistem langsung mengganti komentar tersebut dengan kode hasil inferensi AI secara live.</p>
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
+                <h6 class="text-warning mb-2"><i class="fa-solid fa-eye me-2"></i> 3. Real-Time File Watcher</h6>
+                <p class="small text-muted mb-0">Cukup mengetik <code># @ai buat fungsi validasi email</code> dan sistem langsung mengganti komentar tersebut dengan kode hasil inferensi AI secara live.</p>
+              </div>
             </div>
-
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-gauge"></i> 4. Hardware Telemetry Widget</h4>
-              <p>Mengintegrasikan <code>psutil</code> dan Windows Win32 ctypes API untuk memantau utilitas CPU, RAM, Disk, dan baterai. Widget desktop always-on-top dapat dipanggil kapan saja dengan hotkey <code>Ctrl + Shift + A</code>.</p>
-            </div>
-
-            <div class="arch-card" style="grid-column: 1 / -1;">
-              <h4 class="arch-card-title"><i class="fa-brands fa-whatsapp"></i> 5. PamerAi Exhibition Intelligence & WhatsApp 2-Way Bot</h4>
-              <p>Knowledge base ter-grounding untuk 7 klaster industri pameran B2B PT Pamerindo Indonesia (Manufaktur, Energi/Mining, F&B/FHI, Beauty/Cosmobeauté, Lab Indonesia 2026, dll.) dengan PDF RAG extraction dan bridge pesan WhatsApp 2 arah otomatis.</p>
+            <div class="col-md-6">
+              <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
+                <h6 class="text-warning mb-2"><i class="fa-brands fa-whatsapp me-2"></i> 4. Exhibition WhatsApp Bot</h6>
+                <p class="small text-muted mb-0">Knowledge base ter-grounding untuk 7 klaster industri pameran B2B PT Pamerindo Indonesia dengan PDF RAG extraction dan bridge WhatsApp 2 arah.</p>
+              </div>
             </div>
           </div>
         `,
         'specs': `
-          <div class="arch-card">
-            <h4 class="arch-card-title"><i class="fa-solid fa-code"></i> Key REST API Endpoints Specification</h4>
-            <p>FastAPI melayani REST API asinkron dengan dokumentasi OpenAPI / Swagger UI interaktif:</p>
-            
-            <div class="arch-table-wrap">
-              <table class="arch-table">
+          <div class="mb-3">
+            <h5 class="text-warning mb-2"><i class="fa-solid fa-code me-2"></i> Key REST API Endpoints</h5>
+            <div class="table-responsive">
+              <table class="table table-dark table-striped table-bordered small">
                 <thead>
                   <tr>
                     <th>Method</th>
@@ -425,408 +612,101 @@ function initArchitectureModal() {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td><span class="arch-method-post">POST</span></td>
-                    <td><code>/api/agent/chat</code></td>
-                    <td>Eksekusi ReAct agent dengan reasoning step log &amp; tool execution</td>
-                  </tr>
-                  <tr>
-                    <td><span class="arch-method-post">POST</span></td>
-                    <td><code>/api/agent/autonomous</code></td>
-                    <td>Eksekusi misi otonom dengan multi-step goal decomposition</td>
-                  </tr>
-                  <tr>
-                    <td><span class="arch-method-get">GET</span></td>
-                    <td><code>/api/stats/overview</code></td>
-                    <td>Ringkasan KPI Token (Total Tokens, Biaya USD/IDR, Total Calls, Latensi)</td>
-                  </tr>
-                  <tr>
-                    <td><span class="arch-method-get">GET</span></td>
-                    <td><code>/api/stats/charts</code></td>
-                    <td>Data deret waktu pemakaian token &amp; distribusi pangsa model untuk Chart.js</td>
-                  </tr>
-                  <tr>
-                    <td><span class="arch-method-get">GET</span></td>
-                    <td><code>/api/logs</code></td>
-                    <td>Riwayat log transaksi token dengan paginasi, filter model &amp; pencarian</td>
-                  </tr>
-                  <tr>
-                    <td><span class="arch-method-get">GET</span></td>
-                    <td><code>/api/system/telemetry</code></td>
-                    <td>Telemetri real-time hardware laptop (CPU %, RAM %, Disk, Baterai, Latensi)</td>
-                  </tr>
-                  <tr>
-                    <td><span class="arch-method-get">GET</span></td>
-                    <td><code>/api/fullstack/structure</code></td>
-                    <td>Inspeksi struktur pohon hierarki file proyek secara rekursif</td>
-                  </tr>
-                  <tr>
-                    <td><span class="arch-method-post">POST</span></td>
-                    <td><code>/api/pamerai/chat</code></td>
-                    <td>Interaksi chatbot bilingual dengan grounding pameran Pamerindo &amp; PDF RAG</td>
-                  </tr>
+                  <tr><td><span class="badge bg-success">POST</span></td><td><code>/api/agent/chat</code></td><td>Eksekusi ReAct agent dengan reasoning step log &amp; tool execution</td></tr>
+                  <tr><td><span class="badge bg-success">POST</span></td><td><code>/api/agent/autonomous</code></td><td>Eksekusi misi otonom dengan multi-step goal decomposition</td></tr>
+                  <tr><td><span class="badge bg-primary">GET</span></td><td><code>/api/stats/overview</code></td><td>Ringkasan KPI Token (Total Tokens, Biaya USD/IDR, Total Calls, Latensi)</td></tr>
+                  <tr><td><span class="badge bg-primary">GET</span></td><td><code>/api/stats/charts</code></td><td>Data deret waktu pemakaian token &amp; distribusi pangsa model untuk Chart.js</td></tr>
                 </tbody>
               </table>
             </div>
           </div>
-
-          <div class="arch-card">
-            <h4 class="arch-card-title"><i class="fa-solid fa-terminal"></i> 1-Click Unified Orchestrator</h4>
-            <p>Seluruh ekosistem (FastAPI Backend, Web Dashboard, dan WhatsApp Bot Engine) dapat dijalankan terpadu tanpa tabrakan port menggunakan script:</p>
-            <pre style="background:#060A12; border:1px solid var(--glass-border); padding:12px 16px; border-radius:10px; color:var(--text-gold); font-family:monospace; font-size:0.88rem;">python run_all.py  # Atau klik ganda: Jalankan_Semua_Fitur.bat</pre>
-          </div>
         `
       }
     },
-
     'orion-erp': {
-      badge: '<i class="fa-solid fa-microchip"></i> Enterprise Manufacturing ERP • AS/400 RPG Simulator',
-      title: 'Orion ERP & IBM iSeries Simulator',
-      subtitle: 'Full-Scale Manufacturing ERP, Material Requirements Planning (MRP), BOM Explosion & DB2 Console',
-      tags: ['IBM iSeries (AS/400)', 'RPG IV / ILE RPG', 'RPG Free Format', 'DB2 for i', 'SQL (STRSQL)', 'QAUDJRN', 'Node.js / React', 'WRKSPLF / WRKACTJOB'],
+      badge: '<i class="fa-solid fa-cubes me-1"></i> Enterprise Architecture • ERP System',
+      title: 'Orion ERP IBM iSeries Integrated System',
+      subtitle: 'Modern Web Front-End Bridge, IBM AS/400 DB2 Connectivity & Multi-Department Automation for Enterprise Scale Operations',
+      tags: ['IBM AS/400 DB2', 'PHP Enterprise', 'REST API Bridge', 'Oracle SQL', 'Bootstrap 5', 'Role-Based Access Control', 'Automated Invoicing'],
       tabs: {
         'overview': `
-          <div class="arch-card">
-            <h4 class="arch-card-title"><i class="fa-solid fa-compass"></i> Enterprise ERP & AS/400 Overview</h4>
-            <p><strong>Orion ERP & IBM iSeries Simulator</strong> adalah sistem manufaktur berskala enterprise yang dirancang khusus untuk memodelkan proses bisnis manufaktur berat, MRP, alur kerja perintah kerja (*MES Work Orders*), ledakan Bill of Materials (BOM), dan emulasi terminal AS/400 5250.</p>
+          <div class="mb-4">
+            <h5 class="text-warning mb-2"><i class="fa-solid fa-compass me-2"></i> Executive Overview</h5>
+            <p><strong>Orion ERP IBM iSeries System</strong> adalah solusi modernisasi enterprise yang menjembatani sistem inti lawas <em>IBM AS/400 (iSeries DB2)</em> dengan antarmuka web modern yang intuitif, aman, dan responsif. Sistem ini menyatukan alur kerja Finance, Procurement, Inventory Warehouse, dan Sales Order ke dalam satu panel terpadu.</p>
           </div>
-
-          <div class="arch-img-box">
-            <img src="assets/images/project-orion-erp.png" alt="Orion ERP Dashboard" />
-            <div class="arch-img-caption"><i class="fa-solid fa-industry"></i> Orion Manufacturing ERP & IBM iSeries (AS/400) RPG Simulation Studio</div>
-          </div>
-
-          <div class="arch-grid-2">
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label">Production Engine</span>
-              <span class="arch-stat-value">MRP & Multi-Level BOM</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Kalkulasi net demand terhadap safety stock dan alokasi komponen perakitan Finished Goods.</p>
-            </div>
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label">OS/400 Operations</span>
-              <span class="arch-stat-value">WRKSPLF & WRKACTJOB</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Emulasi antrean spooled file 132-kolom green-bar dan pemantau subsistem aktif IBM i.</p>
-            </div>
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label">Relational Database</span>
-              <span class="arch-stat-value">DB2 for i & STRSQL</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Konsol query interaktif DB2 dan physical files terstruktur (INVMSTP, BOMMSTP, WKHEDP).</p>
-            </div>
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label">Security & Audit</span>
-              <span class="arch-stat-value">OS/400 RBAC & QAUDJRN</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Profil pengguna (QSECOFR, FIN_MGR, WHS_OPER) dan jurnal audit transaksi persisten.</p>
-            </div>
+          <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
+            <img src="assets/images/project-orion-erp.png" alt="Orion ERP Dashboard" class="w-100" />
+            <div class="p-2 bg-dark text-center text-muted small"><i class="fa-solid fa-layer-group me-1"></i> Orion ERP Master Executive Operations &amp; Financial Flow Portal</div>
           </div>
         `,
         'architecture': `
-          <div class="arch-card">
-            <h4 class="arch-card-title"><i class="fa-solid fa-layer-group"></i> AS/400 RPG Free & DB2 Data Architecture</h4>
-            <p>Struktur program ILE RPG dan physical file relational yang merefleksikan arsitektur sistem IBM iSeries enterprise:</p>
-            
-            <div class="arch-grid-2" style="margin-top:16px;">
-              <div class="arch-card" style="padding:16px;">
-                <h5 style="color:var(--text-gold); font-size:0.95rem; margin-bottom:8px;"><i class="fa-solid fa-file-code"></i> RPG Free Programs</h5>
-                <ul style="list-style:none; display:flex; flex-direction:column; gap:6px; font-size:0.85rem; color:var(--text-secondary);">
-                  <li>• <code>INV_REORDER_AUTO.RPGLE</code>: Auto stock reorder trigger</li>
-                  <li>• <code>MRP_ENGINE.RPGLE</code>: Net requirements calculation</li>
-                  <li>• <code>BOM_EXPLODE.RPGLE</code>: Recursive multi-tier BOM explosion</li>
-                  <li>• <code>GL_POST_BATCH.RPGLE</code>: General ledger journal voucher batch</li>
-                </ul>
-              </div>
-
-              <div class="arch-card" style="padding:16px;">
-                <h5 style="color:var(--text-gold); font-size:0.95rem; margin-bottom:8px;"><i class="fa-solid fa-database"></i> DB2 Physical Files</h5>
-                <ul style="list-style:none; display:flex; flex-direction:column; gap:6px; font-size:0.85rem; color:var(--text-secondary);">
-                  <li>• <code>INVMSTP</code>: Master item & safety stock</li>
-                  <li>• <code>BOMMSTP</code>: Component assembly matrix</li>
-                  <li>• <code>WKHEDP</code>: Manufacturing execution work orders</li>
-                  <li>• <code>SECAUDP</code>: OS/400 Security journaling audit log</li>
-                </ul>
-              </div>
-            </div>
+          <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary mb-3">
+            <h6 class="text-warning"><i class="fa-solid fa-server me-2"></i> IBM DB2 Real-Time ODBC Bridge</h6>
+            <p class="small text-muted mb-0">Koneksi langsung dua arah ke database IBM AS/400 tanpa mengorbankan integritas data transaksional ACID.</p>
           </div>
         `,
         'features': `
-          <div class="arch-grid-2">
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-industry"></i> MES Work Orders & BOM</h4>
-              <p>Mendukung perakitan bertingkat dengan validasi ketersediaan bahan baku, reservasi kuantitas gudang (Bin Locations), dan posting output Finished Goods secara otomatis.</p>
-            </div>
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-print"></i> WRKSPLF Spool Viewer</h4>
-              <p>Renders laporan 132-kolom green-bar ASCII autentik untuk Inventory Valuation (INVAUDIT), Trial Balance (GLPOST), dan MRP Purchase Requisition.</p>
-            </div>
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-network-wired"></i> WRKACTJOB Controller</h4>
-              <p>Memantau utilitas CPU subsistem (QINTER, QBATCH, QCTL), status pekerjaan (RUN, TIMW), serta fitur penangguhan pekerjaan interaktif (HLDJOB).</p>
-            </div>
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-lock"></i> 5250 Sign-On Security</h4>
-              <p>Emulasi layar Sign-On IBM i v7r4 dengan penegakan izin berbasis profil pengguna dan pencegahan injeksi SQL berbahaya.</p>
-            </div>
+          <div class="row g-3">
+            <div class="col-md-6"><div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary"><h6 class="text-warning">Finance &amp; General Ledger</h6><p class="small text-muted mb-0">Otomatisasi jurnal akuntansi, penutupan buku akhir bulan otomatis, dan laporan laba rugi multi-cabang.</p></div></div>
+            <div class="col-md-6"><div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary"><h6 class="text-warning">Procurement &amp; Warehouse</h6><p class="small text-muted mb-0">Siklus PR ➡️ PO ➡️ GR dengan multi-tier approval pimpinan via email alert dan FIFO/LIFO tracking.</p></div></div>
           </div>
         `,
         'specs': `
-          <div class="arch-card">
-            <h4 class="arch-card-title"><i class="fa-solid fa-terminal"></i> Interactive DB2 STRSQL Console</h4>
-            <p>Konsol eksekusi query SQL dinamis yang terhubung langsung ke dataset relasional aktif dengan filter keamanan:</p>
-            <pre style="background:#060A12; border:1px solid var(--glass-border); padding:12px 16px; border-radius:10px; color:#4ade80; font-family:monospace; font-size:0.86rem;">SELECT ITEM_NO, DESCR, QTY_ON_HAND, REORDER_PT FROM INVMSTP WHERE QTY_ON_HAND <= REORDER_PT;</pre>
-          </div>
+          <p class="small text-muted">Kompatibel dengan IBM DB2 for i (AS/400), PHP 8.2+, Redis session caching, dan LDAP Single Sign-On.</p>
         `
       }
     },
-
     'cv-examiner': {
-      badge: '<i class="fa-solid fa-brain"></i> Enterprise AI SaaS • Career Intelligence',
+      badge: '<i class="fa-solid fa-file-lines me-1"></i> AI Recruiting Platform • SaaS',
       title: 'CV Examiner AI Pro Platform',
-      subtitle: 'Enterprise AI CV Scoring, ATS Keyword Gap Analyzer, STAR Method Rewriter & Automated Technical Interview Studio',
-      tags: ['GPT-4o', 'FastAPI', 'React 18', 'Python 3.11+', 'AWS Cognito OAuth2', 'Informa AI Engine', 'Tailwind / Glassmorphism'],
+      subtitle: 'Automated Resume Parsing, Semantic ATS Scoring, Candidate Match Engine & Executive Hiring Intelligence',
+      tags: ['Python / FastAPI', 'OpenAI & Gemini API', 'PDF / DOCX Parser', 'Semantic Match', 'ATS Analyzer', 'Chart.js', 'Export Engine'],
       tabs: {
         'overview': `
-          <div class="arch-card">
-            <h4 class="arch-card-title"><i class="fa-solid fa-compass"></i> Career Intelligence Platform</h4>
-            <p><strong>CV Examiner AI Pro</strong> adalah platform SaaS cerdas berbasis GPT-4o untuk evaluasi CV, audit keselarasan kata kunci ATS, restrukturisasi pencapaian ke format STAR kuantitatif, dan studio simulasi wawancara teknis.</p>
+          <div class="mb-4">
+            <h5 class="text-warning mb-2"><i class="fa-solid fa-compass me-2"></i> Executive Overview</h5>
+            <p><strong>CV Examiner AI Pro</strong> adalah platform evaluasi rekrutmen berbasis AI yang menganalisis resume ribuan kandidat secara otomatis. Sistem membaca struktur teks CV dalam format PDF maupun DOCX, mencocokkannya dengan kualifikasi lowongan pekerjaan (*Job Description*), serta menghitung skor kecocokan semantik ATS.</p>
           </div>
-
-          <div class="arch-img-box">
-            <img src="assets/images/project-cv-examiner.png" alt="CV Examiner AI Showcase" />
-            <div class="arch-img-caption"><i class="fa-solid fa-file-shield"></i> CV Examiner AI Pro Dashboard & Analysis Studio</div>
-          </div>
-
-          <div class="arch-grid-2">
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label">ATS Optimization</span>
-              <span class="arch-stat-value">Keyword Gap Scoring</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Audit kata kunci target job dan kalkulasi skor kecocokan ATS (0–100).</p>
-            </div>
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label">Impact Formulation</span>
-              <span class="arch-stat-value">STAR Rewriter Engine</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Mengubah poin pasif menjadi format Situation, Task, Action, Result terukur.</p>
-            </div>
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label">Interactive Studio</span>
-              <span class="arch-stat-value">AI Interview Prep</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Prediksi pertanyaan teknis/perilaku dan evaluator respon langsung.</p>
-            </div>
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label">Personal Branding</span>
-              <span class="arch-stat-value">LinkedIn Alignment</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Sinkronisasi headline & bio LinkedIn dengan narasi pencapaian karier.</p>
-            </div>
-          </div>
-        `,
-        'architecture': `
-          <div class="arch-card">
-            <h4 class="arch-card-title"><i class="fa-solid fa-network-wired"></i> End-to-End SaaS Pipeline</h4>
-            <p>Frontend berbasis React 18 + Vite terhubung dengan backend asynchronous FastAPI yang mengalirkan hasil analisis via Server-Sent Events (SSE) dari engine GPT-4o terlindungi AWS Cognito OAuth2.</p>
-          </div>
-        `,
-        'features': `
-          <div class="arch-grid-2">
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-magnifying-glass"></i> ATS Keyword Audit</h4>
-              <p>Mendeteksi missing keywords industri spesifik dan memberikan rekomendasi penempatan alami pada section pengalaman kerja.</p>
-            </div>
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-star"></i> STAR Rewriter</h4>
-              <p>Menghitung persentase peningkatan metrik bisnis dan menambahkan formula aksi proaktif yang terverifikasi.</p>
-            </div>
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-comments"></i> Technical Interview Prep</h4>
-              <p>Menghasilkan skenario studi kasus teknis dan panduan jawaban ideal berdasarkan celah pengalaman pada CV.</p>
-            </div>
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-language"></i> Bilingual ID / EN</h4>
-              <p>Dukungan penuh antarmuka dan hasil audit dalam Bahasa Indonesia dan English dengan tema Dark/Light Glassmorphism.</p>
-            </div>
-          </div>
-        `,
-        'specs': `
-          <div class="arch-card">
-            <h4 class="arch-card-title"><i class="fa-solid fa-code-branch"></i> API Endpoints & Auth</h4>
-            <p>FastAPI asynchronous endpoints: <code>/api/analyze-cv</code>, <code>/api/star-rewrite</code>, <code>/api/interview-eval</code>, <code>/api/linkedin-audit</code> dengan otentikasi token bearer.</p>
+          <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
+            <img src="assets/images/project-cv-examiner.png" alt="CV Examiner AI Showcase" class="w-100" />
           </div>
         `
       }
     },
-
     'monitor-tablet': {
-      badge: '<i class="fa-solid fa-tablet-screen-button"></i> Enterprise IoT & Remote Admin • Multi-Device Hub',
-      title: 'Enterprise IoT & Multi-Device Remote Monitoring System',
-      subtitle: 'Low-Latency Asynchronous Remote Administration & Real-Time Health Telemetry Hub for Android Tablets and Windows Kiosks/PCs',
-      tags: ['FastAPI (Python 3.10+)', 'Kotlin & Jetpack Compose', 'Android Accessibility API', 'MediaProjection Stream', 'PyAutoGUI', 'psutil', 'In-Memory RAM Cache', 'Sub-200ms Latency'],
+      badge: '<i class="fa-solid fa-tablet-screen-button me-1"></i> IoT Architecture • Remote Telemetry',
+      title: 'Enterprise IoT & Multi-Device Monitoring Hub',
+      subtitle: 'Sub-Second Device Health Telemetry, WebSocket Real-Time Dashboard, Remote Device Management & Fleet Observability',
+      tags: ['WebSocket / Asynchronous I/O', 'FastAPI & Python', 'psutil & WMI', 'Chart.js Live Streaming', 'Multi-Device Fleet', 'Alert Dispatcher'],
       tabs: {
         'overview': `
-          <div class="arch-card">
-            <h4 class="arch-card-title"><i class="fa-solid fa-compass"></i> Executive Overview</h4>
-            <p><strong>Enterprise Multi-Device IoT Monitoring & Remote Administration System</strong> adalah platform pemantauan dan kendali jarak jauh terpusat berlatensi ultra-rendah (<em>sub-200ms</em>) yang dibangun untuk mendukung operasional puluhan tablet kiosk registrasi mandiri dan PC pameran pada event berskala internasional <strong>PT Pamerindo Indonesia (Informa Markets Asia)</strong>.</p>
+          <div class="mb-4">
+            <h5 class="text-warning mb-2"><i class="fa-solid fa-compass me-2"></i> Executive Overview</h5>
+            <p><strong>Enterprise IoT &amp; Multi-Device Remote Monitoring System</strong> adalah platform pemantauan perangkat keras terdistribusi yang dirancang untuk memantau armada tablet pameran, perangkat POS, dan workstation operasional secara real-time melalui koneksi WebSocket asinkron dengan latensi sub-detik.</p>
           </div>
-
-          <div class="arch-img-box">
-            <img src="assets/images/project-monitor-tablet.png" alt="Enterprise IoT & Multi-Device Monitoring Dashboard" />
-            <div class="arch-img-caption"><i class="fa-solid fa-display"></i> Real-Time Multi-Slot IT Admin Command Center & Live Screen Mirroring Modal</div>
-          </div>
-
-          <div class="arch-grid-2">
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label"><i class="fa-solid fa-bolt" style="color:var(--text-gold);"></i> Sub-200ms Low Latency</span>
-              <span class="arch-stat-value">Conflated Channel Streaming</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Transmisi frame JPEG adaptif 720p/1024p (25–45 KB/frame) dengan zero buffer-bloat pada Wi-Fi venue yang padat.</p>
-            </div>
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label"><i class="fa-solid fa-hand-pointer" style="color:var(--text-gold);"></i> Zero-Root Android Control</span>
-              <span class="arch-stat-value">AccessibilityService Gestures</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Injeksi perintah sentuh jarak jauh (Click, Double-Click, Multi-point Swipe, System Home) tanpa perlu root perangkat komersial.</p>
-            </div>
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label"><i class="fa-solid fa-heart-pulse" style="color:var(--text-gold);"></i> Proactive Health Guard</span>
-              <span class="arch-stat-value">Real-Time Telemetry & Watchdog</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Memantau level baterai, utilisasi RAM, CPU load, dan deteksi otomatis perangkat offline dalam 7 detik.</p>
-            </div>
-            <div class="arch-stat-chip">
-              <span class="arch-stat-label"><i class="fa-solid fa-trophy" style="color:var(--text-gold);"></i> Measurable Business ROI</span>
-              <span class="arch-stat-value">96% Faster MTTR (&lt; 30s)</span>
-              <p style="font-size:0.84rem; color:var(--text-secondary); margin-top:4px;">Mengurangi rata-rata downtime kiosk dari 4.5 jam menjadi &lt; 15 menit per pameran dan meningkatkan kapasitas supervisi IT 4x lipat.</p>
-            </div>
-          </div>
-        `,
-        'architecture': `
-          <div class="arch-card">
-            <h4 class="arch-card-title"><i class="fa-solid fa-sitemap"></i> High-Level Multi-Tier System Architecture</h4>
-            <p>Sistem dirancang dengan pemisahan independen antara jalur telemetri berkecepatan tinggi, antrean perintah asinkron (FIFO), dan streaming visual berbasis in-memory caching untuk mencegah latensi disk:</p>
-          </div>
-
-          <div class="arch-flow-diagram">
-            <div class="arch-flow-step">
-              <div class="arch-flow-icon"><i class="fa-solid fa-tablet-screen-button"></i></div>
-              <div class="arch-flow-info">
-                <h5>1. Field Client Layer (Android Tablets & Windows PC Kiosks)</h5>
-                <p><strong>Android Client:</strong> Kotlin + Jetpack Compose UI, Foreground MediaProjection Service, Coroutine Conflated Channel JPEG Stream, dan AccessibilityService gesture executor.<br>
-                <strong>Windows PC Client:</strong> Python standalone (<code>pc_client.py</code> / <code>pc_client.exe</code>) dengan thread-isolated command polling (100ms), background capture worker (5 FPS), dan psutil CPU sampler.</p>
-              </div>
-            </div>
-
-            <div class="arch-flow-step">
-              <div class="arch-flow-icon"><i class="fa-solid fa-server"></i></div>
-              <div class="arch-flow-info">
-                <h5>2. Central Engine & In-Memory Hub (FastAPI)</h5>
-                <p>Asynchronous REST API Gateway • Zero-Disk-I/O In-Memory RAM Screenshot Cache (<code>screenshots_cache[device_id]</code>) dengan latency respon &lt;5ms • Dynamic 7s Heartbeat Watchdog • FIFO Per-Device Command Queue Dispatcher.</p>
-              </div>
-            </div>
-
-            <div class="arch-flow-step">
-              <div class="arch-flow-icon"><i class="fa-solid fa-desktop"></i></div>
-              <div class="arch-flow-info">
-                <h5>3. IT Admin Command Center (Glassmorphic Web Portal)</h5>
-                <p>Multi-slot dynamic monitoring grid dengan live heartbeat pulse • Real-time battery & hardware telemetry bars • Live mirror popup modal dengan DPI scaling-safe coordinate mapping (0–100%) dan virtual keyboard/hotkey toolbar.</p>
-              </div>
-            </div>
-          </div>
-        `,
-        'features': `
-          <div class="arch-grid-2">
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-hand-pointer"></i> Zero-Root Gesture Injection</h4>
-              <p>Memanfaatkan Android <code>AccessibilityService</code> API untuk mengeksekusi sentuhan native, swipe arah ganda, dan tombol kembali/Home tanpa membahayakan integritas sistem operasi.</p>
-            </div>
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-crosshairs"></i> DPI-Scaling Safe Mapping</h4>
-              <p>Mengonversi klik mouse admin menjadi rasio koordinat persentase (0–100%), menjamin akurasi klik sentuh 100% presisi pada berbagai resolusi layar tablet maupun display PC vertikal/horizontal.</p>
-            </div>
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-keyboard"></i> Remote Keyboard & Hotkey Bar</h4>
-              <p>Mendukung pengiriman teks interaktif (<code>TYPE</code>) dan shortcut keyboard esensial (<code>Ctrl+L</code>, <code>Ctrl+T</code>, <code>Ctrl+W</code>, <code>Ctrl+R</code>, <code>Alt+F4</code>, <code>ENTER</code>, <code>ESC</code>) langsung ke PC Kiosk.</p>
-            </div>
-            <div class="arch-card">
-              <h4 class="arch-card-title"><i class="fa-solid fa-memory"></i> In-Memory RAM Caching</h4>
-              <p>Snapshot layar disimpan langsung dalam memori server FastAPI untuk zero-disk write cycle, memungkinkan transmisi mirror real-time hingga 5–10 frame per detik tanpa membebani storage.</p>
-            </div>
-          </div>
-        `,
-        'specs': `
-          <div class="arch-card">
-            <h4 class="arch-card-title"><i class="fa-solid fa-network-wired"></i> Core RESTful API Endpoints</h4>
-            <div class="arch-table-wrap">
-              <table class="arch-table">
-                <thead>
-                  <tr>
-                    <th>Method</th>
-                    <th>Endpoint</th>
-                    <th>Fungsi & Payload</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td><span class="arch-method-post">POST</span></td>
-                    <td><code>/api/report</code></td>
-                    <td>Heartbeat telemetri klien (device_id, battery_level, is_charging, ram_usage, cpu_usage)</td>
-                  </tr>
-                  <tr>
-                    <td><span class="arch-method-get">GET</span></td>
-                    <td><code>/api/command</code></td>
-                    <td>Polling antrean perintah FIFO per device_id (Click, Swipe, Key, Type, Home)</td>
-                  </tr>
-                  <tr>
-                    <td><span class="arch-method-post">POST</span></td>
-                    <td><code>/api/command</code></td>
-                    <td>Enqueue perintah kendali baru dari IT Admin Dashboard</td>
-                  </tr>
-                  <tr>
-                    <td><span class="arch-method-post">POST</span></td>
-                    <td><code>/api/upload_screenshot</code></td>
-                    <td>Multipart JPEG frame streaming langsung ke buffer RAM in-memory server</td>
-                  </tr>
-                  <tr>
-                    <td><span class="arch-method-get">GET</span></td>
-                    <td><code>/api/devices</code></td>
-                    <td>Daftar seluruh perangkat terdaftar beserta status Online/Offline & metrik kesehatan</td>
-                  </tr>
-                  <tr>
-                    <td><span class="arch-method-get">GET</span></td>
-                    <td><code>/api/screenshot/{device_id}</code></td>
-                    <td>Pengambilan snapshot frame visual terkini untuk live rendering modal admin (&lt;5ms)</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <div class="arch-card">
-            <h4 class="arch-card-title"><i class="fa-solid fa-rocket"></i> Deployment & Quick Execution</h4>
-            <p>Ekosistem siap dijalankan di jaringan lokal / LAN pameran dengan instruksi sederhana:</p>
-            <pre style="background:#060A12; border:1px solid var(--glass-border); padding:12px 16px; border-radius:10px; color:var(--text-gold); font-family:monospace; font-size:0.86rem; line-height:1.6;"># 1. Start Server Hub
-python main.py  # Server aktif pada http://localhost:8000
-
-# 2. Windows Client (Python atau Standalone EXE)
-python pc_client.py   # Atau cukup klik ganda pc_client.exe
-
-# 3. Android Tablet Client
-Install app-debug.apk -&gt; Masukkan IP Server -&gt; Aktifkan Accessibility &amp; MediaProjection</pre>
+          <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
+            <img src="assets/images/project-monitor-tablet.png" alt="Enterprise IoT Dashboard" class="w-100" />
           </div>
         `
       }
     }
   };
 
-  // Render Project into Modal
-  function renderProjectModal(projectKey, tabKey = 'overview') {
-    const data = projectsData[projectKey];
-    if (!data) return;
+  function renderModalContent(projectKey, tabKey) {
+    const project = projectsData[projectKey];
+    if (!project) return;
 
-    currentProjectKey = projectKey;
-    currentTabKey = tabKey;
+    if (modalBadge) modalBadge.innerHTML = project.badge;
+    if (modalTitle) modalTitle.textContent = project.title;
+    if (modalSubtitle) modalSubtitle.textContent = project.subtitle;
 
-    modalBadge.innerHTML = data.badge;
-    modalTitle.innerHTML = data.title;
-    modalSubtitle.innerHTML = data.subtitle;
+    const tabContent = (project.tabs && project.tabs[tabKey]) || (project.tabs && project.tabs['overview']) || '<p>Content in preparation.</p>';
+    modalBody.innerHTML = tabContent;
 
-    // Render active tab content
-    modalBody.innerHTML = data.tabs[tabKey] || data.tabs['overview'];
-    modalBody.scrollTop = 0;
+    if (modalFooterTags) {
+      modalFooterTags.innerHTML = project.tags.map(t => `<span class="tech-tag me-1 mb-1 d-inline-block">${t}</span>`).join('');
+    }
 
-    // Update tab button states
     tabBtns.forEach(btn => {
       if (btn.getAttribute('data-tab') === tabKey) {
         btn.classList.add('active');
@@ -834,43 +714,34 @@ Install app-debug.apk -&gt; Masukkan IP Server -&gt; Aktifkan Accessibility &amp
         btn.classList.remove('active');
       }
     });
-
-    // Render footer tags
-    modalFooterTags.innerHTML = data.tags.map(t => `<span class="tech-tag">${t}</span>`).join('');
   }
 
-  // Open Modal Event
+  function openModal(projectKey) {
+    currentProjectKey = projectKey;
+    currentTabKey = 'overview';
+    renderModalContent(currentProjectKey, currentTabKey);
+    backdrop.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal() {
+    backdrop.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
   openButtons.forEach(btn => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      const projectKey = btn.getAttribute('data-modal');
-      renderProjectModal(projectKey || 'nexusagent', 'overview');
-      backdrop.classList.add('active');
-      document.body.classList.add('modal-open');
+      const pKey = btn.getAttribute('data-project') || btn.getAttribute('data-modal') || 'nexusagent';
+      openModal(pKey);
     });
   });
-
-  // Tab Switch Event
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tabKey = btn.getAttribute('data-tab');
-      renderProjectModal(currentProjectKey, tabKey);
-    });
-  });
-
-  // Close Modal Handler
-  function closeModal() {
-    backdrop.classList.remove('active');
-    document.body.classList.remove('modal-open');
-  }
 
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
   if (closeBtnBottom) closeBtnBottom.addEventListener('click', closeModal);
 
   backdrop.addEventListener('click', (e) => {
-    if (e.target === backdrop) {
-      closeModal();
-    }
+    if (e.target === backdrop) closeModal();
   });
 
   document.addEventListener('keydown', (e) => {
@@ -878,5 +749,14 @@ Install app-debug.apk -&gt; Masukkan IP Server -&gt; Aktifkan Accessibility &amp
       closeModal();
     }
   });
-}
 
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const tab = btn.getAttribute('data-tab');
+      if (tab) {
+        currentTabKey = tab;
+        renderModalContent(currentProjectKey, currentTabKey);
+      }
+    });
+  });
+}

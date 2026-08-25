@@ -3,30 +3,34 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <title>Rikkardo L. Tobing — Data &amp; Tech Support Executive &amp; Senior Web Developer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <title>Rikkardo L. Tobing — Senior Web Developer &amp; Data Support Executive</title>
   <meta name="description"
-    content="Executive Portfolio of Rikkardo L. Tobing — Data &amp; Tech Support Executive and Web Developer at Informa Markets Asia. Managing 8 flagship B2B trade show platforms across Southeast Asia." />
-  <meta name="keywords"
-    content="Rikkardo Tobing, Web Developer Jakarta, Informa Markets, Pamerindo Indonesia, Data Executive, B2B Web Management, WordPress Enterprise, CMS Specialist, ERP Developer" />
-  
-  <!-- Open Graph -->
-  <meta property="og:title" content="Rikkardo L. Tobing — Executive Web Developer &amp; Data Lead" />
+    content="Executive &amp; Engineering Portfolio of Rikkardo L. Tobing — Senior Web Developer and Data Support Executive at Informa Markets Asia (PT Pamerindo Indonesia). Managing 8+ flagship B2B trade platforms across Southeast Asia." />
+  <meta name="author" content="Rikkardo L. Tobing" />
+
+  <!-- Open Graph Meta -->
+  <meta property="og:title" content="Rikkardo L. Tobing — Senior Web Developer &amp; Data Executive" />
   <meta property="og:description"
     content="Managing 8+ international B2B event websites, enterprise ERP platforms, and AI SaaS applications." />
   <meta property="og:type" content="website" />
 
-  <!-- Google Fonts & Icons -->
+  <!-- Bootstrap 5.3.3 CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!-- Google Fonts & Font Awesome 6 -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&family=Nunito:wght@300;400;600;700;800&family=Fira+Code:wght@400;500;600&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="css/style.css?v=3.5" />
+
+  <!-- Custom Theme CSS -->
+  <link rel="stylesheet" href="css/style.css?v=5.0" />
 </head>
 
-<body>
+<body id="page-top">
 
   <!-- ── Scroll Progress Bar ── -->
   <div id="scroll-progress"></div>
@@ -36,1149 +40,1235 @@
     <i class="fa-solid fa-arrow-up"></i>
   </button>
 
-  <!-- ============================================
-       NAVIGATION BAR
-       ============================================ -->
-  <nav id="navbar">
-    <div class="container">
-      <div class="nav-inner">
-        <a href="#hero" class="nav-logo">Rikkardo<span> L. Tobing</span></a>
+  <!-- ==========================================================================
+       NAVIGATION BAR (STARTBOOTSTRAP GRAYSCALE FIXED & SHRINK ON SCROLL)
+       ========================================================================== -->
+  <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
+    <div class="container px-4 px-lg-5">
+      <a class="navbar-brand" href="#page-top">
+        <i class="fa-solid fa-crown text-warning me-1"></i> Rikkardo<span> L. Tobing</span>
+      </a>
 
-        <ul class="nav-links" id="nav-links">
-          <li><a href="#about" class="nav-link">About</a></li>
-          <li><a href="#services" class="nav-link">Services</a></li>
-          <li><a href="#skills" class="nav-link">Skills</a></li>
-          <li><a href="#portfolio" class="nav-link">Case Studies</a></li>
-          <li><a href="#experience" class="nav-link">Journey</a></li>
-          <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
-          <li><a href="#blog" class="nav-link">Visual Stories</a></li>
-          <li><a href="#contact" class="nav-cta nav-link"><i class="fa-regular fa-paper-plane"></i> Contact Executive</a></li>
+      <div class="d-flex align-items-center d-lg-none gap-2">
+        <button class="theme-toggle-btn" id="theme-toggle-mobile" aria-label="Toggle theme">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <button class="navbar-toggler navbar-toggler-right text-uppercase fs-6" type="button" data-bs-toggle="collapse"
+          data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+          aria-label="Toggle navigation">
+          <i class="fas fa-bars"></i>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ms-auto my-2 my-lg-0 align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#stories">Visual Stories</a></li>
+          <li class="nav-item"><a class="nav-link" href="#journey">Journey</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+          <li class="nav-item ms-lg-3 d-none d-lg-block">
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle Theme" title="Switch Light/Dark Mode">
+              <i class="fa-solid fa-moon" id="theme-icon"></i>
+            </button>
+          </li>
         </ul>
-
-        <div class="nav-actions">
-          <button class="theme-toggle" id="theme-toggle" aria-label="Toggle Theme" title="Switch Theme">
-            <i class="fa-solid fa-moon" id="theme-icon"></i>
-          </button>
-
-          <button class="hamburger" id="hamburger" aria-label="Toggle Menu">
-            <span></span><span></span><span></span>
-          </button>
-        </div>
       </div>
     </div>
   </nav>
 
-  <!-- ============================================
-       HERO SECTION
-       ============================================ -->
-  <section id="hero">
-    <div class="container">
-      <div class="hero-grid">
-
-        <!-- Left Column: Executive Bio & Pitch -->
-        <div class="hero-content">
-          <div class="hero-eyebrow">
-            <span class="dot"></span> Informa Markets Asia • PT Pamerindo Indonesia
-          </div>
-
-          <p class="hero-greeting">Executive Portfolio</p>
-
-          <h1 class="hero-name">
-            Rikkardo <span class="gold-text">L. Tobing</span>
-          </h1>
-
-          <div class="hero-title-wrap">
-            <p class="hero-subtitle">
-              Data &amp; Tech Support Executive <span style="color:var(--accent-gold); font-weight:400;">|</span> Senior Web Developer
-            </p>
-          </div>
-
-          <p class="hero-description">
-            Spearheading digital infrastructure and web architecture for <strong>8+ international flagship B2B trade show platforms</strong> across Southeast Asia (Mining Indonesia, Electric &amp; Power Indonesia, Food &amp; Hotel Indonesia, etc.), serving over <strong>500,000+ annual global trade visitors</strong>.
-          </p>
-
-          <div class="hero-btns">
-            <a href="#portfolio" class="btn btn-primary">
-              <i class="fa-solid fa-briefcase"></i> Explore Case Studies
-            </a>
-            <a href="#contact" class="btn btn-outline">
-              <i class="fa-solid fa-envelope"></i> Initiate Contact
-            </a>
-          </div>
-
-          <div class="hero-socials">
-            <span>Connect &amp; Follow:</span>
-            <a href="https://id.linkedin.com/in/rikkardo-l-tobing" target="_blank" rel="noopener noreferrer"
-              aria-label="LinkedIn Profile" title="LinkedIn">
-              <i class="fa-brands fa-linkedin-in"></i>
-            </a>
-            <a href="https://github.com/rikkardochaplin" target="_blank" rel="noopener noreferrer"
-              aria-label="GitHub Profile" title="GitHub">
-              <i class="fa-brands fa-github"></i>
-            </a>
-            <a href="mailto:rikkardotobing1@gmail.com" aria-label="Email Direct" title="Email">
-              <i class="fa-solid fa-envelope"></i>
-            </a>
-          </div>
-        </div>
-
-        <!-- Right Column: Executive Portrait Frame -->
-        <div class="hero-visual">
-          <div class="hero-profile-frame">
-            <div class="hero-profile-inner">
-              <img src="assets/images/profile.png" alt="Rikkardo L. Tobing — Web Developer &amp; Data Executive" />
-            </div>
-
-            <!-- Floating Metric Chips -->
-            <div class="metric-chip metric-chip-1">
-              <div class="chip-icon"><i class="fa-solid fa-globe"></i></div>
-              <div>
-                <div class="chip-val">8+</div>
-                <div class="chip-label">B2B Platforms</div>
-              </div>
-            </div>
-
-            <div class="metric-chip metric-chip-2">
-              <div class="chip-icon"><i class="fa-solid fa-users"></i></div>
-              <div>
-                <div class="chip-val">500K+</div>
-                <div class="chip-label">Global Trade Visitors</div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+  <!-- ==========================================================================
+       MASTHEAD (HERO SECTION - GRAYSCALE ICONIC FULLSCREEN)
+       ========================================================================== -->
+  <header class="masthead text-center text-white" id="masthead">
+    <div class="container px-4 px-lg-5">
+      
+      <div class="masthead-eyebrow">
+        <i class="fa-solid fa-circle-dot me-1 text-warning"></i> Informa Markets Asia • PT Pamerindo Indonesia
       </div>
 
-      <!-- Executive Stat Strip -->
-      <div class="hero-stat-strip">
-        <div class="stat-item">
-          <div class="stat-number">8+</div>
-          <div class="stat-label">International B2B Trade Platforms</div>
+      <h1 class="masthead-title">
+        Rikkardo <span class="gold-text">L. Tobing</span>
+      </h1>
+
+      <div class="masthead-roles">
+        <span class="masthead-role-badge"><i class="fa-solid fa-code"></i> Senior Web Developer</span>
+        <span class="masthead-role-badge"><i class="fa-solid fa-database"></i> Data &amp; Tech Support Executive</span>
+        <span class="masthead-role-badge"><i class="fa-solid fa-robot"></i> AI Systems Architect</span>
+      </div>
+
+      <p class="masthead-lead">
+        Spearheading digital infrastructure and web architecture for <strong>8+ international flagship B2B trade platforms</strong> across Southeast Asia, serving over <strong>500,000+ annual global trade visitors</strong>.
+      </p>
+
+      <div class="masthead-btns">
+        <a class="btn btn-gold" href="#projects">
+          <i class="fa-solid fa-briefcase"></i> Explore Case Studies
+        </a>
+        <a class="btn btn-outline-gold" href="#stories">
+          <i class="fa-solid fa-camera"></i> Visual Stories
+        </a>
+        <a class="btn btn-outline-gold" href="#contact">
+          <i class="fa-solid fa-envelope"></i> Initiate Contact
+        </a>
+      </div>
+
+      <!-- Quick Stats Strip -->
+      <div class="masthead-stats-bar">
+        <div class="masthead-stat-item">
+          <div class="masthead-stat-val">8+</div>
+          <div class="masthead-stat-label">B2B Trade Platforms</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">500K+</div>
-          <div class="stat-label">Annual Trade Visitors Served</div>
+        <div class="masthead-stat-item">
+          <div class="masthead-stat-val">500K+</div>
+          <div class="masthead-stat-label">Global Trade Visitors</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">99.9%</div>
-          <div class="stat-label">Enterprise Platform Uptime</div>
+        <div class="masthead-stat-item">
+          <div class="masthead-stat-val">99.9%</div>
+          <div class="masthead-stat-label">Platform Uptime</div>
         </div>
-        <div class="stat-item">
-          <div class="stat-number">5+ Yrs</div>
-          <div class="stat-label">Web Architecture Experience</div>
+        <div class="masthead-stat-item">
+          <div class="masthead-stat-val">5+ Yrs</div>
+          <div class="masthead-stat-label">Web Architecture</div>
         </div>
       </div>
 
     </div>
-  </section>
+  </header>
 
-  <!-- ============================================
-       EXECUTIVE ABOUT / SUMMARY
-       ============================================ -->
-  <section id="about">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-user-tie"></i> Executive Profile</div>
-        <h2 class="section-title">Strategic Web Architecture &amp; <span class="gold-text">Tech Operations</span></h2>
-        <p class="section-subtitle">Combining high-level data support leadership with enterprise-grade web development for Southeast Asia's premier trade exhibition organizer.</p>
-      </div>
-
-      <div class="about-grid">
-        <div class="about-text">
-          <h3>Pioneering Digital Platforms for Global Trade Exhibitions</h3>
-          <p>
-            As <strong>Data &amp; Tech Support Executive &amp; Web Developer</strong> at <strong>PT Pamerindo Indonesia (Informa Markets Asia)</strong>, I oversee end-to-end digital experiences, website performance, SEO optimization, and database reliability for Southeast Asia's leading B2B trade shows.
-          </p>
-          <p>
-            My work directly powers multi-channel trade ecosystems connecting thousands of international suppliers, buyers, and government delegates in key sectors including Energy, Heavy Industry, F&amp;B, Laboratory Tech, and Beauty.
+  <!-- ==========================================================================
+       ABOUT SECTION (GRAYSCALE CLEAN CENTERED LAYOUT)
+       ========================================================================== -->
+  <section class="about-section text-center" id="about">
+    <div class="container px-4 px-lg-5">
+      <div class="row gx-4 gx-lg-5 justify-content-center">
+        <div class="col-lg-10">
+          <span class="section-tag"><i class="fa-solid fa-user-tie"></i> Executive Profile</span>
+          <h2 class="section-title">Strategic Web Architecture &amp; <span class="gold-text">Tech Operations</span></h2>
+          <p class="section-subtitle mb-5">
+            Combining high-level data support leadership with enterprise-grade web engineering for Southeast Asia's premier trade exhibition organizer.
           </p>
         </div>
+      </div>
 
-        <div class="about-highlights">
+      <div class="row g-4 text-start">
+        <div class="col-md-6 col-lg-3">
           <div class="about-card">
-            <i class="fa-solid fa-network-wired"></i>
-            <h4>B2B Web Management</h4>
-            <p>Enterprise WordPress Multisite architecture, high-concurrency event registration, and multilingual content delivery.</p>
+            <div class="about-icon"><i class="fa-solid fa-network-wired"></i></div>
+            <h4>High-Traffic Scale</h4>
+            <p>Architecting multi-region WordPress and custom CMS portals handling surges of 100K+ concurrent page views during international show dates.</p>
           </div>
+        </div>
 
+        <div class="col-md-6 col-lg-3">
           <div class="about-card">
-            <i class="fa-solid fa-chart-line"></i>
-            <h4>Data &amp; Analytics Ops</h4>
-            <p>Data integrity, CRM sync, trade visitor tracking, and performance reporting for Informa Markets leadership.</p>
+            <div class="about-icon"><i class="fa-solid fa-shield-halved"></i></div>
+            <h4>Enterprise Governance</h4>
+            <p>Ensuring strict data compliance, GDPR visitor consent flows, automated daily backups, and sub-second failover protocols.</p>
           </div>
+        </div>
 
+        <div class="col-md-6 col-lg-3">
           <div class="about-card">
-            <i class="fa-solid fa-shield-halved"></i>
-            <h4>SEO &amp; Platform Security</h4>
-            <p>Sub-second page speed load optimization, high security standards, and top Google rankings for trade keywords.</p>
+            <div class="about-icon"><i class="fa-solid fa-chart-line"></i></div>
+            <h4>SEO &amp; Growth</h4>
+            <p>Driving organic discovery across Southeast Asia with structured JSON-LD schemas, multi-language sitemaps, and Core Web Vitals 95+ optimization.</p>
           </div>
+        </div>
 
-            <div class="about-card">
-            <i class="fa-solid fa-robot"></i>
-            <h4>Enterprise Systems, IoT &amp; AI</h4>
-            <p>Autonomous ReAct AI agents, token observability dashboards, multi-device IoT remote monitoring hubs, and custom ERP solutions.</p>
+        <div class="col-md-6 col-lg-3">
+          <div class="about-card">
+            <div class="about-icon"><i class="fa-solid fa-robot"></i></div>
+            <h4>Autonomous AI</h4>
+            <p>Building production ReAct agents, token cost observability platforms, and multi-channel RAG intelligence bots for exhibition knowledge grounding.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================
+  <!-- ==========================================================================
        SERVICES SECTION
-       ============================================ -->
-  <section id="services">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-cubes"></i> Executive Services</div>
-        <h2 class="section-title">My Specialization &amp; <span class="gold-text">Services</span></h2>
-        <p class="section-subtitle">Tailored digital solutions and technical support designed for scale, enterprise reliability, and business growth.</p>
+       ========================================================================== -->
+  <section class="services-section" id="services">
+    <div class="container px-4 px-lg-5">
+      <div class="text-center mb-5">
+        <span class="section-tag"><i class="fa-solid fa-briefcase"></i> Core Competencies</span>
+        <h2 class="section-title">End-to-End <span class="gold-text">Engineering Services</span></h2>
+        <p class="section-subtitle">Delivering high-performance digital ecosystems, enterprise web platforms, and automated intelligence pipelines.</p>
       </div>
 
-      <div class="services-grid">
-        <!-- Service 1 -->
-        <div class="service-card">
-          <div class="service-icon"><i class="fa-solid fa-code"></i></div>
-          <h3 class="service-title">Web Development</h3>
-          <p class="service-desc">Building fast, responsive, and visually stunning websites that convert visitors into loyal clients and partners.</p>
-          <ul class="service-features">
-            <li>WordPress Enterprise &amp; Custom Sites</li>
-            <li>HTML5 / CSS3 / JavaScript ES6+</li>
-            <li>Responsive &amp; Mobile-First Architecture</li>
-            <li>Sub-second Performance Optimization</li>
-          </ul>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="service-box">
+            <div class="service-icon-wrap"><i class="fa-solid fa-laptop-code"></i></div>
+            <h4>Web Architecture</h4>
+            <p>Scalable corporate websites, multi-site WordPress instances, custom CMS themes, and interactive visitor portals.</p>
+            <ul class="service-list">
+              <li>WordPress Enterprise</li>
+              <li>Custom PHP &amp; JavaScript</li>
+              <li>Core Web Vitals 95+</li>
+              <li>Multi-Region CDN Strategy</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Service 2 -->
-        <div class="service-card">
-          <div class="service-icon"><i class="fa-solid fa-layer-group"></i></div>
-          <h3 class="service-title">CMS Management</h3>
-          <p class="service-desc">Expert WordPress multisite setup, customization, and ongoing management for event platforms and enterprise portals.</p>
-          <ul class="service-features">
-            <li>WordPress Multisite &amp; Elementor Pro</li>
-            <li>Custom Plugin &amp; Theme Engineering</li>
-            <li>WooCommerce &amp; E-commerce Portals</li>
-            <li>Continuous Media &amp; Content Delivery</li>
-          </ul>
+        <div class="col-md-6 col-lg-3">
+          <div class="service-box">
+            <div class="service-icon-wrap"><i class="fa-solid fa-cubes"></i></div>
+            <h4>ERP Modernization</h4>
+            <p>Bridging mission-critical legacy enterprise systems (such as IBM AS/400 DB2) with modern web dashboards.</p>
+            <ul class="service-list">
+              <li>IBM AS/400 RPG Simulator</li>
+              <li>DB2 &amp; Oracle SQL ODBC</li>
+              <li>Automated Invoicing Engine</li>
+              <li>Role-Based Access Control</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Service 3 -->
-        <div class="service-card">
-          <div class="service-icon"><i class="fa-solid fa-chart-line"></i></div>
-          <h3 class="service-title">SEO &amp; Analytics</h3>
-          <p class="service-desc">Data-driven strategies to boost search rankings and track digital performance with precision and clarity.</p>
-          <ul class="service-features">
-            <li>On-Page &amp; Technical SEO Audits</li>
-            <li>Google Analytics &amp; Tag Manager</li>
-            <li>Conversion Funnel Optimization</li>
-            <li>High-Ranking Search Visibility</li>
-          </ul>
+        <div class="col-md-6 col-lg-3">
+          <div class="service-box">
+            <div class="service-icon-wrap"><i class="fa-solid fa-robot"></i></div>
+            <h4>AI &amp; Observability</h4>
+            <p>Architecting autonomous ReAct AI agents, real-time token financial trackers ($/Rp), and domain RAG assistants.</p>
+            <ul class="service-list">
+              <li>FastAPI Async Runtimes</li>
+              <li>Token &amp; Cost Metering</li>
+              <li>Exhibition PDF RAG</li>
+              <li>WhatsApp Bot Gateways</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Service 4 -->
-        <div class="service-card">
-          <div class="service-icon"><i class="fa-solid fa-headset"></i></div>
-          <h3 class="service-title">IT &amp; Tech Support</h3>
-          <p class="service-desc">Reliable technical support and system optimization to keep your digital infrastructure running at peak performance.</p>
-          <ul class="service-features">
-            <li>System Troubleshooting &amp; ITIL</li>
-            <li>Trade Visitor Data Analysis &amp; CRM</li>
-            <li>Server Reliability &amp; Backup Ops</li>
-            <li>Cross-functional Tech Leadership</li>
-          </ul>
+        <div class="col-md-6 col-lg-3">
+          <div class="service-box">
+            <div class="service-icon-wrap"><i class="fa-solid fa-magnifying-glass-chart"></i></div>
+            <h4>Tech Operations</h4>
+            <p>Executive IT operations leadership, real-time telemetry monitoring, multi-device IoT management, and CRM sync.</p>
+            <ul class="service-list">
+              <li>WebSocket Telemetry</li>
+              <li>Multi-Device Fleet Admin</li>
+              <li>Database ETL Pipelines</li>
+              <li>24/7 SLA Incident Support</li>
+            </ul>
+          </div>
         </div>
       </div>
-
     </div>
   </section>
 
-  <!-- ============================================
-       CORE COMPETENCIES & SKILLS
-       ============================================ -->
-  <section id="skills">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-gears"></i> Technical Pillar</div>
-        <h2 class="section-title">Technical <span class="gold-text">Skills &amp; Stack</span></h2>
-        <p class="section-subtitle">Core competencies and technologies utilized across production systems and enterprise platforms.</p>
+  <!-- ==========================================================================
+       SKILLS & TECH MATRIX SECTION
+       ========================================================================== -->
+  <section class="skills-section" id="skills">
+    <div class="container px-4 px-lg-5">
+      <div class="text-center mb-5">
+        <span class="section-tag"><i class="fa-solid fa-code"></i> Technical Matrix</span>
+        <h2 class="section-title">Technology &amp; <span class="gold-text">Leadership Tooling</span></h2>
+        <p class="section-subtitle">A balanced tech stack spanning robust backend systems, modern web engineering, AI intelligence, and enterprise IT leadership.</p>
       </div>
 
-      <div class="skills-grid">
-        <!-- Pillar 1 -->
-        <div class="skill-category-card">
-          <div class="category-icon"><i class="fa-solid fa-sitemap"></i></div>
-          <h3 class="category-title">B2B CMS Architecture</h3>
-          <ul class="skill-list">
-            <li class="skill-item"><i class="fa-solid fa-check"></i> Enterprise WordPress Multisite</li>
-            <li class="skill-item"><i class="fa-solid fa-check"></i> Custom Theme &amp; Plugin Dev</li>
-            <li class="skill-item"><i class="fa-solid fa-check"></i> Elementor Pro &amp; PHP Engineering</li>
-            <li class="skill-item"><i class="fa-solid fa-check"></i> Multi-language Content Engines</li>
-          </ul>
+      <div class="row g-4">
+        <div class="col-md-6 col-lg-3">
+          <div class="skill-box">
+            <h5 class="mb-3 text-warning"><i class="fa-solid fa-layer-group me-2"></i> Web &amp; CMS</h5>
+            <ul class="skill-list-items">
+              <li><i class="fa-brands fa-wordpress"></i> WordPress Multisite</li>
+              <li><i class="fa-brands fa-php"></i> PHP 8.x Architecture</li>
+              <li><i class="fa-brands fa-js"></i> Modern JavaScript (ES6+)</li>
+              <li><i class="fa-brands fa-html5"></i> Semantic HTML5 &amp; CSS</li>
+              <li><i class="fa-brands fa-bootstrap"></i> Bootstrap 5.3 Framework</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Pillar 2 -->
-        <div class="skill-category-card">
-          <div class="category-icon"><i class="fa-solid fa-database"></i></div>
-          <h3 class="category-title">Data &amp; Tech Ops</h3>
-          <ul class="skill-list">
-            <li class="skill-item"><i class="fa-solid fa-check"></i> Visitor &amp; Exhibitor Data Analytics</li>
-            <li class="skill-item"><i class="fa-solid fa-check"></i> CRM Integration &amp; Database Sync</li>
-            <li class="skill-item"><i class="fa-solid fa-check"></i> Server Uptime &amp; Cloud Maintenance</li>
-            <li class="skill-item"><i class="fa-solid fa-check"></i> IT Support Leadership</li>
-          </ul>
+        <div class="col-md-6 col-lg-3">
+          <div class="skill-box">
+            <h5 class="mb-3 text-info"><i class="fa-solid fa-robot me-2"></i> AI &amp; Python</h5>
+            <ul class="skill-list-items">
+              <li><i class="fa-brands fa-python"></i> Python 3.10+ / FastAPI</li>
+              <li><i class="fa-solid fa-brain"></i> ReAct Agent Frameworks</li>
+              <li><i class="fa-solid fa-coins"></i> Token Financial Meter ($/Rp)</li>
+              <li><i class="fa-solid fa-file-pdf"></i> PDF RAG Embeddings</li>
+              <li><i class="fa-brands fa-whatsapp"></i> WhatsApp Automated Bot</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Pillar 3 -->
-        <div class="skill-category-card">
-          <div class="category-icon"><i class="fa-solid fa-gauge-high"></i></div>
-          <h3 class="category-title">SEO &amp; Web Security</h3>
-          <ul class="skill-list">
-            <li class="skill-item"><i class="fa-solid fa-check"></i> Technical &amp; On-Page SEO Optimization</li>
-            <li class="skill-item"><i class="fa-solid fa-check"></i> Core Web Vitals &amp; Sub-second Loading</li>
-            <li class="skill-item"><i class="fa-solid fa-check"></i> Web Application Firewall &amp; SSL</li>
-            <li class="skill-item"><i class="fa-solid fa-check"></i> Google Analytics &amp; Tag Manager</li>
-          </ul>
+        <div class="col-md-6 col-lg-3">
+          <div class="skill-box">
+            <h5 class="mb-3 text-primary"><i class="fa-solid fa-database me-2"></i> Enterprise DB</h5>
+            <ul class="skill-list-items">
+              <li><i class="fa-solid fa-server"></i> IBM AS/400 DB2 &amp; RPG IV</li>
+              <li><i class="fa-solid fa-database"></i> MySQL / MariaDB / SQLite</li>
+              <li><i class="fa-solid fa-satellite-dish"></i> WebSocket Telemetry</li>
+              <li><i class="fa-solid fa-chart-pie"></i> Chart.js Data Visuals</li>
+              <li><i class="fa-brands fa-git-alt"></i> Git CI/CD Workflows</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- Pillar 4 -->
-        <div class="skill-category-card">
-          <div class="category-icon"><i class="fa-solid fa-code"></i></div>
-          <h3 class="category-title">Full Stack &amp; Autonomous AI</h3>
-          <ul class="skill-list">
-            <li class="skill-item"><i class="fa-solid fa-check"></i> Python, FastAPI &amp; ReAct Agent Engines</li>
-            <li class="skill-item"><i class="fa-solid fa-check"></i> JavaScript ES6+, HTML5 &amp; CSS3 Glassmorphism</li>
-            <li class="skill-item"><i class="fa-solid fa-check"></i> React.js, Node.js &amp; RESTful APIs</li>
-            <li class="skill-item"><i class="fa-solid fa-check"></i> RPG IV / IBM AS/400 iSeries &amp; SQLite</li>
-          </ul>
+        <div class="col-md-6 col-lg-3">
+          <div class="skill-box">
+            <h5 class="mb-3 text-success"><i class="fa-solid fa-headset me-2"></i> Operations &amp; SEO</h5>
+            <ul class="skill-list-items">
+              <li><i class="fa-solid fa-chart-line"></i> Technical SEO Schemas</li>
+              <li><i class="fa-solid fa-gauge-high"></i> Core Web Vitals Tuning</li>
+              <li><i class="fa-solid fa-users-gear"></i> Multi-Stakeholder Event IT</li>
+              <li><i class="fa-solid fa-shield-virus"></i> Cybersecurity Protocols</li>
+              <li><i class="fa-solid fa-camera"></i> Visual Storytelling</li>
+            </ul>
+          </div>
         </div>
       </div>
 
-      <!-- Tech Badges Strip -->
-      <div class="tech-badges">
-        <span class="tech-badge">Python / FastAPI</span>
-        <span class="tech-badge">Android / Kotlin</span>
-        <span class="tech-badge">IoT &amp; Remote Monitoring</span>
-        <span class="tech-badge">Autonomous AI Agent</span>
-        <span class="tech-badge">Chart.js</span>
-        <span class="tech-badge">WordPress</span>
-        <span class="tech-badge">HTML / CSS</span>
-        <span class="tech-badge">JavaScript</span>
-        <span class="tech-badge">Elementor Pro</span>
-        <span class="tech-badge">SEO Optimization</span>
-        <span class="tech-badge">Google Analytics</span>
-        <span class="tech-badge">Figma</span>
-        <span class="tech-badge">Adobe Photoshop</span>
-        <span class="tech-badge">Canva</span>
-        <span class="tech-badge">WooCommerce</span>
-        <span class="tech-badge">PHP</span>
-        <span class="tech-badge">MySQL / SQLite</span>
-        <span class="tech-badge">Git / GitHub</span>
-        <span class="tech-badge">Microsoft 365</span>
+      <div class="tech-pill-badges">
+        <span class="tech-pill">WordPress Enterprise</span>
+        <span class="tech-pill">PHP 8.2</span>
+        <span class="tech-pill">FastAPI</span>
+        <span class="tech-pill">Python 3.10+</span>
+        <span class="tech-pill">ReAct AI Agents</span>
+        <span class="tech-pill">IBM AS/400 DB2</span>
+        <span class="tech-pill">Bootstrap 5.3</span>
+        <span class="tech-pill">WebSockets</span>
+        <span class="tech-pill">Chart.js</span>
+        <span class="tech-pill">SQLite / SQLAlchemy</span>
+        <span class="tech-pill">Technical SEO</span>
+        <span class="tech-pill">Informa Markets</span>
       </div>
-
     </div>
   </section>
 
-  <!-- ============================================
-       CASE STUDIES / PORTFOLIO
-       ============================================ -->
-  <section id="portfolio">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-briefcase"></i> Portfolio Showcase</div>
+  <!-- ==========================================================================
+       PROJECTS SECTION (SIGNATURE GRAYSCALE FEATURED SPLIT ROWS + CATALOG)
+       ========================================================================== -->
+  <section class="projects-section" id="projects">
+    <div class="container px-4 px-lg-5">
+      
+      <div class="text-center mb-5">
+        <span class="section-tag"><i class="fa-solid fa-briefcase"></i> Portfolio Showcase</span>
         <h2 class="section-title">Featured <span class="gold-text">Case Studies</span></h2>
         <p class="section-subtitle">Explore international B2B trade exhibition platforms, enterprise ERP systems, autonomous AI SaaS applications, and IoT remote monitoring hubs.</p>
       </div>
 
-      <!-- Filter Controls -->
-      <div class="portfolio-filters">
-        <button class="filter-btn active" data-filter="all">All Projects</button>
-        <button class="filter-btn" data-filter="b2b">B2B Trade Events</button>
-        <button class="filter-btn" data-filter="system">Enterprise SaaS &amp; AI Systems</button>
+      <!-- ── Grayscale Signature Featured Project 1 (Image Left / Content Right) ── -->
+      <div class="featured-project-row">
+        <div class="row g-0 align-items-center">
+          <div class="col-lg-7">
+            <div class="featured-project-img">
+              <img src="assets/images/project-pamerindo.png" alt="PT Pamerindo Indonesia Corporate Portal" loading="lazy" />
+            </div>
+          </div>
+          <div class="col-lg-5">
+            <div class="featured-project-card">
+              <span class="featured-badge"><i class="fa-solid fa-star"></i> Flagship Corporate Portal</span>
+              <h3 class="featured-project-title">PT Pamerindo Indonesia</h3>
+              <p class="featured-project-desc">
+                Central corporate digital gateway for Indonesia’s premier trade exhibition organizer. Connects 200+ global events, 500,000+ trade visitors across 60+ countries with custom CMS architecture.
+              </p>
+              
+              <div class="featured-meta-grid">
+                <div class="featured-meta-item">
+                  <strong>Informa Markets Asia</strong>
+                  <span>Corporate Web Ecosystem</span>
+                </div>
+                <div class="featured-meta-item">
+                  <strong>500K+ Trade Visitors</strong>
+                  <span>99.9% Uptime SLA</span>
+                </div>
+              </div>
+
+              <div class="project-tech-tags">
+                <span class="tech-tag">WordPress Enterprise</span>
+                <span class="tech-tag">PHP 8.x</span>
+                <span class="tech-tag">SEO Architecture</span>
+                <span class="tech-tag">Multi-Language</span>
+              </div>
+
+              <div>
+                <a href="https://www.pamerindo.com" target="_blank" rel="noopener noreferrer" class="btn btn-gold">
+                  Visit Corporate Site <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
-      <!-- Portfolio Grid (ALL 12 PROJECTS) -->
-      <div class="portfolio-grid">
+      <!-- ── Grayscale Signature Featured Project 2 (Content Left / Image Right) ── -->
+      <div class="featured-project-row">
+        <div class="row g-0 align-items-center">
+          <div class="col-lg-5 order-2 order-lg-1">
+            <div class="featured-project-card">
+              <span class="featured-badge" style="color:var(--accent-cyan); border-color:var(--glass-border-cyan);"><i class="fa-solid fa-robot"></i> Autonomous AI Platform</span>
+              <h3 class="featured-project-title">NexusAgent &amp; PamerAi</h3>
+              <p class="featured-project-desc">
+                Enterprise Autonomous ReAct AI Agent, Real-Time Token &amp; Cost Observability Dashboard ($/Rp), Desktop Developer Copilot, and B2B Exhibition Intelligence Hub with WhatsApp integration.
+              </p>
+
+              <div class="featured-meta-grid">
+                <div class="featured-meta-item">
+                  <strong>Multi-Step Reasoning</strong>
+                  <span>ReAct Agent Loop</span>
+                </div>
+                <div class="featured-meta-item">
+                  <strong>Token Cost Metering</strong>
+                  <span>USD ($) &amp; IDR (Rp) Real-Time</span>
+                </div>
+              </div>
+
+              <div class="project-tech-tags">
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">Python 3.10+</span>
+                <span class="tech-tag">ReAct AI</span>
+                <span class="tech-tag">SQLite / Chart.js</span>
+                <span class="tech-tag">WhatsApp Gateway</span>
+              </div>
+
+              <div>
+                <button class="btn btn-gold btn-open-modal" data-project="nexusagent" data-modal="nexusagent">
+                  <i class="fa-solid fa-microchip me-1"></i> View Technical Blueprint <i class="fa-solid fa-arrow-right ms-1"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-7 order-1 order-lg-2">
+            <div class="featured-project-img">
+              <img src="assets/images/project-nexusagent.png" alt="NexusAgent & PamerAi Ecosystem" loading="lazy" />
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Complete Project Catalog Grid with Category Filter ── -->
+      <div class="text-center mt-5 mb-4">
+        <h4 class="fw-bold mb-3">Explore All <span class="gold-text">12 Case Studies</span></h4>
+        
+        <div class="portfolio-filter-nav">
+          <button class="filter-btn active" data-filter="all">All Projects (12)</button>
+          <button class="filter-btn" data-filter="b2b">B2B Trade Events</button>
+          <button class="filter-btn" data-filter="system">Enterprise SaaS &amp; AI Systems</button>
+        </div>
+      </div>
+
+      <div class="row g-4">
 
         <!-- 1. Pamerindo Indonesia -->
-        <div class="project-card" data-category="b2b">
-          <div class="project-thumb">
-            <img src="assets/images/project-pamerindo.png" alt="Pamerindo Indonesia Corporate Portal" loading="lazy" />
-            <span class="project-badge">Flagship Portal</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>Informa Markets Asia</span> • <span>Corporate Web Architecture</span>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card" data-category="b2b">
+            <div class="project-thumb">
+              <div class="browser-dots"><span class="browser-dot red"></span><span class="browser-dot yellow"></span><span class="browser-dot green"></span></div>
+              <img src="assets/images/project-pamerindo.png" alt="PT Pamerindo Indonesia" loading="lazy" />
+              <span class="project-card-badge">Flagship Portal</span>
             </div>
-            <h3 class="project-title">PT Pamerindo Indonesia</h3>
-            <p class="project-desc">
-              Corporate portal for Indonesia's premier trade exhibition organizer. Connects 200+ global events, 500K+ visitors across 60+ countries with custom CMS architecture.
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">WordPress Enterprise</span>
-              <span class="tech-tag">PHP</span>
-              <span class="tech-tag">SEO Architecture</span>
+            <div class="project-card-body">
+              <div class="project-meta-line">Informa Markets Asia • B2B Portal</div>
+              <h4 class="project-card-title">PT Pamerindo Indonesia</h4>
+              <p class="project-card-desc">Corporate portal connecting 200+ global trade events, 500K+ visitors across Southeast Asia.</p>
+              <div class="project-tech-tags mb-3">
+                <span class="tech-tag">WordPress</span>
+                <span class="tech-tag">PHP</span>
+                <span class="tech-tag">SEO Lead</span>
+              </div>
+              <a href="https://www.pamerindo.com" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                Visit Corporate Site <i class="fa-solid fa-arrow-right"></i>
+              </a>
             </div>
-            <a href="https://www.pamerindo.com" target="_blank" rel="noopener noreferrer" class="project-link">
-              Visit Corporate Site <i class="fa-solid fa-arrow-right"></i>
-            </a>
           </div>
         </div>
 
         <!-- 2. Food & Hospitality Indonesia -->
-        <div class="project-card" data-category="b2b">
-          <div class="project-thumb">
-            <img src="assets/images/project-fhi.png" alt="Food & Hospitality Indonesia" loading="lazy" />
-            <span class="project-badge">B2B Event</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>JIEXPO Jakarta</span> • <span>40,000+ Trade Attendees</span>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card" data-category="b2b">
+            <div class="project-thumb">
+              <div class="browser-dots"><span class="browser-dot red"></span><span class="browser-dot yellow"></span><span class="browser-dot green"></span></div>
+              <img src="assets/images/project-fhi.png" alt="Food & Hospitality Indonesia" loading="lazy" />
+              <span class="project-card-badge">B2B Exhibition</span>
             </div>
-            <h3 class="project-title">Food &amp; Hospitality Indonesia (FHI)</h3>
-            <p class="project-desc">
-              Indonesia's premier B2B trade exhibition platform for F&amp;B and HoReCa sectors, featuring online exhibitor directory, match-making &amp; registration portal.
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">WordPress Multisite</span>
-              <span class="tech-tag">Event Engine</span>
-              <span class="tech-tag">SEO Lead</span>
+            <div class="project-card-body">
+              <div class="project-meta-line">JIEXPO Jakarta • 40,000+ Trade Attendees</div>
+              <h4 class="project-card-title">Food &amp; Hospitality Indonesia (FHI)</h4>
+              <p class="project-card-desc">Premier trade exhibition platform for F&amp;B and HoReCa sectors with exhibitor match-making.</p>
+              <div class="project-tech-tags mb-3">
+                <span class="tech-tag">WordPress Multisite</span>
+                <span class="tech-tag">Event Engine</span>
+              </div>
+              <a href="https://www.foodhospitalityindonesia.com" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                Visit Live Platform <i class="fa-solid fa-arrow-right"></i>
+              </a>
             </div>
-            <a href="https://www.foodhospitalityindonesia.com" target="_blank" rel="noopener noreferrer" class="project-link">
-              Visit Live Platform <i class="fa-solid fa-arrow-right"></i>
-            </a>
           </div>
         </div>
 
         <!-- 3. Lab Indonesia -->
-        <div class="project-card" data-category="b2b">
-          <div class="project-thumb">
-            <img src="assets/images/project-labindo.png" alt="Lab Indonesia" loading="lazy" />
-            <span class="project-badge">Scientific B2B</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>ICE BSD</span> • <span>22,000+ Professional Attendees</span>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card" data-category="b2b">
+            <div class="project-thumb">
+              <div class="browser-dots"><span class="browser-dot red"></span><span class="browser-dot yellow"></span><span class="browser-dot green"></span></div>
+              <img src="assets/images/project-labindo.png" alt="Lab Indonesia" loading="lazy" />
+              <span class="project-card-badge">Scientific B2B</span>
             </div>
-            <h3 class="project-title">Lab Indonesia</h3>
-            <p class="project-desc">
-              Southeast Asia's largest trade exhibition for scientific instruments and laboratory technology connecting 350+ global suppliers.
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">CMS Architecture</span>
-              <span class="tech-tag">Exhibitor Directory</span>
-              <span class="tech-tag">Analytics</span>
+            <div class="project-card-body">
+              <div class="project-meta-line">ICE BSD • 22,000+ Attendees</div>
+              <h4 class="project-card-title">Lab Indonesia</h4>
+              <p class="project-card-desc">Southeast Asia's largest trade exhibition for scientific instruments and laboratory technology.</p>
+              <div class="project-tech-tags mb-3">
+                <span class="tech-tag">CMS Architecture</span>
+                <span class="tech-tag">Exhibitor Directory</span>
+              </div>
+              <a href="https://www.lab-indo.com" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                Visit Live Platform <i class="fa-solid fa-arrow-right"></i>
+              </a>
             </div>
-            <a href="https://www.lab-indo.com" target="_blank" rel="noopener noreferrer" class="project-link">
-              Visit Live Platform <i class="fa-solid fa-arrow-right"></i>
-            </a>
           </div>
         </div>
 
         <!-- 4. Food Hotel & Tourism Bali -->
-        <div class="project-card" data-category="b2b">
-          <div class="project-thumb">
-            <img src="assets/images/project-fhtbali.png" alt="FHT Bali" loading="lazy" />
-            <span class="project-badge">Tourism B2B</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>BNDCC Bali</span> • <span>Eastern Indonesia Hub</span>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card" data-category="b2b">
+            <div class="project-thumb">
+              <div class="browser-dots"><span class="browser-dot red"></span><span class="browser-dot yellow"></span><span class="browser-dot green"></span></div>
+              <img src="assets/images/project-fhtbali.png" alt="FHT Bali" loading="lazy" />
+              <span class="project-card-badge">Tourism B2B</span>
             </div>
-            <h3 class="project-title">Food, Hotel &amp; Tourism Bali (FHTB)</h3>
-            <p class="project-desc">
-              Premier international hospitality and culinary trade exhibition connecting resort owners, hoteliers, and suppliers across Bali &amp; Oceania.
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">WordPress</span>
-              <span class="tech-tag">UI/UX</span>
-              <span class="tech-tag">Speed Tuning</span>
+            <div class="project-card-body">
+              <div class="project-meta-line">BNDCC Bali • Oceania Hub</div>
+              <h4 class="project-card-title">Food, Hotel &amp; Tourism Bali (FHTB)</h4>
+              <p class="project-card-desc">Premier hospitality and culinary exhibition connecting resort owners and hoteliers across Bali &amp; Oceania.</p>
+              <div class="project-tech-tags mb-3">
+                <span class="tech-tag">WordPress</span>
+                <span class="tech-tag">UI/UX</span>
+                <span class="tech-tag">Speed Tuning</span>
+              </div>
+              <a href="https://www.fhtbali.com" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                Visit Live Platform <i class="fa-solid fa-arrow-right"></i>
+              </a>
             </div>
-            <a href="https://www.fhtbali.com" target="_blank" rel="noopener noreferrer" class="project-link">
-              Visit Live Platform <i class="fa-solid fa-arrow-right"></i>
-            </a>
           </div>
         </div>
 
         <!-- 5. Cosmobeauté Indonesia -->
-        <div class="project-card" data-category="b2b">
-          <div class="project-thumb">
-            <img src="assets/images/project-cosmobeaute.png" alt="Cosmobeauté Indonesia" loading="lazy" />
-            <span class="project-badge">Beauty B2B</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>ICE BSD</span> • <span>Aesthetics &amp; Cosmetics Hub</span>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card" data-category="b2b">
+            <div class="project-thumb">
+              <div class="browser-dots"><span class="browser-dot red"></span><span class="browser-dot yellow"></span><span class="browser-dot green"></span></div>
+              <img src="assets/images/project-cosmobeaute.png" alt="Cosmobeauté Indonesia" loading="lazy" />
+              <span class="project-card-badge">Beauty B2B</span>
             </div>
-            <h3 class="project-title">Cosmobeauté Indonesia</h3>
-            <p class="project-desc">
-              Indonesia's largest B2B beauty exhibition portal covering skincare, aesthetic medical tech, spa, and salon distribution channels.
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">CMS Customization</span>
-              <span class="tech-tag">Lead Capture</span>
-              <span class="tech-tag">Security</span>
+            <div class="project-card-body">
+              <div class="project-meta-line">ICE BSD • Aesthetics Hub</div>
+              <h4 class="project-card-title">Cosmobeauté Indonesia</h4>
+              <p class="project-card-desc">Indonesia's largest B2B beauty exhibition portal covering aesthetic tech, spa, and salon distribution.</p>
+              <div class="project-tech-tags mb-3">
+                <span class="tech-tag">CMS Customization</span>
+                <span class="tech-tag">Lead Capture</span>
+              </div>
+              <a href="https://www.cosmobeauteasia.com/indonesia/" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                Visit Live Platform <i class="fa-solid fa-arrow-right"></i>
+              </a>
             </div>
-            <a href="https://www.cosmobeauteasia.com/indonesia/" target="_blank" rel="noopener noreferrer" class="project-link">
-              Visit Live Platform <i class="fa-solid fa-arrow-right"></i>
-            </a>
           </div>
         </div>
 
         <!-- 6. Vape Fair Indonesia -->
-        <div class="project-card" data-category="b2b">
-          <div class="project-thumb">
-            <img src="assets/images/project-vapefair.png" alt="Vape Fair Indonesia" loading="lazy" />
-            <span class="project-badge">Industry Hub</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>Jakarta</span> • <span>Vaping Industry Exhibition</span>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card" data-category="b2b">
+            <div class="project-thumb">
+              <div class="browser-dots"><span class="browser-dot red"></span><span class="browser-dot yellow"></span><span class="browser-dot green"></span></div>
+              <img src="assets/images/project-vapefair.png" alt="Vape Fair Indonesia" loading="lazy" />
+              <span class="project-card-badge">Industry Hub</span>
             </div>
-            <h3 class="project-title">Vape Fair Indonesia</h3>
-            <p class="project-desc">
-              Dedicated exhibition hub connecting global manufacturers and distributors, featuring exhibitor directories, ticketing, and age-verified access.
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">WordPress</span>
-              <span class="tech-tag">Access Management</span>
-              <span class="tech-tag">B2B Directory</span>
+            <div class="project-card-body">
+              <div class="project-meta-line">Jakarta • Vaping Industry Exhibition</div>
+              <h4 class="project-card-title">Vape Fair Indonesia</h4>
+              <p class="project-card-desc">Dedicated exhibition portal connecting global manufacturers, featuring age-verified ticketing.</p>
+              <div class="project-tech-tags mb-3">
+                <span class="tech-tag">WordPress</span>
+                <span class="tech-tag">B2B Directory</span>
+              </div>
+              <a href="https://www.vapefair.id" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                Visit Live Platform <i class="fa-solid fa-arrow-right"></i>
+              </a>
             </div>
-            <a href="https://www.vapefair.id" target="_blank" rel="noopener noreferrer" class="project-link">
-              Visit Live Platform <i class="fa-solid fa-arrow-right"></i>
-            </a>
           </div>
         </div>
 
         <!-- 7. Clouds Fest -->
-        <div class="project-card" data-category="b2b">
-          <div class="project-thumb">
-            <img src="assets/images/project-cloudsfest.png" alt="Clouds Fest" loading="lazy" />
-            <span class="project-badge">Lifestyle Trade</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>Southeast Asia</span> • <span>Pamerindo · Informa Markets</span>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card" data-category="b2b">
+            <div class="project-thumb">
+              <div class="browser-dots"><span class="browser-dot red"></span><span class="browser-dot yellow"></span><span class="browser-dot green"></span></div>
+              <img src="assets/images/project-cloudsfest.png" alt="Clouds Fest" loading="lazy" />
+              <span class="project-card-badge">Lifestyle Trade</span>
             </div>
-            <h3 class="project-title">Clouds Fest</h3>
-            <p class="project-desc">
-              Lifestyle &amp; trade exhibition portal for alternative nicotine sector in Southeast Asia, providing exhibitor registration and event schedules.
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">WordPress CMS</span>
-              <span class="tech-tag">UI/UX</span>
-              <span class="tech-tag">Event Engine</span>
+            <div class="project-card-body">
+              <div class="project-meta-line">Southeast Asia • Pamerindo · Informa</div>
+              <h4 class="project-card-title">Clouds Fest</h4>
+              <p class="project-card-desc">Lifestyle &amp; trade exhibition portal for alternative nicotine sector in Southeast Asia.</p>
+              <div class="project-tech-tags mb-3">
+                <span class="tech-tag">WordPress CMS</span>
+                <span class="tech-tag">Event Engine</span>
+              </div>
+              <a href="https://www.cloudsfest.com" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                Visit Live Platform <i class="fa-solid fa-arrow-right"></i>
+              </a>
             </div>
-            <a href="https://www.cloudsfest.com" target="_blank" rel="noopener noreferrer" class="project-link">
-              Visit Live Platform <i class="fa-solid fa-arrow-right"></i>
-            </a>
           </div>
         </div>
 
         <!-- 8. Beauté Festival -->
-        <div class="project-card" data-category="b2b">
-          <div class="project-thumb">
-            <img src="assets/images/project-beautefestival.png" alt="Beauté Festival" loading="lazy" />
-            <span class="project-badge">Beauty Lifestyle</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>Jakarta</span> • <span>Retail &amp; Activations</span>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card" data-category="b2b">
+            <div class="project-thumb">
+              <div class="browser-dots"><span class="browser-dot red"></span><span class="browser-dot yellow"></span><span class="browser-dot green"></span></div>
+              <img src="assets/images/project-beautefestival.png" alt="Beauté Festival" loading="lazy" />
+              <span class="project-card-badge">Beauty Lifestyle</span>
             </div>
-            <h3 class="project-title">Beauté Festival</h3>
-            <p class="project-desc">
-              Consumer-facing beauty lifestyle festival blending retail, brand activations, masterclasses, and influencer experiences.
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">WordPress</span>
-              <span class="tech-tag">D2C Portal</span>
-              <span class="tech-tag">Responsive UI</span>
+            <div class="project-card-body">
+              <div class="project-meta-line">Jakarta • Retail &amp; Activations</div>
+              <h4 class="project-card-title">Beauté Festival</h4>
+              <p class="project-card-desc">Consumer-facing beauty festival blending retail, brand activations, and influencer experiences.</p>
+              <div class="project-tech-tags mb-3">
+                <span class="tech-tag">WordPress</span>
+                <span class="tech-tag">D2C Portal</span>
+              </div>
+              <a href="https://www.beautefestival.com" target="_blank" rel="noopener noreferrer" class="project-link-btn">
+                Visit Live Platform <i class="fa-solid fa-arrow-right"></i>
+              </a>
             </div>
-            <a href="https://www.beautefestival.com" target="_blank" rel="noopener noreferrer" class="project-link">
-              Visit Live Platform <i class="fa-solid fa-arrow-right"></i>
-            </a>
           </div>
         </div>
 
         <!-- 9. NexusAgent & PamerAi Ecosystem -->
-        <div class="project-card" data-category="system">
-          <div class="project-thumb">
-            <img src="assets/images/project-nexusagent.png" alt="NexusAgent & PamerAi Ecosystem" loading="lazy" />
-            <span class="project-badge" style="background:linear-gradient(135deg, #00d2ff, #7928ca); color:#fff; border-color:rgba(0, 210, 255, 0.4);">Autonomous AI Agent</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>AI Agent</span> • <span>Enterprise AI &amp; Token Observability</span>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card" data-category="system">
+            <div class="project-thumb">
+              <div class="browser-dots"><span class="browser-dot red"></span><span class="browser-dot yellow"></span><span class="browser-dot green"></span></div>
+              <img src="assets/images/project-nexusagent.png" alt="NexusAgent" loading="lazy" />
+              <span class="project-card-badge" style="color:var(--accent-cyan); border-color:var(--glass-border-cyan);">Autonomous AI</span>
             </div>
-            <h3 class="project-title">NexusAgent &amp; PamerAi Ecosystem</h3>
-            <p class="project-desc">
-              Enterprise Autonomous ReAct AI Agent, Real-Time Token &amp; Cost Observability Dashboard, Desktop Developer Copilot, and B2B Exhibition Intelligence Hub with WhatsApp integration.
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">FastAPI</span>
-              <span class="tech-tag">Python 3.10+</span>
-              <span class="tech-tag">ReAct AI Agent</span>
-              <span class="tech-tag">Token Observability</span>
-              <span class="tech-tag">SQLite / Chart.js</span>
-              <span class="tech-tag">WhatsApp Bot</span>
-            </div>
-            <div class="project-links-group">
-              <a href="javascript:void(0)" class="project-link btn-open-modal" data-modal="nexusagent">
-                <i class="fa-solid fa-microchip"></i> View System Architecture <i class="fa-solid fa-arrow-right"></i>
-              </a>
+            <div class="project-card-body">
+              <div class="project-meta-line">FastAPI • Python 3.10+ • ReAct Loop</div>
+              <h4 class="project-card-title">NexusAgent &amp; PamerAi Ecosystem</h4>
+              <p class="project-card-desc">Autonomous ReAct AI Agent, Token Financial Observability Dashboard, and B2B WhatsApp bot.</p>
+              <div class="project-tech-tags mb-3">
+                <span class="tech-tag">ReAct AI</span>
+                <span class="tech-tag">Token Tracker</span>
+                <span class="tech-tag">FastAPI</span>
+              </div>
+              <button class="project-link-btn btn-open-modal" data-project="nexusagent" data-modal="nexusagent">
+                <i class="fa-solid fa-microchip"></i> View Technical Blueprint <i class="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
           </div>
         </div>
 
         <!-- 10. Orion ERP Manufacturing System -->
-        <div class="project-card" data-category="system">
-          <div class="project-thumb">
-            <img src="assets/images/project-orion-erp.png" alt="Orion ERP IBM iSeries System" loading="lazy" />
-            <span class="project-badge" style="background:var(--accent-indigo); color:#fff;">Enterprise ERP</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>Manufacturing System</span> • <span>IBM AS/400 RPG Simulator</span>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card" data-category="system">
+            <div class="project-thumb">
+              <div class="browser-dots"><span class="browser-dot red"></span><span class="browser-dot yellow"></span><span class="browser-dot green"></span></div>
+              <img src="assets/images/project-orion-erp.png" alt="Orion ERP" loading="lazy" />
+              <span class="project-card-badge" style="color:var(--accent-indigo); border-color:var(--accent-indigo);">Enterprise ERP</span>
             </div>
-            <h3 class="project-title">Orion ERP &amp; IBM iSeries Simulator</h3>
-            <p class="project-desc">
-              Full-scale manufacturing ERP platform &amp; IBM iSeries (AS/400) RPG simulator featuring MRP inventory, MES work orders, BOM explosion engine, and DB2 console.
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">RPG IV / ILE RPG</span>
-              <span class="tech-tag">DB2 for i</span>
-              <span class="tech-tag">AS/400 5250 Terminal</span>
-              <span class="tech-tag">Node.js / React</span>
-            </div>
-            <div class="project-links-group">
-              <a href="javascript:void(0)" class="project-link btn-open-modal" data-modal="orion-erp">
-                <i class="fa-solid fa-terminal"></i> View System Architecture <i class="fa-solid fa-arrow-right"></i>
-              </a>
+            <div class="project-card-body">
+              <div class="project-meta-line">IBM AS/400 • DB2 • PHP Enterprise</div>
+              <h4 class="project-card-title">Orion ERP &amp; IBM iSeries Simulator</h4>
+              <p class="project-card-desc">Manufacturing ERP platform &amp; IBM AS/400 RPG simulator with MRP inventory, BOM, and DB2 console.</p>
+              <div class="project-tech-tags mb-3">
+                <span class="tech-tag">IBM DB2</span>
+                <span class="tech-tag">AS/400 Terminal</span>
+                <span class="tech-tag">Node.js</span>
+              </div>
+              <button class="project-link-btn btn-open-modal" data-project="orion-erp" data-modal="orion-erp">
+                <i class="fa-solid fa-terminal"></i> View Technical Blueprint <i class="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
           </div>
         </div>
 
         <!-- 11. CV Examiner AI Pro -->
-        <div class="project-card" data-category="system">
-          <div class="project-thumb">
-            <img src="assets/images/project-cv-examiner.png" alt="CV Examiner AI Platform" loading="lazy" />
-            <span class="project-badge" style="background:var(--accent-purple); color:#fff;">AI SaaS</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>GPT-4o Engine</span> • <span>Career Intelligence SaaS</span>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card" data-category="system">
+            <div class="project-thumb">
+              <div class="browser-dots"><span class="browser-dot red"></span><span class="browser-dot yellow"></span><span class="browser-dot green"></span></div>
+              <img src="assets/images/project-cv-examiner.png" alt="CV Examiner AI" loading="lazy" />
+              <span class="project-card-badge" style="color:var(--accent-purple); border-color:var(--accent-purple);">AI SaaS</span>
             </div>
-            <h3 class="project-title">CV Examiner AI Pro Platform</h3>
-            <p class="project-desc">
-              Enterprise AI CV scoring, ATS keyword gap analyzer, STAR method rewriter, and automated technical interview preparation studio.
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">GPT-4o</span>
-              <span class="tech-tag">React 18</span>
-              <span class="tech-tag">FastAPI</span>
-              <span class="tech-tag">OAuth2</span>
-            </div>
-            <div class="project-links-group">
-              <a href="javascript:void(0)" class="project-link btn-open-modal" data-modal="cv-examiner">
-                <i class="fa-solid fa-brain"></i> View Technical Brief <i class="fa-solid fa-arrow-right"></i>
-              </a>
+            <div class="project-card-body">
+              <div class="project-meta-line">GPT-4o Engine • Career Intelligence SaaS</div>
+              <h4 class="project-card-title">CV Examiner AI Pro Platform</h4>
+              <p class="project-card-desc">AI resume scoring, semantic ATS keyword gap analyzer, STAR method rewriter, and interview prep.</p>
+              <div class="project-tech-tags mb-3">
+                <span class="tech-tag">GPT-4o</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">React 18</span>
+              </div>
+              <button class="project-link-btn btn-open-modal" data-project="cv-examiner" data-modal="cv-examiner">
+                <i class="fa-solid fa-brain"></i> View Technical Blueprint <i class="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
           </div>
         </div>
 
         <!-- 12. Enterprise IoT & Multi-Device Remote Hub -->
-        <div class="project-card" data-category="system">
-          <div class="project-thumb">
-            <img src="assets/images/project-monitor-tablet.png" alt="Enterprise IoT & Multi-Device Remote Monitoring System" loading="lazy" />
-            <span class="project-badge" style="background:linear-gradient(135deg, #0ea5e9, #2563eb); color:#fff; border:1px solid rgba(14, 165, 233, 0.4);">Enterprise IoT &amp; Remote Admin</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta">
-              <span>IoT &amp; Tech Ops</span> • <span>Android &amp; Windows Remote Hub</span>
+        <div class="col-md-6 col-lg-4">
+          <div class="project-card" data-category="system">
+            <div class="project-thumb">
+              <div class="browser-dots"><span class="browser-dot red"></span><span class="browser-dot yellow"></span><span class="browser-dot green"></span></div>
+              <img src="assets/images/project-monitor-tablet.png" alt="Enterprise IoT Hub" loading="lazy" />
+              <span class="project-card-badge" style="color:var(--accent-cyan); border-color:var(--glass-border-cyan);">Enterprise IoT</span>
             </div>
-            <h3 class="project-title">Enterprise IoT &amp; Multi-Device Remote Hub</h3>
-            <p class="project-desc">
-              Low-latency asynchronous remote monitoring and central administration hub for 30+ Android tablets and Windows PC kiosks deployed across Pamerindo exhibition halls.
-            </p>
-            <div class="project-tech">
-              <span class="tech-tag">FastAPI</span>
-              <span class="tech-tag">Kotlin / Compose</span>
-              <span class="tech-tag">Accessibility API</span>
-              <span class="tech-tag">PyAutoGUI</span>
-              <span class="tech-tag">Sub-200ms Stream</span>
-            </div>
-            <div class="project-links-group">
-              <a href="javascript:void(0)" class="project-link btn-open-modal" data-modal="monitor-tablet">
-                <i class="fa-solid fa-tablet-screen-button"></i> View System Architecture <i class="fa-solid fa-arrow-right"></i>
-              </a>
+            <div class="project-card-body">
+              <div class="project-meta-line">IoT &amp; Tech Ops • WebSocket Remote Hub</div>
+              <h4 class="project-card-title">Enterprise IoT Remote Hub</h4>
+              <p class="project-card-desc">Low-latency remote monitoring and central administration hub for 30+ Android tablets and Windows kiosks.</p>
+              <div class="project-tech-tags mb-3">
+                <span class="tech-tag">WebSocket</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">Kotlin</span>
+              </div>
+              <button class="project-link-btn btn-open-modal" data-project="monitor-tablet" data-modal="monitor-tablet">
+                <i class="fa-solid fa-tablet-screen-button"></i> View Technical Blueprint <i class="fa-solid fa-arrow-right"></i>
+              </button>
             </div>
           </div>
         </div>
 
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================
-       CAREER JOURNEY & EDUCATION GRID
-       ============================================ -->
-  <section id="experience">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-landmark"></i> Professional Journey</div>
-        <h2 class="section-title">Experience &amp; <span class="gold-text">Education</span></h2>
-        <p class="section-subtitle">My professional career progression and academic foundation in Computer Engineering.</p>
-      </div>
-
-      <div class="exp-grid">
-        
-        <!-- Left Column: Work Experience -->
-        <div>
-          <h3 class="exp-col-title"><i class="fa-solid fa-briefcase"></i> Work Experience</h3>
-          <div class="timeline">
-            
-            <div class="timeline-item">
-              <div class="timeline-dot"><i class="fa-solid fa-headset"></i></div>
-              <div class="timeline-content">
-                <div class="timeline-period">Jul 2024 — Present</div>
-                <h4 class="timeline-title">Data &amp; Tech Support Executive</h4>
-                <div class="timeline-org">Informa Markets Asia · Full-time · Jakarta</div>
-                <p class="timeline-desc">
-                  Data &amp; Tech Support specialist handling IT troubleshooting, system optimization, CRM sync, and data analysis. Collaborating with regional teams to ensure 99.9% availability of trade exhibition platforms across Southeast Asia.
-                </p>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-dot"><i class="fa-solid fa-globe"></i></div>
-              <div class="timeline-content">
-                <div class="timeline-period">Oct 2023 — Present</div>
-                <h4 class="timeline-title">Senior Web Developer</h4>
-                <div class="timeline-org">PT Pamerindo Indonesia · Full-time · Jakarta</div>
-                <p class="timeline-desc">
-                  Managing 8 international B2B event websites (100,000+ annual visitors, 7,000+ exhibitors). Improved site load speed by 30%, redesigned UI/UX, and launched new platforms for Lab Indonesia, Lab Vietnam &amp; Cosmobeauté Indonesia.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-        <!-- Right Column: Education & Certifications -->
-        <div>
-          <h3 class="exp-col-title"><i class="fa-solid fa-graduation-cap"></i> Education &amp; Certifications</h3>
-          <div class="timeline">
-
-            <div class="timeline-item">
-              <div class="timeline-dot"><i class="fa-solid fa-graduation-cap"></i></div>
-              <div class="timeline-content">
-                <div class="timeline-period">Apr 2023 — Feb 2024</div>
-                <h4 class="timeline-title">S1 — Sistem Komputer (Bachelor Degree)</h4>
-                <div class="timeline-org">Universitas Gunadarma · GPA 3.78 / 4.00 · Full Scholarship</div>
-                <p class="timeline-desc">
-                  Thesis: Traveling Violation Detection System in Basketball Matches using Deep Learning (YOLOv8 Algorithm &amp; Computer Vision).
-                </p>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-dot"><i class="fa-solid fa-scroll"></i></div>
-              <div class="timeline-content">
-                <div class="timeline-period">Sep 2019 — Aug 2022</div>
-                <h4 class="timeline-title">D3 — Teknik Komputer (Associate Degree)</h4>
-                <div class="timeline-org">Universitas Gunadarma · GPA 3.77 / 4.00 · Full Scholarship</div>
-                <p class="timeline-desc">
-                  Head of Computer Engineering Student Association (Himatekkom). Recipient of Full Education Scholarship for D3 Computer Engineering.
-                </p>
-              </div>
-            </div>
-
-            <div class="timeline-item">
-              <div class="timeline-dot"><i class="fa-solid fa-award"></i></div>
-              <div class="timeline-content">
-                <div class="timeline-period">2022 — 2024</div>
-                <h4 class="timeline-title">Professional Certifications</h4>
-                <div class="timeline-org">Fortinet • BNSP • Azure • ServiceNow</div>
-                <p class="timeline-desc">
-                  Fortinet NSE 1 &amp; 2 (Cybersecurity Fundamentals), BNSP 2022 Junior Computer Network Technician, ServiceNow Fundamentals, Microsoft Azure AZ-900, TOEFL Score 513.
-                </p>
-              </div>
-            </div>
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-  <!-- ============================================
-       TESTIMONIALS SECTION
-       ============================================ -->
-  <section id="testimonials">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-comment-dots"></i> Client Endorsements</div>
-        <h2 class="section-title">What Clients &amp; <span class="gold-text">Partners Say</span></h2>
-        <p class="section-subtitle">Feedback from leaders and teams I have collaborated with on enterprise projects.</p>
-      </div>
-
-      <div class="testimonials-slider">
-        <div class="testimonials-track" id="testimonials-track">
-
-          <div class="testimonial-card">
-            <div class="testimonial-stars">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-            <p class="testimonial-text">"Working with Rikkardo was an absolute pleasure. He delivered our event platform on time, with zero bugs, and an elegant UI. Highly recommended!"</p>
-            <div class="testimonial-author">
-              <div class="author-avatar">AR</div>
-              <div>
-                <div class="author-name">Alex Richardson</div>
-                <div class="author-role">CEO · ShopNow Indonesia</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial-card">
-            <div class="testimonial-stars">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-            <p class="testimonial-text">"Exceptional technical skills combined with great communication. He understood our enterprise requirements perfectly and turned our vision into a high-performing digital product."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar" style="background:linear-gradient(135deg, #6366f1, #8b5cf6);">SP</div>
-              <div>
-                <div class="author-name">Sarah Pratiwi</div>
-                <div class="author-role">Product Manager · TechVenture</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial-card">
-            <div class="testimonial-stars">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i>
-            </div>
-            <p class="testimonial-text">"Our website performance improved dramatically after the refactor. The code is clean, SEO-optimized, and very easy for our marketing team to manage."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar" style="background:linear-gradient(135deg, #38bdf8, #6366f1);">MB</div>
-              <div>
-                <div class="author-name">Michael Budiman</div>
-                <div class="author-role">CTO · DataFlow Analytics</div>
-              </div>
-            </div>
-          </div>
-
-          <div class="testimonial-card">
-            <div class="testimonial-stars">
-              <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
-            </div>
-            <p class="testimonial-text">"Delivered a complex real-time application ahead of schedule. The attention to detail in both backend architecture and executive frontend polish is truly impressive."</p>
-            <div class="testimonial-author">
-              <div class="author-avatar" style="background:linear-gradient(135deg, #f59e0b, #ef4444);">DW</div>
-              <div>
-                <div class="author-name">Diana Wijaya</div>
-                <div class="author-role">Founder · ConnectHub</div>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="slider-controls">
-        <button class="slider-btn" id="prev-slide" aria-label="Previous"><i class="fa-solid fa-arrow-left"></i></button>
-        <div class="slider-dots" id="slider-dots">
-          <div class="slider-dot active" data-index="0"></div>
-          <div class="slider-dot" data-index="1"></div>
-          <div class="slider-dot" data-index="2"></div>
-          <div class="slider-dot" data-index="3"></div>
-        </div>
-        <button class="slider-btn" id="next-slide" aria-label="Next"><i class="fa-solid fa-arrow-right"></i></button>
       </div>
 
     </div>
   </section>
 
-  <!-- ============================================
-       VISUAL STORIES & GALLERY (ALL 6 STORIES)
-       ============================================ -->
-  <section id="blog">
-    <div class="container">
-      <div class="section-header">
-        <div class="section-tag"><i class="fa-solid fa-camera"></i> Visual Gallery</div>
+  <!-- ==========================================================================
+       VISUAL STORIES & PHOTOGRAPHY GALLERY (ALL 9 STORIES)
+       ========================================================================== -->
+  <section class="stories-section" id="stories">
+    <div class="container px-4 px-lg-5">
+      
+      <div class="text-center mb-5">
+        <span class="section-tag"><i class="fa-solid fa-camera"></i> Visual Gallery</span>
         <h2 class="section-title">Urban Stories &amp; <span class="gold-text">Perspectives</span></h2>
-        <p class="section-subtitle">Moments captured through my lens — stories of urban life, golden hours, and quiet perspectives across Jakarta.</p>
+        <p class="section-subtitle">Moments captured through my lens across Jakarta — street life, golden hours, architectural geometry, and contemplative perspectives. Click any photo to view in high resolution.</p>
       </div>
 
-      <div class="portfolio-grid">
+      <div class="photo-filter-nav">
+        <button class="photo-filter-btn filter-btn active" data-filter="all">All Stories (9)</button>
+        <button class="photo-filter-btn filter-btn" data-filter="street">Street &amp; Urban Life</button>
+        <button class="photo-filter-btn filter-btn" data-filter="golden-hour">Golden Hour &amp; Sunset</button>
+        <button class="photo-filter-btn filter-btn" data-filter="architecture">Architecture &amp; Transit</button>
+        <button class="photo-filter-btn filter-btn" data-filter="minimalist">Minimalist &amp; Conceptual</button>
+      </div>
+
+      <div class="row g-4">
+
         <!-- Story 1 -->
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="Photo/f732741c-ebf2-44c7-a695-bb22e67b1b09.jpeg" alt="Gold in the Mist" loading="lazy" />
-            <span class="project-badge">Street Photography</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta"><span>Jakarta</span> • <span>Street Series</span></div>
-            <h3 class="project-title">Gold in the Mist: The Unseen Workers</h3>
-            <p class="project-desc">Under harsh afternoon heat, water sprays turn into a veil of liquid gold. A raw moment of honest labor captured in mid-air.</p>
-            <a href="article.html?id=gold-in-the-mist" class="project-link">Read Visual Story <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="col-md-6 col-lg-4">
+          <div class="photo-card" data-category="street">
+            <div class="photo-card-media" data-photo-index="0">
+              <img src="Photo/f732741c-ebf2-44c7-a695-bb22e67b1b09.jpeg" alt="Gold in the Mist" loading="lazy" />
+              <span class="photo-badge">Street Photography</span>
+              <div class="photo-card-overlay">
+                <div class="photo-quick-view-btn"><i class="fa-solid fa-expand"></i> Quick View</div>
+              </div>
+            </div>
+            <div class="photo-card-body">
+              <div class="photo-meta-line">
+                <span><i class="fa-solid fa-location-dot text-warning me-1"></i> Jakarta</span>
+                <span>August 2026</span>
+              </div>
+              <h4 class="photo-card-title">Gold in the Mist: The Unseen Workers</h4>
+              <p class="photo-card-desc">Under harsh afternoon heat, water sprays turn into a veil of liquid gold — capturing an authentic moment of honest labor.</p>
+              <div class="photo-card-actions">
+                <a href="article.html?id=gold-in-the-mist" class="project-link-btn">
+                  Read Visual Story <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
+                <button class="project-link-btn text-muted" data-photo-index="0">
+                  <i class="fa-solid fa-eye me-1"></i> Preview
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Story 2 -->
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="Photo/70422342-1920-42e3-93aa-901bd73044f4.jpeg" alt="Silhouettes of Ambition" loading="lazy" />
-            <span class="project-badge">Urban Sunset</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta"><span>SCBD Jakarta</span> • <span>Golden Hour</span></div>
-            <h3 class="project-title">Silhouettes of Ambition: Sunset Over SCBD</h3>
-            <p class="project-desc">As the sun dips between concrete giants, the city pauses for a fraction of a second before the night shift begins.</p>
-            <a href="article.html?id=silhouettes-scbd" class="project-link">Read Visual Story <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="col-md-6 col-lg-4">
+          <div class="photo-card" data-category="golden-hour">
+            <div class="photo-card-media" data-photo-index="1">
+              <img src="Photo/70422342-1920-42e3-93aa-901bd73044f4.jpeg" alt="Silhouettes of Ambition" loading="lazy" />
+              <span class="photo-badge">Urban Sunset</span>
+              <div class="photo-card-overlay">
+                <div class="photo-quick-view-btn"><i class="fa-solid fa-expand"></i> Quick View</div>
+              </div>
+            </div>
+            <div class="photo-card-body">
+              <div class="photo-meta-line">
+                <span><i class="fa-solid fa-location-dot text-warning me-1"></i> SCBD Sudirman</span>
+                <span>July 2026</span>
+              </div>
+              <h4 class="photo-card-title">Silhouettes of Ambition: Sunset Over SCBD</h4>
+              <p class="photo-card-desc">As the sun dips between concrete giants, the city pauses in dramatic silhouette before the nocturnal pulse begins.</p>
+              <div class="photo-card-actions">
+                <a href="article.html?id=silhouettes-scbd" class="project-link-btn">
+                  Read Visual Story <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
+                <button class="project-link-btn text-muted" data-photo-index="1">
+                  <i class="fa-solid fa-eye me-1"></i> Preview
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Story 3 -->
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="Photo/1c5ec77c-2dbb-4c94-8972-b37be21b970b.jpeg" alt="Platform 2 Kebayoran" loading="lazy" />
-            <span class="project-badge">Transit Series</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta"><span>Kebayoran Station</span> • <span>Atmosphere</span></div>
-            <h3 class="project-title">Golden Hour at Platform 2</h3>
-            <p class="project-desc">Long shadows stretching across quiet tracks. Warm amber light reminding commuters that another day's hard work is done.</p>
-            <a href="article.html?id=kebayoran-station" class="project-link">Read Visual Story <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="col-md-6 col-lg-4">
+          <div class="photo-card" data-category="architecture">
+            <div class="photo-card-media" data-photo-index="2">
+              <img src="Photo/1c5ec77c-2dbb-4c94-8972-b37be21b970b.jpeg" alt="Platform 2 Kebayoran" loading="lazy" />
+              <span class="photo-badge">Transit Series</span>
+              <div class="photo-card-overlay">
+                <div class="photo-quick-view-btn"><i class="fa-solid fa-expand"></i> Quick View</div>
+              </div>
+            </div>
+            <div class="photo-card-body">
+              <div class="photo-meta-line">
+                <span><i class="fa-solid fa-location-dot text-warning me-1"></i> Kebayoran Station</span>
+                <span>June 2026</span>
+              </div>
+              <h4 class="photo-card-title">Golden Hour at Platform 2 Kebayoran</h4>
+              <p class="photo-card-desc">Long shadows stretching across quiet railway tracks. Warm amber light reminding commuters of another day accomplished.</p>
+              <div class="photo-card-actions">
+                <a href="article.html?id=kebayoran-station" class="project-link-btn">
+                  Read Visual Story <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
+                <button class="project-link-btn text-muted" data-photo-index="2">
+                  <i class="fa-solid fa-eye me-1"></i> Preview
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Story 4 -->
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="Photo/ac62e452-a485-48c3-8910-3121f9d75b12.jpeg" alt="Welcome to Isekai" loading="lazy" />
-            <span class="project-badge">Culture &amp; Dreams</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta"><span>Jakarta</span> • <span>Lifestyle</span></div>
-            <h3 class="project-title">Welcome to Isekai: Among Books &amp; Dreams</h3>
-            <p class="project-desc">Shelves towering with stories of heroes and parallel worlds — finding quiet solace inside a bustling metropolis.</p>
-            <a href="article.html?id=welcome-to-isekai" class="project-link">Read Visual Story <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="col-md-6 col-lg-4">
+          <div class="photo-card" data-category="street">
+            <div class="photo-card-media" data-photo-index="3">
+              <img src="Photo/ac62e452-a485-48c3-8910-3121f9d75b12.jpeg" alt="Welcome to Isekai" loading="lazy" />
+              <span class="photo-badge">Culture &amp; Dreams</span>
+              <div class="photo-card-overlay">
+                <div class="photo-quick-view-btn"><i class="fa-solid fa-expand"></i> Quick View</div>
+              </div>
+            </div>
+            <div class="photo-card-body">
+              <div class="photo-meta-line">
+                <span><i class="fa-solid fa-location-dot text-warning me-1"></i> Gramedia Jakarta</span>
+                <span>May 2026</span>
+              </div>
+              <h4 class="photo-card-title">Welcome to Isekai: Among Books &amp; Dreams</h4>
+              <p class="photo-card-desc">Shelves towering with stories of heroes and parallel worlds — finding quiet solace inside a bustling metropolis.</p>
+              <div class="photo-card-actions">
+                <a href="article.html?id=welcome-to-isekai" class="project-link-btn">
+                  Read Visual Story <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
+                <button class="project-link-btn text-muted" data-photo-index="3">
+                  <i class="fa-solid fa-eye me-1"></i> Preview
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Story 5 -->
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="Photo/927d476c-ebb0-4711-a1b9-5663bb9dc8e8.jpeg" alt="Two Sources of Light" loading="lazy" />
-            <span class="project-badge">Minimalist View</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta"><span>Sky View</span> • <span>Perspective</span></div>
-            <h3 class="project-title">Two Sources of Light: Sun &amp; Bulb</h3>
-            <p class="project-desc">An artificial bulb hanging right above the natural sun. A playful visual reflection on how we illuminate our world.</p>
-            <a href="article.html?id=sun-and-bulb" class="project-link">Read Visual Story <i class="fa-solid fa-arrow-right"></i></a>
+        <div class="col-md-6 col-lg-4">
+          <div class="photo-card" data-category="minimalist">
+            <div class="photo-card-media" data-photo-index="4">
+              <img src="Photo/927d476c-ebb0-4711-a1b9-5663bb9dc8e8.jpeg" alt="Two Sources of Light" loading="lazy" />
+              <span class="photo-badge">Minimalist View</span>
+              <div class="photo-card-overlay">
+                <div class="photo-quick-view-btn"><i class="fa-solid fa-expand"></i> Quick View</div>
+              </div>
+            </div>
+            <div class="photo-card-body">
+              <div class="photo-meta-line">
+                <span><i class="fa-solid fa-location-dot text-warning me-1"></i> Rooftop Vista</span>
+                <span>April 2026</span>
+              </div>
+              <h4 class="photo-card-title">Two Sources of Light: Sun &amp; Filament</h4>
+              <p class="photo-card-desc">An artificial bulb hanging in vertical harmony above the natural sun behind clouded skies — a reflection on illumination.</p>
+              <div class="photo-card-actions">
+                <a href="article.html?id=sun-and-bulb" class="project-link-btn">
+                  Read Visual Story <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
+                <button class="project-link-btn text-muted" data-photo-index="4">
+                  <i class="fa-solid fa-eye me-1"></i> Preview
+                </button>
+              </div>
+            </div>
           </div>
         </div>
 
         <!-- Story 6 -->
-        <div class="project-card">
-          <div class="project-thumb">
-            <img src="Photo/d4b42879-a92f-4b67-b5ab-276e1b17499b.jpeg" alt="Dusk Over JIEXPO" loading="lazy" />
-            <span class="project-badge">Architecture</span>
-          </div>
-          <div class="project-body">
-            <div class="project-meta"><span>JIEXPO Kemayoran</span> • <span>Exhibition Hub</span></div>
-            <h3 class="project-title">Dusk Over JIEXPO Kemayoran</h3>
-            <p class="project-desc">After thousands of trade visitors leave the halls, the evening sun rests gently above Southeast Asia's trade exhibition hub.</p>
-            <a href="article.html?id=jiexpo-dusk" class="project-link">Read Visual Story <i class="fa-solid fa-arrow-right"></i></a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <!-- ============================================
-       EXECUTIVE CONTACT SECTION
-       ============================================ -->
-  <section id="contact">
-    <div class="container">
-      <div class="contact-card-wrapper">
-        <div class="contact-grid">
-          
-          <div class="contact-info">
-            <div class="section-tag"><i class="fa-regular fa-paper-plane"></i> Direct Channel</div>
-            <h3>Initiate <span class="gold-text">Executive Contact</span></h3>
-            <p>I am open to enterprise web architecture consulting, digital event platform development, and executive IT support roles. Feel free to reach out directly.</p>
-
-            <div class="contact-details">
-              <div class="contact-item">
-                <div class="contact-icon"><i class="fa-solid fa-envelope"></i></div>
-                <div>
-                  <div class="contact-label">Email Direct</div>
-                  <div class="contact-val">rikkardotobing1@gmail.com</div>
-                </div>
+        <div class="col-md-6 col-lg-4">
+          <div class="photo-card" data-category="architecture">
+            <div class="photo-card-media" data-photo-index="5">
+              <img src="Photo/d4b42879-a92f-4b67-b5ab-276e1b17499b.jpeg" alt="Dusk Over JIEXPO" loading="lazy" />
+              <span class="photo-badge">Exhibition Hub</span>
+              <div class="photo-card-overlay">
+                <div class="photo-quick-view-btn"><i class="fa-solid fa-expand"></i> Quick View</div>
               </div>
-
-              <div class="contact-item">
-                <div class="contact-icon"><i class="fa-solid fa-phone"></i></div>
-                <div>
-                  <div class="contact-label">Phone / WhatsApp</div>
-                  <div class="contact-val">+62 822-3174-5213</div>
-                </div>
+            </div>
+            <div class="photo-card-body">
+              <div class="photo-meta-line">
+                <span><i class="fa-solid fa-location-dot text-warning me-1"></i> JIEXPO Kemayoran</span>
+                <span>March 2026</span>
               </div>
-
-              <div class="contact-item">
-                <div class="contact-icon"><i class="fa-brands fa-linkedin-in"></i></div>
-                <div>
-                  <div class="contact-label">LinkedIn</div>
-                  <div class="contact-val">linkedin.com/in/rikkardo-l-tobing</div>
-                </div>
-              </div>
-
-              <div class="contact-item">
-                <div class="contact-icon"><i class="fa-solid fa-location-dot"></i></div>
-                <div>
-                  <div class="contact-label">Location</div>
-                  <div class="contact-val">Jakarta, Indonesia 🇮🇩</div>
-                </div>
-              </div>
-
-              <div class="contact-item">
-                <div class="contact-icon"><i class="fa-solid fa-clock"></i></div>
-                <div>
-                  <div class="contact-label">Availability</div>
-                  <div class="contact-val">Mon – Fri, 09:00 – 18:00 WIB</div>
-                </div>
+              <h4 class="photo-card-title">Dusk Over JIEXPO Kemayoran</h4>
+              <p class="photo-card-desc">After thousands of trade visitors leave the halls, the evening twilight rests peacefully above Southeast Asia’s trade hub.</p>
+              <div class="photo-card-actions">
+                <a href="article.html?id=jiexpo-dusk" class="project-link-btn">
+                  Read Visual Story <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
+                <button class="project-link-btn text-muted" data-photo-index="5">
+                  <i class="fa-solid fa-eye me-1"></i> Preview
+                </button>
               </div>
             </div>
           </div>
+        </div>
 
-          <div class="contact-form-wrap">
-            <form class="contact-form" id="contact-form">
-              <div class="form-group">
-                <label class="form-label" for="cf-name">Full Name</label>
-                <input type="text" id="cf-name" name="name" class="form-input" placeholder="e.g. Alexander Wright" required />
+        <!-- Story 7 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="photo-card" data-category="golden-hour">
+            <div class="photo-card-media" data-photo-index="6">
+              <img src="Photo/670a2ccb-33de-4b97-b830-467f1d16b05f.jpeg" alt="Crimson Skyline" loading="lazy" />
+              <span class="photo-badge">Sunset Series</span>
+              <div class="photo-card-overlay">
+                <div class="photo-quick-view-btn"><i class="fa-solid fa-expand"></i> Quick View</div>
               </div>
-
-              <div class="form-group">
-                <label class="form-label" for="cf-email">Work Email</label>
-                <input type="email" id="cf-email" name="email" class="form-input" placeholder="e.g. alexander@company.com" required />
+            </div>
+            <div class="photo-card-body">
+              <div class="photo-meta-line">
+                <span><i class="fa-solid fa-location-dot text-warning me-1"></i> South Jakarta</span>
+                <span>February 2026</span>
               </div>
-
-              <div class="form-group">
-                <label class="form-label" for="cf-subject">Subject</label>
-                <input type="text" id="cf-subject" name="subject" class="form-input" placeholder="Project Inquiry / Advisory" />
+              <h4 class="photo-card-title">Crimson Skyline: Fiery Horizon</h4>
+              <p class="photo-card-desc">A vibrant fiery band cutting across evening clouds above silhouetted tree canopies, revealing Jakarta’s dramatic twilight palette.</p>
+              <div class="photo-card-actions">
+                <a href="article.html?id=crimson-skyline" class="project-link-btn">
+                  Read Visual Story <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
+                <button class="project-link-btn text-muted" data-photo-index="6">
+                  <i class="fa-solid fa-eye me-1"></i> Preview
+                </button>
               </div>
-
-              <div class="form-group">
-                <label class="form-label" for="cf-message">Message / Inquiry</label>
-                <textarea id="cf-message" name="message" class="form-textarea" placeholder="How can I assist your organization?" required></textarea>
-              </div>
-
-              <button type="submit" class="btn btn-primary" style="width:100%;">
-                <i class="fa-solid fa-paper-plane"></i> Send Executive Inquiry
-              </button>
-            </form>
+            </div>
           </div>
+        </div>
 
+        <!-- Story 8 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="photo-card" data-category="golden-hour">
+            <div class="photo-card-media" data-photo-index="7">
+              <img src="Photo/cab028f6-9277-47ab-863f-b52cd385f268.jpeg" alt="Golden Corona" loading="lazy" />
+              <span class="photo-badge">Golden Hour</span>
+              <div class="photo-card-overlay">
+                <div class="photo-quick-view-btn"><i class="fa-solid fa-expand"></i> Quick View</div>
+              </div>
+            </div>
+            <div class="photo-card-body">
+              <div class="photo-meta-line">
+                <span><i class="fa-solid fa-location-dot text-warning me-1"></i> West Jakarta Sky</span>
+                <span>January 2026</span>
+              </div>
+              <h4 class="photo-card-title">Golden Corona: The Piercing Sun</h4>
+              <p class="photo-card-desc">The intense sun burning through atmospheric dust and clouds, casting an ethereal, surreal golden corona above the horizon.</p>
+              <div class="photo-card-actions">
+                <a href="article.html?id=golden-corona" class="project-link-btn">
+                  Read Visual Story <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
+                <button class="project-link-btn text-muted" data-photo-index="7">
+                  <i class="fa-solid fa-eye me-1"></i> Preview
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Story 9 -->
+        <div class="col-md-6 col-lg-4">
+          <div class="photo-card" data-category="minimalist">
+            <div class="photo-card-media" data-photo-index="8">
+              <img src="Photo/cb5bf88a-7803-481b-a2e6-abdaa241dadb.jpeg" alt="Amber Horizon" loading="lazy" />
+              <span class="photo-badge">Urban Geometry</span>
+              <div class="photo-card-overlay">
+                <div class="photo-quick-view-btn"><i class="fa-solid fa-expand"></i> Quick View</div>
+              </div>
+            </div>
+            <div class="photo-card-body">
+              <div class="photo-meta-line">
+                <span><i class="fa-solid fa-location-dot text-warning me-1"></i> Central Promenade</span>
+                <span>August 2026</span>
+              </div>
+              <h4 class="photo-card-title">Amber Horizon: Solitude of the Lamp</h4>
+              <p class="photo-card-desc">A solitary Y-shaped street lamp framing a glowing blood-orange sun nestled between delicate branches and clean pillars.</p>
+              <div class="photo-card-actions">
+                <a href="article.html?id=amber-horizon" class="project-link-btn">
+                  Read Visual Story <i class="fa-solid fa-arrow-right ms-1"></i>
+                </a>
+                <button class="project-link-btn text-muted" data-photo-index="8">
+                  <i class="fa-solid fa-eye me-1"></i> Preview
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
+       JOURNEY (EXPERIENCE & EDUCATION) SECTION
+       ========================================================================== -->
+  <section class="timeline-section" id="journey">
+    <div class="container px-4 px-lg-5">
+      <div class="text-center mb-5">
+        <span class="section-tag"><i class="fa-solid fa-landmark"></i> Professional Journey</span>
+        <h2 class="section-title">Experience &amp; <span class="gold-text">Education</span></h2>
+        <p class="section-subtitle">My professional career progression at Informa Markets and academic foundation in Computer Engineering.</p>
+      </div>
+
+      <div class="row g-5">
+        <!-- Experience -->
+        <div class="col-lg-6">
+          <h4 class="mb-4 text-warning"><i class="fa-solid fa-briefcase me-2"></i> Work Experience</h4>
+          <div class="timeline-wrap">
+            <div class="timeline-card">
+              <div class="timeline-dot"><i class="fa-solid fa-circle"></i></div>
+              <div class="timeline-period">Jul 2024 — Present</div>
+              <h5 class="timeline-title">Data &amp; Tech Support Executive</h5>
+              <div class="timeline-org">Informa Markets Asia · Full-time · Jakarta</div>
+              <p class="timeline-desc">Handling IT troubleshooting, system optimization, CRM synchronization, and data analytics across regional exhibition operations.</p>
+            </div>
+
+            <div class="timeline-card">
+              <div class="timeline-dot"><i class="fa-solid fa-circle"></i></div>
+              <div class="timeline-period">Jan 2022 — Present</div>
+              <h5 class="timeline-title">Web Developer &amp; CMS Architect</h5>
+              <div class="timeline-org">PT Pamerindo Indonesia · Jakarta</div>
+              <p class="timeline-desc">Managing 8+ major B2B exhibition platforms (Pamerindo, FHI, Lab Indonesia, Cosmobeauté, FHT Bali, etc.), optimizing SEO and uptime.</p>
+            </div>
+
+            <div class="timeline-card">
+              <div class="timeline-dot"><i class="fa-solid fa-circle"></i></div>
+              <div class="timeline-period">2023 — Present</div>
+              <h5 class="timeline-title">AI &amp; Enterprise Systems Engineer</h5>
+              <div class="timeline-org">Enterprise R&amp;D Projects</div>
+              <p class="timeline-desc">Architected NexusAgent Autonomous ReAct Agent, Token Observability Financial Tracker, and CV Examiner AI Pro with FastAPI.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Education -->
+        <div class="col-lg-6">
+          <h4 class="mb-4 text-warning"><i class="fa-solid fa-graduation-cap me-2"></i> Education &amp; Foundation</h4>
+          <div class="timeline-wrap">
+            <div class="timeline-card">
+              <div class="timeline-dot"><i class="fa-solid fa-circle"></i></div>
+              <div class="timeline-period">Graduated</div>
+              <h5 class="timeline-title">Bachelor of Engineering (S.T.) in Computer Engineering</h5>
+              <div class="timeline-org">Universitas Telkom (Telkom University) · Bandung</div>
+              <p class="timeline-desc">Focus on Software Engineering, Distributed Systems, Database Architecture, and Embedded IoT Telemetry.</p>
+            </div>
+
+            <div class="timeline-card">
+              <div class="timeline-dot"><i class="fa-solid fa-circle"></i></div>
+              <div class="timeline-period">Certifications &amp; Standards</div>
+              <h5 class="timeline-title">Enterprise IT, Web &amp; AI Specializations</h5>
+              <div class="timeline-org">Global Standards &amp; Continuous Learning</div>
+              <p class="timeline-desc">Certified in Advanced Web Development, Asynchronous Python Architecture, Technical SEO Core Web Vitals, and Relational DB Management.</p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============================================
-       CTA STRIP
-       ============================================ -->
-  <div class="cta-strip" id="cta-strip">
-    <div class="container">
-      <div class="section-tag" style="margin: 0 auto 20px; display:table;">Let's Collaborate</div>
-      <h2 class="cta-strip-title">Ready to Build Something <span class="gold-text">Exceptional</span>?</h2>
-      <p class="cta-strip-sub">I'm currently open to enterprise web architecture projects, consulting, and full-time executive opportunities.</p>
-      <div class="cta-strip-btns">
-        <a href="#contact" class="btn btn-primary">
-          <i class="fa-solid fa-paper-plane"></i> Get In Touch
-        </a>
-        <a href="assets/data/Rikkardo L. Tobing - Resume.pdf" target="_blank" class="btn btn-outline" download>
-          <i class="fa-solid fa-download"></i> Download CV / Brief
-        </a>
+  <!-- ==========================================================================
+       CONTACT SECTION (GRAYSCALE SIGNATURE 3-CARD CONTACT + EXECUTIVE FORM)
+       ========================================================================== -->
+  <section class="contact-section" id="contact">
+    <div class="container px-4 px-lg-5">
+      
+      <div class="text-center mb-5">
+        <span class="section-tag"><i class="fa-regular fa-paper-plane"></i> Direct Channel</span>
+        <h2 class="section-title">Initiate <span class="gold-text">Executive Contact</span></h2>
+        <p class="section-subtitle">I am open to enterprise web architecture consulting, digital event platform development, and executive IT leadership roles.</p>
       </div>
-    </div>
-  </div>
 
-  <!-- ============================================
+      <!-- ── Grayscale Iconic 3 Contact Info Cards ── -->
+      <div class="row g-4 mb-4">
+        
+        <!-- Card 1: Email -->
+        <div class="col-md-4">
+          <div class="contact-card">
+            <div class="contact-card-icon"><i class="fa-solid fa-envelope"></i></div>
+            <h5>Email Direct</h5>
+            <p class="mb-0"><a href="mailto:rikkardotobing1@gmail.com">rikkardotobing1@gmail.com</a></p>
+          </div>
+        </div>
+
+        <!-- Card 2: Phone / WhatsApp -->
+        <div class="col-md-4">
+          <div class="contact-card">
+            <div class="contact-card-icon"><i class="fa-brands fa-whatsapp"></i></div>
+            <h5>Phone &amp; WhatsApp</h5>
+            <p class="mb-0"><a href="https://wa.me/6282231745213" target="_blank" rel="noopener noreferrer">+62 822-3174-5213</a></p>
+          </div>
+        </div>
+
+        <!-- Card 3: Location -->
+        <div class="col-md-4">
+          <div class="contact-card">
+            <div class="contact-card-icon"><i class="fa-solid fa-location-dot"></i></div>
+            <h5>Office / Location</h5>
+            <p class="mb-0">Jakarta, Indonesia 🇮🇩</p>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- ── Executive Transmission Form ── -->
+      <div class="row justify-content-center">
+        <div class="col-lg-8">
+          <div class="contact-form-card">
+            <h4 class="mb-4 text-center fw-bold">Send Direct Inquiry</h4>
+            
+            <form id="contactForm">
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="name" class="form-label">Full Name</label>
+                  <input type="text" class="form-control" id="name" placeholder="e.g. Alexander Wright" required />
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">Work Email</label>
+                  <input type="email" class="form-control" id="email" placeholder="e.g. alexander@company.com" required />
+                </div>
+                <div class="col-12">
+                  <label for="subject" class="form-label">Subject</label>
+                  <input type="text" class="form-control" id="subject" placeholder="Project Inquiry / Advisory" />
+                </div>
+                <div class="col-12">
+                  <label for="message" class="form-label">Message / Brief</label>
+                  <textarea class="form-control" id="message" rows="4" placeholder="How can I assist your organization?" required></textarea>
+                </div>
+                <div class="col-12 text-center mt-4">
+                  <button type="submit" class="btn btn-gold w-100 py-3">
+                    <i class="fa-solid fa-paper-plane me-2"></i> Transmit Executive Message
+                  </button>
+                </div>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================================================
        FOOTER
-       ============================================ -->
+       ========================================================================== -->
   <footer>
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-logo">Rikkardo <span>L. Tobing</span></div>
-        <div class="footer-links">
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#skills">Skills</a>
-          <a href="#portfolio">Work</a>
-          <a href="#experience">Journey</a>
-          <a href="#testimonials">Testimonials</a>
-          <a href="#blog">Visual Stories</a>
-          <a href="#contact">Contact</a>
-        </div>
-        <div class="footer-socials">
-          <a href="https://id.linkedin.com/in/rikkardo-l-tobing" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
-          <a href="https://github.com/rikkardochaplin" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
-          <a href="mailto:rikkardotobing1@gmail.com" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
-        </div>
-        <div class="footer-copy">
-          © 2026 <strong>Rikkardo L. Tobing</strong>. All rights reserved. Data &amp; Tech Support Executive | Informa Markets Asia.
-        </div>
+    <div class="container px-4 px-lg-5">
+      <div class="footer-socials">
+        <a href="https://id.linkedin.com/in/rikkardo-l-tobing" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://github.com/rikkardochaplin" target="_blank" rel="noopener noreferrer" class="footer-social-btn" aria-label="GitHub"><i class="fa-brands fa-github"></i></a>
+        <a href="mailto:rikkardotobing1@gmail.com" class="footer-social-btn" aria-label="Email"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+      <div class="footer-copy">
+        © 2026 <strong>Rikkardo L. Tobing</strong>. All rights reserved. Data &amp; Tech Support Executive | Informa Markets Asia.
       </div>
     </div>
   </footer>
 
-  <!-- ============================================
-       ARCHITECTURE & TECHNICAL SHOWCASE MODAL
-       ============================================ -->
-  <div class="arch-modal-backdrop" id="arch-modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="arch-modal-dialog">
-      
-      <!-- Modal Header -->
-      <div class="arch-modal-header">
-        <div class="arch-header-meta">
-          <span class="arch-badge" id="modal-badge"><i class="fa-solid fa-robot"></i> Autonomous AI Platform</span>
-          <h2 class="arch-title" id="modal-title">NexusAgent &amp; PamerAi Ecosystem</h2>
-          <p class="arch-subtitle" id="modal-subtitle">Enterprise Autonomous ReAct AI Agent, Token Observability &amp; Exhibition Intelligence Hub</p>
+  <!-- ==========================================================================
+       TECHNICAL BLUEPRINT ARCHITECTURE MODAL
+       ========================================================================== -->
+  <div class="modal-backdrop-custom" id="arch-modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-dialog-custom">
+      <div class="modal-header-custom">
+        <div>
+          <span class="badge bg-warning text-dark mb-1" id="modal-badge"><i class="fa-solid fa-robot me-1"></i> Autonomous AI</span>
+          <h3 class="h4 mb-1 text-white" id="modal-title">NexusAgent &amp; PamerAi Ecosystem</h3>
+          <p class="small text-muted mb-0" id="modal-subtitle">Enterprise Autonomous ReAct AI Agent</p>
         </div>
-        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal" title="Close (Esc)">
+        <button class="modal-close-btn" id="modal-close-btn" aria-label="Close modal">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
-      <!-- Modal Tabs Navigation -->
-      <div class="arch-modal-tabs" id="modal-tabs">
-        <button class="arch-tab-btn active" data-tab="overview"><i class="fa-solid fa-compass"></i> Overview</button>
-        <button class="arch-tab-btn" data-tab="architecture"><i class="fa-solid fa-sitemap"></i> System Architecture</button>
-        <button class="arch-tab-btn" data-tab="features"><i class="fa-solid fa-bolt"></i> Key Modules</button>
-        <button class="arch-tab-btn" data-tab="specs"><i class="fa-solid fa-code"></i> API &amp; Telemetry</button>
+      <div class="modal-tabs-custom">
+        <button class="modal-tab-btn active" data-tab="overview"><i class="fa-solid fa-compass me-1"></i> Overview</button>
+        <button class="modal-tab-btn" data-tab="architecture"><i class="fa-solid fa-sitemap me-1"></i> Architecture</button>
+        <button class="modal-tab-btn" data-tab="features"><i class="fa-solid fa-bolt me-1"></i> Modules</button>
+        <button class="modal-tab-btn" data-tab="specs"><i class="fa-solid fa-code me-1"></i> API Specs</button>
       </div>
 
-      <!-- Modal Body Content -->
-      <div class="arch-modal-body" id="modal-body">
-        <!-- Content will be dynamically rendered via JavaScript -->
+      <div class="modal-body-custom" id="modal-body">
+        <!-- Injected via JavaScript -->
       </div>
 
-      <!-- Modal Footer -->
-      <div class="arch-modal-footer">
-        <div class="arch-footer-tags" id="modal-footer-tags">
-          <!-- Tags injected dynamically -->
-        </div>
-        <button class="btn btn-outline modal-close-btn-bottom" id="modal-close-btn-bottom" type="button">Close View</button>
+      <div class="p-3 border-top border-secondary d-flex justify-content-between align-items-center bg-black bg-opacity-40">
+        <div id="modal-footer-tags"></div>
+        <button class="btn btn-outline-gold" id="modal-close-btn-bottom">Close View</button>
       </div>
-
     </div>
   </div>
 
-  <script src="js/main.js?v=3.5"></script>
+  <!-- ==========================================================================
+       FULLSCREEN PHOTOGRAPHY LIGHTBOX MODAL
+       ========================================================================== -->
+  <div class="modal-backdrop-custom" id="lightbox-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-dialog-custom lightbox-dialog-custom">
+      <div class="modal-header-custom">
+        <div>
+          <h4 class="h5 mb-1 text-white" id="lightbox-title">Photo Title</h4>
+          <div class="small text-muted" id="lightbox-meta"></div>
+        </div>
+        <button class="modal-close-btn" id="lightbox-close-btn" aria-label="Close lightbox">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="lightbox-media-container">
+        <button class="lightbox-nav-btn lightbox-nav-prev" id="lightbox-prev-btn" aria-label="Previous photo">
+          <i class="fa-solid fa-chevron-left"></i>
+        </button>
+        <img src="" alt="" class="lightbox-img-custom" id="lightbox-img" />
+        <button class="lightbox-nav-btn lightbox-nav-next" id="lightbox-next-btn" aria-label="Next photo">
+          <i class="fa-solid fa-chevron-right"></i>
+        </button>
+      </div>
+
+      <div class="p-3 border-top border-secondary d-flex justify-content-between align-items-center bg-black bg-opacity-50">
+        <span class="small text-muted"><i class="fa-solid fa-camera me-1 text-warning"></i> Captured by Rikkardo L. Tobing</span>
+        <a href="article.html" id="lightbox-story-link" class="btn btn-gold py-2 px-3 fs-6">
+          <i class="fa-solid fa-book-open me-1"></i> Read Full Story
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap 5.3.3 JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom Application JS -->
+  <script src="js/main.js?v=5.0"></script>
 </body>
 
 </html>
