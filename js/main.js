@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initNavbarShrink();
   initScrollProgress();
   initBackToTop();
+  initQuickDock();
   initPortfolioFilter();
   initPhotoGalleryFilter();
   initPhotoLightbox();
@@ -282,7 +283,7 @@ function initPhotoLightbox() {
     if (titleEl) titleEl.textContent = item.title;
     if (metaEl) {
       metaEl.innerHTML = `
-        <span class="me-3"><i class="fa-solid fa-location-dot" style="color:var(--accent-gold);"></i> ${item.location}</span>
+        <span class="me-3"><i class="fa-solid fa-location-dot" style="color:var(--accent-blue-light);"></i> ${item.location}</span>
         <span class="me-3"><i class="fa-solid fa-camera" style="color:var(--accent-cyan);"></i> ${item.category}</span>
         <span><i class="fa-solid fa-calendar" style="color:var(--accent-indigo);"></i> ${item.date}</span>
       `;
@@ -345,10 +346,10 @@ function initCardTilt() {
       const centerX = rect.width / 2;
       const centerY = rect.height / 2;
 
-      const rotateX = ((y - centerY) / centerY) * -4;
-      const rotateY = ((x - centerX) / centerX) * 4;
+      const rotateX = ((y - centerY) / centerY) * -3;
+      const rotateY = ((x - centerX) / centerX) * 3;
 
-      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-6px)`;
+      card.style.transform = `perspective(1000px) rotateX(${rotateX.toFixed(2)}deg) rotateY(${rotateY.toFixed(2)}deg) translateY(-4px)`;
     });
 
     card.addEventListener('mouseleave', () => {
@@ -359,25 +360,34 @@ function initCardTilt() {
 
 /* ── 8. Theme Switcher (Dark / Light Mode) ── */
 function initThemeToggle() {
-  const themeToggle = document.getElementById('theme-toggle');
-  const themeIcon = document.getElementById('theme-icon');
-  if (!themeToggle || !themeIcon) return;
+  const toggleButtons = document.querySelectorAll('.theme-toggle-btn');
+  if (!toggleButtons.length) return;
+
+  const updateIcons = (isLight) => {
+    toggleButtons.forEach(btn => {
+      const icon = btn.querySelector('i');
+      if (icon) {
+        icon.className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
+      }
+    });
+  };
 
   const savedTheme = localStorage.getItem('executive_theme');
   if (savedTheme === 'light') {
     document.body.classList.add('light-mode');
-    themeIcon.className = 'fa-solid fa-sun';
+    updateIcons(true);
   } else {
     document.body.classList.remove('light-mode');
-    themeIcon.className = 'fa-solid fa-moon';
+    updateIcons(false);
   }
 
-  themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('light-mode');
-    const isLight = document.body.classList.contains('light-mode');
-
-    themeIcon.className = isLight ? 'fa-solid fa-sun' : 'fa-solid fa-moon';
-    localStorage.setItem('executive_theme', isLight ? 'light' : 'dark');
+  toggleButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+      const isLight = document.body.classList.contains('light-mode');
+      updateIcons(isLight);
+      localStorage.setItem('executive_theme', isLight ? 'light' : 'dark');
+    });
   });
 }
 
@@ -483,90 +493,85 @@ function initArchitectureModal() {
   let currentTabKey = 'overview';
 
   const projectsData = {
+    // ── 1. NexusAgent & PamerAi ──
     'nexusagent': {
-      badge: '<i class="fa-solid fa-robot me-1"></i> Autonomous AI Platform • AI Agent',
+      badge: '<i class="fa-solid fa-robot me-1"></i> Autonomous AI Platform',
       title: 'NexusAgent & PamerAi Ecosystem',
-      subtitle: 'Autonomous ReAct Multi-Step Agent, Real-Time Token & Cost Observability Platform, Desktop Developer Copilot & B2B Exhibition Intelligence',
-      tags: ['FastAPI / Python 3.10+', 'ReAct Agent Loop', 'Token Financial Meter ($/Rp)', 'SQLite / SQLAlchemy 2.0', 'Chart.js Analytics', 'WhatsApp Bot Gateway', 'psutil / Win32', 'Tkinter GUI'],
+      subtitle: 'Autonomous ReAct Multi-Step Agent, Real-Time Token & Cost Observability Platform, Developer Copilot & B2B Exhibition Intelligence',
+      tags: ['FastAPI / Python 3.10+', 'ReAct Agent Loop', 'Token Cost Meter ($/Rp)', 'SQLite / SQLAlchemy 2.0', 'Chart.js Analytics', 'WhatsApp Bot Gateway', 'psutil / Win32', 'Tkinter GUI'],
       tabs: {
         'overview': `
           <div class="mb-4">
-            <h5 class="text-warning mb-2"><i class="fa-solid fa-compass me-2"></i> Executive Overview</h5>
-            <p><strong>NexusAgent &amp; PamerAi Ecosystem</strong> adalah platform kecerdasan buatan enterprise end-to-end yang mengotomasi alur kerja developer, memberikan transparansi 100% atas biaya dan konsumsi token LLM multi-mata uang ($ USD &amp; Rp IDR), serta menyediakan layanan informasi pameran B2B omnichannel berbasis PDF RAG.</p>
+            <h5 class="text-info mb-2"><i class="fa-solid fa-compass me-2"></i> System Overview</h5>
+            <p><strong>NexusAgent &amp; PamerAi</strong> is an end-to-end AI platform built to streamline engineering workflows, provide granular transparency over LLM token consumption in dual currencies (USD $ and IDR Rp), and serve automated event intelligence to trade visitors via WhatsApp and PDF RAG retrieval.</p>
           </div>
-
           <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
             <img src="assets/images/project-nexusagent.png" alt="NexusAgent Web Dashboard" class="w-100" />
-            <div class="p-2 bg-dark text-center text-muted small"><i class="fa-solid fa-chart-line me-1"></i> Real-Time Glassmorphic Observability Web Dashboard &amp; Token Analytics (Chart.js &amp; FastAPI)</div>
+            <div class="p-2 bg-dark text-center text-muted small"><i class="fa-solid fa-chart-line me-1"></i> Real-Time Observability Web Dashboard &amp; Token Financial Analytics (Chart.js &amp; FastAPI)</div>
           </div>
-
           <div class="row g-3">
             <div class="col-md-6">
               <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
-                <div class="text-warning fw-bold small mb-1"><i class="fa-solid fa-brain me-1"></i> Multi-Step Autonomous Reasoning</div>
-                <div class="h6 mb-2">ReAct Agent Execution Loop</div>
-                <p class="small text-muted mb-0">Mengurai instruksi kompleks menjadi sub-tugas, evaluasi bertahap (*self-reflection*), dan auto error recovery.</p>
+                <div class="text-info fw-bold small mb-1"><i class="fa-solid fa-brain me-1"></i> Autonomous Reasoning</div>
+                <div class="h6 mb-2">ReAct Execution Loop</div>
+                <p class="small text-muted mb-0">Breaks down complex user goals into manageable subtasks with self-reflection, step verification, and automatic error recovery.</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
-                <div class="text-warning fw-bold small mb-1"><i class="fa-solid fa-calculator me-1"></i> Financial Observability</div>
+                <div class="text-info fw-bold small mb-1"><i class="fa-solid fa-calculator me-1"></i> Financial Observability</div>
                 <div class="h6 mb-2">USD ($) &amp; IDR (Rp) Cost Meter</div>
-                <p class="small text-muted mb-0">Pelacakan token presisi per panggilan API dengan katalog harga dinamis dan visualisasi deret waktu Chart.js.</p>
+                <p class="small text-muted mb-0">Tracks prompt and completion tokens per API request with live currency conversion and interactive time-series charts.</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
-                <div class="text-warning fw-bold small mb-1"><i class="fa-solid fa-laptop-code me-1"></i> Full-Stack DX Copilot</div>
+                <div class="text-info fw-bold small mb-1"><i class="fa-solid fa-laptop-code me-1"></i> Developer Copilot</div>
                 <div class="h6 mb-2">Live @ai File Watcher</div>
-                <p class="small text-muted mb-0">Memantau komentar kode secara real-time dan mengeksekusi sintesis kode otomatis disertai CLI terminal sandbox.</p>
+                <p class="small text-muted mb-0">Monitors code comments in real time, generates tested implementations, and provides a sandboxed terminal execution runner.</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
-                <div class="text-warning fw-bold small mb-1"><i class="fa-solid fa-comments me-1"></i> Omnichannel Intelligence</div>
-                <div class="h6 mb-2">PamerAi &amp; WhatsApp Bot</div>
-                <p class="small text-muted mb-0">Grounding 7 klaster industri pameran Informa Markets dengan PDF RAG reader dan WhatsApp 2-way bot.</p>
+                <div class="text-info fw-bold small mb-1"><i class="fa-solid fa-comments me-1"></i> Omnichannel Support</div>
+                <div class="h6 mb-2">PamerAi WhatsApp Assistant</div>
+                <p class="small text-muted mb-0">Grounds inquiries across Informa Markets exhibition portfolios using vector-indexed PDF floorplans, schedules, and exhibitor lists.</p>
               </div>
             </div>
           </div>
         `,
         'architecture': `
           <div class="mb-4">
-            <h5 class="text-warning mb-2"><i class="fa-solid fa-sitemap me-2"></i> High-Level Multi-Tier Architecture</h5>
-            <p>Arsitektur modular berlapis memisahkan antarmuka pengguna, API gateway asinkron, agen penalaran ReAct, eksekusi tool aman, observabilitas token, dan gateway provider LLM.</p>
+            <h5 class="text-info mb-2"><i class="fa-solid fa-sitemap me-2"></i> High-Level System Architecture</h5>
+            <p>A decoupled multi-tier architecture isolating user interfaces, asynchronous API routing, reasoning agent loops, tool sandboxing, and token metric persistence.</p>
           </div>
-
           <div class="d-flex flex-column gap-3">
             <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary d-flex gap-3 align-items-center">
-              <div class="fs-3 text-warning"><i class="fa-solid fa-desktop"></i></div>
+              <div class="fs-3 text-info"><i class="fa-solid fa-desktop"></i></div>
               <div>
-                <h6 class="mb-1 text-white">1. Client Interfaces &amp; Channels Layer</h6>
-                <p class="small text-muted mb-0">Modern Glassmorphism Web Dashboard • Standalone Desktop GUI (Tkinter) • Global Hotkey Floating Copilot (Ctrl+Shift+A) • Inline File Watcher (@ai) • WhatsApp Bot Engine.</p>
+                <h6 class="mb-1 text-white">1. Client Interfaces &amp; Channels</h6>
+                <p class="small text-muted mb-0">Glassmorphism Web Dashboard • Standalone Desktop GUI (Tkinter) • Global Shortcut Overlay (Ctrl+Shift+A) • Inline Code Watcher • WhatsApp Webhook Gateway.</p>
               </div>
             </div>
-
             <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary d-flex gap-3 align-items-center">
-              <div class="fs-3 text-info"><i class="fa-solid fa-bolt"></i></div>
+              <div class="fs-3 text-primary"><i class="fa-solid fa-bolt"></i></div>
               <div>
                 <h6 class="mb-1 text-white">2. Asynchronous API Gateway (FastAPI &amp; Uvicorn)</h6>
-                <p class="small text-muted mb-0">High-performance ASGI runtime • Lifespan database session manager • Pydantic v2 schemas • Asynchronous event streams.</p>
+                <p class="small text-muted mb-0">High-performance ASGI runtime with lifespan database connection pooling, Pydantic v2 data validation, and Server-Sent Events (SSE).</p>
               </div>
             </div>
-
             <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary d-flex gap-3 align-items-center">
-              <div class="fs-3 text-primary"><i class="fa-solid fa-brain"></i></div>
+              <div class="fs-3 text-info"><i class="fa-solid fa-brain"></i></div>
               <div>
                 <h6 class="mb-1 text-white">3. Core NexusAgent Intelligence Engine</h6>
-                <p class="small text-muted mb-0">ReAct Loop (Thought ➡️ Action ➡️ Observation ➡️ Answer) • Autonomous Goal Planner &amp; Decomposer • Long-Term Persistent Semantic Memory.</p>
+                <p class="small text-muted mb-0">ReAct Cycle (Thought ➔ Action ➔ Observation ➔ Synthesis) with autonomous goal planning, long-term memory retrieval, and retry logic.</p>
               </div>
             </div>
-
             <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary d-flex gap-3 align-items-center">
               <div class="fs-3 text-success"><i class="fa-solid fa-toolbox"></i></div>
               <div>
-                <h6 class="mb-1 text-white">4. Dynamic Tool Registry (Safe Execution Sandbox)</h6>
-                <p class="small text-muted mb-0">Fullstack File I/O &amp; Git Diff • Whitelisted CLI Terminal Sandbox • Windows WMI &amp; psutil Hardware Telemetry • PamerAi PDF Extraction &amp; RAG.</p>
+                <h6 class="mb-1 text-white">4. Tool Execution Sandbox</h6>
+                <p class="small text-muted mb-0">File I/O diff engine, whitelisted shell runner, system telemetry (psutil/Win32), and document vector search indexing.</p>
               </div>
             </div>
           </div>
@@ -575,47 +580,43 @@ function initArchitectureModal() {
           <div class="row g-3">
             <div class="col-md-6">
               <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
-                <h6 class="text-warning mb-2"><i class="fa-solid fa-list-check me-2"></i> 1. Autonomous ReAct Engine</h6>
-                <p class="small text-muted mb-0">Menerapkan paradigma Reasoning + Acting. Agen merencanakan urutan aksi, memvalidasi hasil observasi, dan melakukan auto-recovery jika instruksi gagal dieksekusi.</p>
+                <h6 class="text-info mb-2"><i class="fa-solid fa-list-check me-2"></i> 1. Autonomous ReAct Engine</h6>
+                <p class="small text-muted mb-0">Implements the Reasoning + Acting pattern, evaluating execution results step-by-step to achieve multi-phase engineering objectives autonomously.</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
-                <h6 class="text-warning mb-2"><i class="fa-solid fa-coins me-2"></i> 2. Token &amp; Cost Metering</h6>
-                <p class="small text-muted mb-0">Menghitung Prompt Tokens, Completion Tokens, Total Tokens, dan Latensi (ms) per request. Menghasilkan estimasi biaya USD ($) dan Rupiah (Rp) instan.</p>
+                <h6 class="text-info mb-2"><i class="fa-solid fa-coins me-2"></i> 2. Token &amp; Cost Metering</h6>
+                <p class="small text-muted mb-0">Measures prompt tokens, completion tokens, latency (ms), and cost per call, rendering instant conversion rates in USD and IDR.</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
-                <h6 class="text-warning mb-2"><i class="fa-solid fa-eye me-2"></i> 3. Real-Time File Watcher</h6>
-                <p class="small text-muted mb-0">Cukup mengetik <code># @ai buat fungsi validasi email</code> dan sistem langsung mengganti komentar tersebut dengan kode hasil inferensi AI secara live.</p>
+                <h6 class="text-info mb-2"><i class="fa-solid fa-eye me-2"></i> 3. Live File Watcher</h6>
+                <p class="small text-muted mb-0">Type <code># @ai generate email validator</code> in your source code, and the background watcher immediately synthesizes working code in place.</p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100">
-                <h6 class="text-warning mb-2"><i class="fa-brands fa-whatsapp me-2"></i> 4. Exhibition WhatsApp Bot</h6>
-                <p class="small text-muted mb-0">Knowledge base ter-grounding untuk 7 klaster industri pameran B2B PT Pamerindo Indonesia dengan PDF RAG extraction dan bridge WhatsApp 2 arah.</p>
+                <h6 class="text-info mb-2"><i class="fa-brands fa-whatsapp me-2"></i> 4. Event WhatsApp Assistant</h6>
+                <p class="small text-muted mb-0">Grounds domain knowledge for 7 exhibition industry clusters at PT Pamerindo Indonesia with PDF RAG search and two-way messaging.</p>
               </div>
             </div>
           </div>
         `,
         'specs': `
           <div class="mb-3">
-            <h5 class="text-warning mb-2"><i class="fa-solid fa-code me-2"></i> Key REST API Endpoints</h5>
+            <h5 class="text-info mb-2"><i class="fa-solid fa-code me-2"></i> Key REST API Endpoints</h5>
             <div class="table-responsive">
               <table class="table table-dark table-striped table-bordered small">
                 <thead>
-                  <tr>
-                    <th>Method</th>
-                    <th>Endpoint</th>
-                    <th>Fungsi &amp; Deskripsi</th>
-                  </tr>
+                  <tr><th>Method</th><th>Endpoint</th><th>Description</th></tr>
                 </thead>
                 <tbody>
-                  <tr><td><span class="badge bg-success">POST</span></td><td><code>/api/agent/chat</code></td><td>Eksekusi ReAct agent dengan reasoning step log &amp; tool execution</td></tr>
-                  <tr><td><span class="badge bg-success">POST</span></td><td><code>/api/agent/autonomous</code></td><td>Eksekusi misi otonom dengan multi-step goal decomposition</td></tr>
-                  <tr><td><span class="badge bg-primary">GET</span></td><td><code>/api/stats/overview</code></td><td>Ringkasan KPI Token (Total Tokens, Biaya USD/IDR, Total Calls, Latensi)</td></tr>
-                  <tr><td><span class="badge bg-primary">GET</span></td><td><code>/api/stats/charts</code></td><td>Data deret waktu pemakaian token &amp; distribusi pangsa model untuk Chart.js</td></tr>
+                  <tr><td><span class="badge bg-success">POST</span></td><td><code>/api/agent/chat</code></td><td>Executes single or multi-turn reasoning steps with tool calls</td></tr>
+                  <tr><td><span class="badge bg-success">POST</span></td><td><code>/api/agent/autonomous</code></td><td>Launches goal decomposition for complex autonomous missions</td></tr>
+                  <tr><td><span class="badge bg-primary">GET</span></td><td><code>/api/stats/overview</code></td><td>Retrieves KPI metrics: token counts, total costs ($/Rp), and latency averages</td></tr>
+                  <tr><td><span class="badge bg-primary">GET</span></td><td><code>/api/stats/charts</code></td><td>Provides time-series usage datasets and model distribution stats for Chart.js</td></tr>
                 </tbody>
               </table>
             </div>
@@ -623,16 +624,18 @@ function initArchitectureModal() {
         `
       }
     },
+
+    // ── 2. Orion ERP ──
     'orion-erp': {
       badge: '<i class="fa-solid fa-cubes me-1"></i> Enterprise Architecture • ERP System',
-      title: 'Orion ERP IBM iSeries Integrated System',
+      title: 'Orion ERP & IBM iSeries Integrated System',
       subtitle: 'Modern Web Front-End Bridge, IBM AS/400 DB2 Connectivity & Multi-Department Automation for Enterprise Scale Operations',
       tags: ['IBM AS/400 DB2', 'PHP Enterprise', 'REST API Bridge', 'Oracle SQL', 'Bootstrap 5', 'Role-Based Access Control', 'Automated Invoicing'],
       tabs: {
         'overview': `
           <div class="mb-4">
-            <h5 class="text-warning mb-2"><i class="fa-solid fa-compass me-2"></i> Executive Overview</h5>
-            <p><strong>Orion ERP IBM iSeries System</strong> adalah solusi modernisasi enterprise yang menjembatani sistem inti lawas <em>IBM AS/400 (iSeries DB2)</em> dengan antarmuka web modern yang intuitif, aman, dan responsif. Sistem ini menyatukan alur kerja Finance, Procurement, Inventory Warehouse, dan Sales Order ke dalam satu panel terpadu.</p>
+            <h5 class="text-info mb-2"><i class="fa-solid fa-compass me-2"></i> System Overview</h5>
+            <p><strong>Orion ERP</strong> is an enterprise modernization solution connecting legacy <em>IBM AS/400 (iSeries DB2)</em> backends with modern, secure, and intuitive web interfaces. It unifies financial accounting, procurement workflows, warehouse inventory, and sales order fulfillment into a centralized dashboard.</p>
           </div>
           <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
             <img src="assets/images/project-orion-erp.png" alt="Orion ERP Dashboard" class="w-100" />
@@ -641,21 +644,23 @@ function initArchitectureModal() {
         `,
         'architecture': `
           <div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary mb-3">
-            <h6 class="text-warning"><i class="fa-solid fa-server me-2"></i> IBM DB2 Real-Time ODBC Bridge</h6>
-            <p class="small text-muted mb-0">Koneksi langsung dua arah ke database IBM AS/400 tanpa mengorbankan integritas data transaksional ACID.</p>
+            <h6 class="text-info"><i class="fa-solid fa-server me-2"></i> IBM DB2 Real-Time ODBC Bridge</h6>
+            <p class="small text-muted mb-0">Direct bidirectional integration with IBM AS/400 DB2 tables preserving strict ACID transactional integrity, role-based permissions, and audit logs.</p>
           </div>
         `,
         'features': `
           <div class="row g-3">
-            <div class="col-md-6"><div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary"><h6 class="text-warning">Finance &amp; General Ledger</h6><p class="small text-muted mb-0">Otomatisasi jurnal akuntansi, penutupan buku akhir bulan otomatis, dan laporan laba rugi multi-cabang.</p></div></div>
-            <div class="col-md-6"><div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary"><h6 class="text-warning">Procurement &amp; Warehouse</h6><p class="small text-muted mb-0">Siklus PR ➡️ PO ➡️ GR dengan multi-tier approval pimpinan via email alert dan FIFO/LIFO tracking.</p></div></div>
+            <div class="col-md-6"><div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100"><h6 class="text-info">Finance &amp; General Ledger</h6><p class="small text-muted mb-0">Automated journal entries, month-end ledger closing, and multi-branch P&amp;L reporting.</p></div></div>
+            <div class="col-md-6"><div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100"><h6 class="text-info">Procurement &amp; Warehouse</h6><p class="small text-muted mb-0">End-to-end PR ➔ PO ➔ GR workflow with multi-level executive sign-offs and FIFO/LIFO tracking.</p></div></div>
           </div>
         `,
         'specs': `
-          <p class="small text-muted">Kompatibel dengan IBM DB2 for i (AS/400), PHP 8.2+, Redis session caching, dan LDAP Single Sign-On.</p>
+          <p class="small text-muted">Compatible with IBM DB2 for i (AS/400), PHP 8.2+, Redis session caching, and LDAP/SSO authentication.</p>
         `
       }
     },
+
+    // ── 3. CV Examiner AI ──
     'cv-examiner': {
       badge: '<i class="fa-solid fa-file-lines me-1"></i> AI Recruiting Platform • SaaS',
       title: 'CV Examiner AI Pro Platform',
@@ -664,15 +669,29 @@ function initArchitectureModal() {
       tabs: {
         'overview': `
           <div class="mb-4">
-            <h5 class="text-warning mb-2"><i class="fa-solid fa-compass me-2"></i> Executive Overview</h5>
-            <p><strong>CV Examiner AI Pro</strong> adalah platform evaluasi rekrutmen berbasis AI yang menganalisis resume ribuan kandidat secara otomatis. Sistem membaca struktur teks CV dalam format PDF maupun DOCX, mencocokkannya dengan kualifikasi lowongan pekerjaan (*Job Description*), serta menghitung skor kecocokan semantik ATS.</p>
+            <h5 class="text-info mb-2"><i class="fa-solid fa-compass me-2"></i> System Overview</h5>
+            <p><strong>CV Examiner AI Pro</strong> is an intelligent talent evaluation platform designed to parse, analyze, and score candidate resumes at scale. It extracts structured text from PDF and DOCX files, benchmarks experience against job descriptions, and provides ATS keyword gap analysis along with STAR-method improvement suggestions.</p>
           </div>
           <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
             <img src="assets/images/project-cv-examiner.png" alt="CV Examiner AI Showcase" class="w-100" />
           </div>
+        `,
+        'architecture': `
+          <p class="small text-muted">Leverages FastAPI async processing, token-budgeted prompt engineering, and semantic distance embeddings to evaluate qualifications without bias.</p>
+        `,
+        'features': `
+          <div class="row g-3">
+            <div class="col-md-6"><div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100"><h6 class="text-info">ATS Scoring Engine</h6><p class="small text-muted mb-0">Instant scoring of keyword density, section organization, and quantifiable achievement metrics.</p></div></div>
+            <div class="col-md-6"><div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100"><h6 class="text-info">STAR Rewriter</h6><p class="small text-muted mb-0">Transforming bullet points into structured Situation, Task, Action, and Result impact statements.</p></div></div>
+          </div>
+        `,
+        'specs': `
+          <p class="small text-muted">Supports multi-format parsing, JSON report exports, and candidate comparison matrices.</p>
         `
       }
     },
+
+    // ── 4. IoT Remote Hub ──
     'monitor-tablet': {
       badge: '<i class="fa-solid fa-tablet-screen-button me-1"></i> IoT Architecture • Remote Telemetry',
       title: 'Enterprise IoT & Multi-Device Monitoring Hub',
@@ -681,12 +700,307 @@ function initArchitectureModal() {
       tabs: {
         'overview': `
           <div class="mb-4">
-            <h5 class="text-warning mb-2"><i class="fa-solid fa-compass me-2"></i> Executive Overview</h5>
-            <p><strong>Enterprise IoT &amp; Multi-Device Remote Monitoring System</strong> adalah platform pemantauan perangkat keras terdistribusi yang dirancang untuk memantau armada tablet pameran, perangkat POS, dan workstation operasional secara real-time melalui koneksi WebSocket asinkron dengan latensi sub-detik.</p>
+            <h5 class="text-info mb-2"><i class="fa-solid fa-compass me-2"></i> System Overview</h5>
+            <p><strong>Enterprise IoT &amp; Multi-Device Remote Monitoring Hub</strong> is a distributed hardware telemetry system built to monitor exhibition tablets, POS terminals, and operational workstations in real time over low-latency asynchronous WebSockets.</p>
           </div>
           <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
             <img src="assets/images/project-monitor-tablet.png" alt="Enterprise IoT Dashboard" class="w-100" />
           </div>
+        `,
+        'architecture': `
+          <p class="small text-muted">Lightweight agent installed on Android and Windows endpoints streaming CPU, RAM, battery, network, and app health to a central FastAPI WebSocket server.</p>
+        `,
+        'features': `
+          <div class="row g-3">
+            <div class="col-md-6"><div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100"><h6 class="text-info">Live Fleet Matrix</h6><p class="small text-muted mb-0">Instant status overview of all 30+ devices deployed across exhibition halls with battery and network alerts.</p></div></div>
+            <div class="col-md-6"><div class="p-3 rounded-3 bg-black bg-opacity-50 border border-secondary h-100"><h6 class="text-info">Remote Action Dispatch</h6><p class="small text-muted mb-0">Push config updates, trigger kiosk reload, or reboot remote devices with 1-click admin controls.</p></div></div>
+          </div>
+        `,
+        'specs': `
+          <p class="small text-muted">Sub-500ms broadcast latency, SQLite history logging, and automated Telegram/Email failure alerts.</p>
+        `
+      }
+    },
+
+    // ── 5. PT Pamerindo Indonesia ──
+    'pamerindo': {
+      badge: '<i class="fa-solid fa-star me-1"></i> Flagship Corporate Portal',
+      title: 'PT Pamerindo Indonesia Corporate Portal',
+      subtitle: 'Central Digital Gateway for Indonesia’s Premier B2B Exhibition Organizer (Informa Markets Asia)',
+      tags: ['WordPress Enterprise', 'Custom PHP 8.x', 'Technical SEO Schema', 'Multilingual CMS', '99.9% Uptime SLA', 'Multi-Region CDN'],
+      tabs: {
+        'overview': `
+          <div class="mb-4">
+            <h5 class="text-info mb-2"><i class="fa-solid fa-compass me-2"></i> Corporate Showcase</h5>
+            <p><strong>PT Pamerindo Indonesia</strong> is the corporate gateway connecting 200+ global trade exhibitions and over 500,000 yearly trade visitors across Southeast Asia. Designed for exceptional load speeds, high security, and high-volume event registrations.</p>
+          </div>
+          <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
+            <img src="assets/images/project-pamerindo.png" alt="PT Pamerindo Indonesia" class="w-100" />
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <span class="small text-muted">Status: Live in Production</span>
+            <a href="https://www.pamerindo.com" target="_blank" rel="noopener noreferrer" class="btn btn-blue py-2 px-3">Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+          </div>
+        `,
+        'architecture': `
+          <p class="small text-muted">Engineered on a secure WordPress Enterprise stack with Redis caching, Cloudflare CDN, JSON-LD structured schemas, and GDPR-compliant visitor tracking.</p>
+        `
+      }
+    },
+
+    // ── 6. Food & Hospitality Indonesia ──
+    'fhi': {
+      badge: '<i class="fa-solid fa-utensils me-1"></i> B2B Trade Exhibition',
+      title: 'Food & Hospitality Indonesia (FHI)',
+      subtitle: 'Premier International Exhibition Platform for F&B and HoReCa Sectors (JIEXPO Kemayoran Jakarta)',
+      tags: ['WordPress Multisite', 'Exhibitor Matchmaking', 'Floorplan Engine', 'Lead Capture API', 'High Traffic Tuning'],
+      tabs: {
+        'overview': `
+          <div class="mb-4">
+            <h5 class="text-info mb-2"><i class="fa-solid fa-compass me-2"></i> Event Overview</h5>
+            <p><strong>Food &amp; Hospitality Indonesia (FHI)</strong> gathers over 40,000 trade attendees and 800+ international exhibitors. The portal features interactive exhibitor directories, seminar registration, and automated VIP badges.</p>
+          </div>
+          <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
+            <img src="assets/images/project-fhi.png" alt="FHI" class="w-100" />
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <span class="small text-muted">JIEXPO Jakarta • 40,000+ Trade Attendees</span>
+            <a href="https://www.foodhospitalityindonesia.com" target="_blank" rel="noopener noreferrer" class="btn btn-blue py-2 px-3">Visit Live Platform <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+          </div>
+        `
+      }
+    },
+
+    // ── 7. Lab Indonesia ──
+    'labindo': {
+      badge: '<i class="fa-solid fa-flask me-1"></i> Scientific Trade Exhibition',
+      title: 'Lab Indonesia',
+      subtitle: 'Southeast Asia’s Leading Exhibition for Laboratory Equipment & Scientific Instrumentation (ICE BSD)',
+      tags: ['CMS Architecture', 'Searchable Directory', 'Technical SEO', 'Visitor Analytics', 'Bilingual Portal'],
+      tabs: {
+        'overview': `
+          <div class="mb-4">
+            <h5 class="text-info mb-2"><i class="fa-solid fa-compass me-2"></i> Event Overview</h5>
+            <p><strong>Lab Indonesia</strong> is the benchmark exhibition for scientific instrumentation in Southeast Asia, connecting over 22,000 researchers, lab managers, and global manufacturers.</p>
+          </div>
+          <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
+            <img src="assets/images/project-labindo.png" alt="Lab Indonesia" class="w-100" />
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <span class="small text-muted">ICE BSD • 22,000+ Attendees</span>
+            <a href="https://www.lab-indo.com" target="_blank" rel="noopener noreferrer" class="btn btn-blue py-2 px-3">Visit Live Platform <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+          </div>
+        `
+      }
+    },
+
+    // ── 8. Food, Hotel & Tourism Bali ──
+    'fhtbali': {
+      badge: '<i class="fa-solid fa-hotel me-1"></i> Hospitality & Tourism Trade',
+      title: 'Food, Hotel & Tourism Bali (FHTB)',
+      subtitle: 'Premier International Hospitality and Resort Trade Platform (BNDCC Nusa Dua Bali)',
+      tags: ['WordPress Enterprise', 'Responsive UX', 'Speed Tuning', 'Asia-Pacific Hub', 'Lead Funnel'],
+      tabs: {
+        'overview': `
+          <div class="mb-4">
+            <h5 class="text-info mb-2"><i class="fa-solid fa-compass me-2"></i> Event Overview</h5>
+            <p><strong>FHT Bali</strong> serves as the eastern Indonesian and Asia-Pacific hub for hospitality procurement, connecting luxury resort operators and culinary experts with global food &amp; hotel tech brands.</p>
+          </div>
+          <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
+            <img src="assets/images/project-fhtbali.png" alt="FHT Bali" class="w-100" />
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <span class="small text-muted">BNDCC Bali • Asia-Pacific Hub</span>
+            <a href="https://www.fhtbali.com" target="_blank" rel="noopener noreferrer" class="btn btn-blue py-2 px-3">Visit Live Platform <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+          </div>
+        `
+      }
+    },
+
+    // ── 9. Cosmobeauté Indonesia ──
+    'cosmobeaute': {
+      badge: '<i class="fa-solid fa-spa me-1"></i> Beauty & Aesthetic B2B',
+      title: 'Cosmobeauté Indonesia',
+      subtitle: 'Indonesia’s Largest B2B Beauty, Aesthetic Technology & Salon Distribution Exhibition Portal (ICE BSD)',
+      tags: ['WordPress Customization', 'Lead Capture Engine', 'B2B Directory', 'Exhibitor Matchmaking'],
+      tabs: {
+        'overview': `
+          <div class="mb-4">
+            <h5 class="text-info mb-2"><i class="fa-solid fa-compass me-2"></i> Event Overview</h5>
+            <p><strong>Cosmobeauté Indonesia</strong> connects aesthetic medical specialists, spa owners, and beauty distributors with international brands and equipment manufacturers.</p>
+          </div>
+          <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
+            <img src="assets/images/project-cosmobeaute.png" alt="Cosmobeaute" class="w-100" />
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <span class="small text-muted">ICE BSD • Aesthetic Tech Hub</span>
+            <a href="https://www.cosmobeauteasia.com/indonesia/" target="_blank" rel="noopener noreferrer" class="btn btn-blue py-2 px-3">Visit Live Platform <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+          </div>
+        `
+      }
+    },
+
+    // ── 10. Vape Fair Indonesia ──
+    'vapefair': {
+      badge: '<i class="fa-solid fa-wind me-1"></i> Trade & Consumer Expo',
+      title: 'Vape Fair Indonesia',
+      subtitle: 'International Alternative Consumer Products & Vaping Industry Exhibition Portal',
+      tags: ['WordPress', 'Age Verification', 'Ticketing Flow', 'B2B Directory', 'High Traffic Tuning'],
+      tabs: {
+        'overview': `
+          <div class="mb-4">
+            <h5 class="text-info mb-2"><i class="fa-solid fa-compass me-2"></i> Event Overview</h5>
+            <p><strong>Vape Fair Indonesia</strong> is an international exhibition portal connecting manufacturers, distributors, and consumers, featuring age-verified digital ticket booking.</p>
+          </div>
+          <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
+            <img src="assets/images/project-vapefair.png" alt="Vape Fair" class="w-100" />
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <span class="small text-muted">Jakarta • Vaping Industry Exhibition</span>
+            <a href="https://www.vapefair.id" target="_blank" rel="noopener noreferrer" class="btn btn-blue py-2 px-3">Visit Live Platform <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+          </div>
+        `
+      }
+    },
+
+    // ── 11. Clouds Fest ──
+    'cloudsfest': {
+      badge: '<i class="fa-solid fa-cloud me-1"></i> Lifestyle & Trade Event',
+      title: 'Clouds Fest',
+      subtitle: 'Dynamic Lifestyle & Trade Showcase Platform for Alternative Consumer Products Across Southeast Asia',
+      tags: ['WordPress CMS', 'Event Engine', 'Mobile Optimization', 'Ticketing API'],
+      tabs: {
+        'overview': `
+          <div class="mb-4">
+            <h5 class="text-info mb-2"><i class="fa-solid fa-compass me-2"></i> Event Overview</h5>
+            <p><strong>Clouds Fest</strong> offers interactive event schedules, musical performer lineups, and exhibitor booths for regional lifestyle trade audiences.</p>
+          </div>
+          <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
+            <img src="assets/images/project-cloudsfest.png" alt="Clouds Fest" class="w-100" />
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <span class="small text-muted">Southeast Asia • Informa Markets</span>
+            <a href="https://www.cloudsfest.com" target="_blank" rel="noopener noreferrer" class="btn btn-blue py-2 px-3">Visit Live Platform <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+          </div>
+        `
+      }
+    },
+
+    // ── 12. Beauté Festival ──
+    'beautefestival': {
+      badge: '<i class="fa-solid fa-heart me-1"></i> Consumer Beauty Festival',
+      title: 'Beauté Festival',
+      subtitle: 'Consumer-Facing Beauty & Wellness Festival Portal with Direct-to-Consumer Activations',
+      tags: ['WordPress', 'D2C Portal', 'Influencer Schedule', 'Brand Activations'],
+      tabs: {
+        'overview': `
+          <div class="mb-4">
+            <h5 class="text-info mb-2"><i class="fa-solid fa-compass me-2"></i> Event Overview</h5>
+            <p><strong>Beauté Festival</strong> brings together beauty enthusiasts, influencers, and leading skincare brands with interactive workshop bookings and live masterclass schedules.</p>
+          </div>
+          <div class="mb-4 rounded-3 overflow-hidden border border-secondary">
+            <img src="assets/images/project-beautefestival.png" alt="Beaute Festival" class="w-100" />
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <span class="small text-muted">Jakarta • Retail &amp; Activations</span>
+            <a href="https://www.beautefestival.com" target="_blank" rel="noopener noreferrer" class="btn btn-blue py-2 px-3">Visit Live Platform <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i></a>
+          </div>
+        `
+      }
+    },
+
+    // ── SERVICES ──
+    'service-web': {
+      badge: '<i class="fa-solid fa-laptop-code me-1"></i> Engineering Service',
+      title: 'Web Architecture & CMS Engineering',
+      subtitle: 'Enterprise Multisite WordPress, High-Traffic Custom Themes, Core Web Vitals Optimization & CDN Networks',
+      tags: ['WordPress Multisite', 'PHP 8.2+', 'Custom CMS', 'Core Web Vitals 95+', 'Cloudflare CDN', 'Nginx Cache'],
+      tabs: {
+        'overview': `
+          <p>I architect scalable corporate websites and multi-site CMS ecosystems that handle traffic spikes during regional trade exhibition dates. Every build incorporates clean semantic HTML5, async script loading, CSS containment, and responsive mobile architecture.</p>
+          <ul class="text-secondary small mt-3">
+            <li>Sub-second page load times on 3G/4G networks</li>
+            <li>Zero-downtime database and asset backups</li>
+            <li>Custom Gutenberg blocks and bespoke PHP templates</li>
+          </ul>
+        `
+      }
+    },
+    'service-erp': {
+      badge: '<i class="fa-solid fa-cubes me-1"></i> Engineering Service',
+      title: 'Legacy ERP Modernization',
+      subtitle: 'Bridging IBM AS/400 DB2 and Legacy Mainframe Backends with Modern Web Dashboards',
+      tags: ['IBM AS/400 DB2', 'RPG Simulator', 'ODBC Integration', 'Automated Invoicing', 'Role-Based Access'],
+      tabs: {
+        'overview': `
+          <p>Many enterprises rely on robust AS/400 DB2 systems but need modern, accessible interfaces for sales teams and executives. I build secure REST and ODBC middleware that exposes real-time data without breaking transactional integrity.</p>
+        `
+      }
+    },
+    'service-ai': {
+      badge: '<i class="fa-solid fa-robot me-1"></i> Engineering Service',
+      title: 'AI Systems & LLM Observability',
+      subtitle: 'FastAPI Microservices, Autonomous ReAct Reasoning Loops & Real-Time Token Cost Metering',
+      tags: ['FastAPI', 'Python 3.10+', 'ReAct Agents', 'Cost Metering ($/Rp)', 'Document RAG', 'WhatsApp Bot'],
+      tabs: {
+        'overview': `
+          <p>From autonomous developer tools to domain-specific RAG bots, I engineer practical AI systems that connect to your business documents and track every dollar and rupiah spent on LLM tokens.</p>
+        `
+      }
+    },
+    'service-ops': {
+      badge: '<i class="fa-solid fa-magnifying-glass-chart me-1"></i> Engineering Service',
+      title: 'Tech Operations & Telemetry',
+      subtitle: 'WebSocket Live Telemetry, Multi-Device Fleet Monitoring & 24/7 SLA Incident Support',
+      tags: ['WebSocket Streams', 'Hardware Telemetry', 'Fleet Management', 'Incident Response', 'CRM Sync'],
+      tabs: {
+        'overview': `
+          <p>Delivering on-site and remote technical operations for international exhibition events. Managing device fleets, telemetry streams, and database synchronizations with sub-second latency.</p>
+        `
+      }
+    },
+    // ── ABOUT CARDS ──
+    'about-scale': {
+      badge: '<i class="fa-solid fa-network-wired me-1"></i> Core Engineering Pillar',
+      title: 'High-Traffic Web Scale & Performance',
+      subtitle: 'Architecting WordPress Multisite & Custom CMS Ecosystems Capable of Handling 100K+ Concurrent Surges',
+      tags: ['Multisite WordPress', 'High Concurrency', 'Redis Object Caching', 'Cloudflare CDN', 'Nginx Microcaching', '99.9% Uptime'],
+      tabs: {
+        'overview': `
+          <p>During flagship B2B exhibition launches (e.g. FHI Jakarta, Lab Indonesia, FHTB Bali), platforms experience massive concurrent traffic spikes. I design and tune the web infrastructure with distributed caching, async database query optimizations, and global edge delivery to ensure zero downtime and sub-second response times.</p>
+        `
+      }
+    },
+    'about-gov': {
+      badge: '<i class="fa-solid fa-shield-halved me-1"></i> Core Engineering Pillar',
+      title: 'Enterprise Governance & System Stability',
+      subtitle: 'Strict Data Privacy, GDPR-Compliant Workflows, Automated Backups & Resilient Failover',
+      tags: ['Data Privacy', 'GDPR Compliance', 'Automated Daily Backups', 'Disaster Recovery', 'Role-Based Access', 'Security Audits'],
+      tabs: {
+        'overview': `
+          <p>Managing international trade event platforms requires enterprise-grade governance. I implement automated encrypted database backups, role-based user access controls, strict consent mechanisms, and automated failover routing to maintain system integrity and compliance.</p>
+        `
+      }
+    },
+    'about-seo': {
+      badge: '<i class="fa-solid fa-chart-line me-1"></i> Core Engineering Pillar',
+      title: 'Technical SEO & Core Web Vitals',
+      subtitle: 'Structured JSON-LD Schema, Crawl Budget Optimization & Core Web Vitals 95+ Across Southeast Asia',
+      tags: ['JSON-LD Schemas', 'Core Web Vitals 95+', 'Lighthouse Optimization', 'Crawl Budget', 'Multilingual Indexing'],
+      tabs: {
+        'overview': `
+          <p>Maximizing organic discovery for hundreds of thousands of international trade visitors. Every platform is audited for Core Web Vitals (LCP &lt; 1.2s, CLS 0.00, INP &lt; 50ms), featuring semantic HTML5 markup, event schema data, and canonical cross-domain indexing.</p>
+        `
+      }
+    },
+    'about-ai': {
+      badge: '<i class="fa-solid fa-robot me-1"></i> Core Engineering Pillar',
+      title: 'Practical AI & Autonomous Systems',
+      subtitle: 'ReAct Agent Loops, Real-Time Token Cost Metering ($/Rp) & Document-Grounded RAG',
+      tags: ['FastAPI Microservices', 'ReAct Agent Loop', 'Token Observability', 'Document RAG', 'WhatsApp Bot', 'Python 3.10+'],
+      tabs: {
+        'overview': `
+          <p>Engineering production-ready AI tools that directly solve business problems: automated developer copilots, transparent LLM token expense meters in dual currencies ($ USD &amp; Rp IDR), and intelligent event assistants that ground visitor inquiries directly in official exhibition documentation.</p>
         `
       }
     }
@@ -700,11 +1014,11 @@ function initArchitectureModal() {
     if (modalTitle) modalTitle.textContent = project.title;
     if (modalSubtitle) modalSubtitle.textContent = project.subtitle;
 
-    const tabContent = (project.tabs && project.tabs[tabKey]) || (project.tabs && project.tabs['overview']) || '<p>Content in preparation.</p>';
+    const tabContent = (project.tabs && project.tabs[tabKey]) || (project.tabs && project.tabs['overview']) || '<p class="text-muted">Detailed technical documentation is active for this system.</p>';
     modalBody.innerHTML = tabContent;
 
     if (modalFooterTags) {
-      modalFooterTags.innerHTML = project.tags.map(t => `<span class="tech-tag me-1 mb-1 d-inline-block">${t}</span>`).join('');
+      modalFooterTags.innerHTML = project.tags ? project.tags.map(t => `<span class="tech-tag me-1 mb-1 d-inline-block">${t}</span>`).join('') : '';
     }
 
     tabBtns.forEach(btn => {
@@ -729,12 +1043,18 @@ function initArchitectureModal() {
     document.body.style.overflow = '';
   }
 
-  openButtons.forEach(btn => {
-    btn.addEventListener('click', (e) => {
+  // Bind click on all modal triggers & clickable cards
+  document.addEventListener('click', (e) => {
+    const trigger = e.target.closest('[data-project], [data-service], [data-about], [data-modal], .btn-open-modal');
+    if (trigger) {
+      // Don't trigger modal if user explicitly clicked an external link <a> with href
+      if (e.target.closest('a[href^="http"], a[href^="mailto"], a[href^="https"]')) {
+        return;
+      }
       e.preventDefault();
-      const pKey = btn.getAttribute('data-project') || btn.getAttribute('data-modal') || 'nexusagent';
+      const pKey = trigger.getAttribute('data-project') || trigger.getAttribute('data-service') || trigger.getAttribute('data-about') || trigger.getAttribute('data-modal') || 'nexusagent';
       openModal(pKey);
-    });
+    }
   });
 
   if (closeBtn) closeBtn.addEventListener('click', closeModal);
@@ -756,6 +1076,42 @@ function initArchitectureModal() {
       if (tab) {
         currentTabKey = tab;
         renderModalContent(currentProjectKey, currentTabKey);
+      }
+    });
+  });
+}
+
+/* ── 11. Quick Dock Navigation & Scroll Spy ── */
+function initQuickDock() {
+  const dock = document.getElementById('quick-dock');
+  if (!dock) return;
+
+  const sections = document.querySelectorAll('section[id], header[id]');
+  const dockItems = dock.querySelectorAll('.dock-item');
+
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 280) {
+      dock.classList.add('visible');
+    } else {
+      dock.classList.remove('visible');
+    }
+
+    let current = '';
+    const scrollPos = window.scrollY + 180;
+
+    sections.forEach(section => {
+      const top = section.offsetTop;
+      const height = section.offsetHeight;
+      if (scrollPos >= top && scrollPos < top + height) {
+        current = section.getAttribute('id');
+      }
+    });
+
+    dockItems.forEach(item => {
+      item.classList.remove('active');
+      const href = item.getAttribute('href');
+      if (href === `#${current}`) {
+        item.classList.add('active');
       }
     });
   });
