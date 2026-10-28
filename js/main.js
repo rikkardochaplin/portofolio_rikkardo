@@ -336,6 +336,7 @@ function initPhotoLightbox() {
 
 /* ── 7. 3D Card Perspective Tilt Effect ── */
 function initCardTilt() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || window.innerWidth < 768) return;
   const tiltElements = document.querySelectorAll('.project-card, .photo-card, .featured-project-row, .about-card');
 
   tiltElements.forEach(card => {

@@ -9,45 +9,64 @@
   <!-- Bootstrap 5.3.3 CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
 
-  <!-- Google Fonts & Font Awesome 6 -->
+  <!-- Editorial Collage Google Fonts & Font Awesome 6 -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Inter:wght@300;400;500;600;700;800&family=Nunito:wght@300;400;600;700;800&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500&family=Space+Grotesk:wght@500;600;700;800&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="css/style.css?v=5.0" />
+  <link rel="stylesheet" href="css/style.css?v=10.0" />
   
   <style>
     .article-page {
-      padding: 90px 0 50px;
+      padding: 110px 0 60px;
     }
     .back-nav-btn {
       display: inline-flex;
       align-items: center;
       gap: 8px;
       font-family: var(--font-heading);
-      font-size: 0.82rem;
+      font-size: 0.85rem;
       font-weight: 700;
-      color: var(--accent-blue-light);
-      margin-bottom: 20px;
-      padding: 6px 16px;
-      background: var(--bg-card);
-      border: 1px solid var(--glass-border-blue);
-      border-radius: var(--radius-full);
+      color: var(--text-ink);
+      margin-bottom: 24px;
+      padding: 8px 18px;
+      background: var(--surface-paper);
+      border: 2px solid var(--border-ink);
+      border-radius: var(--radius-xs);
+      box-shadow: var(--shadow-flat-sm);
       text-decoration: none;
       transition: var(--transition);
     }
     .back-nav-btn:hover {
-      background: var(--accent-blue);
-      color: #fff !important;
-      transform: translateX(-4px);
+      background: var(--accent-yellow);
+      color: var(--text-ink) !important;
+      transform: translate(-2px, -2px);
+      box-shadow: var(--shadow-flat-md);
     }
     .article-img-frame {
-      border-radius: var(--radius-xl);
+      border-radius: var(--radius-xs);
       overflow: hidden;
-      border: 1px solid var(--glass-border-blue);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.7), 0 0 35px rgba(37, 99, 235, 0.2);
-      background: #000;
-      margin-bottom: 30px;
+      border: 2px solid var(--border-ink);
+      box-shadow: var(--shadow-flat-lg);
+      background: #FAF8F1;
+      padding: 12px 12px 28px 12px;
+      margin-bottom: 34px;
+      position: relative;
+      transform: rotate(-0.5deg);
+    }
+    .article-img-frame::before {
+      content: "";
+      position: absolute;
+      top: -10px;
+      left: 50%;
+      transform: translateX(-50%) rotate(1deg);
+      width: 80px;
+      height: 22px;
+      background: var(--tape-translucent);
+      box-shadow: var(--shadow-tape);
+      z-index: 5;
     }
     .article-img-frame img {
       width: 100%;
@@ -56,44 +75,52 @@
       background: #000;
       display: block;
       margin: 0 auto;
+      border: 1px solid var(--border-ink);
     }
     .article-body-wrapper {
       max-width: 800px;
       margin: 0 auto 40px;
       font-size: 1.05rem;
-      line-height: 1.75;
-      color: var(--text-secondary);
+      line-height: 1.8;
+      color: var(--text-ink-secondary);
     }
     .article-quote-box {
-      border-left: 4px solid var(--accent-blue-light);
-      padding: 14px 20px;
-      margin: 24px 0;
+      border-left: 4px solid var(--accent-coral);
+      padding: 16px 24px;
+      margin: 28px 0;
+      font-family: var(--font-serif);
       font-style: italic;
-      font-size: 1.15rem;
-      color: var(--text-primary);
-      background: rgba(37, 99, 235, 0.08);
-      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      font-size: 1.25rem;
+      color: var(--text-ink);
+      background: var(--surface-paper);
+      border-top: 1px solid var(--border-paper);
+      border-right: 1px solid var(--border-paper);
+      border-bottom: 1px solid var(--border-paper);
+      box-shadow: 2px 2px 0px rgba(37, 35, 31, 0.08);
+      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
     }
     .related-card {
-      background: var(--bg-card);
-      border: 1px solid var(--glass-border);
-      border-radius: var(--radius-lg);
+      background: var(--surface-paper);
+      border: 2px solid var(--border-ink);
+      border-radius: var(--radius-xs);
       overflow: hidden;
       text-decoration: none;
       transition: var(--transition);
       display: flex;
       flex-direction: column;
       height: 100%;
+      box-shadow: var(--shadow-flat-sm);
     }
     .related-card:hover {
-      transform: translateY(-4px);
-      border-color: var(--glass-border-blue);
-      box-shadow: var(--shadow-blue);
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-flat-md);
+      background: var(--surface-card-hover);
     }
     .related-card-thumb {
-      height: 160px;
+      height: 180px;
       background: #000;
       overflow: hidden;
+      border-bottom: 2px solid var(--border-ink);
     }
     .related-card-thumb img {
       width: 100%;
@@ -102,7 +129,13 @@
       transition: var(--transition-slow);
     }
     .related-card:hover .related-card-thumb img {
-      transform: scale(1.05);
+      transform: scale(1.04);
+    }
+    .article-details-strip {
+      background: var(--surface-paper);
+      border: 2px solid var(--border-ink);
+      border-radius: var(--radius-xs);
+      box-shadow: var(--shadow-flat-sm);
     }
   </style>
 </head>
@@ -150,18 +183,18 @@
       </div>
 
       <div class="article-body-wrapper">
-        <div class="row g-3 p-3 rounded-4 bg-black bg-opacity-40 border border-secondary mb-4 text-center">
+        <div class="row g-3 p-3 article-details-strip mb-4 text-center">
           <div class="col-md-4">
             <div class="small text-muted text-uppercase fw-bold">Location</div>
-            <div class="fw-bold text-white" id="det-location">Jakarta, Indonesia</div>
+            <div class="fw-bold" id="det-location">Jakarta, Indonesia</div>
           </div>
           <div class="col-md-4">
             <div class="small text-muted text-uppercase fw-bold">Atmosphere / Lighting</div>
-            <div class="fw-bold text-white" id="det-mood">Golden Hour Sunset</div>
+            <div class="fw-bold" id="det-mood">Golden Hour Sunset</div>
           </div>
           <div class="col-md-4">
             <div class="small text-muted text-uppercase fw-bold">Category</div>
-            <div class="fw-bold text-white" id="det-cat">Street Photography</div>
+            <div class="fw-bold" id="det-cat">Street Photography</div>
           </div>
         </div>
 
@@ -171,10 +204,10 @@
       </div>
 
       <!-- Related Stories -->
-      <div class="border-top border-secondary pt-5 mt-5">
+      <div class="border-top border-dark pt-5 mt-5">
         <div class="text-center mb-4">
           <span class="section-tag"><i class="fa-solid fa-images"></i> More Perspectives</span>
-          <h3 class="fw-bold">Explore Other <span class="gold-text">Visual Stories</span></h3>
+          <h3 class="fw-bold">Explore Other <span class="blue-text">Visual Stories</span></h3>
         </div>
         <div class="row g-4" id="related-stories-grid">
           <!-- Injected via JavaScript -->
@@ -191,7 +224,7 @@
   </footer>
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/main.js?v=5.0"></script>
+  <script src="js/main.js?v=10.0"></script>
   <script>
     // Complete Stories Database (All 9 Photos)
     const stories = {
@@ -353,7 +386,7 @@
               </div>
               <div class="p-3">
                 <div class="small text-muted mb-1"><i class="fa-solid fa-location-dot text-info me-1"></i> ${item.location} • ${item.tag}</div>
-                <h5 class="h6 fw-bold text-white mb-0">${item.title}</h5>
+                <h5 class="h6 fw-bold mb-0">${item.title}</h5>
               </div>
             </a>
           </div>
