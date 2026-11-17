@@ -27,10 +27,10 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!-- Custom Theme CSS -->
-  <link rel="stylesheet" href="css/style.css?v=12.0" />
+  <link rel="stylesheet" href="css/style.css?v=13.0" />
 </head>
 
-<body id="page-top">
+<body id="page-top" class="drivefolio-body">
 
   <!-- ── Scroll Progress Bar ── -->
   <div id="scroll-progress"></div>
@@ -196,6 +196,9 @@
 
     <!-- Bottom-Center Proximity Billboard Popup Card -->
     <div class="drivefolio-proximity-card" id="drivefolio-proximity-card" role="region" aria-live="polite">
+      <button type="button" class="df-card-dismiss-btn" id="df-card-dismiss-btn" aria-label="Minimize card" title="Hide card">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
       <div class="df-card-thumb">
         <img id="df-card-img" src="assets/images/project-pamerindo.png" alt="Project Preview" />
       </div>
@@ -235,13 +238,19 @@
 
     <!-- Mobile / Tablet Virtual Touch Controls -->
     <div class="df-mobile-controls">
+      <div class="df-mobile-action-stack">
+        <button type="button" class="df-mobile-open-btn" id="df-mobile-open-btn" title="Open Active Billboard or Island Hub">
+          <i class="fa-solid fa-expand"></i>
+          <span>OPEN</span>
+        </button>
+        <button type="button" class="df-mobile-boost-btn" id="df-mobile-boost-btn" title="Hold for Nitro Turbo Boost">
+          <i class="fa-solid fa-bolt"></i>
+          <span>TURBO</span>
+        </button>
+      </div>
       <div class="df-joystick-zone" id="df-joystick-zone" aria-label="Touch Steering Joystick">
         <div class="df-joystick-knob" id="df-joystick-knob"></div>
       </div>
-      <button type="button" class="df-mobile-boost-btn" id="df-mobile-boost-btn">
-        <i class="fa-solid fa-bolt"></i>
-        <span>TURBO</span>
-      </button>
     </div>
   </section>
 
@@ -1576,7 +1585,7 @@
   <!-- Custom Application JS -->
   <script src="js/main.js?v=10.0"></script>
   <!-- Drivefolio 3D Island Controller -->
-  <script src="js/drivefolio-3d.js?v=3.0"></script>
+  <script src="js/drivefolio-3d.js?v=4.0"></script>
 </body>
 
 </html>

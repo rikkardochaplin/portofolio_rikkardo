@@ -789,6 +789,14 @@
     applyTimeOfDay(TIME_MODES[timeModeIndex]);
     updateVisitedHUD();
 
+    // If arriving via URL hash (e.g. index.html#stories from article.html), open corresponding Island Hub!
+    const initHash = (window.location.hash || '').replace('#', '');
+    if (['about', 'services', 'skills'].includes(initHash)) {
+      openDistrictOverlay('about');
+    } else if (['projects', 'stories', 'journey', 'contact'].includes(initHash)) {
+      openDistrictOverlay(initHash);
+    }
+
     const camPos = new THREE.Vector3(startPt.x - startPt.tx * 22, 13.5, startPt.z - startPt.tz * 22);
     const camLook = new THREE.Vector3(startPt.x, 2.4, startPt.z);
 
@@ -970,7 +978,11 @@
         }
       });
 
-      const targetFov = (keys.boost && Math.abs(carState.speed) > 0.35) ? 52 : 44;
+      // Responsive FOV & Chase Camera Distance for Portrait Mobile vs Desktop/Landscape
+      const aspect = container.clientWidth / Math.max(1, container.clientHeight);
+      const portraitFactor = aspect < 1.0 ? (1.0 - aspect) : 0;
+      const baseFov = 44 + Math.min(20, portraitFactor * 32);
+      const targetFov = (keys.boost && Math.abs(carState.speed) > 0.35) ? (baseFov + 8) : baseFov;
       if (Math.abs(camera.fov - targetFov) > 0.1) {
         camera.fov += (targetFov - camera.fov) * 0.12;
         camera.updateProjectionMatrix();
@@ -986,9 +998,9 @@
       }
       updateExhaustParticles(dt);
 
-      // 3. Smooth Chase Camera Follow
-      const camDist = 21.5 + Math.abs(carState.speed) * 4.2;
-      const camHeight = 11.8 + Math.abs(carState.speed) * 1.5;
+      // 3. Smooth Chase Camera Follow (Adaptive for Portrait & Landscape)
+      const camDist = 21.5 + portraitFactor * 9.5 + Math.abs(carState.speed) * 4.2;
+      const camHeight = 11.8 + portraitFactor * 3.4 + Math.abs(carState.speed) * 1.5;
       const targetCamX = carState.x - Math.sin(carState.heading) * camDist;
       const targetCamZ = carState.z - Math.cos(carState.heading) * camDist;
 
@@ -1197,6 +1209,10 @@
 
     function updateProximityHUDCard(stop) {
       const card = document.getElementById('drivefolio-proximity-card');
+      const mobileOpenBtn = document.getElementById('df-mobile-open-btn');
+      if (mobileOpenBtn) {
+        mobileOpenBtn.classList.toggle('ready', Boolean(stop));
+      }
       if (!card) return;
 
       if (!stop) {
@@ -1456,6 +1472,25 @@
         nextStopBtn.addEventListener('click', () => {
           const nextIdx = activeStop ? (activeStop.index + 1) % stopObjects.length : 0;
           driveToStop(nextIdx);
+        });
+      }
+
+      const dismissCardBtn = document.getElementById('df-card-dismiss-btn');
+      if (dismissCardBtn) {
+        dismissCardBtn.addEventListener('click', () => {
+          const card = document.getElementById('drivefolio-proximity-card');
+          if (card) card.classList.remove('active');
+        });
+      }
+
+      const mobileOpenBtn = document.getElementById('df-mobile-open-btn');
+      if (mobileOpenBtn) {
+        mobileOpenBtn.addEventListener('click', () => {
+          if (activeStop && activeStop.stop) {
+            triggerStopAction(activeStop.stop);
+          } else {
+            openDistrictOverlay('projects');
+          }
         });
       }
 

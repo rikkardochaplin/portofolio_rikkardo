@@ -2187,19 +2187,22 @@ footer {
    (100% Fullscreen Locked 3D World — Zero Old Page Scroll)
    ========================================================================== */
 
-html, body {
+html:has(body.drivefolio-body),
+body.drivefolio-body {
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   overflow: hidden !important;
   margin: 0;
   padding: 0;
+  overscroll-behavior: none;
 }
 
-/* Hide legacy static scroll navigation bars */
-#mainNav,
-#quick-dock,
-#scroll-progress,
-#back-top {
+/* Hide legacy static scroll navigation bars on 3D World page */
+body.drivefolio-body #mainNav,
+body.drivefolio-body #quick-dock,
+body.drivefolio-body #scroll-progress,
+body.drivefolio-body #back-top {
   display: none !important;
 }
 
@@ -2208,6 +2211,7 @@ html, body {
   inset: 0;
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   background: #0F172A;
   overflow: hidden;
   user-select: none;
@@ -2960,44 +2964,461 @@ html, body {
   border: 1px solid #18181B;
 }
 
-/* ── Responsive Adjustments for Drivefolio Stage ── */
-@media (max-width: 991.98px) {
-  .drivefolio-controls-bar {
-    display: none;
+/* ── Proximity Card Dismiss Button & Mobile Action Stack ── */
+.df-card-dismiss-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #F2EBDD;
+  color: #18181B;
+  border: 1.5px solid #18181B;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.72rem;
+  cursor: pointer;
+  z-index: 5;
+  transition: var(--transition);
+}
+
+.df-card-dismiss-btn:hover {
+  background: #E11D48;
+  color: #FFFFFF;
+}
+
+.df-mobile-action-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.df-mobile-open-btn {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: #FAF8F1;
+  color: #18181B;
+  border: 2px solid #18181B;
+  box-shadow: 3px 3px 0px #18181B;
+  font-family: var(--font-heading);
+  font-size: 0.66rem;
+  font-weight: 800;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  touch-action: manipulation;
+  transition: var(--transition);
+}
+
+.df-mobile-open-btn.ready {
+  background: #10B981;
+  color: #FFFFFF;
+  animation: dfPulse 1.5s infinite;
+}
+
+/* ==========================================================================
+   21. MULTI-DEVICE RESPONSIVE SYSTEM (DESKTOP, TABLET, MOBILE, LANDSCAPE)
+   ========================================================================== */
+
+/* 1. Laptops & Tablets Landscape (max-width: 1399px) */
+@media (max-width: 1399.98px) {
+  .drivefolio-hud-top {
+    top: max(12px, env(safe-area-inset-top));
+    left: 12px;
+    right: 12px;
+    gap: 6px;
   }
-  .df-mobile-controls {
-    display: flex;
+
+  .df-pill {
+    padding: 5px 10px;
+    font-size: 0.72rem;
   }
-  .drivefolio-proximity-card {
-    bottom: 132px;
-    padding: 11px;
+
+  .df-gps-select {
+    padding: 5px 24px 5px 9px;
+    font-size: 0.72rem;
+    max-width: 185px;
   }
-  .df-card-thumb {
-    width: 110px;
-    height: 96px;
-  }
+
   .df-zones-nav {
+    order: 3;
+    width: 100%;
+    justify-content: center;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+
+  .df-zones-nav::-webkit-scrollbar {
     display: none;
+  }
+
+  .df-zones-nav .df-pill {
+    flex-shrink: 0;
+  }
+
+  .df-autopilot-banner {
+    top: 102px;
   }
 }
 
-@media (max-width: 575.98px) {
+/* 2. Touch Devices & Tablets (max-width: 991.98px OR coarse pointer) */
+@media (max-width: 991.98px), (hover: none) and (pointer: coarse) {
+  .drivefolio-controls-bar {
+    display: none !important;
+  }
+
+  .df-mobile-controls {
+    display: flex !important;
+    bottom: max(18px, env(safe-area-inset-bottom));
+    right: max(16px, env(safe-area-inset-right));
+  }
+
+  .drivefolio-hud-bottom-left {
+    bottom: max(18px, env(safe-area-inset-bottom));
+    left: max(14px, env(safe-area-inset-left));
+  }
+}
+
+@media (max-width: 991.98px) {
   .drivefolio-hud-top {
-    top: 10px;
-    left: 10px;
-    right: 10px;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
   }
-  .df-minimap-card {
-    width: 126px;
+
+  .drivefolio-hud-top > .df-hud-group {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    justify-content: flex-start;
+    width: 100%;
+    padding-bottom: 2px;
   }
-  #drivefolio-minimap {
-    width: 110px;
+
+  .drivefolio-hud-top > .df-hud-group::-webkit-scrollbar {
+    display: none;
+  }
+
+  .drivefolio-hud-top > .df-hud-group > * {
+    flex-shrink: 0;
+  }
+
+  .df-zones-nav {
+    display: flex !important;
+    order: 2;
+  }
+
+  .df-autopilot-banner {
+    top: 122px;
+    font-size: 0.7rem;
+    padding: 5px 12px;
+    max-width: 92vw;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .drivefolio-proximity-card {
+    bottom: 148px;
+    width: min(540px, 94vw);
+    padding: 11px 13px;
+    gap: 12px;
+  }
+
+  .df-card-thumb {
+    width: 112px;
     height: 96px;
   }
+
+  .df-district-overlay {
+    padding: 10px;
+  }
+
+  .df-district-window {
+    width: 100%;
+    height: 94dvh;
+  }
+
+  .df-district-header {
+    padding: 10px 14px;
+    gap: 8px;
+  }
+
+  .df-district-tabs {
+    order: 3;
+    width: 100%;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2px;
+  }
+
+  .df-district-tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .df-dist-tab {
+    flex-shrink: 0;
+  }
+}
+
+/* 3. Mobile Smartphones Portrait & Compact Viewports (max-width: 767.98px) */
+@media (max-width: 767.98px) {
+  .df-brand-pill span {
+    max-width: 115px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .df-visited-pill {
+    min-width: auto;
+  }
+
+  .df-visited-bar-wrap {
+    width: 36px;
+  }
+
+  .df-minimap-card {
+    width: 124px;
+    padding: 4px;
+  }
+
+  .df-minimap-header {
+    font-size: 0.56rem;
+    margin-bottom: 2px;
+  }
+
+  #drivefolio-minimap {
+    width: 112px;
+    height: 94px;
+  }
+
+  .df-speedometer-card {
+    padding: 6px 9px;
+    min-width: 72px;
+  }
+
+  .df-speed-num {
+    font-size: 1.2rem;
+  }
+
+  .df-joystick-zone {
+    width: 84px;
+    height: 84px;
+  }
+
+  .df-joystick-knob {
+    width: 34px;
+    height: 34px;
+  }
+
+  .df-mobile-boost-btn,
+  .df-mobile-open-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 0.62rem;
+  }
+
+  .drivefolio-proximity-card {
+    bottom: 142px;
+    left: 10px;
+    right: 10px;
+    width: auto;
+    transform: translateY(24px) scale(0.97);
+    padding: 10px 12px;
+    gap: 10px;
+  }
+
+  .drivefolio-proximity-card.active {
+    transform: translateY(0) scale(1);
+  }
+
+  .df-card-thumb {
+    width: 82px;
+    height: 82px;
+  }
+
+  .df-card-title {
+    font-size: 0.96rem;
+    padding-right: 22px;
+  }
+
+  .df-card-sub {
+    font-size: 0.68rem;
+    margin-bottom: 3px;
+  }
+
+  .df-card-desc {
+    font-size: 0.72rem;
+    -webkit-line-clamp: 1;
+    margin-bottom: 5px;
+  }
+
+  .df-card-tags {
+    display: none;
+  }
+
+  .df-action-btn {
+    padding: 5px 10px;
+    font-size: 0.69rem;
+  }
+
+  .df-key-hint {
+    display: none;
+  }
+
+  /* Native Full-Bleed App Window for District Overlay on Mobile */
+  .df-district-overlay {
+    padding: 0;
+  }
+
+  .df-district-window {
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
+    max-height: 100dvh;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+  }
+
+  .df-district-heading {
+    font-size: 0.92rem;
+  }
+
+  #df-district-drive-here-btn span {
+    display: none;
+  }
+
+  /* Blueprint & Lightbox Modals on Mobile */
+  .modal-backdrop-custom {
+    padding: 8px;
+  }
+
+  .modal-dialog-custom {
+    max-height: 94vh;
+    max-height: 94dvh;
+  }
+
+  .modal-header-custom {
+    padding: 14px 16px;
+  }
+
+  .modal-body-custom {
+    padding: 16px;
+  }
+
+  .lightbox-media-container {
+    min-height: 240px;
+    max-height: 56dvh;
+  }
+
+  .lightbox-img-custom {
+    max-height: 56dvh;
+  }
+}
+
+/* 4. Small Phones (max-width: 480px) */
+@media (max-width: 480px) {
+  .drivefolio-hud-top {
+    top: max(8px, env(safe-area-inset-top));
+    left: 8px;
+    right: 8px;
+  }
+
   .df-speedometer-card {
     display: none;
   }
+
   .df-card-thumb {
     display: none;
+  }
+
+  .drivefolio-proximity-card {
+    bottom: 136px;
+    left: 8px;
+    right: 8px;
+  }
+}
+
+/* 5. Mobile Landscape Mode (Short Height Viewports: max-height: 540px) */
+@media (max-height: 540px) and (orientation: landscape) {
+  .drivefolio-hud-top {
+    top: 6px;
+    left: 10px;
+    right: 10px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .drivefolio-hud-top > .df-hud-group {
+    width: auto;
+    overflow: visible;
+  }
+
+  .df-zones-nav {
+    order: 0;
+    width: auto;
+  }
+
+  .df-autopilot-banner {
+    top: 46px;
+    padding: 3px 10px;
+    font-size: 0.65rem;
+  }
+
+  .df-minimap-card {
+    width: 104px;
+    padding: 3px;
+  }
+
+  #drivefolio-minimap {
+    width: 94px;
+    height: 74px;
+  }
+
+  .df-speedometer-card {
+    display: none;
+  }
+
+  .drivefolio-proximity-card {
+    bottom: 10px;
+    width: min(430px, 62vw);
+    padding: 8px 10px;
+  }
+
+  .df-card-thumb,
+  .df-card-desc,
+  .df-card-tags {
+    display: none;
+  }
+
+  .df-joystick-zone {
+    width: 74px;
+    height: 74px;
+  }
+
+  .df-mobile-action-stack {
+    flex-direction: row;
+  }
+
+  .df-mobile-boost-btn,
+  .df-mobile-open-btn {
+    width: 44px;
+    height: 44px;
   }
 }
