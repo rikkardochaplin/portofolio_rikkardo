@@ -42,6 +42,7 @@
 
   <!-- ── Floating Quick-Nav Dock (Fast Jump Without Long Scroll) ── -->
   <div id="quick-dock" aria-label="Quick Section Navigation">
+    <a href="#drivefolio-stage" class="dock-item" title="3D Island Drive"><i class="fa-solid fa-car-side"></i> <span>3D Drive</span></a>
     <a href="#about" class="dock-item" title="About Me"><i class="fa-solid fa-user-tie"></i> <span>About</span></a>
     <a href="#services" class="dock-item" title="Services & Capabilities"><i class="fa-solid fa-briefcase"></i> <span>Services</span></a>
     <a href="#skills" class="dock-item" title="Skills & Stack"><i class="fa-solid fa-code"></i> <span>Skills</span></a>
@@ -73,6 +74,7 @@
 
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav ms-auto my-2 my-lg-0 align-items-lg-center">
+          <li class="nav-item"><a class="nav-link fw-bold" href="#drivefolio-stage"><i class="fa-solid fa-car-side me-1"></i> 3D Island</a></li>
           <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
           <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
           <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
@@ -89,6 +91,140 @@
       </div>
     </div>
   </nav>
+
+  <!-- ==========================================================================
+       DRIVEFOLIO 3D INTERACTIVE ISLAND WORLD (HERO STAGE)
+       ========================================================================== -->
+  <section class="drivefolio-stage" id="drivefolio-stage" aria-label="Interactive 3D Portfolio Island">
+    <!-- 3D WebGL Canvas Mount -->
+    <div id="drivefolio-canvas-wrap"></div>
+
+    <!-- Top HUD Bar -->
+    <div class="drivefolio-hud-top">
+      <!-- Left Group: View Switcher & Visited Tracker -->
+      <div class="df-hud-group">
+        <div class="df-mode-switcher" role="group" aria-label="Portfolio Mode Switcher">
+          <button type="button" class="df-mode-btn active" id="df-mode-3d-btn" title="Interactive 3D Island Mode">
+            <i class="fa-solid fa-car-side"></i> 3D Island Drive
+          </button>
+          <button type="button" class="df-mode-btn" id="df-mode-classic-btn" title="Scroll to Full Portfolio Dossier">
+            <i class="fa-solid fa-table-columns"></i> Classic Dossier
+          </button>
+        </div>
+
+        <div class="df-pill df-visited-pill" title="Visited Case Study Billboards">
+          <i class="fa-solid fa-flag-checkered text-success"></i>
+          <span id="drivefolio-visited-count">0 of 12 Seen</span>
+          <div class="df-visited-bar-wrap">
+            <div class="df-visited-bar-fill" id="drivefolio-visited-bar"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Center Group: GPS Quick Teleport / Auto-Drive Selector -->
+      <div class="df-hud-group">
+        <select id="df-gps-select" class="df-gps-select" aria-label="GPS Teleport to Project Billboard">
+          <option value="">📍 GPS Drive to Stop...</option>
+        </select>
+      </div>
+
+      <!-- Right Group: Autopilot, Time of Day, Car Paint, Postcard, Sound -->
+      <div class="df-hud-group">
+        <button type="button" class="df-pill df-btn" id="df-autopilot-btn" title="Automatically drive through all project billboards">
+          <i class="fa-solid fa-route me-1"></i> Autopilot Tour
+        </button>
+
+        <button type="button" class="df-pill df-btn" id="df-time-btn" title="Switch Day / Sunset / Night Cycle">
+          <i class="fa-solid fa-sun me-1"></i> Day
+        </button>
+
+        <button type="button" class="df-pill df-btn" id="df-color-btn" title="Customize Car Paint Color">
+          <span class="df-color-swatch" id="df-color-dot"></span> Paint
+        </button>
+
+        <button type="button" class="df-pill df-btn" id="df-postcard-btn" title="Capture 3D Island Postcard Snapshot">
+          <i class="fa-solid fa-camera-retro me-1"></i> Postcard
+        </button>
+
+        <button type="button" class="df-pill df-btn" id="df-sound-btn" title="Toggle Engine & Checkpoint Audio FX" aria-label="Toggle Sound">
+          <i class="fa-solid fa-volume-xmark"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Autopilot Active Status Banner -->
+    <div class="df-autopilot-banner" id="df-autopilot-banner">
+      <span class="df-pulse-dot"></span>
+      <span>AUTOPILOT TOUR ACTIVE — Driving to: <strong id="df-autopilot-target-name">PT Pamerindo Indonesia</strong></span>
+    </div>
+
+    <!-- Bottom-Left Radar Minimap & Speedometer -->
+    <div class="drivefolio-hud-bottom-left">
+      <div class="df-minimap-card" title="Click anywhere on radar to drive there">
+        <div class="df-minimap-header">
+          <span><i class="fa-solid fa-compass me-1"></i> Island Radar</span>
+          <span>16 Stops</span>
+        </div>
+        <canvas id="drivefolio-minimap" width="160" height="132"></canvas>
+      </div>
+
+      <div class="df-speedometer-card">
+        <div class="df-speed-num" id="drivefolio-speed-val">0</div>
+        <div class="df-speed-unit">KM/H</div>
+        <div class="drivefolio-gear-badge" id="drivefolio-gear-badge">PARK</div>
+      </div>
+    </div>
+
+    <!-- Bottom-Center Proximity Billboard Popup Card -->
+    <div class="drivefolio-proximity-card" id="drivefolio-proximity-card" role="region" aria-live="polite">
+      <div class="df-card-thumb">
+        <img id="df-card-img" src="assets/images/project-pamerindo.png" alt="Project Preview" />
+      </div>
+      <div class="df-card-body">
+        <div class="df-card-meta-row">
+          <span class="df-card-badge" id="df-card-badge">Flagship Portal</span>
+          <span class="df-card-zone" id="df-card-zone">B2B Exhibition Boulevard</span>
+        </div>
+        <h3 class="df-card-title" id="df-card-title">PT Pamerindo Indonesia</h3>
+        <div class="df-card-sub" id="df-card-sub">Informa Markets Asia • 500K+ Trade Visitors</div>
+        <p class="df-card-desc" id="df-card-desc">
+          The primary digital gateway for Indonesia’s leading trade exhibition organizer, connecting 200+ international events.
+        </p>
+        <div class="df-card-tags" id="df-card-tags"></div>
+        <div class="df-card-actions">
+          <button type="button" class="df-action-btn primary" id="df-card-primary-btn">
+            <i class="fa-solid fa-microchip me-1"></i> Open Case Study <span class="df-key-hint">[E]</span>
+          </button>
+          <a href="https://www.pamerindo.com" target="_blank" rel="noopener noreferrer" class="df-action-btn secondary" id="df-card-visit-btn">
+            Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>
+          </a>
+          <button type="button" class="df-action-btn secondary" id="df-card-next-btn" title="Auto-drive to next billboard">
+            Next Stop <i class="fa-solid fa-forward-step ms-1"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop Controls Hint Bar -->
+    <div class="drivefolio-controls-bar">
+      <span><kbd class="df-kbd">W</kbd><kbd class="df-kbd">A</kbd><kbd class="df-kbd">S</kbd><kbd class="df-kbd">D</kbd> or <kbd class="df-kbd">Arrows</kbd> Drive</span>
+      <span><kbd class="df-kbd">Shift</kbd> Turbo Boost</span>
+      <span><kbd class="df-kbd">Space</kbd> Brake</span>
+      <span><kbd class="df-kbd">Click</kbd> Road / Billboard to Auto-Drive</span>
+      <span><kbd class="df-kbd">E</kbd> Open Case Study</span>
+    </div>
+
+    <!-- Mobile / Tablet Virtual Touch Controls -->
+    <div class="df-mobile-controls">
+      <div class="df-joystick-zone" id="df-joystick-zone" aria-label="Touch Steering Joystick">
+        <div class="df-joystick-knob" id="df-joystick-knob"></div>
+      </div>
+      <button type="button" class="df-mobile-boost-btn" id="df-mobile-boost-btn">
+        <i class="fa-solid fa-bolt"></i>
+        <span>TURBO</span>
+      </button>
+    </div>
+  </section>
 
   <!-- ==========================================================================
        MASTHEAD (HERO SECTION)
@@ -1334,10 +1470,47 @@
     </div>
   </div>
 
+  <!-- ==========================================================================
+       3D ISLAND POSTCARD SNAPSHOT MODAL
+       ========================================================================== -->
+  <div class="modal-backdrop-custom" id="postcard-modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-dialog-custom postcard-dialog-custom">
+      <div class="modal-header-custom">
+        <div>
+          <span class="badge bg-warning text-dark mb-1"><i class="fa-solid fa-camera-retro me-1"></i> Island Souvenir</span>
+          <h4 class="h5 mb-0 text-white">Drivefolio 3D Island Postcard</h4>
+        </div>
+        <button class="modal-close-btn" id="postcard-close-btn" aria-label="Close postcard modal">
+          <i class="fa-solid fa-xmark"></i>
+        </button>
+      </div>
+
+      <div class="modal-body-custom text-center">
+        <div class="postcard-preview-frame mb-3">
+          <img id="postcard-preview-img" src="" alt="Drivefolio Island Postcard Snapshot" />
+        </div>
+        <p class="small text-muted mb-0" id="postcard-caption-text">
+          Greetings from Rikkardo L. Tobing's 3D Drivefolio Island • Jakarta, ID
+        </p>
+      </div>
+
+      <div class="p-3 border-top border-secondary d-flex justify-content-between align-items-center bg-black bg-opacity-50">
+        <span class="small text-muted"><i class="fa-solid fa-car-side me-1 text-warning"></i> Drivefolio 3D Snapshot Engine</span>
+        <a href="#" id="postcard-download-btn" download="Rikkardo-Drivefolio-Postcard.png" class="btn btn-blue py-2 px-3">
+          <i class="fa-solid fa-download me-1"></i> Save Postcard PNG
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Three.js WebGL 3D Engine (r128) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
   <!-- Bootstrap 5.3.3 JS Bundle -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <!-- Custom Application JS -->
   <script src="js/main.js?v=10.0"></script>
+  <!-- Drivefolio 3D Island Controller -->
+  <script src="js/drivefolio-3d.js?v=1.0"></script>
 </body>
 
 </html>
