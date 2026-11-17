@@ -27,7 +27,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
   <!-- Custom Theme CSS -->
-  <link rel="stylesheet" href="css/style.css?v=10.0" />
+  <link rel="stylesheet" href="css/style.css?v=12.0" />
 </head>
 
 <body id="page-top">
@@ -101,15 +101,11 @@
 
     <!-- Top HUD Bar -->
     <div class="drivefolio-hud-top">
-      <!-- Left Group: View Switcher & Visited Tracker -->
+      <!-- Left Group: Brand, Visited Tracker & GPS -->
       <div class="df-hud-group">
-        <div class="df-mode-switcher" role="group" aria-label="Portfolio Mode Switcher">
-          <button type="button" class="df-mode-btn active" id="df-mode-3d-btn" title="Interactive 3D Island Mode">
-            <i class="fa-solid fa-car-side"></i> 3D Island Drive
-          </button>
-          <button type="button" class="df-mode-btn" id="df-mode-classic-btn" title="Scroll to Full Portfolio Dossier">
-            <i class="fa-solid fa-table-columns"></i> Classic Dossier
-          </button>
+        <div class="df-pill df-brand-pill">
+          <i class="fa-solid fa-compass-drafting text-warning"></i>
+          <span>Rikkardo L. Tobing</span>
         </div>
 
         <div class="df-pill df-visited-pill" title="Visited Case Study Billboards">
@@ -119,19 +115,38 @@
             <div class="df-visited-bar-fill" id="drivefolio-visited-bar"></div>
           </div>
         </div>
-      </div>
 
-      <!-- Center Group: GPS Quick Teleport / Auto-Drive Selector -->
-      <div class="df-hud-group">
-        <select id="df-gps-select" class="df-gps-select" aria-label="GPS Teleport to Project Billboard">
-          <option value="">📍 GPS Drive to Stop...</option>
+        <select id="df-gps-select" class="df-gps-select" aria-label="GPS Teleport to Stop">
+          <option value="">📍 GPS Teleport (16 Stops)...</option>
         </select>
       </div>
 
-      <!-- Right Group: Autopilot, Time of Day, Car Paint, Postcard, Sound -->
+      <!-- Center Group: Multi-Island Destinations ("Ke Tempat Lain") -->
+      <div class="df-hud-group df-zones-nav" role="navigation" aria-label="Island Destinations">
+        <button type="button" class="df-pill df-btn active" id="df-zone-main-btn" data-island-jump="main" title="Drive on Main Circular Project Circuit">
+          <i class="fa-solid fa-road"></i> Main Circuit
+        </button>
+        <button type="button" class="df-pill df-btn" data-district-open="about" title="Drive to North Island: Profile, About, Services & Tech Stack">
+          <i class="fa-solid fa-user-astronaut"></i> North: About &amp; Stack
+        </button>
+        <button type="button" class="df-pill df-btn" data-district-open="projects" title="Open Full 12 Case Studies Catalog">
+          <i class="fa-solid fa-layer-group"></i> 12 Projects
+        </button>
+        <button type="button" class="df-pill df-btn" data-district-open="stories" title="Drive to East Island: 9 Jakarta Visual Stories">
+          <i class="fa-solid fa-camera"></i> East: Stories (9)
+        </button>
+        <button type="button" class="df-pill df-btn" data-district-open="journey" title="Drive to South Island: Experience, Gunadarma & Resume">
+          <i class="fa-solid fa-award"></i> South: Journey &amp; CV
+        </button>
+        <button type="button" class="df-pill df-btn" data-district-open="contact" title="Drive to West Island: Direct Contact & Message Tower">
+          <i class="fa-solid fa-satellite-dish"></i> West: Contact
+        </button>
+      </div>
+
+      <!-- Right Group: Autopilot, Time of Day, Vehicle, Paint, Postcard, Sound -->
       <div class="df-hud-group">
-        <button type="button" class="df-pill df-btn" id="df-autopilot-btn" title="Automatically drive through all project billboards">
-          <i class="fa-solid fa-route me-1"></i> Autopilot Tour
+        <button type="button" class="df-pill df-btn" id="df-autopilot-btn" title="Automatically drive through all stops across the islands">
+          <i class="fa-solid fa-route me-1"></i> Autopilot
         </button>
 
         <button type="button" class="df-pill df-btn" id="df-time-btn" title="Switch Day / Sunset / Night Cycle">
@@ -229,6 +244,49 @@
       </button>
     </div>
   </section>
+
+  <!-- ==========================================================================
+       IN-GAME ISLAND DISTRICT OVERLAY WINDOW (OPENS WHEN VISITING ISLANDS)
+       ========================================================================== -->
+  <div class="df-district-overlay" id="df-district-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="df-district-window">
+      <!-- Sticky In-Game District Header & Tab Bar -->
+      <div class="df-district-header">
+        <div class="d-flex align-items-center gap-3 flex-wrap">
+          <span class="df-district-badge" id="df-district-badge"><i class="fa-solid fa-island-tropical me-1"></i> NORTH ISLAND LAB</span>
+          <h3 class="df-district-heading mb-0" id="df-district-heading">About, Services &amp; Tech Stack</h3>
+        </div>
+
+        <div class="df-district-tabs">
+          <button type="button" class="df-dist-tab active" data-dist-tab="about">
+            <i class="fa-solid fa-user-astronaut"></i> About &amp; Stack
+          </button>
+          <button type="button" class="df-dist-tab" data-dist-tab="projects">
+            <i class="fa-solid fa-layer-group"></i> All 12 Projects
+          </button>
+          <button type="button" class="df-dist-tab" data-dist-tab="stories">
+            <i class="fa-solid fa-camera"></i> Visual Stories (9)
+          </button>
+          <button type="button" class="df-dist-tab" data-dist-tab="journey">
+            <i class="fa-solid fa-award"></i> Journey &amp; CV
+          </button>
+          <button type="button" class="df-dist-tab" data-dist-tab="contact">
+            <i class="fa-solid fa-satellite-dish"></i> Contact
+          </button>
+        </div>
+
+        <div class="d-flex align-items-center gap-2">
+          <button type="button" class="df-pill df-btn" id="df-district-drive-here-btn" title="Drive 3D Car to this Island">
+            <i class="fa-solid fa-location-arrow me-1"></i> Drive Car Here
+          </button>
+          <button type="button" class="df-district-close-btn" id="df-district-close-btn" title="Return to 3D Island Driving (Esc)">
+            <i class="fa-solid fa-xmark me-1"></i> Back to 3D Drive
+          </button>
+        </div>
+      </div>
+
+      <!-- Scrollable District Content Body -->
+      <div class="df-district-body" id="df-district-body">
 
   <!-- ==========================================================================
        MASTHEAD (HERO SECTION)
@@ -1406,6 +1464,10 @@
     </div>
   </footer>
 
+      </div><!-- /.df-district-body -->
+    </div><!-- /.df-district-window -->
+  </div><!-- /#df-district-overlay -->
+
   <!-- ==========================================================================
        TECHNICAL BLUEPRINT ARCHITECTURE MODAL
        ========================================================================== -->
@@ -1514,7 +1576,7 @@
   <!-- Custom Application JS -->
   <script src="js/main.js?v=10.0"></script>
   <!-- Drivefolio 3D Island Controller -->
-  <script src="js/drivefolio-3d.js?v=2.0"></script>
+  <script src="js/drivefolio-3d.js?v=3.0"></script>
 </body>
 
 </html>

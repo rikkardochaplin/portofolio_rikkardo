@@ -1,26 +1,41 @@
 /* ==========================================================================
-   DRIVEFOLIO 3D ISLAND ENGINE v2.0 — RIKKARDO L. TOBING EDITION
-   Symmetrical Circular Resort & Circuit Island + High-Detail Sculpted 3D Cars
-   (MeshPhysicalMaterial Clearcoat Paint, Wheel Arches, Alloy Rims, Brake Calipers,
-   Grand Circular Boulevard, 4 Radial Avenues, Central Fountain Rotunda & Lighthouse)
+   DRIVEFOLIO 3D ARCHIPELAGO ENGINE v3.0 — RIKKARDO L. TOBING EDITION
+   100% Fullscreen 3D World (Zero Page Scroll)
+   - Main Circular Project Circuit Island (12 Case Study Billboards, 3 per Quadrant)
+   - 4 Grand Ocean Bridges (North, East, South, West)
+   - 4 Dedicated Satellite Islands ("Ke Tempat Lain"):
+       * NORTH ISLAND: About, Services & Tech Stack Lab
+       * EAST ISLAND:  Jakarta Visual Stories & Photography Vista (9 Stories)
+       * SOUTH ISLAND: Career Journey, Universitas Gunadarma & Certifications Hall
+       * WEST ISLAND:  Executive Contact Tower, Helipad & Rotating Lighthouse
+   - 3 Sculpted Clearcoat 3D Vehicles (GT Supercar, Cyber 4x4 SUV, Aero Hypercar)
    ========================================================================== */
 
 (function () {
   'use strict';
 
-  // ── Circle Geometry Constants ──
-  const ISLAND_RADIUS = 148;
+  // ── Archipelago Geometry Constants ──
+  const MAIN_ISLAND_RADIUS = 138;
   const OUTER_ROAD_RADIUS = 102;
   const OUTER_ROAD_WIDTH = 14;
   const INNER_RING_RADIUS = 34;
+  const SAT_ISLAND_DIST = 200;
+  const SAT_ISLAND_RADIUS = 33;
 
-  // ── Complete Island Stops & Billboards Dataset (Evenly Spaced 360° Circle) ──
-  const ISLAND_STOPS = [
+  // 12 Project Case Studies placed symmetrically on Main Circular Island (3 per quadrant, avoiding 0°, 90°, 180°, 270° bridges)
+  const PROJECT_Angles_Deg = [
+    22.5, 45.0, 67.5,     // Quadrant 1 (SE)
+    112.5, 135.0, 157.5,  // Quadrant 2 (SW)
+    202.5, 225.0, 247.5,  // Quadrant 3 (NW)
+    292.5, 315.0, 337.5   // Quadrant 4 (NE)
+  ];
+
+  const PROJECT_STOPS = [
     {
       id: 'pamerindo',
       type: 'project',
       category: 'b2b',
-      zone: 'B2B Exhibition Boulevard',
+      zone: 'Main Circuit • B2B Boulevard',
       badge: 'Flagship Corporate Portal',
       title: 'PT Pamerindo Indonesia',
       subtitle: 'Informa Markets Asia • 500K+ Trade Visitors • 99.9% Uptime SLA',
@@ -34,7 +49,7 @@
       id: 'nexusagent',
       type: 'project',
       category: 'system',
-      zone: 'AI & Enterprise District',
+      zone: 'Main Circuit • AI & Enterprise',
       badge: 'Autonomous AI & Observability',
       title: 'NexusAgent & PamerAi Ecosystem',
       subtitle: 'FastAPI • Python 3.10+ • ReAct Loop • Cost Tracker ($/Rp)',
@@ -48,7 +63,7 @@
       id: 'orion-erp',
       type: 'project',
       category: 'system',
-      zone: 'AI & Enterprise District',
+      zone: 'Main Circuit • AI & Enterprise',
       badge: 'Enterprise ERP & AS/400',
       title: 'Orion ERP & IBM iSeries Simulator',
       subtitle: 'IBM AS/400 • DB2 for i • RPG IV Free Format • MES & MRP',
@@ -62,7 +77,7 @@
       id: 'cv-examiner',
       type: 'project',
       category: 'system',
-      zone: 'AI & Enterprise District',
+      zone: 'Main Circuit • AI & Enterprise',
       badge: 'AI Career Intelligence SaaS',
       title: 'CV Examiner AI Pro Platform',
       subtitle: 'GPT-4o Engine • React 18 • FastAPI • Semantic ATS Scoring',
@@ -76,7 +91,7 @@
       id: 'monitor-tablet',
       type: 'project',
       category: 'system',
-      zone: 'AI & Enterprise District',
+      zone: 'Main Circuit • AI & Enterprise',
       badge: 'Enterprise IoT Telemetry',
       title: 'Enterprise IoT Remote Hub',
       subtitle: 'Sub-200ms WebSocket Hub • Kotlin Android & Windows Kiosks',
@@ -87,24 +102,10 @@
       accent: '#10B981'
     },
     {
-      id: 'about-scale',
-      type: 'hub',
-      category: 'about',
-      zone: 'Engineering Hub',
-      badge: 'About & Core Pillars',
-      title: 'Bridging Web Engineering & Tech Ops',
-      subtitle: '4 Core Pillars: High-Traffic Scale • Governance • SEO 95+ • Practical AI',
-      desc: 'Computer Engineering graduate from Universitas Gunadarma & Data/Tech Support Executive at Informa Markets Asia building resilient digital ecosystems.',
-      img: 'assets/images/profile.png',
-      sectionId: '#about',
-      tags: ['100K+ Concurrency', 'GDPR Governance', 'Core Web Vitals 95+', 'Production AI'],
-      accent: '#D9624A'
-    },
-    {
       id: 'fhi',
       type: 'project',
       category: 'b2b',
-      zone: 'B2B Exhibition Boulevard',
+      zone: 'Main Circuit • B2B Boulevard',
       badge: 'B2B Trade Exhibition',
       title: 'Food & Hospitality Indonesia (FHI)',
       subtitle: 'JIEXPO Jakarta • 40,000+ Trade Attendees • 700+ Exhibitors',
@@ -118,7 +119,7 @@
       id: 'labindo',
       type: 'project',
       category: 'b2b',
-      zone: 'B2B Exhibition Boulevard',
+      zone: 'Main Circuit • B2B Boulevard',
       badge: 'Scientific B2B Portal',
       title: 'Lab Indonesia',
       subtitle: 'ICE BSD • 22,000+ Attendees • Scientific Instrumentation',
@@ -129,24 +130,10 @@
       accent: '#3B82F6'
     },
     {
-      id: 'service-web',
-      type: 'hub',
-      category: 'services',
-      zone: 'Capabilities & Stack Garage',
-      badge: 'Services & Tech Stack',
-      title: 'Core Engineering Capabilities',
-      subtitle: 'Web Architecture • Legacy ERP • AI Observability • Tech Operations',
-      desc: 'Full-stack delivery combining WordPress Enterprise, PHP 8.2, Python FastAPI, ReAct AI Agents, IBM AS/400 DB2, WebSockets, and Technical SEO.',
-      img: 'assets/images/project-pamerindo.png',
-      sectionId: '#services',
-      tags: ['WordPress & PHP 8.2', 'Python & FastAPI', 'IBM AS/400 DB2', 'WebSockets & SEO'],
-      accent: '#76948C'
-    },
-    {
       id: 'fhtbali',
       type: 'project',
       category: 'b2b',
-      zone: 'B2B Exhibition Boulevard',
+      zone: 'Main Circuit • B2B Boulevard',
       badge: 'Hospitality & Tourism B2B',
       title: 'Food, Hotel & Tourism Bali (FHTB)',
       subtitle: 'BNDCC Nusa Dua Bali • Asia-Pacific Resort Hub',
@@ -160,7 +147,7 @@
       id: 'cosmobeaute',
       type: 'project',
       category: 'b2b',
-      zone: 'B2B Exhibition Boulevard',
+      zone: 'Main Circuit • B2B Boulevard',
       badge: 'Beauty & Aesthetics B2B',
       title: 'Cosmobeauté Indonesia',
       subtitle: 'ICE BSD • Indonesia’s Largest Beauty & Aesthetic Tech Hub',
@@ -171,25 +158,10 @@
       accent: '#EC4899'
     },
     {
-      id: 'stories-hub',
-      type: 'stories',
-      category: 'stories',
-      zone: 'Jakarta Photography Vista',
-      badge: '9 Visual Stories & Articles',
-      title: 'Urban Stories & Perspectives',
-      subtitle: 'Street Photography • Golden Hour • SCBD • Kebayoran • JIEXPO',
-      desc: 'Moments captured through Rikkardo’s lens around Jakarta — everyday street scenes, golden hours, transit geometry, and quiet urban observations.',
-      img: 'Photo/f732741c-ebf2-44c7-a695-bb22e67b1b09.jpeg',
-      sectionId: '#stories',
-      photoIndex: 0,
-      tags: ['Gold in the Mist', 'SCBD Sunset', 'Kebayoran Station', 'JIEXPO Dusk'],
-      accent: '#F97316'
-    },
-    {
       id: 'vapefair',
       type: 'project',
       category: 'b2b',
-      zone: 'B2B Exhibition Boulevard',
+      zone: 'Main Circuit • B2B Boulevard',
       badge: 'Industry Trade Hub',
       title: 'Vape Fair Indonesia',
       subtitle: 'Jakarta • International Trade & Consumer Expo',
@@ -203,7 +175,7 @@
       id: 'cloudsfest',
       type: 'project',
       category: 'b2b',
-      zone: 'B2B Exhibition Boulevard',
+      zone: 'Main Circuit • B2B Boulevard',
       badge: 'Lifestyle & Trade Show',
       title: 'Clouds Fest',
       subtitle: 'Southeast Asia • Pamerindo · Informa Markets',
@@ -217,7 +189,7 @@
       id: 'beautefestival',
       type: 'project',
       category: 'b2b',
-      zone: 'B2B Exhibition Boulevard',
+      zone: 'Main Circuit • B2B Boulevard',
       badge: 'Beauty Lifestyle D2C',
       title: 'Beauté Festival',
       subtitle: 'Jakarta • Retail, Influencer Schedules & Brand Activations',
@@ -226,29 +198,111 @@
       url: 'https://www.beautefestival.com',
       tags: ['WordPress', 'D2C Portal', 'Brand Activations'],
       accent: '#F43F5E'
-    },
-    {
-      id: 'contact-hub',
-      type: 'contact',
-      category: 'contact',
-      zone: 'Executive Dispatch & Journey',
-      badge: 'Journey & Direct Contact',
-      title: 'Experience, Education & Contact',
-      subtitle: 'Informa Markets • Univ. Gunadarma (GPA 3.78) • Let’s Collaborate',
-      desc: 'Connect directly via Email (rikkardotobing1@gmail.com), WhatsApp (+62 822-3174-5213), or dispatch an inquiry message straight from the island.',
-      img: 'assets/images/profile.png',
-      sectionId: '#contact',
-      tags: ['rikkardotobing1@gmail.com', '+62 822-3174-5213', 'Jakarta, ID 🇮🇩', 'Resume PDF'],
-      accent: '#22C55E'
     }
-  ].map((stop, idx, arr) => ({
+  ].map((stop, idx) => ({
     ...stop,
-    // Evenly distribute all 16 stops around the 360-degree circular boulevard!
-    // Offset slightly from 0° so cardinal arches at 0°, 90°, 180°, 270° sit cleanly between stops
-    angle: ((idx + 0.5) / arr.length) * Math.PI * 2
+    angle: (PROJECT_Angles_Deg[idx] * Math.PI) / 180
   }));
 
-  // Metallic Automotive Paint Presets
+  // 4 Satellite Island Hubs ("Ke Tempat Lain" across the 4 Ocean Bridges!)
+  const SATELLITE_ISLANDS = [
+    {
+      id: 'north-about-island',
+      districtTab: 'about',
+      type: 'island-hub',
+      compass: 'NORTH ISLAND',
+      zone: 'North Island • Engineering Sanctuary',
+      badge: 'About, Services & Tech Stack',
+      title: 'About Me, Services & Tech Stack Lab',
+      subtitle: '4 Core Pillars • 4 Engineering Services • Full Skills Matrix',
+      desc: 'Explore Rikkardo’s executive profile, 4 engineering pillars, core capabilities (Web, Legacy AS/400 ERP, AI Observability, Tech Ops), and full tech stack.',
+      img: 'assets/images/profile.png',
+      tags: ['WordPress & PHP 8.2', 'Python & FastAPI', 'IBM AS/400 DB2', 'Core Web Vitals 95+'],
+      accent: '#D9624A',
+      angle: Math.PI * 1.5, // North (0, -200)
+      cx: 0,
+      cz: -SAT_ISLAND_DIST,
+      parkX: 0,
+      parkZ: -(SAT_ISLAND_DIST - 12),
+      boardX: 0,
+      boardZ: -(SAT_ISLAND_DIST + 14),
+      lookX: 0,
+      lookZ: -100
+    },
+    {
+      id: 'east-stories-island',
+      districtTab: 'stories',
+      type: 'island-hub',
+      compass: 'EAST ISLAND',
+      zone: 'East Island • Photography Vista',
+      badge: '9 Visual Stories & Articles',
+      title: 'Urban Stories & Perspectives Gallery',
+      subtitle: 'Jakarta Street Photography • Golden Hour • SCBD • Kebayoran • JIEXPO',
+      desc: 'Step into the photography exhibition island showcasing all 9 visual stories captured around Jakarta with fullscreen lightbox & full narrative articles.',
+      img: 'Photo/f732741c-ebf2-44c7-a695-bb22e67b1b09.jpeg',
+      tags: ['Gold in the Mist', 'SCBD Sunset', 'Kebayoran Station', 'JIEXPO Dusk'],
+      accent: '#F97316',
+      angle: 0, // East (+200, 0)
+      cx: SAT_ISLAND_DIST,
+      cz: 0,
+      parkX: SAT_ISLAND_DIST - 12,
+      parkZ: 0,
+      boardX: SAT_ISLAND_DIST + 14,
+      boardZ: 0,
+      lookX: 100,
+      lookZ: 0
+    },
+    {
+      id: 'south-journey-island',
+      districtTab: 'journey',
+      type: 'island-hub',
+      compass: 'SOUTH ISLAND',
+      zone: 'South Island • Hall of Journey',
+      badge: 'Experience, Education & CV',
+      title: 'Career Journey & Gunadarma Foundation',
+      subtitle: 'Informa Markets Asia • Pamerindo • Univ. Gunadarma (GPA 3.78/4.00)',
+      desc: 'Inspect full work experience records, Computer Engineering degrees (YOLOv8 & IoT Theses), Fortinet/Azure/ServiceNow certifications, and Resume PDF.',
+      img: 'assets/images/project-pamerindo.png',
+      tags: ['Informa Markets Asia', 'GPA 3.78 & 3.77', 'Fortinet NSE 1 & 2', 'Azure & ServiceNow'],
+      accent: '#8B5CF6',
+      angle: Math.PI * 0.5, // South (0, +200)
+      cx: 0,
+      cz: SAT_ISLAND_DIST,
+      parkX: 0,
+      parkZ: SAT_ISLAND_DIST - 12,
+      boardX: 0,
+      boardZ: SAT_ISLAND_DIST + 14,
+      lookX: 0,
+      lookZ: 100
+    },
+    {
+      id: 'west-contact-island',
+      districtTab: 'contact',
+      type: 'island-hub',
+      compass: 'WEST ISLAND',
+      zone: 'West Island • Lighthouse & Dispatch',
+      badge: 'Direct Contact & Collaboration',
+      title: 'Executive Contact & Dispatch Tower',
+      subtitle: 'rikkardotobing1@gmail.com • WhatsApp +62 822-3174-5213 • Jakarta 🇮🇩',
+      desc: 'Connect directly via Email, WhatsApp, LinkedIn, GitHub, or send a live inquiry straight from the West Island Communications Tower.',
+      img: 'assets/images/profile.png',
+      tags: ['Direct Email', 'WhatsApp Chat', 'Live Message Form', 'Jakarta, Indonesia'],
+      accent: '#10B981',
+      angle: Math.PI, // West (-200, 0)
+      cx: -SAT_ISLAND_DIST,
+      cz: 0,
+      parkX: -(SAT_ISLAND_DIST - 12),
+      parkZ: 0,
+      boardX: -(SAT_ISLAND_DIST + 14),
+      boardZ: 0,
+      lookX: -100,
+      lookZ: 0
+    }
+  ];
+
+  // Combined 16 stops (12 Main Island Projects + 4 Satellite Island Portals)
+  const ALL_STOPS = [...PROJECT_STOPS, ...SATELLITE_ISLANDS];
+
   const CAR_COLORS = [
     { name: 'Rosso Corsa Red', hex: 0xE11D48, css: '#E11D48' },
     { name: 'Solaris Gold', hex: 0xF59E0B, css: '#F59E0B' },
@@ -258,7 +312,6 @@
     { name: 'Alpine Pearl White', hex: 0xF8FAFC, css: '#F8FAFC' }
   ];
 
-  // 3 Sculpted 3D Vehicle Archetypes
   const VEHICLE_TYPES = [
     { id: 'supercar', label: 'GT Supercar', icon: 'fa-car-side' },
     { id: 'suv', label: 'Cyber 4x4 SUV', icon: 'fa-truck-monster' },
@@ -267,17 +320,34 @@
 
   const TIME_MODES = ['day', 'sunset', 'night'];
 
-  // Pure Circular Boulevard Parametric Function (R = 102)
   function getRoadPoint(t) {
     const x = Math.cos(t) * OUTER_ROAD_RADIUS;
     const z = Math.sin(t) * OUTER_ROAD_RADIUS;
-    // Unit tangent along increasing t
     const tx = -Math.sin(t);
     const tz = Math.cos(t);
-    // Outward unit normal (pointing away from island center)
     const nx = Math.cos(t);
     const nz = Math.sin(t);
     return { x, z, tx, tz, nx, nz };
+  }
+
+  // Check if (x, z) is on Main Island, any of the 4 Bridges, or any of the 4 Satellite Islands
+  function isDrivableSurface(x, z) {
+    const rMain = Math.hypot(x, z);
+    // Avoid central fountain basin (r <= 15.5)
+    if (rMain <= 15.5) return false;
+    // Main circular island
+    if (rMain < 134.5) return true;
+    // North/South Bridges (along Z axis, |x| < 6.8, |z| between 128 and 175)
+    if (Math.abs(x) < 6.8 && Math.abs(z) >= 126 && Math.abs(z) <= 176) return true;
+    // East/West Bridges (along X axis, |z| < 6.8, |x| between 128 and 175)
+    if (Math.abs(z) < 6.8 && Math.abs(x) >= 126 && Math.abs(x) <= 176) return true;
+    // 4 Satellite Islands
+    for (const sat of SATELLITE_ISLANDS) {
+      if (Math.hypot(x - sat.cx, z - sat.cz) < SAT_ISLAND_RADIUS - 2) {
+        return true;
+      }
+    }
+    return false;
   }
 
   document.addEventListener('DOMContentLoaded', () => {
@@ -287,7 +357,6 @@
   });
 
   function initDrivefolioWorld(container) {
-    // ── State ──
     const visitedProjects = new Set(JSON.parse(localStorage.getItem('drivefolio_visited') || '[]'));
     let activeStop = null;
     let autopilotActive = false;
@@ -299,6 +368,7 @@
     let audioCtx = null;
     let engineOsc = null;
     let engineGain = null;
+    let currentDistrictTab = 'about';
 
     const hour = new Date().getHours();
     let timeModeIndex = (hour >= 19 || hour < 6) ? 2 : (hour >= 16 && hour < 19) ? 1 : 0;
@@ -306,13 +376,12 @@
     // ── Scene, Camera, Renderer ──
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0x7EC8E3);
-    scene.fog = new THREE.FogExp2(0x7EC8E3, 0.0018);
+    scene.fog = new THREE.FogExp2(0x7EC8E3, 0.0014);
 
-    // Create procedural studio reflection CubeTexture for metallic clearcoat car paint!
     const envTexture = createStudioEnvCubeTexture();
     scene.environment = envTexture;
 
-    const camera = new THREE.PerspectiveCamera(44, container.clientWidth / container.clientHeight, 0.5, 1000);
+    const camera = new THREE.PerspectiveCamera(44, container.clientWidth / container.clientHeight, 0.5, 1100);
     const renderer = new THREE.WebGLRenderer({
       antialias: true,
       preserveDrawingBuffer: true,
@@ -328,17 +397,17 @@
 
     // ── Lighting ──
     const hemiLight = new THREE.HemisphereLight(0xFFFFFF, 0x3B6E4C, 0.85);
-    hemiLight.position.set(0, 140, 0);
+    hemiLight.position.set(0, 160, 0);
     scene.add(hemiLight);
 
     const sunLight = new THREE.DirectionalLight(0xFFF8E7, 1.35);
-    sunLight.position.set(110, 145, 95);
+    sunLight.position.set(120, 165, 105);
     sunLight.castShadow = true;
     sunLight.shadow.mapSize.width = 2048;
     sunLight.shadow.mapSize.height = 2048;
     sunLight.shadow.camera.near = 15;
-    sunLight.shadow.camera.far = 450;
-    const shadowBound = 170;
+    sunLight.shadow.camera.far = 560;
+    const shadowBound = 240;
     sunLight.shadow.camera.left = -shadowBound;
     sunLight.shadow.camera.right = shadowBound;
     sunLight.shadow.camera.top = shadowBound;
@@ -346,22 +415,20 @@
     sunLight.shadow.bias = -0.0005;
     scene.add(sunLight);
 
-    // Sun / Moon Orb
     const celestialOrb = new THREE.Mesh(
-      new THREE.SphereGeometry(15, 28, 28),
+      new THREE.SphereGeometry(16, 28, 28),
       new THREE.MeshBasicMaterial({ color: 0xFFE875 })
     );
-    celestialOrb.position.set(240, 155, -250);
+    celestialOrb.position.set(270, 175, -280);
     scene.add(celestialOrb);
 
-    // Night Starfield Dome
     const starsGroup = createStarfield();
     starsGroup.visible = false;
     scene.add(starsGroup);
 
-    // ── Ocean, Turquoise Coral Lagoon & Concentric Wave Rings ──
+    // ── Ocean & Lagoon Reefs ──
     const oceanMesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(1800, 1800).rotateX(-Math.PI / 2),
+      new THREE.PlaneGeometry(2400, 2400).rotateX(-Math.PI / 2),
       new THREE.MeshStandardMaterial({
         color: 0x0E7490,
         roughness: 0.18,
@@ -372,22 +439,20 @@
     oceanMesh.receiveShadow = true;
     scene.add(oceanMesh);
 
-    // Shallow turquoise coral reef ring around circular island
     const lagoonMesh = new THREE.Mesh(
-      new THREE.RingGeometry(ISLAND_RADIUS - 2, ISLAND_RADIUS + 26, 96).rotateX(-Math.PI / 2),
+      new THREE.RingGeometry(MAIN_ISLAND_RADIUS + 8, MAIN_ISLAND_RADIUS + 34, 96).rotateX(-Math.PI / 2),
       new THREE.MeshBasicMaterial({
         color: 0x22D3EE,
         transparent: true,
-        opacity: 0.34,
+        opacity: 0.32,
         side: THREE.DoubleSide
       })
     );
     lagoonMesh.position.y = -2.05;
     scene.add(lagoonMesh);
 
-    // Animated shoreline white foam rings
     const foamRing1 = new THREE.Mesh(
-      new THREE.RingGeometry(ISLAND_RADIUS + 1.5, ISLAND_RADIUS + 3.8, 96).rotateX(-Math.PI / 2),
+      new THREE.RingGeometry(MAIN_ISLAND_RADIUS + 10.5, MAIN_ISLAND_RADIUS + 12.8, 96).rotateX(-Math.PI / 2),
       new THREE.MeshBasicMaterial({
         color: 0xF0FDFA,
         transparent: true,
@@ -398,34 +463,21 @@
     foamRing1.position.y = -1.95;
     scene.add(foamRing1);
 
-    const foamRing2 = new THREE.Mesh(
-      new THREE.RingGeometry(ISLAND_RADIUS + 7, ISLAND_RADIUS + 8.6, 96).rotateX(-Math.PI / 2),
-      new THREE.MeshBasicMaterial({
-        color: 0xE0F2FE,
-        transparent: true,
-        opacity: 0.35,
-        side: THREE.DoubleSide
-      })
-    );
-    foamRing2.position.y = -1.98;
-    scene.add(foamRing2);
-
-    // ── Symmetrical Circular Island World ──
+    // ── Main Island + 4 Bridges + 4 Satellite Islands Group ──
     const islandGroup = new THREE.Group();
     scene.add(islandGroup);
 
-    // Tier 1: Circular Golden Sand Beach Base
+    // Main Circular Sand & Grass Base
     const sandCyl = new THREE.Mesh(
-      new THREE.CylinderGeometry(ISLAND_RADIUS, ISLAND_RADIUS + 5, 2.3, 96),
+      new THREE.CylinderGeometry(MAIN_ISLAND_RADIUS + 9, MAIN_ISLAND_RADIUS + 14, 2.3, 96),
       new THREE.MeshStandardMaterial({ color: 0xF3DFB6, roughness: 0.86 })
     );
     sandCyl.position.y = -1.1;
     sandCyl.receiveShadow = true;
     islandGroup.add(sandCyl);
 
-    // Tier 2: Architectural Stone Retaining Wall & Main Emerald Parkland Disc
     const stoneWallCyl = new THREE.Mesh(
-      new THREE.CylinderGeometry(138.5, 139.5, 1.3, 96),
+      new THREE.CylinderGeometry(MAIN_ISLAND_RADIUS + 0.5, MAIN_ISLAND_RADIUS + 1.5, 1.3, 96),
       new THREE.MeshStandardMaterial({ color: 0xD6D0C4, roughness: 0.7 })
     );
     stoneWallCyl.position.y = -0.35;
@@ -433,206 +485,88 @@
     islandGroup.add(stoneWallCyl);
 
     const grassCyl = new THREE.Mesh(
-      new THREE.CylinderGeometry(137.5, 138.2, 1.2, 96),
+      new THREE.CylinderGeometry(MAIN_ISLAND_RADIUS - 0.5, MAIN_ISLAND_RADIUS + 0.2, 1.2, 96),
       new THREE.MeshStandardMaterial({ color: 0x4EA860, roughness: 0.82 })
     );
     grassCyl.position.y = -0.25;
     grassCyl.receiveShadow = true;
     islandGroup.add(grassCyl);
 
-    // Invisible Raycast Plane for Click-to-Drive
+    // Invisible Raycast Plane covering the entire 5-Island Archipelago
     const raycastPlane = new THREE.Mesh(
-      new THREE.PlaneGeometry(400, 400).rotateX(-Math.PI / 2),
+      new THREE.PlaneGeometry(600, 600).rotateX(-Math.PI / 2),
       new THREE.MeshBasicMaterial({ visible: false })
     );
     raycastPlane.position.y = 0.38;
     scene.add(raycastPlane);
 
-    // ── Build Circular Boulevard, Rumble Curbs, 4 Radial Spokes & Central Rotunda ──
+    // ── Build Circular Highway, Central Rotunda, 4 Bridges & 4 Satellite Islands ──
     const fountainDrops = [];
-    let monumentGlobe = null;
-    let lighthouseBeamPivot = null;
-    let lighthouseSpotLight = null;
     const streetLampBulbs = [];
     const streetLampLights = [];
 
-    const worldRefs = buildCircularHighwayAndLandmarks(
+    const worldRefs = buildArchipelagoWorld(
       islandGroup,
       fountainDrops,
       streetLampBulbs,
       streetLampLights
     );
-    monumentGlobe = worldRefs.monumentGlobe;
-    lighthouseBeamPivot = worldRefs.lighthouseBeamPivot;
-    lighthouseSpotLight = worldRefs.lighthouseSpotLight;
+    const monumentGlobe = worldRefs.monumentGlobe;
+    const lighthouseBeamPivot = worldRefs.lighthouseBeamPivot;
+    const lighthouseSpotLight = worldRefs.lighthouseSpotLight;
 
-    // ── Build All 16 Symmetrical Outer-Ring Billboards ──
+    // ── Build 12 Project Billboards on Main Island + 4 Satellite Island Portals ──
     const stopObjects = [];
     const textureLoader = new THREE.TextureLoader();
 
-    ISLAND_STOPS.forEach((stop, index) => {
+    // 1. 12 Project Billboards on Main Circular Boulevard
+    PROJECT_STOPS.forEach((stop, index) => {
       const pt = getRoadPoint(stop.angle);
-      // Place all billboards symmetrically along the OUTER showcase ring (R = 122)
-      // facing inward toward the circular boulevard so the camera never gets blocked!
-      const billboardRadius = OUTER_ROAD_RADIUS + 18.5;
+      const billboardRadius = OUTER_ROAD_RADIUS + 18.2;
       const bx = pt.nx * billboardRadius;
       const bz = pt.nz * billboardRadius;
-
-      // Pit-stop trigger bay on the outer lane of the circular road
       const parkRadius = OUTER_ROAD_RADIUS + 4.4;
       const parkX = pt.nx * parkRadius;
       const parkZ = pt.nz * parkRadius;
-
-      const stopGroup = new THREE.Group();
-      stopGroup.position.set(bx, 0.35, bz);
-      // Face toward the approaching car on the circular boulevard
       const lookX = pt.x - pt.tx * 7;
       const lookZ = pt.z - pt.tz * 7;
-      stopGroup.lookAt(lookX, 0.35, lookZ);
-      islandGroup.add(stopGroup);
 
-      // Architectural Lay-By Stage Base
-      const stageBase = new THREE.Mesh(
-        new THREE.BoxGeometry(15.2, 0.45, 5.2),
-        new THREE.MeshStandardMaterial({ color: 0x25231F, roughness: 0.65 })
-      );
-      stageBase.position.set(0, 0.22, 0.8);
-      stageBase.receiveShadow = true;
-      stopGroup.add(stageBase);
-
-      const stageTrim = new THREE.Mesh(
-        new THREE.BoxGeometry(15.5, 0.14, 5.4),
-        new THREE.MeshStandardMaterial({
-          color: new THREE.Color(stop.accent),
-          emissive: new THREE.Color(stop.accent),
-          emissiveIntensity: 0.35
-        })
-      );
-      stageTrim.position.set(0, 0.46, 0.8);
-      stopGroup.add(stageTrim);
-
-      // Glowing Ground Pit-Stop Ring on Road
-      const ringMesh = new THREE.Mesh(
-        new THREE.RingGeometry(4.0, 4.75, 40).rotateX(-Math.PI / 2),
-        new THREE.MeshBasicMaterial({
-          color: new THREE.Color(stop.accent),
-          side: THREE.DoubleSide,
-          transparent: true,
-          opacity: 0.72
-        })
-      );
-      ringMesh.position.set(parkX, 0.44, parkZ);
-      islandGroup.add(ringMesh);
-
-      const discMesh = new THREE.Mesh(
-        new THREE.CircleGeometry(4.0, 40).rotateX(-Math.PI / 2),
-        new THREE.MeshBasicMaterial({
-          color: new THREE.Color(stop.accent),
-          transparent: true,
-          opacity: 0.15
-        })
-      );
-      discMesh.position.set(parkX, 0.42, parkZ);
-      islandGroup.add(discMesh);
-
-      // Twin Steel Gantry Columns
-      const pillarGeo = new THREE.CylinderGeometry(0.34, 0.42, 9.2, 16);
-      const pillarMat = new THREE.MeshStandardMaterial({
-        color: 0x1E293B,
-        metalness: 0.75,
-        roughness: 0.25
-      });
-      [-4.6, 4.6].forEach(px => {
-        const pillar = new THREE.Mesh(pillarGeo, pillarMat);
-        pillar.position.set(px, 4.6, 0);
-        pillar.castShadow = true;
-        stopGroup.add(pillar);
-      });
-
-      // Billboard Frame Casing
-      const boardWidth = 12.6;
-      const boardHeight = 7.3;
-      const frameMesh = new THREE.Mesh(
-        new THREE.BoxGeometry(boardWidth + 0.8, boardHeight + 0.8, 0.65),
-        new THREE.MeshStandardMaterial({
-          color: 0x18181B,
-          roughness: 0.35,
-          metalness: 0.45
-        })
-      );
-      frameMesh.position.set(0, 7.8, 0);
-      frameMesh.castShadow = true;
-      stopGroup.add(frameMesh);
-
-      // Glowing Accent Crown Bar
-      const topBarMesh = new THREE.Mesh(
-        new THREE.BoxGeometry(boardWidth + 1.1, 0.5, 0.88),
-        new THREE.MeshStandardMaterial({
-          color: new THREE.Color(stop.accent),
-          emissive: new THREE.Color(stop.accent),
-          emissiveIntensity: 0.32,
-          roughness: 0.25
-        })
-      );
-      topBarMesh.position.set(0, 7.8 + boardHeight * 0.5 + 0.4, 0);
-      stopGroup.add(topBarMesh);
-
-      // High-DPI Billboard Face Texture
-      const boardTexture = createBillboardCanvasTexture(stop, index + 1, textureLoader);
-      const faceMat = new THREE.MeshStandardMaterial({
-        map: boardTexture,
-        roughness: 0.22,
-        metalness: 0.05,
-        emissive: new THREE.Color(0xFFFFFF),
-        emissiveMap: boardTexture,
-        emissiveIntensity: 0.18
-      });
-
-      const frontFace = new THREE.Mesh(new THREE.PlaneGeometry(boardWidth, boardHeight), faceMat);
-      frontFace.position.set(0, 7.8, 0.35);
-      stopGroup.add(frontFace);
-
-      const backFace = new THREE.Mesh(new THREE.PlaneGeometry(boardWidth, boardHeight), faceMat);
-      backFace.position.set(0, 7.8, -0.35);
-      backFace.rotation.y = Math.PI;
-      stopGroup.add(backFace);
-
-      // Floating 3D Status Gem Above Billboard
-      const isVisited = visitedProjects.has(stop.id);
-      const markerMat = new THREE.MeshStandardMaterial({
-        color: isVisited ? 0x10B981 : new THREE.Color(stop.accent),
-        emissive: isVisited ? 0x059669 : new THREE.Color(stop.accent),
-        emissiveIntensity: 0.55,
-        roughness: 0.15,
-        metalness: 0.3
-      });
-      const markerMesh = new THREE.Mesh(new THREE.OctahedronGeometry(0.9, 0), markerMat);
-      markerMesh.position.set(0, 13.2, 0);
-      stopGroup.add(markerMesh);
-
-      // Symmetrical Ornamental Cypress Trees Flanking Each Billboard
-      [-6.8, 6.8].forEach(tx => {
-        const ornamentalTree = createOrnamentalTree(1.05);
-        ornamentalTree.position.set(tx, 0.2, 0.6);
-        stopGroup.add(ornamentalTree);
-      });
-
-      stopObjects.push({
+      const so = createBillboardStopObject(
+        islandGroup,
         stop,
         index,
         bx,
         bz,
         parkX,
         parkZ,
-        ringMesh,
-        discMesh,
-        markerMesh,
-        markerMat,
-        faceMat
-      });
+        lookX,
+        lookZ,
+        visitedProjects,
+        textureLoader
+      );
+      stopObjects.push(so);
     });
 
-    // ── Sky Clouds Ring ──
+    // 2. 4 Satellite Island Portal Landmarks ("Ke Tempat Lain")
+    SATELLITE_ISLANDS.forEach((satStop, idx) => {
+      const globalIdx = PROJECT_STOPS.length + idx;
+      const so = createBillboardStopObject(
+        islandGroup,
+        satStop,
+        globalIdx,
+        satStop.boardX,
+        satStop.boardZ,
+        satStop.parkX,
+        satStop.parkZ,
+        satStop.lookX,
+        satStop.lookZ,
+        visitedProjects,
+        textureLoader
+      );
+      stopObjects.push(so);
+    });
+
+    // ── Sky Clouds ──
     const cloudsGroup = new THREE.Group();
     scene.add(cloudsGroup);
     populateSkyClouds(cloudsGroup);
@@ -648,8 +582,8 @@
     waypointGroup.add(wpRing);
     scene.add(waypointGroup);
 
-    // ── Build Sculpted 3D Player Car (with Switchable Chassis!) ──
-    const startAngle = ISLAND_STOPS[0].angle - 0.055;
+    // ── Build Sculpted 3D Player Car ──
+    const startAngle = PROJECT_STOPS[0].angle - 0.055;
     const startPt = getRoadPoint(startAngle);
 
     const carRoot = new THREE.Group();
@@ -664,42 +598,37 @@
     carRoot.add(carBuilder.group);
 
     function rebuildPlayerVehicle() {
-      const prevHeadlightIntensity = carBuilder.headLightLeft.intensity;
+      const prevHl = carBuilder.headLightLeft.intensity;
       carRoot.remove(carBuilder.group);
       carBuilder = buildSculptedVehicle(
         VEHICLE_TYPES[vehicleTypeIndex].id,
         CAR_COLORS[carColorIndex].hex,
         envTexture
       );
-      carBuilder.headLightLeft.intensity = prevHeadlightIntensity;
-      carBuilder.headLightRight.intensity = prevHeadlightIntensity;
+      carBuilder.headLightLeft.intensity = prevHl;
+      carBuilder.headLightRight.intensity = prevHl;
       carRoot.add(carBuilder.group);
     }
 
-    // Car Physics State
     const carState = {
       x: startPt.x,
       z: startPt.z,
       heading: Math.atan2(startPt.tx, startPt.tz),
       speed: 0,
-      maxSpeed: 0.78,
-      boostMaxSpeed: 1.18,
-      accel: 0.024,
+      maxSpeed: 0.8,
+      boostMaxSpeed: 1.22,
+      accel: 0.025,
       ReverseMax: -0.38,
       friction: 0.962,
       steerAngle: 0,
       wheelRotation: 0
     };
 
-    // Exhaust & Nitro Flame Particle Pool + Tire Skid Marks Pool
+    // Exhaust & Skid Marks Pools
     const particles = [];
     const particleGeo = new THREE.SphereGeometry(0.28, 10, 10);
     for (let i = 0; i < 36; i++) {
-      const pMat = new THREE.MeshBasicMaterial({
-        color: 0xF8FAFC,
-        transparent: true,
-        opacity: 0
-      });
+      const pMat = new THREE.MeshBasicMaterial({ color: 0xF8FAFC, transparent: true, opacity: 0 });
       const pMesh = new THREE.Mesh(particleGeo, pMat);
       pMesh.visible = false;
       scene.add(pMesh);
@@ -707,14 +636,9 @@
     }
     let particleSpawnTimer = 0;
 
-    // Tire Skid Marks Pool
     const skidMarks = [];
     const skidGeo = new THREE.PlaneGeometry(0.42, 1.3).rotateX(-Math.PI / 2);
-    const skidMat = new THREE.MeshBasicMaterial({
-      color: 0x111318,
-      transparent: true,
-      opacity: 0.45
-    });
+    const skidMat = new THREE.MeshBasicMaterial({ color: 0x111318, transparent: true, opacity: 0.45 });
     for (let i = 0; i < 60; i++) {
       const sm = new THREE.Mesh(skidGeo, skidMat);
       sm.visible = false;
@@ -724,47 +648,48 @@
     let skidIndex = 0;
 
     // ── Input Controls ──
-    const keys = {
-      forward: false,
-      backward: false,
-      left: false,
-      right: false,
-      boost: false,
-      brake: false
-    };
+    const keys = { forward: false, backward: false, left: false, right: false, boost: false, brake: false };
     let joystickVector = { x: 0, y: 0, active: false };
 
     window.addEventListener('keydown', (e) => {
       if (['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement?.tagName)) return;
-      const modalOpen = document.getElementById('arch-modal-backdrop')?.classList.contains('active') ||
-                        document.getElementById('lightbox-backdrop')?.classList.contains('active') ||
-                        document.getElementById('postcard-modal-backdrop')?.classList.contains('active');
-      if (modalOpen) return;
+
+      const districtOverlay = document.getElementById('df-district-overlay');
+      if (e.code === 'Escape' && districtOverlay?.classList.contains('active')) {
+        closeDistrictOverlay();
+        return;
+      }
+
+      const anyModalOpen = document.getElementById('arch-modal-backdrop')?.classList.contains('active') ||
+                           document.getElementById('lightbox-backdrop')?.classList.contains('active') ||
+                           document.getElementById('postcard-modal-backdrop')?.classList.contains('active') ||
+                           districtOverlay?.classList.contains('active');
+      if (anyModalOpen) return;
 
       switch (e.code) {
         case 'KeyW':
         case 'ArrowUp':
           keys.forward = true;
           cancelAutopilotOnManualInput();
-          if (e.code === 'ArrowUp') e.preventDefault();
+          e.preventDefault();
           break;
         case 'KeyS':
         case 'ArrowDown':
           keys.backward = true;
           cancelAutopilotOnManualInput();
-          if (e.code === 'ArrowDown') e.preventDefault();
+          e.preventDefault();
           break;
         case 'KeyA':
         case 'ArrowLeft':
           keys.left = true;
           cancelAutopilotOnManualInput();
-          if (e.code === 'ArrowLeft') e.preventDefault();
+          e.preventDefault();
           break;
         case 'KeyD':
         case 'ArrowRight':
           keys.right = true;
           cancelAutopilotOnManualInput();
-          if (e.code === 'ArrowRight') e.preventDefault();
+          e.preventDefault();
           break;
         case 'ShiftLeft':
         case 'ShiftRight':
@@ -772,7 +697,7 @@
           break;
         case 'Space':
           keys.brake = true;
-          if (window.scrollY < 120) e.preventDefault();
+          e.preventDefault();
           break;
         case 'KeyE':
         case 'Enter':
@@ -851,8 +776,7 @@
       const groundHits = raycaster.intersectObject(raycastPlane);
       if (groundHits.length > 0) {
         const pt = groundHits[0].point;
-        const r = Math.hypot(pt.x, pt.z);
-        if (r < 134 && r > 18) {
+        if (isDrivableSurface(pt.x, pt.z)) {
           if (autopilotActive) setAutopilot(false);
           clickWaypoint = { x: pt.x, z: pt.z };
           waypointGroup.position.set(pt.x, 0, pt.z);
@@ -861,16 +785,14 @@
       }
     });
 
-    // ── Bind HUD Controls ──
     bindHUDControls();
     applyTimeOfDay(TIME_MODES[timeModeIndex]);
     updateVisitedHUD();
 
-    // ── Camera State ──
     const camPos = new THREE.Vector3(startPt.x - startPt.tx * 22, 13.5, startPt.z - startPt.tz * 22);
     const camLook = new THREE.Vector3(startPt.x, 2.4, startPt.z);
 
-    // ── Minimap 2D Canvas ──
+    // Minimap Click-to-Teleport/Drive
     const minimapCanvas = document.getElementById('drivefolio-minimap');
     const minimapCtx = minimapCanvas ? minimapCanvas.getContext('2d') : null;
     if (minimapCanvas) {
@@ -878,10 +800,10 @@
         const rect = minimapCanvas.getBoundingClientRect();
         const mx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
         const mz = ((e.clientY - rect.top) / rect.height) * 2 - 1;
-        const worldX = mx * 155;
-        const worldZ = mz * 155;
+        const worldX = mx * 245;
+        const worldZ = mz * 245;
         let nearestIdx = -1;
-        let minDist = 26;
+        let minDist = 34;
         stopObjects.forEach((so, idx) => {
           const d = Math.hypot(so.parkX - worldX, so.parkZ - worldZ);
           if (d < minDist) {
@@ -891,7 +813,7 @@
         });
         if (nearestIdx >= 0) {
           driveToStop(nearestIdx);
-        } else if (Math.hypot(worldX, worldZ) < 134) {
+        } else if (isDrivableSurface(worldX, worldZ)) {
           if (autopilotActive) setAutopilot(false);
           clickWaypoint = { x: worldX, z: worldZ };
           waypointGroup.position.set(worldX, 0, worldZ);
@@ -909,7 +831,7 @@
       const dt = Math.min(clock.getDelta(), 0.05);
       elapsed += dt;
 
-      // 1. Autopilot Curve-Following along Circular Boulevard or Click Waypoint
+      // 1. Smart Autopilot Navigation (Handles Main Circular Road + Bridges to Satellite Islands!)
       let autoThrottle = 0;
       let autoSteer = 0;
 
@@ -920,8 +842,8 @@
           const dz = targetStop.parkZ - carState.z;
           const dist = Math.hypot(dx, dz);
 
-          if (dist < 4.6) {
-            carState.speed *= 0.78;
+          if (dist < 4.8) {
+            carState.speed *= 0.76;
             if (!targetStop._autopilotPauseTimer) {
               targetStop._autopilotPauseTimer = elapsed;
               markStopVisited(targetStop.stop);
@@ -931,23 +853,44 @@
               updateAutopilotStatusBanner();
             }
           } else {
-            // Follow circular road smoothly toward target stop angle!
-            const currentAngle = Math.atan2(carState.z, carState.x);
-            const targetAngle = targetStop.stop.angle;
-            let angularDiff = normalizeAngle(targetAngle - currentAngle);
-            if (angularDiff < -0.15) angularDiff += Math.PI * 2;
+            // Determine intermediate waypoint if moving between Main Island and a Satellite Island
+            const carR = Math.hypot(carState.x, carState.z);
+            const targetR = Math.hypot(targetStop.parkX, targetStop.parkZ);
+            let aimX = targetStop.parkX;
+            let aimZ = targetStop.parkZ;
 
-            // Aim at a lookahead point along the circular road
-            const lookAheadAngle = Math.abs(angularDiff) > 0.35
-              ? currentAngle + Math.sign(angularDiff || 1) * 0.24
-              : targetAngle;
-            const aimX = Math.cos(lookAheadAngle) * (OUTER_ROAD_RADIUS + 2.2);
-            const aimZ = Math.sin(lookAheadAngle) * (OUTER_ROAD_RADIUS + 2.2);
+            if (carR > 130 && targetR < 130) {
+              // Currently on a satellite island/bridge -> head straight inward along the bridge first
+              const bridgeAngle = Math.atan2(carState.z, carState.x);
+              aimX = Math.cos(bridgeAngle) * OUTER_ROAD_RADIUS;
+              aimZ = Math.sin(bridgeAngle) * OUTER_ROAD_RADIUS;
+            } else if (carR <= 130 && targetR > 135) {
+              // Currently on Main Island heading to a Satellite Island -> drive along Circular Road to that bridge entry!
+              const currentAngle = Math.atan2(carState.z, carState.x);
+              const bridgeAngle = targetStop.stop.angle;
+              const angDiff = normalizeAngle(bridgeAngle - currentAngle);
+              if (Math.abs(angDiff) > 0.16) {
+                const nextAng = currentAngle + Math.sign(angDiff) * 0.25;
+                aimX = Math.cos(nextAng) * OUTER_ROAD_RADIUS;
+                aimZ = Math.sin(nextAng) * OUTER_ROAD_RADIUS;
+              }
+            } else if (carR <= 130 && targetR <= 130) {
+              // Both on Main Circular Island -> follow circular highway
+              const currentAngle = Math.atan2(carState.z, carState.x);
+              const targetAngle = targetStop.stop.angle;
+              let angDiff = normalizeAngle(targetAngle - currentAngle);
+              if (angDiff < -0.15) angDiff += Math.PI * 2;
+              if (Math.abs(angDiff) > 0.32) {
+                const nextAng = currentAngle + Math.sign(angDiff || 1) * 0.24;
+                aimX = Math.cos(nextAng) * (OUTER_ROAD_RADIUS + 2.0);
+                aimZ = Math.sin(nextAng) * (OUTER_ROAD_RADIUS + 2.0);
+              }
+            }
 
             const desiredHeading = Math.atan2(aimX - carState.x, aimZ - carState.z);
             const headingErr = normalizeAngle(desiredHeading - carState.heading);
             autoSteer = Math.max(-1, Math.min(1, headingErr * 2.6));
-            autoThrottle = dist > 16 ? 0.86 : 0.52;
+            autoThrottle = dist > 16 ? 0.88 : 0.54;
           }
         }
       } else if (clickWaypoint) {
@@ -956,7 +899,7 @@
         const dist = Math.hypot(dx, dz);
         wpRing.scale.setScalar(1 + 0.2 * Math.sin(elapsed * 6));
 
-        if (dist < 3.6) {
+        if (dist < 3.8) {
           clickWaypoint = null;
           waypointGroup.visible = false;
         } else {
@@ -967,7 +910,7 @@
         }
       }
 
-      // 2. Manual + Joystick + Auto Input Integration
+      // 2. Physics Integration
       const forwardInput = keys.forward ? 1 : (joystickVector.active && joystickVector.y < -0.15 ? -joystickVector.y : autoThrottle);
       const backwardInput = keys.backward ? 1 : (joystickVector.active && joystickVector.y > 0.15 ? joystickVector.y : 0);
       const steerInput = (keys.left ? 1 : 0) - (keys.right ? 1 : 0) +
@@ -978,10 +921,7 @@
 
       if (keys.brake) {
         carState.speed *= 0.86;
-        // Leave tire skid marks when braking/drifting at speed!
-        if (Math.abs(carState.speed) > 0.2) {
-          dropTireSkidMarks(carState);
-        }
+        if (Math.abs(carState.speed) > 0.2) dropTireSkidMarks(carState);
       } else if (forwardInput > 0) {
         carState.speed = Math.min(currentMax * forwardInput, carState.speed + carState.accel * (keys.boost ? 1.75 : 1));
       } else if (backwardInput > 0) {
@@ -1003,33 +943,25 @@
       const nextX = carState.x + Math.sin(carState.heading) * carState.speed * (dt * 60);
       const nextZ = carState.z + Math.cos(carState.heading) * carState.speed * (dt * 60);
 
-      // Circular Island Boundary Clamp
-      const distFromOrigin = Math.hypot(nextX, nextZ);
-      if (distFromOrigin < 134 && distFromOrigin > 15.5) {
+      if (isDrivableSurface(nextX, nextZ)) {
         carState.x = nextX;
         carState.z = nextZ;
-      } else if (distFromOrigin <= 15.5) {
-        // Bounce gently off central fountain basin
-        const pushAngle = Math.atan2(nextX, nextZ);
-        carState.x = Math.sin(pushAngle) * 15.7;
-        carState.z = Math.cos(pushAngle) * 15.7;
-        carState.speed *= 0.45;
+      } else if (isDrivableSurface(nextX, carState.z)) {
+        carState.x = nextX;
+        carState.speed *= 0.82;
+      } else if (isDrivableSurface(carState.x, nextZ)) {
+        carState.z = nextZ;
+        carState.speed *= 0.82;
       } else {
-        // Outer stone retaining wall
-        const pullAngle = Math.atan2(nextX, nextZ);
-        carState.x = Math.sin(pullAngle) * 133.8;
-        carState.z = Math.cos(pullAngle) * 133.8;
         carState.speed *= -0.35;
       }
 
-      // Apply Car Transform & Dynamic Suspension Pitch/Roll
       carRoot.position.set(carState.x, 0.38, carState.z);
       carRoot.rotation.y = carState.heading;
 
       carBuilder.bodyPivot.rotation.x = -carState.speed * 0.055;
       carBuilder.bodyPivot.rotation.z = carState.steerAngle * carState.speed * 1.5;
 
-      // Spin & Steer Multi-Spoke Wheels
       carState.wheelRotation += carState.speed * 1.25;
       carBuilder.wheels.forEach((w, idx) => {
         w.spinGroup.rotation.x = carState.wheelRotation;
@@ -1038,18 +970,15 @@
         }
       });
 
-      // Dynamic Turbo Camera FOV Warp
       const targetFov = (keys.boost && Math.abs(carState.speed) > 0.35) ? 52 : 44;
       if (Math.abs(camera.fov - targetFov) > 0.1) {
         camera.fov += (targetFov - camera.fov) * 0.12;
         camera.updateProjectionMatrix();
       }
 
-      // Speedometer & Audio
       updateSpeedometerHUD(carState.speed, keys.boost);
       updateEngineSound(carState.speed, keys.boost);
 
-      // Exhaust & Nitro Flame Particles
       particleSpawnTimer += dt;
       if (Math.abs(carState.speed) > 0.06 && particleSpawnTimer > (keys.boost ? 0.025 : 0.065)) {
         particleSpawnTimer = 0;
@@ -1075,9 +1004,9 @@
       camLook.z += (targetLookZ - camLook.z) * 0.15;
       camera.lookAt(camLook);
 
-      // 4. Check Billboard Proximity & Animate World Landmarks
+      // 4. Check Billboard & Satellite Island Portal Proximity
       let closestStopObj = null;
-      let closestDist = 12.2;
+      let closestDist = 12.6;
 
       stopObjects.forEach((so, i) => {
         so.markerMesh.position.y = 13.0 + Math.sin(elapsed * 2.8 + i) * 0.45;
@@ -1106,7 +1035,7 @@
         }
       }
 
-      // 5. Animate Central Fountain Jets, Monument Globe, Lighthouse & Ocean Waves
+      // 5. Animate Fountain, Monument Globe & Lighthouse
       fountainDrops.forEach((fd, idx) => {
         const phase = (elapsed * 1.8 + idx * 0.17) % 1;
         const r = 2.5 + phase * 6.2;
@@ -1127,12 +1056,9 @@
 
       const waveScale1 = 1 + Math.sin(elapsed * 1.8) * 0.014;
       foamRing1.scale.set(waveScale1, waveScale1, 1);
-      const waveScale2 = 1 + Math.cos(elapsed * 1.5) * 0.018;
-      foamRing2.scale.set(waveScale2, waveScale2, 1);
 
       cloudsGroup.rotation.y = elapsed * 0.01;
 
-      // 6. Render Circular Radar Minimap
       if (minimapCtx) {
         drawMinimap(minimapCtx, minimapCanvas.width, minimapCanvas.height, carState, stopObjects, activeStop);
       }
@@ -1150,8 +1076,65 @@
     });
 
     // =========================================================================
-    // WORLD SCOPE HELPERS
+    // WORLD SCOPE HELPERS & IN-GAME DISTRICT OVERLAY CONTROLLER
     // =========================================================================
+
+    function openDistrictOverlay(districtKey) {
+      currentDistrictTab = districtKey || 'about';
+      const overlay = document.getElementById('df-district-overlay');
+      const badgeEl = document.getElementById('df-district-badge');
+      const headingEl = document.getElementById('df-district-heading');
+      const bodyEl = document.getElementById('df-district-body');
+
+      if (!overlay) return;
+      overlay.setAttribute('data-active-district', currentDistrictTab);
+
+      const metaMap = {
+        about: { badge: 'NORTH ISLAND • TECH LAB', title: 'Executive Profile, About, Services & Tech Stack' },
+        projects: { badge: 'MAIN CIRCUIT • 12 CASE STUDIES', title: 'Complete Portfolio & Technical Case Studies (12)' },
+        stories: { badge: 'EAST ISLAND • PHOTOGRAPHY VISTA', title: 'Urban Stories & Perspectives Gallery (9 Stories)' },
+        journey: { badge: 'SOUTH ISLAND • HALL OF JOURNEY', title: 'Experience, Universitas Gunadarma & Certifications' },
+        contact: { badge: 'WEST ISLAND • DISPATCH TOWER', title: 'Direct Contact & Collaboration Transmission' }
+      };
+
+      const meta = metaMap[currentDistrictTab] || metaMap.about;
+      if (badgeEl) badgeEl.innerHTML = `<i class="fa-solid fa-compass me-1"></i> ${meta.badge}`;
+      if (headingEl) headingEl.textContent = meta.title;
+
+      document.querySelectorAll('.df-dist-tab').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-dist-tab') === currentDistrictTab);
+      });
+
+      document.querySelectorAll('[data-district-open]').forEach(btn => {
+        btn.classList.toggle('active', btn.getAttribute('data-district-open') === currentDistrictTab);
+      });
+      const mainBtn = document.getElementById('df-zone-main-btn');
+      if (mainBtn) mainBtn.classList.remove('active');
+
+      overlay.classList.add('active');
+      overlay.setAttribute('aria-hidden', 'false');
+      if (bodyEl) bodyEl.scrollTop = 0;
+    }
+
+    function closeDistrictOverlay() {
+      const overlay = document.getElementById('df-district-overlay');
+      if (!overlay) return;
+      overlay.classList.remove('active');
+      overlay.setAttribute('aria-hidden', 'true');
+      document.querySelectorAll('[data-district-open]').forEach(btn => btn.classList.remove('active'));
+      const mainBtn = document.getElementById('df-zone-main-btn');
+      if (mainBtn) mainBtn.classList.add('active');
+    }
+
+    function teleportOrDriveToDistrictIsland(districtKey) {
+      const satIdx = SATELLITE_ISLANDS.findIndex(s => s.districtTab === districtKey);
+      if (satIdx >= 0) {
+        const globalStopIdx = PROJECT_STOPS.length + satIdx;
+        driveToStop(globalStopIdx);
+      } else {
+        driveToStop(0);
+      }
+    }
 
     function dropTireSkidMarks(state) {
       const backDist = -1.55;
@@ -1182,7 +1165,7 @@
     }
 
     function updateVisitedHUD() {
-      const totalProjects = ISLAND_STOPS.filter(s => s.type === 'project').length;
+      const totalProjects = PROJECT_STOPS.length;
       const count = visitedProjects.size;
       const countEl = document.getElementById('drivefolio-visited-count');
       const barEl = document.getElementById('drivefolio-visited-bar');
@@ -1252,10 +1235,8 @@
       if (primaryBtn) {
         if (stop.type === 'project') {
           primaryBtn.innerHTML = `<i class="fa-solid fa-microchip me-1"></i> Open Case Study <span class="df-key-hint">[E]</span>`;
-        } else if (stop.type === 'stories') {
-          primaryBtn.innerHTML = `<i class="fa-solid fa-camera me-1"></i> Open Photo Lightbox <span class="df-key-hint">[E]</span>`;
         } else {
-          primaryBtn.innerHTML = `<i class="fa-solid fa-compass me-1"></i> Inspect Section <span class="df-key-hint">[E]</span>`;
+          primaryBtn.innerHTML = `<i class="fa-solid fa-door-open me-1"></i> Enter ${stop.compass} Hub <span class="df-key-hint">[E]</span>`;
         }
         primaryBtn.onclick = () => triggerStopAction(stop);
       }
@@ -1265,12 +1246,8 @@
           visitBtn.style.display = 'inline-flex';
           visitBtn.href = stop.url;
           visitBtn.target = '_blank';
+          visitBtn.onclick = null;
           visitBtn.innerHTML = `Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square ms-1"></i>`;
-        } else if (stop.sectionId) {
-          visitBtn.style.display = 'inline-flex';
-          visitBtn.href = stop.sectionId;
-          visitBtn.removeAttribute('target');
-          visitBtn.innerHTML = `Scroll to Section <i class="fa-solid fa-arrow-down ms-1"></i>`;
         } else {
           visitBtn.style.display = 'none';
         }
@@ -1281,19 +1258,9 @@
 
     function triggerStopAction(stop) {
       if (!stop) return;
-      if (stop.type === 'stories') {
-        const photoTrigger = document.querySelector(`[data-photo-index="${stop.photoIndex || 0}"]`);
-        if (photoTrigger) {
-          photoTrigger.click();
-          return;
-        }
-      }
-      if (stop.type === 'contact') {
-        const contactSec = document.querySelector('#contact');
-        if (contactSec) {
-          contactSec.scrollIntoView({ behavior: 'smooth' });
-          return;
-        }
+      if (stop.type === 'island-hub' && stop.districtTab) {
+        openDistrictOverlay(stop.districtTab);
+        return;
       }
       const fakeTrigger = document.createElement('button');
       fakeTrigger.setAttribute('data-project', stop.id);
@@ -1319,7 +1286,7 @@
         btn.classList.toggle('active', autopilotActive);
         btn.innerHTML = autopilotActive
           ? `<i class="fa-solid fa-circle-stop me-1"></i> Stop Autopilot`
-          : `<i class="fa-solid fa-route me-1"></i> Autopilot Tour`;
+          : `<i class="fa-solid fa-route me-1"></i> Autopilot`;
       }
       if (banner) banner.classList.toggle('active', autopilotActive);
       if (autopilotActive) updateAutopilotStatusBanner();
@@ -1344,9 +1311,9 @@
         hemiLight.intensity = 0.88;
         sunLight.color.setHex(0xFFF8E7);
         sunLight.intensity = 1.35;
-        sunLight.position.set(110, 145, 95);
+        sunLight.position.set(120, 165, 105);
         celestialOrb.material.color.setHex(0xFFE875);
-        celestialOrb.position.set(240, 155, -250);
+        celestialOrb.position.set(270, 175, -280);
         oceanMesh.material.color.setHex(0x0E7490);
         carBuilder.headLightLeft.intensity = 0;
         carBuilder.headLightRight.intensity = 0;
@@ -1364,9 +1331,9 @@
         hemiLight.intensity = 0.68;
         sunLight.color.setHex(0xFB923C);
         sunLight.intensity = 1.2;
-        sunLight.position.set(-145, 52, -115);
+        sunLight.position.set(-165, 55, -125);
         celestialOrb.material.color.setHex(0xFF4500);
-        celestialOrb.position.set(-240, 44, -210);
+        celestialOrb.position.set(-260, 48, -230);
         oceanMesh.material.color.setHex(0x1E3A8A);
         carBuilder.headLightLeft.intensity = 2.0;
         carBuilder.headLightRight.intensity = 2.0;
@@ -1384,9 +1351,9 @@
         hemiLight.intensity = 0.42;
         sunLight.color.setHex(0x60A5FA);
         sunLight.intensity = 0.48;
-        sunLight.position.set(-85, 115, -95);
+        sunLight.position.set(-95, 130, -105);
         celestialOrb.material.color.setHex(0xE0F2FE);
-        celestialOrb.position.set(-180, 135, -220);
+        celestialOrb.position.set(-200, 155, -240);
         oceanMesh.material.color.setHex(0x061226);
         carBuilder.headLightLeft.intensity = 3.8;
         carBuilder.headLightRight.intensity = 3.8;
@@ -1401,20 +1368,81 @@
     function bindHUDControls() {
       const gpsSelect = document.getElementById('df-gps-select');
       if (gpsSelect) {
-        gpsSelect.innerHTML = `<option value="">📍 GPS Drive to Stop (16)...</option>` +
-          ISLAND_STOPS.map((s, idx) => `<option value="${idx}">${idx + 1}. ${s.title} (${s.badge})</option>`).join('');
+        gpsSelect.innerHTML = `<option value="">📍 GPS Teleport (16 Stops)...</option>` +
+          ALL_STOPS.map((s, idx) => {
+            const prefix = s.type === 'island-hub' ? `🏝️ [${s.compass}]` : `#${idx + 1}`;
+            return `<option value="${idx}">${prefix} ${s.title}</option>`;
+          }).join('');
         gpsSelect.addEventListener('change', () => {
           const idx = parseInt(gpsSelect.value, 10);
           if (!isNaN(idx)) {
+            closeDistrictOverlay();
             driveToStop(idx);
             gpsSelect.value = '';
           }
         });
       }
 
+      // Bind Multi-Island Destination Buttons ("Ke Tempat Lain")
+      document.querySelectorAll('[data-district-open]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const distKey = btn.getAttribute('data-district-open');
+          // Drive car toward that Satellite Island AND open its In-Game District Window!
+          if (distKey !== 'projects') {
+            teleportOrDriveToDistrictIsland(distKey);
+          }
+          openDistrictOverlay(distKey);
+        });
+      });
+
+      const mainCircuitBtn = document.getElementById('df-zone-main-btn');
+      if (mainCircuitBtn) {
+        mainCircuitBtn.addEventListener('click', () => {
+          closeDistrictOverlay();
+          driveToStop(0);
+        });
+      }
+
+      // District Overlay Tabs & Close Buttons
+      document.querySelectorAll('.df-dist-tab').forEach(tabBtn => {
+        tabBtn.addEventListener('click', () => {
+          const tabKey = tabBtn.getAttribute('data-dist-tab');
+          openDistrictOverlay(tabKey);
+        });
+      });
+
+      const closeDistBtn = document.getElementById('df-district-close-btn');
+      const distOverlay = document.getElementById('df-district-overlay');
+      if (closeDistBtn) closeDistBtn.addEventListener('click', closeDistrictOverlay);
+      if (distOverlay) {
+        distOverlay.addEventListener('click', (e) => {
+          if (e.target === distOverlay) closeDistrictOverlay();
+        });
+      }
+
+      const driveHereBtn = document.getElementById('df-district-drive-here-btn');
+      if (driveHereBtn) {
+        driveHereBtn.addEventListener('click', () => {
+          closeDistrictOverlay();
+          teleportOrDriveToDistrictIsland(currentDistrictTab);
+        });
+      }
+
+      // Intercept internal section links inside #masthead (e.g. #projects, #stories, #contact) so they switch tabs inside the District Overlay!
+      document.querySelectorAll('#masthead a[href^="#"]').forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const href = link.getAttribute('href');
+          if (href === '#projects') openDistrictOverlay('projects');
+          else if (href === '#stories') openDistrictOverlay('stories');
+          else if (href === '#contact') openDistrictOverlay('contact');
+        });
+      });
+
       const autoBtn = document.getElementById('df-autopilot-btn');
       if (autoBtn) {
         autoBtn.addEventListener('click', () => {
+          closeDistrictOverlay();
           if (!autopilotActive) {
             const nextUnvisited = stopObjects.findIndex(so => so.stop.type === 'project' && !visitedProjects.has(so.stop.id));
             autopilotTargetIndex = nextUnvisited >= 0 ? nextUnvisited : ((activeStop ? activeStop.index + 1 : 0) % stopObjects.length);
@@ -1439,7 +1467,6 @@
         });
       }
 
-      // Car Model Switcher (GT Supercar / Cyber SUV / Aero Hypercar)
       const modelBtn = document.getElementById('df-car-model-btn');
       if (modelBtn) {
         modelBtn.addEventListener('click', () => {
@@ -1450,7 +1477,6 @@
         });
       }
 
-      // Car Paint Switcher
       const colorBtn = document.getElementById('df-color-btn');
       const colorDot = document.getElementById('df-color-dot');
       if (colorBtn) {
@@ -1462,7 +1488,6 @@
         });
       }
 
-      // Postcard Snapshot Mode
       const postcardBtn = document.getElementById('df-postcard-btn');
       const postcardBackdrop = document.getElementById('postcard-modal-backdrop');
       const postcardClose = document.getElementById('postcard-close-btn');
@@ -1475,7 +1500,7 @@
           renderer.render(scene, camera);
           const dataUrl = composePostcardImage(
             renderer.domElement,
-            activeStop ? activeStop.stop.title : 'Rikkardo L. Tobing — 3D Portfolio Island',
+            activeStop ? activeStop.stop.title : 'Rikkardo L. Tobing — 3D Portfolio Archipelago',
             TIME_MODES[timeModeIndex]
           );
           if (postcardImg) postcardImg.src = dataUrl;
@@ -1514,23 +1539,7 @@
         });
       }
 
-      const mode3dBtn = document.getElementById('df-mode-3d-btn');
-      const modeClassicBtn = document.getElementById('df-mode-classic-btn');
-      if (mode3dBtn && modeClassicBtn) {
-        mode3dBtn.addEventListener('click', () => {
-          mode3dBtn.classList.add('active');
-          modeClassicBtn.classList.remove('active');
-          window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-        modeClassicBtn.addEventListener('click', () => {
-          modeClassicBtn.classList.add('active');
-          mode3dBtn.classList.remove('active');
-          const masthead = document.getElementById('masthead');
-          if (masthead) masthead.scrollIntoView({ behavior: 'smooth' });
-        });
-      }
-
-      // Mobile Virtual Joystick
+      // Mobile Joystick
       const joyZone = document.getElementById('df-joystick-zone');
       const joyKnob = document.getElementById('df-joystick-knob');
       if (joyZone && joyKnob) {
@@ -1664,7 +1673,162 @@
   }
 
   // ===========================================================================
-  // HIGH-DETAIL SCULPTED 3D VEHICLES (GT SUPERCAR, CYBER SUV, AERO HYPERCAR)
+  // BILLBOARD & PORTAL STOP OBJECT BUILDER
+  // ===========================================================================
+
+  function createBillboardStopObject(
+    islandGroup,
+    stop,
+    index,
+    bx,
+    bz,
+    parkX,
+    parkZ,
+    lookX,
+    lookZ,
+    visitedProjects,
+    textureLoader
+  ) {
+    const stopGroup = new THREE.Group();
+    stopGroup.position.set(bx, 0.35, bz);
+    stopGroup.lookAt(lookX, 0.35, lookZ);
+    islandGroup.add(stopGroup);
+
+    const stageBase = new THREE.Mesh(
+      new THREE.BoxGeometry(15.2, 0.45, 5.2),
+      new THREE.MeshStandardMaterial({ color: 0x1E293B, roughness: 0.65 })
+    );
+    stageBase.position.set(0, 0.22, 0.8);
+    stageBase.receiveShadow = true;
+    stopGroup.add(stageBase);
+
+    const stageTrim = new THREE.Mesh(
+      new THREE.BoxGeometry(15.5, 0.14, 5.4),
+      new THREE.MeshStandardMaterial({
+        color: new THREE.Color(stop.accent),
+        emissive: new THREE.Color(stop.accent),
+        emissiveIntensity: 0.35
+      })
+    );
+    stageTrim.position.set(0, 0.46, 0.8);
+    stopGroup.add(stageTrim);
+
+    const ringMesh = new THREE.Mesh(
+      new THREE.RingGeometry(4.2, 5.0, 40).rotateX(-Math.PI / 2),
+      new THREE.MeshBasicMaterial({
+        color: new THREE.Color(stop.accent),
+        side: THREE.DoubleSide,
+        transparent: true,
+        opacity: 0.75
+      })
+    );
+    ringMesh.position.set(parkX, 0.44, parkZ);
+    islandGroup.add(ringMesh);
+
+    const discMesh = new THREE.Mesh(
+      new THREE.CircleGeometry(4.2, 40).rotateX(-Math.PI / 2),
+      new THREE.MeshBasicMaterial({
+        color: new THREE.Color(stop.accent),
+        transparent: true,
+        opacity: 0.16
+      })
+    );
+    discMesh.position.set(parkX, 0.42, parkZ);
+    islandGroup.add(discMesh);
+
+    const pillarGeo = new THREE.CylinderGeometry(0.34, 0.42, 9.2, 16);
+    const pillarMat = new THREE.MeshStandardMaterial({
+      color: 0x1E293B,
+      metalness: 0.75,
+      roughness: 0.25
+    });
+    [-4.6, 4.6].forEach(px => {
+      const pillar = new THREE.Mesh(pillarGeo, pillarMat);
+      pillar.position.set(px, 4.6, 0);
+      pillar.castShadow = true;
+      stopGroup.add(pillar);
+    });
+
+    const boardWidth = 12.6;
+    const boardHeight = 7.3;
+    const frameMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(boardWidth + 0.8, boardHeight + 0.8, 0.65),
+      new THREE.MeshStandardMaterial({
+        color: 0x18181B,
+        roughness: 0.35,
+        metalness: 0.45
+      })
+    );
+    frameMesh.position.set(0, 7.8, 0);
+    frameMesh.castShadow = true;
+    stopGroup.add(frameMesh);
+
+    const topBarMesh = new THREE.Mesh(
+      new THREE.BoxGeometry(boardWidth + 1.1, 0.5, 0.88),
+      new THREE.MeshStandardMaterial({
+        color: new THREE.Color(stop.accent),
+        emissive: new THREE.Color(stop.accent),
+        emissiveIntensity: 0.35,
+        roughness: 0.25
+      })
+    );
+    topBarMesh.position.set(0, 7.8 + boardHeight * 0.5 + 0.4, 0);
+    stopGroup.add(topBarMesh);
+
+    const boardTexture = createBillboardCanvasTexture(stop, index + 1, textureLoader);
+    const faceMat = new THREE.MeshStandardMaterial({
+      map: boardTexture,
+      roughness: 0.22,
+      metalness: 0.05,
+      emissive: new THREE.Color(0xFFFFFF),
+      emissiveMap: boardTexture,
+      emissiveIntensity: 0.18
+    });
+
+    const frontFace = new THREE.Mesh(new THREE.PlaneGeometry(boardWidth, boardHeight), faceMat);
+    frontFace.position.set(0, 7.8, 0.35);
+    stopGroup.add(frontFace);
+
+    const backFace = new THREE.Mesh(new THREE.PlaneGeometry(boardWidth, boardHeight), faceMat);
+    backFace.position.set(0, 7.8, -0.35);
+    backFace.rotation.y = Math.PI;
+    stopGroup.add(backFace);
+
+    const isVisited = visitedProjects.has(stop.id);
+    const markerMat = new THREE.MeshStandardMaterial({
+      color: isVisited ? 0x10B981 : new THREE.Color(stop.accent),
+      emissive: isVisited ? 0x059669 : new THREE.Color(stop.accent),
+      emissiveIntensity: 0.55,
+      roughness: 0.15,
+      metalness: 0.3
+    });
+    const markerMesh = new THREE.Mesh(new THREE.OctahedronGeometry(0.95, 0), markerMat);
+    markerMesh.position.set(0, 13.2, 0);
+    stopGroup.add(markerMesh);
+
+    [-6.8, 6.8].forEach(tx => {
+      const ornamentalTree = createOrnamentalTree(1.05);
+      ornamentalTree.position.set(tx, 0.2, 0.6);
+      stopGroup.add(ornamentalTree);
+    });
+
+    return {
+      stop,
+      index,
+      bx,
+      bz,
+      parkX,
+      parkZ,
+      ringMesh,
+      discMesh,
+      markerMesh,
+      markerMat,
+      faceMat
+    };
+  }
+
+  // ===========================================================================
+  // SCULPTED 3D VEHICLES (GT SUPERCAR, CYBER SUV, AERO HYPERCAR)
   // ===========================================================================
 
   function buildSculptedVehicle(vehicleId, hexColor, envTexture) {
@@ -1672,7 +1836,6 @@
     const bodyPivot = new THREE.Group();
     group.add(bodyPivot);
 
-    // Real Automotive Clearcoat Metallic Paint (MeshPhysicalMaterial)
     const paintMat = new THREE.MeshPhysicalMaterial({
       color: hexColor,
       metalness: 0.68,
@@ -1733,7 +1896,6 @@
       buildGTSupercarBody(bodyPivot, paintMat, carbonMat, glassMat, chromeMat, hlMat, tlMat, neonCyanMat);
     }
 
-    // Headlight SpotLights
     const headLightLeft = new THREE.SpotLight(0xFFF6D6, 0, 48, Math.PI / 5, 0.45, 1.2);
     headLightLeft.position.set(-0.95, 0.9, 2.5);
     headLightLeft.target.position.set(-0.95, 0.1, 18);
@@ -1744,7 +1906,6 @@
     headLightRight.target.position.set(0.95, 0.1, 18);
     group.add(headLightRight, headLightRight.target);
 
-    // 4 Sculpted Alloy Wheels with Brake Calipers & Ventilated Discs
     const wheels = [];
     const wheelRadius = vehicleId === 'suv' ? 0.66 : 0.56;
     const wheelWidth = vehicleId === 'formula' ? 0.56 : 0.46;
@@ -1775,20 +1936,18 @@
     };
   }
 
-  function buildGTSupercarBody(bodyPivot, paintMat, carbonMat, glassMat, chromeMat, hlMat, tlMat, neonCyanMat) {
-    // 1. Extruded Aerodynamic Side Profile with Carved Wheel Arches
+  function buildGTSupercarBody(bodyPivot, paintMat, carbonMat, glassMat, chromeMat, hlMat, tlMat) {
     const bodyShape = new THREE.Shape();
     bodyShape.moveTo(-2.7, 0.28);
     bodyShape.lineTo(-2.82, 0.68);
-    bodyShape.quadraticCurveTo(-2.7, 1.08, -2.05, 1.15); // Rear deck
-    bodyShape.lineTo(-0.95, 1.66); // Fastback roofline
-    bodyShape.quadraticCurveTo(-0.1, 1.74, 0.55, 1.62);  // Roof arch
-    bodyShape.lineTo(1.55, 1.05);  // Sloped windshield
-    bodyShape.quadraticCurveTo(2.35, 0.92, 2.78, 0.62);  // Sculpted hood
-    bodyShape.lineTo(2.85, 0.28);  // Front nose
+    bodyShape.quadraticCurveTo(-2.7, 1.08, -2.05, 1.15);
+    bodyShape.lineTo(-0.95, 1.66);
+    bodyShape.quadraticCurveTo(-0.1, 1.74, 0.55, 1.62);
+    bodyShape.lineTo(1.55, 1.05);
+    bodyShape.quadraticCurveTo(2.35, 0.92, 2.78, 0.62);
+    bodyShape.lineTo(2.85, 0.28);
     bodyShape.lineTo(-2.7, 0.28);
 
-    // Cut out front & rear wheel arches
     const rearArch = new THREE.Path();
     rearArch.absarc(-1.68, 0.34, 0.64, 0, Math.PI, false);
     bodyShape.holes.push(rearArch);
@@ -1805,7 +1964,6 @@
       bevelSize: 0.2,
       bevelSegments: 5
     });
-    // Center X extrusion and orient along Z axis (front = +Z)
     bodyGeo.translate(0, 0, -2.15 * 0.5);
     bodyGeo.rotateY(Math.PI / 2);
 
@@ -1814,7 +1972,6 @@
     mainShell.receiveShadow = true;
     bodyPivot.add(mainShell);
 
-    // 2. Panoramic Tinted Glass Cockpit Canopy
     const cabinShape = new THREE.Shape();
     cabinShape.moveTo(-1.92, 1.12);
     cabinShape.lineTo(-0.88, 1.69);
@@ -1836,7 +1993,6 @@
     cabinGlass.castShadow = true;
     bodyPivot.add(cabinGlass);
 
-    // 3. Widebody Flared Wheel Fenders (4 Arches)
     const fenderGeo = new THREE.CylinderGeometry(0.68, 0.68, 0.42, 24, 1, false, 0, Math.PI);
     fenderGeo.rotateZ(Math.PI / 2);
     [
@@ -1851,7 +2007,6 @@
       bodyPivot.add(fender);
     });
 
-    // 4. Carbon-Fiber Front Splitter, Side Skirts & Rear Diffuser
     const frontSplitter = new THREE.Mesh(new THREE.BoxGeometry(2.68, 0.12, 0.65), carbonMat);
     frontSplitter.position.set(0, 0.26, 2.75);
     bodyPivot.add(frontSplitter);
@@ -1867,7 +2022,6 @@
     rearDiffuser.position.set(0, 0.34, -2.68);
     bodyPivot.add(rearDiffuser);
 
-    // 5. Front Honeycomb Grille & Angular LED Headlights
     const grille = new THREE.Mesh(new THREE.BoxGeometry(1.55, 0.28, 0.12), carbonMat);
     grille.position.set(0, 0.48, 2.95);
     bodyPivot.add(grille);
@@ -1879,20 +2033,17 @@
       bodyPivot.add(hl);
     });
 
-    // 6. Full-Width Cyberpunk LED Taillight Bar & Quad Chrome Exhausts
     const tailBar = new THREE.Mesh(new THREE.BoxGeometry(2.38, 0.16, 0.12), tlMat);
     tailBar.position.set(0, 0.88, -2.86);
     bodyPivot.add(tailBar);
 
-    const pipeGeo = new THREE.CylinderGeometry(0.11, 0.11, 0.35, 16);
-    pipeGeo.rotateX(Math.PI / 2);
+    const pipeGeo = new THREE.CylinderGeometry(0.11, 0.11, 0.35, 16).rotateX(Math.PI / 2);
     [-0.72, -0.46, 0.46, 0.72].forEach(px => {
       const pipe = new THREE.Mesh(pipeGeo, chromeMat);
       pipe.position.set(px, 0.36, -2.88);
       bodyPivot.add(pipe);
     });
 
-    // 7. Active GT Swan-Neck Rear Spoiler Wing + Side Mirrors
     [-0.65, 0.65].forEach(sx => {
       const pylon = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.42, 0.32), carbonMat);
       pylon.position.set(sx, 1.24, -2.42);
@@ -1905,14 +2056,12 @@
     gtWing.castShadow = true;
     bodyPivot.add(gtWing);
 
-    // Wing Endplates
     [-1.32, 1.32].forEach(ex => {
       const plate = new THREE.Mesh(new THREE.BoxGeometry(0.06, 0.28, 0.58), paintMat);
       plate.position.set(ex, 1.44, -2.52);
       bodyPivot.add(plate);
     });
 
-    // Aerodynamic Side Mirrors
     [-1.28, 1.28].forEach(mx => {
       const mirror = new THREE.Mesh(new THREE.BoxGeometry(0.28, 0.14, 0.2), paintMat);
       mirror.position.set(mx, 1.16, 0.82);
@@ -1921,7 +2070,6 @@
   }
 
   function buildCyberSUVBody(bodyPivot, paintMat, carbonMat, glassMat, chromeMat, hlMat, tlMat) {
-    // Rugged G-Wagon / Cyber Off-Roader 4x4 SUV
     const lowerBody = new THREE.Mesh(new THREE.BoxGeometry(2.62, 0.95, 5.1), paintMat);
     lowerBody.position.set(0, 0.88, 0);
     lowerBody.castShadow = true;
@@ -1936,7 +2084,6 @@
     roofCap.position.set(0, 2.2, -0.52);
     bodyPivot.add(roofCap);
 
-    // Roof Expedition Rack + Off-Road LED Lightbar
     const rackFrame = new THREE.Mesh(new THREE.BoxGeometry(2.2, 0.14, 2.6), carbonMat);
     rackFrame.position.set(0, 2.34, -0.55);
     bodyPivot.add(rackFrame);
@@ -1945,7 +2092,6 @@
     roofLedBar.position.set(0, 2.36, 0.82);
     bodyPivot.add(roofLedBar);
 
-    // Heavy Bullbar & Grille
     const bullbar = new THREE.Mesh(new THREE.BoxGeometry(2.74, 0.45, 0.35), carbonMat);
     bullbar.position.set(0, 0.58, 2.62);
     bodyPivot.add(bullbar);
@@ -1956,7 +2102,6 @@
       bodyPivot.add(hl);
     });
 
-    // Rear Tailgate Spare Wheel Carrier
     const spareTire = new THREE.Mesh(
       new THREE.CylinderGeometry(0.55, 0.55, 0.36, 24).rotateX(Math.PI / 2),
       carbonMat
@@ -1969,8 +2114,7 @@
     bodyPivot.add(tailBar);
   }
 
-  function buildAeroHypercarBody(bodyPivot, paintMat, carbonMat, glassMat, chromeMat, hlMat, tlMat, neonCyanMat) {
-    // Low-Slung Le Mans / Formula Prototype Hypercar
+  function buildAeroHypercarBody(bodyPivot, paintMat, carbonMat, glassMat, chromeMat, hlMat, tlMat) {
     const noseCone = new THREE.Mesh(
       new THREE.ConeGeometry(0.95, 3.2, 6).rotateX(Math.PI / 2),
       paintMat
@@ -1985,18 +2129,15 @@
     sidepods.castShadow = true;
     bodyPivot.add(sidepods);
 
-    // Teardrop Cockpit Bubble
     const canopy = new THREE.Mesh(new THREE.SphereGeometry(0.88, 24, 18), glassMat);
     canopy.scale.set(0.92, 0.68, 1.65);
     canopy.position.set(0, 1.05, -0.1);
     bodyPivot.add(canopy);
 
-    // LMP Dorsal Shark Fin
     const sharkFin = new THREE.Mesh(new THREE.BoxGeometry(0.08, 0.68, 1.95), carbonMat);
     sharkFin.position.set(0, 1.28, -1.55);
     bodyPivot.add(sharkFin);
 
-    // Front Tri-Plane Aero Wing
     const frontWing = new THREE.Mesh(new THREE.BoxGeometry(2.85, 0.1, 0.72), carbonMat);
     frontWing.position.set(0, 0.28, 2.75);
     bodyPivot.add(frontWing);
@@ -2005,7 +2146,6 @@
     frontNeon.position.set(0, 0.55, 2.55);
     bodyPivot.add(frontNeon);
 
-    // Massive Rear Aero Wing
     const rearWing = new THREE.Mesh(new THREE.BoxGeometry(2.88, 0.1, 0.65), carbonMat);
     rearWing.position.set(0, 1.38, -2.48);
     rearWing.rotation.x = 0.16;
@@ -2021,7 +2161,6 @@
     const spinGroup = new THREE.Group();
     steerPivot.add(spinGroup);
 
-    // 1. Rubber Tire Barrel
     const tireMat = new THREE.MeshStandardMaterial({ color: 0x141417, roughness: 0.82 });
     const tire = new THREE.Mesh(
       new THREE.CylinderGeometry(radius, radius, width, 28).rotateZ(Math.PI / 2),
@@ -2030,7 +2169,6 @@
     tire.castShadow = true;
     spinGroup.add(tire);
 
-    // 2. Alloy Rim Outer Barrel
     const rimRadius = radius * 0.68;
     const rim = new THREE.Mesh(
       new THREE.CylinderGeometry(rimRadius, rimRadius, width + 0.02, 24).rotateZ(Math.PI / 2),
@@ -2038,14 +2176,12 @@
     );
     spinGroup.add(rim);
 
-    // 3. Dark Inner Brake Rotor Disc + Red Brembo Brake Caliper (Fixed on SteerPivot!)
     const sign = isLeft ? -1 : 1;
     const caliperMat = new THREE.MeshStandardMaterial({ color: 0xEF4444, roughness: 0.3, metalness: 0.4 });
     const caliper = new THREE.Mesh(new THREE.BoxGeometry(0.12, radius * 0.55, radius * 0.35), caliperMat);
     caliper.position.set(sign * (width * 0.38), radius * 0.15, -radius * 0.25);
     steerPivot.add(caliper);
 
-    // 4. 5-Spoke Star Alloy Face & Center Cap
     const spokeGeo = new THREE.BoxGeometry(0.06, rimRadius * 1.82, 0.09);
     for (let s = 0; s < 5; s++) {
       const spoke = new THREE.Mesh(spokeGeo, chromeMat);
@@ -2064,15 +2200,14 @@
   }
 
   // ===========================================================================
-  // SYMMETRICAL CIRCULAR ISLAND ARCHITECTURE, LANDMARKS & STUDIO ENVIRONMENT
+  // 5-ISLAND ARCHIPELAGO WORLD BUILDER (MAIN ISLAND + 4 BRIDGES + 4 SATELLITES)
   // ===========================================================================
 
-  function buildCircularHighwayAndLandmarks(islandGroup, fountainDrops, streetLampBulbs, streetLampLights) {
-    // 1. Main Grand Circular Boulevard Asphalt Ring (R = 102, width = 14)
+  function buildArchipelagoWorld(islandGroup, fountainDrops, streetLampBulbs, streetLampLights) {
     const innerR = OUTER_ROAD_RADIUS - OUTER_ROAD_WIDTH * 0.5;
     const outerR = OUTER_ROAD_RADIUS + OUTER_ROAD_WIDTH * 0.5;
 
-    // Stone Walkways / Curbs flanking the circular highway
+    // 1. Main Circular Boulevard & Motorsport Rumble Curbs
     const curbRingMesh = new THREE.Mesh(
       new THREE.RingGeometry(innerR - 1.6, outerR + 1.6, 128).rotateX(-Math.PI / 2),
       new THREE.MeshStandardMaterial({ color: 0xD6D0C4, roughness: 0.75 })
@@ -2081,7 +2216,6 @@
     curbRingMesh.receiveShadow = true;
     islandGroup.add(curbRingMesh);
 
-    // Alternating Motorsport Red & White Curb Rumble Strips
     const rumbleCount = 96;
     for (let i = 0; i < rumbleCount; i++) {
       const a1 = (i / rumbleCount) * Math.PI * 2;
@@ -2104,7 +2238,6 @@
       islandGroup.add(outerStrip);
     }
 
-    // Main Circular Asphalt Road Surface
     const roadRingMesh = new THREE.Mesh(
       new THREE.RingGeometry(innerR, outerR, 128).rotateX(-Math.PI / 2),
       new THREE.MeshStandardMaterial({ color: 0x262930, roughness: 0.72 })
@@ -2113,7 +2246,6 @@
     roadRingMesh.receiveShadow = true;
     islandGroup.add(roadRingMesh);
 
-    // Center Dashed White Lane Dividers around the Circle
     const dashGeo = new THREE.PlaneGeometry(0.45, 2.8).rotateX(-Math.PI / 2);
     const dashMat = new THREE.MeshBasicMaterial({ color: 0xFAF8F1 });
     for (let i = 0; i < 96; i++) {
@@ -2125,7 +2257,7 @@
       islandGroup.add(dash);
     }
 
-    // 2. Inner Roundabout Ring (R = 34) + 4 Radial Avenues (N, E, S, W Spokes)
+    // 2. Inner Roundabout + 4 Radial Avenues extending all the way across the 4 Ocean Bridges!
     const innerRoundabout = new THREE.Mesh(
       new THREE.RingGeometry(INNER_RING_RADIUS - 4.5, INNER_RING_RADIUS + 4.5, 72).rotateX(-Math.PI / 2),
       new THREE.MeshStandardMaterial({ color: 0x2D3139, roughness: 0.75 })
@@ -2134,20 +2266,113 @@
     innerRoundabout.receiveShadow = true;
     islandGroup.add(innerRoundabout);
 
-    // 4 Cardinal Radial Avenues connecting Inner Roundabout to Main Circular Highway
-    const spokeLength = innerR - (INNER_RING_RADIUS + 4.2);
-    const spokeGeo = new THREE.PlaneGeometry(8.5, spokeLength).rotateX(-Math.PI / 2);
-    const spokeMat = new THREE.MeshStandardMaterial({ color: 0x2D3139, roughness: 0.75 });
-    [0, Math.PI * 0.5, Math.PI, Math.PI * 1.5].forEach(ang => {
-      const midR = (INNER_RING_RADIUS + 4.2 + innerR) * 0.5;
-      const spoke = new THREE.Mesh(spokeGeo, spokeMat);
-      spoke.position.set(Math.cos(ang) * midR, 0.385, Math.sin(ang) * midR);
-      spoke.rotation.y = -ang + Math.PI * 0.5;
-      spoke.receiveShadow = true;
-      islandGroup.add(spoke);
+    // Build the 4 Radial Avenues + 4 Ocean Suspension Bridges + 4 Satellite Islands!
+    let lighthouseRefs = { beamPivot: null, spotLight: null };
+
+    SATELLITE_ISLANDS.forEach(sat => {
+      const ang = sat.angle;
+      const nx = Math.cos(ang);
+      const nz = Math.sin(ang);
+
+      // Radial avenue from Inner Roundabout (R=38) to Satellite Island Center (R=200)
+      const totalRoadLen = SAT_ISLAND_DIST - (INNER_RING_RADIUS + 4.0);
+      const midR = (INNER_RING_RADIUS + 4.0 + SAT_ISLAND_DIST) * 0.5;
+
+      const fullAvenue = new THREE.Mesh(
+        new THREE.PlaneGeometry(11.5, totalRoadLen).rotateX(-Math.PI / 2),
+        new THREE.MeshStandardMaterial({ color: 0x262930, roughness: 0.72 })
+      );
+      fullAvenue.position.set(nx * midR, 0.4, nz * midR);
+      fullAvenue.rotation.y = -ang + Math.PI * 0.5;
+      fullAvenue.receiveShadow = true;
+      islandGroup.add(fullAvenue);
+
+      // Bridge Deck & Suspension Arch Towers over the Ocean (from R=134 to R=170)
+      const bridgeMidR = 152;
+      const bridgeLen = 40;
+      const bridgeGroup = new THREE.Group();
+      bridgeGroup.position.set(nx * bridgeMidR, 0.38, nz * bridgeMidR);
+      bridgeGroup.rotation.y = -ang + Math.PI * 0.5;
+      islandGroup.add(bridgeGroup);
+
+      const bridgeDeck = new THREE.Mesh(
+        new THREE.BoxGeometry(13.6, 0.6, bridgeLen),
+        new THREE.MeshStandardMaterial({ color: 0x334155, roughness: 0.6 })
+      );
+      bridgeDeck.position.y = -0.25;
+      bridgeGroup.add(bridgeDeck);
+
+      // Glowing Bridge Guardrails & Suspension Arch Pylons
+      const railMat = new THREE.MeshStandardMaterial({
+        color: new THREE.Color(sat.accent),
+        emissive: new THREE.Color(sat.accent),
+        emissiveIntensity: 0.45
+      });
+      [-6.4, 6.4].forEach(rx => {
+        const rail = new THREE.Mesh(new THREE.BoxGeometry(0.35, 1.1, bridgeLen), railMat);
+        rail.position.set(rx, 0.55, 0);
+        bridgeGroup.add(rail);
+
+        // Twin Bridge Arch Towers
+        [-11, 11].forEach(tz => {
+          const tower = new THREE.Mesh(
+            new THREE.BoxGeometry(0.85, 11.5, 0.85),
+            new THREE.MeshStandardMaterial({ color: 0x1E293B, metalness: 0.7, roughness: 0.3 })
+          );
+          tower.position.set(rx, 5.5, tz);
+          tower.castShadow = true;
+          bridgeGroup.add(tower);
+        });
+      });
+
+      // Crossbeams on Bridge Towers
+      [-11, 11].forEach(tz => {
+        const cross = new THREE.Mesh(new THREE.BoxGeometry(13.8, 0.9, 0.9), railMat);
+        cross.position.set(0, 10.6, tz);
+        bridgeGroup.add(cross);
+      });
+
+      // Satellite Island Sand, Stone Wall & Emerald Plateau
+      const satSand = new THREE.Mesh(
+        new THREE.CylinderGeometry(SAT_ISLAND_RADIUS + 4, SAT_ISLAND_RADIUS + 7.5, 2.2, 64),
+        new THREE.MeshStandardMaterial({ color: 0xF3DFB6, roughness: 0.86 })
+      );
+      satSand.position.set(sat.cx, -1.1, sat.cz);
+      satSand.receiveShadow = true;
+      islandGroup.add(satSand);
+
+      const satGrass = new THREE.Mesh(
+        new THREE.CylinderGeometry(SAT_ISLAND_RADIUS, SAT_ISLAND_RADIUS + 0.8, 1.25, 64),
+        new THREE.MeshStandardMaterial({ color: 0x4EA860, roughness: 0.8 })
+      );
+      satGrass.position.set(sat.cx, -0.22, sat.cz);
+      satGrass.receiveShadow = true;
+      islandGroup.add(satGrass);
+
+      const satPlaza = new THREE.Mesh(
+        new THREE.CylinderGeometry(22, 22.8, 0.3, 48),
+        new THREE.MeshStandardMaterial({ color: 0x262930, roughness: 0.72 })
+      );
+      satPlaza.position.set(sat.cx, 0.39, sat.cz);
+      satPlaza.receiveShadow = true;
+      islandGroup.add(satPlaza);
+
+      // Overhead Entrance Arch at the Bridge Entry on Main Circular Highway
+      buildHighwayOverheadArch(
+        islandGroup,
+        ang,
+        `${sat.compass} BRIDGE ➔ ${sat.badge.toUpperCase()}`,
+        `DRIVE ACROSS BRIDGE TO ENTER ${sat.compass}`,
+        sat.accent
+      );
+
+      // If West Island -> also build the iconic Coastal Lighthouse!
+      if (sat.id === 'west-contact-island') {
+        lighthouseRefs = buildCoastalLighthouseOnIsland(islandGroup, sat.cx - 12, sat.cz + 16);
+      }
     });
 
-    // 3. Central Executive Rotunda & Animated Water Fountain (R = 0 to 29)
+    // 3. Central Executive Rotunda & Animated Water Fountain (0, 0)
     const plazaDisc = new THREE.Mesh(
       new THREE.CylinderGeometry(29.5, 30.2, 0.35, 64),
       new THREE.MeshStandardMaterial({ color: 0xF2EBDD, roughness: 0.75 })
@@ -2156,10 +2381,9 @@
     plazaDisc.receiveShadow = true;
     islandGroup.add(plazaDisc);
 
-    // Fountain Outer Stone Basin & Turquoise Pool
     const basinWall = new THREE.Mesh(
       new THREE.CylinderGeometry(14.8, 15.4, 1.4, 48),
-      new THREE.MeshStandardMaterial({ color: 0x25231F, roughness: 0.5 })
+      new THREE.MeshStandardMaterial({ color: 0x18181B, roughness: 0.5 })
     );
     basinWall.position.y = 0.9;
     basinWall.castShadow = true;
@@ -2178,7 +2402,6 @@
     poolWater.position.y = 1.05;
     islandGroup.add(poolWater);
 
-    // Animated Water Fountain Droplets Ring
     const dropGeo = new THREE.SphereGeometry(0.32, 8, 8);
     const dropMat = new THREE.MeshBasicMaterial({ color: 0xE0F2FE, transparent: true, opacity: 0.85 });
     for (let i = 0; i < 24; i++) {
@@ -2188,7 +2411,6 @@
       fountainDrops.push(drop);
     }
 
-    // Central Monument Tower & 4-Sided Executive Stat Board
     const monumentTex = createMonumentCanvasTexture();
     const monumentMat = new THREE.MeshStandardMaterial({
       map: monumentTex,
@@ -2210,7 +2432,6 @@
     monumentPedestal.position.set(0, 1.6, 0);
     islandGroup.add(monumentPedestal);
 
-    // Floating Golden Crown Octahedron Above Central Rotunda
     const monumentGlobe = new THREE.Mesh(
       new THREE.OctahedronGeometry(2.2, 0),
       new THREE.MeshStandardMaterial({
@@ -2224,41 +2445,11 @@
     monumentGlobe.position.set(0, 13.8, 0);
     islandGroup.add(monumentGlobe);
 
-    // 4. Grand Start/Finish Overhead Gantry Arch at Angle = 0°
-    buildHighwayOverheadArch(
-      islandGroup,
-      0,
-      'RIKKARDO L. TOBING • DRIVEFOLIO CIRCUIT',
-      '8+ B2B PORTALS • 500K+ VISITORS • 99.9% UPTIME SLA',
-      '#E8B931'
-    );
-
-    // District Arches at 90° and 270°
-    buildHighwayOverheadArch(
-      islandGroup,
-      Math.PI * 0.5,
-      'AI, ERP & ENTERPRISE SYSTEMS SECTOR',
-      'FASTAPI • REACT AGENTS • IBM AS/400 DB2 • IOT TELEMETRY',
-      '#06B6D4'
-    );
-
-    buildHighwayOverheadArch(
-      islandGroup,
-      Math.PI * 1.5,
-      'INFORMA MARKETS B2B EXHIBITION BOULEVARD',
-      'PAMERINDO • FHI • LAB INDO • FHT BALI • COSMOBEAUTE',
-      '#D9624A'
-    );
-
-    // 5. Coastal Lighthouse & Viewing Pier at Angle = 180° (West/South Coast)
-    const lighthouseRefs = buildCoastalLighthouseAndPier(islandGroup, Math.PI);
-
-    // 6. Symmetrical Inner Boulevard Street Lamps & Park Tree Rings
+    // 4. Street Lamps & Ornamental Park Trees on Main Island
     const poleMat = new THREE.MeshStandardMaterial({ color: 0x1E293B, metalness: 0.7, roughness: 0.3 });
     for (let i = 0; i < 16; i++) {
       const a = ((i + 0.5) / 16) * Math.PI * 2;
       const pt = getRoadPoint(a);
-      // Inner sidewalk edge lamp
       const lx = pt.nx * (innerR - 2.2);
       const lz = pt.nz * (innerR - 2.2);
 
@@ -2294,7 +2485,6 @@
 
       islandGroup.add(lampGroup);
 
-      // Symmetrical Inner Park Ring Trees (R = 66) — avoiding the 4 radial avenues
       if (Math.abs(Math.sin(a * 2)) > 0.25) {
         const tree1 = createOrnamentalTree(1.25);
         tree1.position.set(pt.nx * 68, 0.35, pt.nz * 68);
@@ -2328,7 +2518,6 @@
       archGroup.add(col);
     });
 
-    // Overhead Banner Canvas
     const c = document.createElement('canvas');
     c.width = 1024;
     c.height = 192;
@@ -2340,13 +2529,13 @@
     ctx.strokeRect(8, 8, 1008, 176);
 
     ctx.fillStyle = '#FAF8F1';
-    ctx.font = 'bold 42px "Space Grotesk", sans-serif';
+    ctx.font = 'bold 38px "Space Grotesk", sans-serif';
     ctx.textAlign = 'center';
-    ctx.fillText(titleText, 512, 88);
+    ctx.fillText(titleText, 512, 86);
 
     ctx.fillStyle = accentHex;
-    ctx.font = 'bold 26px "DM Sans", sans-serif';
-    ctx.fillText(subText, 512, 142);
+    ctx.font = 'bold 24px "DM Sans", sans-serif';
+    ctx.fillText(subText, 512, 140);
 
     const tex = new THREE.CanvasTexture(c);
     const bannerMat = new THREE.MeshStandardMaterial({
@@ -2361,53 +2550,47 @@
     archGroup.add(beam);
   }
 
-  function buildCoastalLighthouseAndPier(islandGroup, angle) {
-    const lx = Math.cos(angle) * 134;
-    const lz = Math.sin(angle) * 134;
+  function buildCoastalLighthouseOnIsland(islandGroup, lx, lz) {
     const group = new THREE.Group();
     group.position.set(lx, 0.35, lz);
-    group.rotation.y = -angle;
     islandGroup.add(group);
 
-    // Striped Lighthouse Tower
     const redMat = new THREE.MeshStandardMaterial({ color: 0xDC2626, roughness: 0.5 });
     const whiteMat = new THREE.MeshStandardMaterial({ color: 0xFAF8F1, roughness: 0.5 });
     const darkMat = new THREE.MeshStandardMaterial({ color: 0x1E293B, roughness: 0.4 });
 
     for (let s = 0; s < 5; s++) {
-      const rBot = 3.2 - s * 0.35;
-      const rTop = 3.2 - (s + 1) * 0.35;
+      const rBot = 2.8 - s * 0.3;
+      const rTop = 2.8 - (s + 1) * 0.3;
       const seg = new THREE.Mesh(
-        new THREE.CylinderGeometry(rTop, rBot, 3.2, 24),
+        new THREE.CylinderGeometry(rTop, rBot, 3.0, 24),
         s % 2 === 0 ? redMat : whiteMat
       );
-      seg.position.y = 1.6 + s * 3.2;
+      seg.position.y = 1.5 + s * 3.0;
       seg.castShadow = true;
       group.add(seg);
     }
 
-    // Lantern Gallery Deck & Glass Dome
-    const deck = new THREE.Mesh(new THREE.CylinderGeometry(2.1, 2.1, 0.4, 24), darkMat);
-    deck.position.y = 16.2;
+    const deck = new THREE.Mesh(new THREE.CylinderGeometry(1.9, 1.9, 0.4, 24), darkMat);
+    deck.position.y = 15.2;
     group.add(deck);
 
     const lantern = new THREE.Mesh(
-      new THREE.CylinderGeometry(1.4, 1.4, 2.2, 20),
+      new THREE.CylinderGeometry(1.25, 1.25, 2.0, 20),
       new THREE.MeshBasicMaterial({ color: 0xFEF08A })
     );
-    lantern.position.y = 17.4;
+    lantern.position.y = 16.3;
     group.add(lantern);
 
-    const roof = new THREE.Mesh(new THREE.ConeGeometry(1.9, 2.0, 24), redMat);
-    roof.position.y = 19.4;
+    const roof = new THREE.Mesh(new THREE.ConeGeometry(1.75, 1.9, 24), redMat);
+    roof.position.y = 18.2;
     group.add(roof);
 
-    // Rotating Beacon Pivot
     const beamPivot = new THREE.Group();
-    beamPivot.position.set(0, 17.4, 0);
+    beamPivot.position.set(0, 16.3, 0);
     group.add(beamPivot);
 
-    const spotLight = new THREE.SpotLight(0xFEF08A, 0, 95, Math.PI / 6, 0.5, 1.2);
+    const spotLight = new THREE.SpotLight(0xFEF08A, 0, 105, Math.PI / 6, 0.5, 1.2);
     spotLight.position.set(0, 0, 0);
     spotLight.target.position.set(35, -12, 0);
     beamPivot.add(spotLight, spotLight.target);
@@ -2491,7 +2674,6 @@
   }
 
   function createStudioEnvCubeTexture() {
-    // Generate 6 procedural HDR-style studio reflection faces for metallic car paint!
     const faces = [];
     for (let i = 0; i < 6; i++) {
       const c = document.createElement('canvas');
@@ -2500,15 +2682,12 @@
       const ctx = c.getContext('2d');
       const grad = ctx.createLinearGradient(0, 0, 0, 256);
       if (i === 2) {
-        // Top sky highlight
         grad.addColorStop(0, '#FFFFFF');
         grad.addColorStop(1, '#BAE6FD');
       } else if (i === 3) {
-        // Ground bounce
         grad.addColorStop(0, '#334155');
         grad.addColorStop(1, '#0F172A');
       } else {
-        // Horizon studio softbox strip
         grad.addColorStop(0, '#E0F2FE');
         grad.addColorStop(0.46, '#FFFFFF');
         grad.addColorStop(0.54, '#38BDF8');
@@ -2526,12 +2705,12 @@
   function createStarfield() {
     const group = new THREE.Group();
     const starGeo = new THREE.BufferGeometry();
-    const count = 450;
+    const count = 480;
     const positions = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.random() * Math.PI * 0.42;
-      const r = 420;
+      const r = 460;
       positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
       positions[i * 3 + 1] = r * Math.cos(phi) + 25;
       positions[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta);
@@ -2587,10 +2766,11 @@
       }
 
       ctx.fillStyle = '#18181B';
-      ctx.fillRect(imgX + 14, imgY + 14, 102, 44);
+      ctx.fillRect(imgX + 14, imgY + 14, 130, 44);
       ctx.fillStyle = '#E8B931';
-      ctx.font = 'bold 24px "Space Grotesk", sans-serif';
-      ctx.fillText(`STOP #${String(stopNumber).padStart(2, '0')}`, imgX + 24, imgY + 44);
+      ctx.font = 'bold 22px "Space Grotesk", sans-serif';
+      const label = stop.type === 'island-hub' ? stop.compass : `STOP #${String(stopNumber).padStart(2, '0')}`;
+      ctx.fillText(label, imgX + 22, imgY + 43);
 
       const rx = 516;
       const rw = canvas.width - rx - 42;
@@ -2634,7 +2814,10 @@
       ctx.fillRect(rx, canvas.height - 74, rw, 42);
       ctx.fillStyle = '#E8B931';
       ctx.font = 'bold 20px "Space Grotesk", sans-serif';
-      ctx.fillText('PARK IN RING OR PRESS [E] TO OPEN CASE STUDY ➔', rx + 16, canvas.height - 46);
+      const cta = stop.type === 'island-hub'
+        ? `PARK IN RING & PRESS [E] TO ENTER ${stop.compass} HUB ➔`
+        : 'PARK IN RING & PRESS [E] TO OPEN CASE STUDY ➔';
+      ctx.fillText(cta, rx + 16, canvas.height - 46);
 
       texture.needsUpdate = true;
     }
@@ -2685,11 +2868,11 @@
       roughness: 0.92,
       flatShading: true
     });
-    for (let i = 0; i < 16; i++) {
+    for (let i = 0; i < 18; i++) {
       const cGroup = new THREE.Group();
-      const angle = (i / 16) * Math.PI * 2;
-      const dist = 185 + (i % 3) * 35;
-      cGroup.position.set(Math.cos(angle) * dist, 56 + (i % 4) * 7, Math.sin(angle) * dist);
+      const angle = (i / 18) * Math.PI * 2;
+      const dist = 235 + (i % 3) * 35;
+      cGroup.position.set(Math.cos(angle) * dist, 62 + (i % 4) * 7, Math.sin(angle) * dist);
 
       const p1 = new THREE.Mesh(new THREE.DodecahedronGeometry(5.8, 1), cloudMat);
       const p2 = new THREE.Mesh(new THREE.DodecahedronGeometry(4.4, 1), cloudMat);
@@ -2707,53 +2890,56 @@
 
     const cx = w * 0.5;
     const cy = h * 0.5;
-    const scale = (Math.min(w, h) * 0.45) / ISLAND_RADIUS;
+    const scale = (Math.min(w, h) * 0.45) / 240;
 
     ctx.save();
-    // Circular Island Disc
+    // Main Circular Island
     ctx.beginPath();
-    ctx.arc(cx, cy, 138 * scale, 0, Math.PI * 2);
+    ctx.arc(cx, cy, MAIN_ISLAND_RADIUS * scale, 0, Math.PI * 2);
     ctx.fillStyle = 'rgba(78, 168, 96, 0.35)';
     ctx.fill();
     ctx.strokeStyle = 'rgba(243, 223, 182, 0.75)';
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 1.5;
     ctx.stroke();
 
-    // 4 Radial Avenues
-    ctx.strokeStyle = '#334155';
-    ctx.lineWidth = 2.5;
-    [0, Math.PI * 0.5, Math.PI, Math.PI * 1.5].forEach(ang => {
+    // 4 Satellite Islands & Bridges
+    SATELLITE_ISLANDS.forEach(sat => {
+      // Bridge line
       ctx.beginPath();
-      ctx.moveTo(cx + Math.cos(ang) * INNER_RING_RADIUS * scale, cy + Math.sin(ang) * INNER_RING_RADIUS * scale);
-      ctx.lineTo(cx + Math.cos(ang) * OUTER_ROAD_RADIUS * scale, cy + Math.sin(ang) * OUTER_ROAD_RADIUS * scale);
+      ctx.moveTo(cx, cy);
+      ctx.lineTo(cx + sat.cx * scale, cy + sat.cz * scale);
+      ctx.strokeStyle = '#334155';
+      ctx.lineWidth = 3;
+      ctx.stroke();
+
+      // Satellite island circle
+      ctx.beginPath();
+      ctx.arc(cx + sat.cx * scale, cy + sat.cz * scale, SAT_ISLAND_RADIUS * scale, 0, Math.PI * 2);
+      ctx.fillStyle = 'rgba(78, 168, 96, 0.45)';
+      ctx.fill();
+      ctx.strokeStyle = sat.accent;
+      ctx.lineWidth = 1.5;
       ctx.stroke();
     });
 
-    // Inner Roundabout Ring
-    ctx.beginPath();
-    ctx.arc(cx, cy, INNER_RING_RADIUS * scale, 0, Math.PI * 2);
-    ctx.strokeStyle = '#334155';
-    ctx.lineWidth = 2.5;
-    ctx.stroke();
-
-    // Main Circular Highway Loop
+    // Main Circular Highway
     ctx.beginPath();
     ctx.arc(cx, cy, OUTER_ROAD_RADIUS * scale, 0, Math.PI * 2);
     ctx.strokeStyle = '#1E293B';
-    ctx.lineWidth = 5.5;
+    ctx.lineWidth = 4.5;
     ctx.stroke();
 
-    // All 16 Symmetrical Billboard Stops
+    // All 16 Stop Pins
     stopObjects.forEach(so => {
       const sx = cx + so.parkX * scale;
       const sy = cy + so.parkZ * scale;
       const isCurrent = activeStop === so;
       ctx.beginPath();
-      ctx.arc(sx, sy, isCurrent ? 5.2 : 3.3, 0, Math.PI * 2);
+      ctx.arc(sx, sy, isCurrent ? 4.8 : 2.9, 0, Math.PI * 2);
       ctx.fillStyle = isCurrent ? '#E8B931' : so.stop.accent;
       ctx.fill();
       ctx.strokeStyle = '#0F172A';
-      ctx.lineWidth = 1.2;
+      ctx.lineWidth = 1;
       ctx.stroke();
     });
 
@@ -2763,15 +2949,15 @@
     ctx.translate(px, py);
     ctx.rotate(-carState.heading + Math.PI);
     ctx.beginPath();
-    ctx.moveTo(0, -6.5);
-    ctx.lineTo(4.8, 5.2);
-    ctx.lineTo(0, 2.8);
-    ctx.lineTo(-4.8, 5.2);
+    ctx.moveTo(0, -6.0);
+    ctx.lineTo(4.4, 4.8);
+    ctx.lineTo(0, 2.5);
+    ctx.lineTo(-4.4, 4.8);
     ctx.closePath();
     ctx.fillStyle = '#E11D48';
     ctx.fill();
     ctx.strokeStyle = '#FAF8F1';
-    ctx.lineWidth = 1.5;
+    ctx.lineWidth = 1.4;
     ctx.stroke();
     ctx.restore();
   }
@@ -2798,7 +2984,7 @@
 
     ctx.fillStyle = '#D9624A';
     ctx.font = '600 21px "DM Sans", sans-serif';
-    ctx.fillText(`Rikkardo L. Tobing — Interactive 3D Drivefolio Island (${timeMode.toUpperCase()} EDITION)`, 52, out.height - 48);
+    ctx.fillText(`Rikkardo L. Tobing — Interactive 3D Drivefolio Archipelago (${timeMode.toUpperCase()} EDITION)`, 52, out.height - 48);
 
     ctx.fillStyle = '#E8B931';
     ctx.fillRect(out.width - 280, out.height - 118, 226, 68);
