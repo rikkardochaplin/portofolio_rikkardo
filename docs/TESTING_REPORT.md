@@ -1,12 +1,12 @@
 # Testing Report — Rikkardo L. Tobing Portfolio Redesign
 
 **Test Date:** 2026-11-26  
-**Environment:** Local HTTP server (`python -m http.server 8769`), Google Chrome Headless via Chrome DevTools Protocol, Node.js `v25.1.0`, Python `3.14.2`
+**Environment:** Local HTTP server (`python -m http.server 8772`), Google Chrome Headless via Chrome DevTools Protocol, Node.js `v25.1.0`, Python `3.14.2`
 
 ---
 
 ## 1. Content & Asset Integrity Verification (`docs/verify_content_integrity.py`)
-- **Result:** `157 / 157` checks passed, `0` failures.
+- **Result:** `155 / 155` checks passed, `0` failures.
 - Verified:
   - All 23 projects (12 core + 11 cloud full-stack SaaS & web apps) present in both `index.html` and `js/data.js`, ranked Tier 1 → Tier 2 → Tier 3 (`docs/PROJECT_PRIORITY_AUDIT.md`)
   - All 9 visual stories present in both `index.html` and `js/data.js`
@@ -32,15 +32,15 @@
 - **Runtime Exceptions:** `0` (`[]`) across `index.html`, `project.html`, and `drivefolio.html`.
 - **Blueprint Removal:** `archModalExists: false`, `openModalButtons: 0`.
 - **Compact Default & Expand Toggle:**
-  - Initial load: `9 / 23` flagship cards visible (`is-compact-hidden` pre-applied for zero FOUC), `compactHeight = 11,460px` on Desktop (`1440px`)
-  - Expanded via `#projects-expand-btn`: `23 / 23` cards visible (`expandedHeight = 13,758px`)
+  - Initial load: `9 / 23` flagship cards visible (`is-compact-hidden` pre-applied for zero FOUC), `compactHeight = 11,178px` on Desktop (`1440px`)
+  - Expanded via `#projects-expand-btn`: `23 / 23` cards visible (`expandedHeight = 13,490px`)
   - Collapsed back via `#projects-expand-btn`: `9 / 23` cards visible
-- **Image Loading (after full scroll across all 23 cards + 9 stories + profile):** `33 / 33` images on `index.html` loaded with `naturalWidth > 0` (`broken: []`); `0` broken images across sampled case studies (`pamerindo`, `tixlantra`, `kelantra`, `pinjam-barang`, `meeting-registrasi`, `absenlantra`).
+- **Image Loading (after full scroll across all 23 cards + 9 stories + monograph plate):** `33 / 33` images on `index.html` loaded with `naturalWidth > 0` (`broken: []`); `0` broken images across sampled case studies (`pamerindo`, `tixlantra`, `kelantra`, `pinjam-barang`, `meeting-registrasi`, `absenlantra`).
 - **Responsive Overflow & Layout Checks:**
-  - Desktop (`1440x900`): `scrollW = 1425`, `innerW = 1440`, `scrollH = 11,460`, `overflow: false`, `wrappedNav: []`, `navHeight: 71`
-  - Laptop (`1024x768`): `scrollW = 1009`, `innerW = 1024`, `scrollH = 13,792`, `overflow: false`, `wrappedNav: []`, `navHeight: 71`
-  - Tablet (`768x1024`): `scrollW = 753`, `innerW = 768`, `scrollH = 16,329`, `overflow: false`, `navHeight: 71`
-  - Mobile (`375x812`): `scrollW = 375`, `innerW = 375`, `scrollH = 24,912`, `overflow: false`, `navHeight: 71`
+  - Desktop (`1440x900`): `scrollW = 1425`, `innerW = 1440`, `scrollH = 11,178`, `overflow: false`, `wrappedNav: []`, `navHeight: 71`
+  - Laptop (`1024x768`): `scrollW = 1009`, `innerW = 1024`, `scrollH = 13,214`, `overflow: false`, `wrappedNav: []`, `navHeight: 71`
+  - Tablet (`768x1024`): `scrollW = 753`, `innerW = 768`, `scrollH = 15,533`, `overflow: false`, `navHeight: 71`
+  - Mobile (`375x812`): `scrollW = 375`, `innerW = 375`, `scrollH = 23,527`, `overflow: false`, `navHeight: 71`
   - Mobile Navigation Drawer: opens and closes cleanly (`opened: true, closed: true`)
 - **Interactive Flows Tested:**
   - **Project Filters:** `all` -> 9 (compact) / 23 (expanded), `fullstack` -> 11, `web` -> 14, `enterprise` -> 10, `ai` -> 6, `iot` -> 3
