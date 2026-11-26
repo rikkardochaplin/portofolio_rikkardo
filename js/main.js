@@ -94,13 +94,24 @@ function initBackToTop() {
 
 /* ── 4. Accessible Intersection Reveal ── */
 function initRevealAnimations() {
-  const nodes = document.querySelectorAll('[data-reveal]');
+  const nodes = Array.from(document.querySelectorAll('[data-reveal]'));
   if (!nodes.length) return;
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
     nodes.forEach(n => n.classList.add('revealed'));
     return;
   }
+
+  const revealVisible = () => {
+    const vh = window.innerHeight || 900;
+    nodes.forEach(n => {
+      if (n.classList.contains('revealed')) return;
+      const rect = n.getBoundingClientRect();
+      if (rect.top <= vh + 120) {
+        n.classList.add('revealed');
+      }
+    });
+  };
 
   const observer = new IntersectionObserver((entries, obs) => {
     entries.forEach(entry => {
@@ -109,15 +120,18 @@ function initRevealAnimations() {
         obs.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+  }, { threshold: 0.01, rootMargin: '120px 0px 120px 0px' });
 
   nodes.forEach(n => observer.observe(n));
+  window.addEventListener('scroll', revealVisible, { passive: true });
+  revealVisible();
 }
 
 /* ── 5. Project Category Filtering ── */
 function initProjectFilters() {
   const filterGroup = document.getElementById('project-filters');
   const cards = document.querySelectorAll('#projects-grid .project-card');
+  const countLabel = document.getElementById('projects-count-label');
   if (!filterGroup || !cards.length) return;
 
   const buttons = filterGroup.querySelectorAll('.filter-btn');
@@ -127,11 +141,16 @@ function initProjectFilters() {
       btn.classList.add('active');
       const filter = btn.getAttribute('data-filter');
 
+      let visible = 0;
       cards.forEach(card => {
         const cats = (card.getAttribute('data-category') || '').split(/\s+/);
         const match = filter === 'all' || cats.includes(filter);
         card.classList.toggle('is-hidden', !match);
+        if (match) visible += 1;
       });
+      if (countLabel) {
+        countLabel.textContent = `Showing ${visible} of ${cards.length} projects`;
+      }
     });
   });
 }

@@ -6,9 +6,9 @@
 ---
 
 ## 1. Content & Asset Integrity Verification (`docs/verify_content_integrity.py`)
-- **Result:** `113 / 113` checks passed, `0` failures.
+- **Result:** `146 / 146` checks passed, `0` failures.
 - Verified:
-  - All 12 projects present in both `index.html` and `js/data.js`
+  - All 23 projects (12 original + 11 Vercel full-stack apps) present in both `index.html` and `js/data.js`
   - All 9 visual stories present in both `index.html` and `js/data.js`
   - Professional identity (`Multi-disciplinary Technology Engineer`), tagline (`Beyond Code. Across Technology.`), and all 4 career stats (`8+`, `500K+`, `99.9%`, `5+ Yrs`)
   - All experience entries (`Informa Markets Asia`, `PT Pamerindo Indonesia`), education (`Universitas Gunadarma` Bachelor's GPA `3.78 / 4.00` & Diploma GPA `3.77 / 4.00`), and all 6 certifications (`Fortinet NSE 1 & NSE 2`, `Fortinet Certified Fundamentals in Cybersecurity`, `BNSP Junior Computer Network Technician`, `ServiceNow Fundamentals`, `Azure Fundamentals`, `TOEFL Computer-Based, Score 513`)
@@ -37,14 +37,15 @@
 
 ## 3. Automated Headless Browser & Responsive Verification
 - **Runtime Exceptions:** `0` (`[]`) across `index.html`, `project.html?id=monitor-tablet`, `article.html?id=gold-in-the-mist`, and `drivefolio.html`.
-- **Image Loading (after full scroll):** `24 / 24` images on `index.html` loaded with `naturalWidth > 0` (`broken: []`); `4 / 4` screenshots loaded on `project.html?id=monitor-tablet`; `0` broken images on `article.html?id=gold-in-the-mist`.
+- **Image Loading (after full scroll):** `35 / 35` images on `index.html` loaded with `naturalWidth > 0` (`broken: []`); `4 / 4` screenshots loaded on `project.html?id=monitor-tablet`; `0` broken images across tested Vercel case studies (`tixlantra`, `kelantra`, `email-check`, `absenlantra`) and `article.html?id=gold-in-the-mist`.
 - **Responsive Overflow Checks:**
-  - Desktop (`1440x900`): `scrollW = 1425`, `innerW = 1440`, `overflow: false`
+  - Desktop (`1440x900`): `scrollW = 1425`, `innerW = 1440`, `overflow: false`, `wrappedNav: []`
+  - Laptop (`1024x768`): `scrollW = 1009`, `innerW = 1024`, `overflow: false`, `wrappedNav: []`
   - Tablet (`768x1024`): `scrollW = 753`, `innerW = 768`, `overflow: false`
   - Mobile (`375x812`): `scrollW = 375`, `innerW = 375`, `overflow: false`
   - Mobile Navigation Drawer: opens and closes cleanly (`opened: true, closed: true`)
 - **Interactive Flows Tested:**
-  - **Project Filters:** `all` -> 12, `web` -> 8, `enterprise` -> 3, `ai` -> 2, `iot` -> 1
+  - **Project Filters (23 total):** `all` -> 23, `vercel` -> 11, `web` -> 14, `enterprise` -> 10, `ai` -> 6, `iot` -> 3
   - **Quick View Blueprint Modal:** opens on `NexusAgent & PamerAi Ecosystem`, switches to `Specs` tab rendering `/api/agent/chat` table, closes cleanly
   - **Visual Story Filters:** `all` -> 9, `street` -> 2, `golden-hour` -> 3, `architecture` -> 2, `minimalist` -> 2
   - **Photography Lightbox:** opens on `Gold in the Mist: The Unseen Workers`, navigates Next to `Silhouettes of Ambition: Sunset Over SCBD`, closes cleanly

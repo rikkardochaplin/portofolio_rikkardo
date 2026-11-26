@@ -29,7 +29,7 @@ def verify():
     errors = []
     checks = []
 
-    # 1. Check all 12 Projects in index.html & js/data.js
+    # 1. Check all 23 Projects in index.html & js/data.js (12 core + 11 Vercel apps)
     projects = [
         "PT Pamerindo Indonesia",
         "Food & Hospitality Indonesia (FHI)",
@@ -42,7 +42,18 @@ def verify():
         "NexusAgent & PamerAi Ecosystem",
         "Orion ERP & IBM iSeries Simulator",
         "CV Examiner AI Pro Platform",
-        "Enterprise IoT Remote Hub"
+        "Enterprise IoT Remote Hub",
+        "Tixlantra",
+        "Kelantra",
+        "Seolantra",
+        "Lemburyukk",
+        "AssetFlow IT",
+        "Reportlantra",
+        "XP MailShield Pro 2006",
+        "Online Invitation Builder",
+        "Absenlantra",
+        "Meeting-Registrasi",
+        "Elysia AI Chatbot"
     ]
     for p in projects:
         if p in index_html and p in data_js:

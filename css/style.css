@@ -352,7 +352,7 @@ ul {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 20px;
+  gap: clamp(12px, 1.8vw, 20px);
   height: 70px;
 }
 
@@ -365,6 +365,8 @@ ul {
   font-weight: 700;
   font-size: 1rem;
   letter-spacing: -0.02em;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
 .nav-brand-mark {
@@ -384,17 +386,18 @@ ul {
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: clamp(10px, 1.35vw, 24px);
   list-style: none;
 }
 
 .nav-links a {
   text-decoration: none;
   color: var(--text-on-dark-muted);
-  font-size: 0.875rem;
+  font-size: clamp(0.81rem, 0.95vw, 0.875rem);
   font-weight: 500;
   padding-block: 6px;
   position: relative;
+  white-space: nowrap;
 }
 
 .nav-links a:hover,
@@ -416,6 +419,7 @@ ul {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-shrink: 0;
 }
 
 .nav-drivefolio-pill {
@@ -431,6 +435,7 @@ ul {
   padding: 7px 12px;
   border-radius: var(--radius-sm);
   text-decoration: none;
+  white-space: nowrap;
 }
 
 .nav-drivefolio-pill:hover {
@@ -1191,7 +1196,7 @@ ul {
   font-family: var(--font-mono);
   font-size: 0.78rem;
   font-weight: 500;
-  padding: 7px 14px;
+  padding: 9px 14px;
   border-radius: var(--radius-sm);
   cursor: pointer;
   transition: all var(--transition);

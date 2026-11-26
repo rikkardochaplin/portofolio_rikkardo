@@ -202,37 +202,37 @@ window.PORTFOLIO_DATA = {
     {
       category: 'Web & CMS',
       icon: 'fa-solid fa-globe',
-      items: ['WordPress Enterprise', 'WordPress Multisite', 'Custom CMS Themes', 'HTML5', 'CSS3', 'Responsive UI', 'Bootstrap 5', 'Chart.js']
+      items: ['WordPress Enterprise', 'WordPress Multisite', 'Next.js 14–16 (App Router)', 'React 18 / 19', 'Tailwind CSS v4', 'HTML5 / CSS3', 'Bootstrap 5', 'Chart.js / Recharts']
     },
     {
       category: 'Programming Languages',
       icon: 'fa-solid fa-code',
-      items: ['PHP 8.x', 'JavaScript (ES6+)', 'Python 3.10+', 'SQL', 'Kotlin (Android Client)', 'RPG IV / ILE RPG (Sim)']
+      items: ['PHP 8.x', 'JavaScript (ES6+)', 'TypeScript', 'Python 3.10+', 'SQL', 'Kotlin (Android Client)', 'RPG IV / ILE RPG (Sim)']
     },
     {
       category: 'AI & Python',
       icon: 'fa-solid fa-robot',
-      items: ['FastAPI', 'Uvicorn', 'ReAct Agent Frameworks', 'Document RAG & PDF Extraction', 'Token Cost Metering ($/Rp)', 'YOLOv8 (Thesis)', 'PyAutoGUI / psutil']
+      items: ['FastAPI', 'Uvicorn', 'ReAct Agent Frameworks', 'Document RAG & PDF Extraction', 'Token Cost Metering ($/Rp)', 'Google Gemini / OpenAI API', 'ONNX Runtime (SFace)', 'YOLOv8 (Thesis)']
     },
     {
       category: 'Databases & Systems',
       icon: 'fa-solid fa-database',
-      items: ['MySQL / MariaDB', 'SQLite / SQLAlchemy', 'IBM AS/400 DB2 (Sim)', 'WebSockets', 'REST APIs', 'ODBC Integration', 'CRM Synchronization']
+      items: ['Supabase (PostgreSQL RLS)', 'Firebase (Auth & Firestore)', 'MySQL / MariaDB', 'SQLite / SQLAlchemy', 'IBM AS/400 DB2 (Sim)', 'WebSockets', 'REST APIs', 'CRM Synchronization']
     },
     {
       category: 'Cloud & Infrastructure',
       icon: 'fa-solid fa-cloud',
-      items: ['Microsoft Azure', 'Mimecast', 'Cloudflare CDN', 'Nginx / Redis Caching', 'Windows & Hardware Support', 'Network Troubleshooting', 'ESP8266 IoT']
+      items: ['Microsoft Azure', 'Vercel (Functions & Deploy)', 'Mimecast', 'Cloudflare CDN', 'Nginx / Redis Caching', 'Docker', 'Hardware & Network Support', 'ESP8266 IoT']
     },
     {
       category: 'Operations & SEO',
       icon: 'fa-solid fa-chart-line',
-      items: ['Technical SEO', 'JSON-LD Structured Data', 'Core Web Vitals Tuning', 'GDPR Consent Workflows', 'Event IT Infrastructure', 'Incident Resolution', 'Data & Reporting Ops']
+      items: ['Technical SEO', 'Google PageSpeed Insights API', 'JSON-LD Structured Data', 'Core Web Vitals Tuning', 'GDPR Consent Workflows', 'Event IT Infrastructure', 'Incident Resolution', 'Data & Reporting Ops']
     },
     {
       category: 'Development Tools',
       icon: 'fa-solid fa-terminal',
-      items: ['Git & GitHub', 'Vercel', 'VS Code', 'Node.js', 'React 18 / Vite', 'Swagger / OpenAPI', 'Three.js (WebGL)']
+      items: ['Git & GitHub', 'VS Code', 'Node.js', 'Vite', 'Zod & React Hook Form', 'Inngest', 'ExcelJS / jsPDF', 'Vitest / Three.js']
     }
   ],
 
@@ -837,6 +837,352 @@ window.PORTFOLIO_DATA = {
           </div>
         `,
         specs: `<p class="bp-note">Python 3.10+ • FastAPI • Uvicorn • Kotlin &amp; Jetpack Compose • PyAutoGUI • psutil • Sub-200ms Streaming.</p>`
+      }
+    },
+    {
+      id: 'tixlantra',
+      title: 'Tixlantra',
+      badge: 'Vercel Full-Stack • Event SaaS',
+      metaLine: 'Next.js 16 • Supabase RLS • Resend • QR Check-In',
+      categories: ['vercel', 'enterprise', 'web'],
+      categoryLabel: 'Vercel App • Event Ticketing SaaS',
+      featured: false,
+      shortDesc: 'Multi-event registration and cryptographic QR e-ticket platform with white-label client branding, payment proof confirmation, atomic check-in validation, and Excel export.',
+      img: 'assets/images/project-tixlantra.png',
+      webp: 'assets/images/webp/project-tixlantra.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: null,
+      repoUrl: 'https://github.com/rikkardochaplin/tixlantra',
+      tags: ['Next.js 16', 'React 19', 'Supabase RLS', 'Resend', 'html5-qrcode', 'ExcelJS'],
+      caseStudy: {
+        overview: 'Tixlantra (part of the Lantra ecosystem) is a mobile-first multi-event registration and QR e-ticket platform built with Next.js 16 App Router, React 19, TypeScript, Supabase PostgreSQL with Row-Level Security, and Resend.',
+        background: 'Built to serve multi-day B2B/B2C events requiring customizable client branding, both free instant tickets and paid manual-transfer verification, and reliable gate check-in.',
+        problem: 'Event organizers struggle with race conditions at entrance scanners, inconsistent white-label registration flows, and manual Excel tracking across multi-gate venues.',
+        role: 'Sole Full-Stack Engineer — designed the PostgreSQL schema & RLS policies, RPC check-in functions, Resend inline QR email delivery, and Tixlantra Scan camera portal.',
+        approach: 'Used 32-byte base64url cryptographic ticket tokens, atomic Postgres partial unique indexes (1x check-in per paid event day), and Signed URL payment proof review.',
+        implementation: 'Implemented /e/[slug] registration, /payment/[token] transfer upload, /ticket/[token] pass page, /admin/scan camera validator (html5-qrcode), and 2-sheet ExcelJS export.',
+        results: 'Complete production-structured Next.js + Supabase repository verified on GitHub; public live deployment URL and event attendee metrics are not publicly documented.',
+        screenshots: [{ src: 'assets/images/project-tixlantra.png', webp: 'assets/images/webp/project-tixlantra.webp', caption: 'Tixlantra Multi-Event Ticketing Architecture' }]
+      },
+      tabs: {
+        overview: `<div class="bp-section"><h5><i class="fa-solid fa-ticket"></i> Tixlantra Event Ticketing SaaS</h5><p>Multi-event &amp; multi-day ticketing platform featuring white-label branding, free instant QR passes, paid manual transfer confirmation, and atomic Postgres check-in rules.</p></div><div class="bp-media"><img src="assets/images/project-tixlantra.png" alt="Tixlantra" loading="lazy" /></div>`,
+        architecture: `<div class="bp-card"><h6>Next.js 16 App Router + Supabase PostgreSQL RLS</h6><p>Server-side QR generation (<code>qrcode</code>), Resend inline CID email delivery, private Storage buckets with Signed URLs, and atomic check-in RPCs.</p></div>`,
+        features: `<div class="bp-grid"><div class="bp-card"><h6>White-Label Events</h6><p>Custom brand title, logo, and theme tokens per event slug with automatic fallback.</p></div><div class="bp-card"><h6>Tixlantra Scan</h6><p>Camera + hardware barcode validation reporting VALID, ALREADY USED, UNPAID, or WRONG DAY.</p></div></div>`,
+        specs: `<p class="bp-note">Next.js 16 • React 19 • TypeScript • Tailwind CSS v4 • Supabase SSR/RLS • Resend • ExcelJS • Zod.</p>`
+      }
+    },
+    {
+      id: 'kelantra',
+      title: 'Kelantra',
+      badge: 'Vercel Full-Stack • B2B SaaS',
+      metaLine: 'Next.js 15 • Supabase RLS • Multi-Tenant Procurement',
+      categories: ['vercel', 'enterprise'],
+      categoryLabel: 'Vercel App • Procurement SaaS',
+      featured: false,
+      shortDesc: 'Multi-tenant B2B procurement and vendor management SaaS with strict PostgreSQL Row-Level Security, multi-tier approval workflows, and Vitest tenant isolation tests.',
+      img: 'assets/images/project-kelantra.png',
+      webp: 'assets/images/webp/project-kelantra.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: null,
+      repoUrl: 'https://github.com/rikkardochaplin/kelantra',
+      tags: ['Next.js 15', 'React 19', 'TypeScript', 'Supabase RLS', 'Vitest', 'Zod'],
+      caseStudy: {
+        overview: 'Kelantra ("Control Every Purchase") is an enterprise multi-tenant B2B procurement and vendor management SaaS engineered with Next.js 15 App Router, TypeScript strict mode, and Supabase PostgreSQL.',
+        background: 'Organizations running multi-department purchasing need strict tenant isolation, unique document numbering per company, and auditable approval hierarchies.',
+        problem: 'Standard multi-tenant apps risk cross-organization data leaks if authorization only checks client-submitted organization IDs.',
+        role: 'Lead Full-Stack Engineer — architected dual-layer authorization (Database RLS + Server Action guards), RBAC role matrix, and Vitest tenant isolation test suite.',
+        approach: 'Every transactional table carries organization_id enforced by PostgreSQL RLS helpers (is_member_of_org, has_org_roles) alongside server-side getTenantContext() verification.',
+        implementation: 'Built multi-tier purchase approval flows, private tenant Supabase Storage buckets, Platform Superadmin governance (/platform-admin), and React Hook Form + Zod validation.',
+        results: 'Verified Next.js 15 multi-tenant architecture with Vitest isolation tests on GitHub; production tenant counts are not publicly documented.',
+        screenshots: [{ src: 'assets/images/project-kelantra.png', webp: 'assets/images/webp/project-kelantra.webp', caption: 'Kelantra Multi-Tenant Procurement Architecture' }]
+      },
+      tabs: {
+        overview: `<div class="bp-section"><h5><i class="fa-solid fa-boxes-packing"></i> Kelantra B2B Procurement</h5><p>Multi-tenant SaaS handling purchase requisitions, vendor management, multi-tier approvals, and strict PostgreSQL RLS tenant isolation.</p></div><div class="bp-media"><img src="assets/images/project-kelantra.png" alt="Kelantra" loading="lazy" /></div>`,
+        architecture: `<div class="bp-card"><h6>Dual-Layer Tenant Security</h6><p>Combines database-level RLS policies (<code>is_member_of_org()</code>) with server-side <code>requireTenantAuth()</code> guards in Next.js Server Actions.</p></div>`,
+        features: `<div class="bp-grid"><div class="bp-card"><h6>Multi-Tier Approvals</h6><p>Role-based workflow across Owner, Procurement, Finance, and Platform Superadmin.</p></div><div class="bp-card"><h6>Vitest Isolation Suite</h6><p>Automated unit/integration tests verifying tenant boundaries in happy-dom.</p></div></div>`,
+        specs: `<p class="bp-note">Next.js 15 • React 19 • TypeScript • Supabase SSR &amp; RLS • React Hook Form • Zod • Vitest.</p>`
+      }
+    },
+    {
+      id: 'seolantra',
+      title: 'Seolantra',
+      badge: 'Vercel Full-Stack • Website Intelligence',
+      metaLine: 'Next.js 16 • PageSpeed Insights API v5 • Inngest',
+      categories: ['vercel', 'web', 'ai'],
+      categoryLabel: 'Vercel App • SEO & Performance SaaS',
+      featured: false,
+      shortDesc: 'Website performance, SEO, accessibility, and best-practices audit SaaS powered by Google PageSpeed Insights API v5, Inngest durable workflows, Recharts, and PDF reports.',
+      img: 'assets/images/project-seolantra.png',
+      webp: 'assets/images/webp/project-seolantra.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: null,
+      repoUrl: 'https://github.com/rikkardochaplin/seolantra',
+      tags: ['Next.js 16', 'PageSpeed API v5', 'Inngest', 'Firebase', 'React-PDF'],
+      caseStudy: {
+        overview: 'Seolantra ("See deeper. Build better.") is a website intelligence SaaS running automated Mobile & Desktop Core Web Vitals, SEO, accessibility, and best-practices audits.',
+        background: 'Created to streamline technical SEO and Lighthouse diagnostics across multiple managed exhibition and corporate domains.',
+        problem: 'Manual PageSpeed checks across dozens of URLs are repetitive, hard to track over time, and difficult to package into executive PDF reports.',
+        role: 'Full-Stack Developer — built the Next.js 16 App Router dashboard, Firebase Auth HttpOnly session cookie handling, Inngest background job orchestration, and PDF generator.',
+        approach: 'Offloaded long-running PageSpeed Insights v5 API polling to durable Inngest workflows (/api/inngest) while persisting audit snapshots in Cloud Firestore.',
+        implementation: 'Integrated OpenTelemetry instrumentation, Recharts trend graphs, @react-pdf/renderer executive reports, and accessible Zod-validated audit triggers.',
+        results: 'Complete Next.js 16 + Inngest + PageSpeed SaaS codebase on GitHub; public live domain metrics are not publicly documented.',
+        screenshots: [{ src: 'assets/images/project-seolantra.png', webp: 'assets/images/webp/project-seolantra.webp', caption: 'Seolantra Website Intelligence Architecture' }]
+      },
+      tabs: {
+        overview: `<div class="bp-section"><h5><i class="fa-solid fa-gauge-high"></i> Seolantra Website Intelligence</h5><p>Deep performance, SEO, accessibility, and best-practices audit SaaS powered by Google PageSpeed Insights API v5 and Cloud Firestore.</p></div><div class="bp-media"><img src="assets/images/project-seolantra.png" alt="Seolantra" loading="lazy" /></div>`,
+        architecture: `<div class="bp-card"><h6>Durable Workflow &amp; Session Auth</h6><p>Inngest background functions (<code>/api/inngest</code>) execute mobile/desktop PageSpeed scans asynchronously with Firebase Admin HttpOnly cookie sessions.</p></div>`,
+        specs: `<p class="bp-note">Next.js 16 • React 19 • TypeScript • Firebase Admin • Inngest • Recharts • @react-pdf/renderer.</p>`
+      }
+    },
+    {
+      id: 'lemburyukk',
+      title: 'Lemburyukk',
+      badge: 'Vercel Full-Stack • Enterprise Operations',
+      metaLine: 'Next.js 16 • Firebase • ExcelJS • jsPDF',
+      categories: ['vercel', 'enterprise'],
+      categoryLabel: 'Vercel App • Overtime & Reporting',
+      featured: false,
+      shortDesc: 'Overtime tracking and official PT Pamerindo Indonesia report generator featuring dual canvas digital signatures, multi-session duration logic, and A4 PDF / Excel exports.',
+      img: 'assets/images/project-lemburyukk.png',
+      webp: 'assets/images/webp/project-lemburyukk.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: null,
+      repoUrl: 'https://github.com/rikkardochaplin/lemburyukk',
+      tags: ['Next.js 16', 'Tailwind v4', 'Firebase', 'ExcelJS', 'jsPDF'],
+      caseStudy: {
+        overview: 'Lemburyukk is a minimalist overtime record and official report generator built around PT Pamerindo Indonesia’s official spreadsheet and A4 printable form specifications.',
+        background: 'Replaced manual spreadsheet formatting and physical paper signing for daily/weekend overtime claims during exhibition setups.',
+        problem: 'Calculating multi-session overtime hours, weekend/holiday break deductions, and formatting compliant Excel/PDF forms with signatures took significant administrative time.',
+        role: 'Creator & Full-Stack Engineer — built the Next.js 16 interface, dual HTML5 canvas/upload signature pad, ExcelJS corporate template exporter, and jsPDF A4 renderer.',
+        approach: 'Supports both Cloud Firestore multi-device sync and a standalone local/offline mode with tabular monospace time displays and automatic dark/light theming.',
+        implementation: 'Implemented 24-hour multi-session calculations, configurable 1-hour weekend/holiday break deductions (>4h), national holiday markers, and toast notifications.',
+        results: 'Verified Next.js 16 repository on GitHub producing pixel-accurate PT Pamerindo Excel (.xlsx) and A4 Landscape PDF overtime forms.',
+        screenshots: [{ src: 'assets/images/project-lemburyukk.png', webp: 'assets/images/webp/project-lemburyukk.webp', caption: 'Lemburyukk Overtime & Reporting Architecture' }]
+      },
+      tabs: {
+        overview: `<div class="bp-section"><h5><i class="fa-solid fa-clock"></i> Lemburyukk Overtime Generator</h5><p>Tracks multi-session overtime hours, applies weekend/holiday rest deductions, captures dual employee/manager signatures, and exports official PT Pamerindo Excel &amp; A4 PDFs.</p></div><div class="bp-media"><img src="assets/images/project-lemburyukk.png" alt="Lemburyukk" loading="lazy" /></div>`,
+        specs: `<p class="bp-note">Next.js 16 • React 19 • Tailwind CSS v4 • Firebase • ExcelJS • jsPDF + AutoTable.</p>`
+      }
+    },
+    {
+      id: 'pinjam-barang',
+      title: 'AssetFlow IT (Pinjam-Barang)',
+      badge: 'Vercel Full-Stack • IT Operations',
+      metaLine: 'React 18 • Vite • Firebase • QR Inventory • Docker',
+      categories: ['vercel', 'iot', 'enterprise'],
+      categoryLabel: 'Vercel App • IT Asset Management',
+      featured: false,
+      shortDesc: 'IT asset lending and inventory system for PT Pamerindo Indonesia with dual employee/admin portals, QR code scanning, printable A4 handover letters, and Vercel/Docker support.',
+      img: 'assets/images/project-pinjam-barang.png',
+      webp: 'assets/images/webp/project-pinjam-barang.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: null,
+      repoUrl: 'https://github.com/rikkardochaplin/pinjaminpamerindo',
+      tags: ['React 18', 'Vite', 'Firebase', 'QR Scanner', 'ExcelJS', 'Docker'],
+      caseStudy: {
+        overview: 'AssetFlow IT (pinjaminpamerindo) is a dedicated IT asset lending and inventory tracking platform for PT Pamerindo Indonesia & Informa Markets operations.',
+        background: 'Exhibition operations involve lending laptops, tablets, scanners, and peripherals across event teams, requiring clear chain-of-custody accountability.',
+        problem: 'Paper-based lending logs caused lost asset accountability and slow handover documentation during busy venue load-in days.',
+        role: 'Full-Stack Developer — designed the dual Borrower & IT Admin portals, QR checkout workflow, and printable A4 3-signature handover letter.',
+        approach: 'Built as a fast React 18 + Vite SPA backed by Firebase with QR code generation/scanning (qrcode & html5-qrcode) and client-side PDF/Excel exports.',
+        implementation: 'Added automatic loan duration calculation, manager approval flags, @media print A4 letterhead with 3 signature columns (Borrower, IT Custodian, Approver), and both Vercel & Docker/Nginx configs.',
+        results: 'Complete dual-portal asset management web app verified on GitHub; internal deployment metrics are not publicly documented.',
+        screenshots: [{ src: 'assets/images/project-pinjam-barang.png', webp: 'assets/images/webp/project-pinjam-barang.webp', caption: 'AssetFlow IT Dual-Portal Lending System' }]
+      },
+      tabs: {
+        overview: `<div class="bp-section"><h5><i class="fa-solid fa-laptop-file"></i> AssetFlow IT Lending System</h5><p>Manages IT equipment loans for PT Pamerindo Indonesia with employee/admin dual portals, QR scanning, Excel exports, and printable A4 handover letters.</p></div><div class="bp-media"><img src="assets/images/project-pinjam-barang.png" alt="AssetFlow IT" loading="lazy" /></div>`,
+        specs: `<p class="bp-note">React 18 • Vite 5 • React Router 7 • Firebase • qrcode • html5-qrcode • jsPDF • ExcelJS • Vercel / Docker.</p>`
+      }
+    },
+    {
+      id: 'reportlantra',
+      title: 'Reportlantra (Sosmed-Report)',
+      badge: 'Vercel Full-Stack • Analytics SaaS',
+      metaLine: 'Next.js 15 • Firebase • Recharts • SheetJS',
+      categories: ['vercel', 'enterprise', 'web'],
+      categoryLabel: 'Vercel App • Social Analytics SaaS',
+      featured: false,
+      shortDesc: 'Multi-brand social media monthly performance reporting app (LinkedIn, Instagram, TikTok) replacing manual Excel files with multi-sheet .xlsx import/export and Recharts dashboards.',
+      img: 'assets/images/project-reportlantra.png',
+      webp: 'assets/images/webp/project-reportlantra.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: null,
+      repoUrl: 'https://github.com/rikkardochaplin/reportlantra',
+      tags: ['Next.js 15', 'TypeScript', 'Firebase', 'Recharts', 'SheetJS'],
+      caseStudy: {
+        overview: 'Reportlantra is a multi-user, multi-brand social media analytics platform covering LinkedIn, Instagram, and TikTok monthly performance reporting.',
+        background: 'Built to replace fragmented monthly Excel workbooks with interactive KPI dashboards, engagement rate (ER) leaderboards, and print-ready executive summaries.',
+        problem: 'Compiling cross-platform social metrics manually in spreadsheets was error-prone and lacked automated trend comparison or brand isolation.',
+        role: 'Full-Stack Developer — built multi-brand Firestore isolation (users/{uid}/brands/{brandId}), SheetJS .xlsx import/export parser, and Recharts analytics views.',
+        approach: 'Organized 13 App Router routes including /dashboard, /platform, /input, /top-konten, /highlights, /target, /kalender, /laporan, and /admin.',
+        implementation: 'Added merge/overwrite Excel import modes, real-time ER preview while typing, +10% target suggestions, and print-ready A4 portrait light-mode PDF layouts.',
+        results: 'Complete multi-brand analytics platform verified on GitHub; internal adoption counts are not publicly documented.',
+        screenshots: [{ src: 'assets/images/project-reportlantra.png', webp: 'assets/images/webp/project-reportlantra.webp', caption: 'Reportlantra Multi-Brand Analytics Architecture' }]
+      },
+      tabs: {
+        overview: `<div class="bp-section"><h5><i class="fa-solid fa-chart-area"></i> Reportlantra Social Analytics</h5><p>Multi-brand LinkedIn, Instagram, and TikTok reporting dashboard with .xlsx import/export, ER leaderboards, content calendars, and A4 print reports.</p></div><div class="bp-media"><img src="assets/images/project-reportlantra.png" alt="Reportlantra" loading="lazy" /></div>`,
+        specs: `<p class="bp-note">Next.js 15 • React 19 • TypeScript • Firebase Auth &amp; Firestore • Recharts • SheetJS (xlsx).</p>`
+      }
+    },
+    {
+      id: 'email-check',
+      title: 'XP MailShield Pro 2006',
+      badge: 'Vercel Full-Stack • AI Security',
+      metaLine: 'Next.js 16 • Gemini 2.5 Flash • Heuristic v2.6',
+      categories: ['vercel', 'ai', 'enterprise'],
+      categoryLabel: 'Vercel App • Cybersecurity & AI',
+      featured: false,
+      shortDesc: 'AI-powered email phishing, BEC, and malware inspector built with a responsive Windows XP Luna interface, dual Heuristic + Gemini 2.5 Flash engine, and Web Audio retro SFX.',
+      img: 'assets/images/project-email-check.png',
+      webp: 'assets/images/webp/project-email-check.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: null,
+      repoUrl: 'https://github.com/rikkardochaplin/emaildetector',
+      tags: ['Next.js 16', 'React 19', 'Gemini 2.5 Flash', 'TypeScript', 'Web Audio API'],
+      caseStudy: {
+        overview: 'XP MailShield Pro 2006 (email-check-xp) is a dual-engine email threat inspector detecting phishing, CEO Whaling/BEC, spoofed senders, malicious links, and double-extension malware attachments.',
+        background: 'Designed to help corporate staff inspect suspicious emails in plain Indonesian/English with an approachable, memorable Windows XP Luna interface.',
+        problem: 'Non-technical staff struggle to spot subtle Reply-To spoofing, urgency manipulation, and disguised payloads (.pdf.exe) in corporate inboxes.',
+        role: 'Full-Stack & UI Engineer — engineered the Smart Heuristic v2.6 local detector, Gemini 2.5 Flash reasoning integration, XP Event Viewer audit log, and Web Audio synthesizer.',
+        approach: 'Runs an instant zero-API-key heuristic engine locally (covering Indonesian banking scams & dangerous file extensions) alongside optional Gemini 2.5 Flash psychological context analysis.',
+        implementation: 'Implemented responsive Windows XP taskbar/Start menu layout, 4-pillar threat scoring (Spoofing, Psychological Urgency, URLs, Malware), and eventvwr.msc audit logging.',
+        results: 'Complete Next.js 16 + Tailwind v4 cybersecurity tool verified on GitHub; external deployment usage is not publicly documented.',
+        screenshots: [{ src: 'assets/images/project-email-check.png', webp: 'assets/images/webp/project-email-check.webp', caption: 'XP MailShield Pro 2006 Inspection Architecture' }]
+      },
+      tabs: {
+        overview: `<div class="bp-section"><h5><i class="fa-solid fa-shield-virus"></i> XP MailShield Pro 2006</h5><p>Dual-engine email threat analyzer combining local Heuristic v2.6 rules with Google Gemini 2.5 Flash inside a responsive Windows XP Luna UI.</p></div><div class="bp-media"><img src="assets/images/project-email-check.png" alt="XP MailShield Pro" loading="lazy" /></div>`,
+        specs: `<p class="bp-note">Next.js 16 • React 19 • TypeScript • Tailwind CSS v4 • Google Gemini 2.5 Flash • Web Audio API.</p>`
+      }
+    },
+    {
+      id: 'online-invitation',
+      title: 'Online Invitation Builder',
+      badge: 'Vercel Full-Stack • SaaS Builder',
+      metaLine: 'Next.js 16 • Supabase RLS • QRCode • Zod',
+      categories: ['vercel', 'web'],
+      categoryLabel: 'Vercel App • Invitation SaaS',
+      featured: false,
+      shortDesc: 'Production-ready SaaS invitation builder and guest management platform with 6 themes, 80-bit personalized guest tokens, bulk CSV import, WhatsApp compiler, and live RSVP metrics.',
+      img: 'assets/images/project-online-invitation.png',
+      webp: 'assets/images/webp/project-online-invitation.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: null,
+      repoUrl: 'https://github.com/rikkardochaplin/Online-Invitation',
+      tags: ['Next.js 16', 'React 19', 'Supabase RLS', 'QRCode', 'Zod'],
+      caseStudy: {
+        overview: 'Online Invitation Builder & Guest Management System is a SaaS platform built with Next.js 16, TypeScript, Tailwind CSS v4, and Supabase PostgreSQL/Auth/Storage/RLS.',
+        background: 'Built for weddings, engagements, corporate gatherings, and private events requiring personalized guest links and structured RSVP tracking.',
+        problem: 'Static invitation pages lack per-guest party size limits, WhatsApp bulk personalization, and secure RSVP aggregation.',
+        role: 'Full-Stack Developer — built the multi-tab invitation editor, 6 visual theme switcher, 80-bit guest token generator, bulk CSV importer, and mobile/tablet/desktop live preview.',
+        approach: 'Used Supabase SSR session protection for /admin routes, Zod validation for RSVP submissions, and unique per-guest tokens (/invite/[slug]/g/[token]).',
+        implementation: 'Added 13 customizable content blocks, MP3 background audio support, dynamic WhatsApp template compilation, QR pass generation, and token revocation.',
+        results: 'Complete Next.js 16 + Supabase SaaS repository verified on GitHub; public live customer numbers are not publicly documented.',
+        screenshots: [{ src: 'assets/images/project-online-invitation.png', webp: 'assets/images/webp/project-online-invitation.webp', caption: 'Online Invitation SaaS Architecture' }]
+      },
+      tabs: {
+        overview: `<div class="bp-section"><h5><i class="fa-solid fa-envelope-open-text"></i> Online Invitation SaaS</h5><p>Multi-template invitation builder with live viewport preview, 80-bit personalized guest links, bulk CSV import, WhatsApp templates, and QR check-in passes.</p></div><div class="bp-media"><img src="assets/images/project-online-invitation.png" alt="Online Invitation" loading="lazy" /></div>`,
+        specs: `<p class="bp-note">Next.js 16 • React 19 • TypeScript • Supabase SSR &amp; RLS • QRCode • Zod • Sonner.</p>`
+      }
+    },
+    {
+      id: 'absenlantra',
+      title: 'Absenlantra',
+      badge: 'Vercel Stack • Biometric & IoT',
+      metaLine: 'Next.js 14 • ONNX SFace • AES-256-GCM • Firebase',
+      categories: ['vercel', 'iot', 'ai'],
+      categoryLabel: 'Vercel App • Biometric Attendance',
+      featured: false,
+      shortDesc: 'Decentralized mobile & web office attendance system using 128-dim OpenCV SFace ONNX facial verification, AES-256-GCM template encryption, and Haversine geofence radius validation.',
+      img: 'assets/images/project-absenlantra.png',
+      webp: 'assets/images/webp/project-absenlantra.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: null,
+      repoUrl: null,
+      tags: ['Next.js 14', 'ONNX Runtime', 'AES-256-GCM', 'Firebase Admin', 'TypeScript'],
+      caseStudy: {
+        overview: 'Absenlantra is a local-first mobile + web attendance platform combining Android facial enrollment/check-in with a 7-module Next.js App Router administration dashboard.',
+        background: 'Designed to run reliably over local LAN Wi-Fi using Firebase Emulator Suite without paid cloud dependencies.',
+        problem: 'Attendance systems must verify real identity and physical office presence while preventing photo replay attacks and protecting biometric templates.',
+        role: 'System Architect & Developer — built the Next.js 14 admin/API backend (onnxruntime-node, sharp, firebase-admin, zod) and biometric verification pipeline.',
+        approach: 'Extracts 128-dimensional SFace ONNX embeddings server-side, encrypts templates with AES-256-GCM, verifies Cosine Similarity (>= 0.363), and enforces Haversine geofencing + 60s anti-replay nonces.',
+        implementation: 'Delivered 7 admin modules (Stats, Employees, Attendance Logs, Leave/Correction Approvals, Face Review, Formula-Injection-Safe CSV Export, Office Schedule Config).',
+        results: 'Documented local LAN prototype with atomic Firestore transactions and disk persistence; external production metrics are not publicly documented.',
+        screenshots: [{ src: 'assets/images/project-absenlantra.png', webp: 'assets/images/webp/project-absenlantra.webp', caption: 'Absenlantra Biometric Attendance Architecture' }]
+      },
+      tabs: {
+        overview: `<div class="bp-section"><h5><i class="fa-solid fa-face-viewfinder"></i> Absenlantra Biometric Attendance</h5><p>Decentralized attendance platform with 128-dim SFace ONNX face verification, AES-256-GCM encryption, Haversine geofence check, and 7-module Next.js admin console.</p></div><div class="bp-media"><img src="assets/images/project-absenlantra.png" alt="Absenlantra" loading="lazy" /></div>`,
+        specs: `<p class="bp-note">Next.js 14 • React 18 • TypeScript • onnxruntime-node • Sharp • Firebase Admin • Zod.</p>`
+      }
+    },
+    {
+      id: 'meeting-registrasi',
+      title: 'Meeting-Registrasi',
+      badge: 'Vercel Stack • Event Operations',
+      metaLine: 'Next.js 14 • Firebase Firestore • Multi-Gate QR',
+      categories: ['vercel', 'enterprise', 'web'],
+      categoryLabel: 'Vercel App • Event Registration',
+      featured: false,
+      shortDesc: 'Minimalist event registration and multi-gate QR check-in platform supporting nested parent/sub-events, 48-character cryptographic QR passes, and role-scoped gate scanners.',
+      img: 'assets/images/project-meeting-registrasi.png',
+      webp: 'assets/images/webp/project-meeting-registrasi.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: null,
+      repoUrl: null,
+      tags: ['Next.js 14', 'React 18', 'Firebase Admin', 'QRCode', 'html5-qrcode'],
+      caseStudy: {
+        overview: 'Meeting-Registrasi is an enterprise event registration and multi-gate QR attendance management system engineered with Next.js 14 App Router and Firebase Firestore.',
+        background: 'Designed with high operational clarity for multi-session conferences and exhibitions where sub-events have independent capacities and entrance gates.',
+        problem: 'Large conferences require separate entrance tracking per hall/workshop while keeping personal attendee data out of raw QR payloads.',
+        role: 'Full-Stack Engineer — designed the nested event hierarchy, 48-char random token passes, and gate-scoped scanner routes (/scan/[event-slug]/[gate-slug]).',
+        approach: 'Generates unpredictable 48-character pass tokens mapped server-side via Firebase Admin SDK, paired with duplicate email checks and quota enforcement.',
+        implementation: 'Built /register/[event-slug] mobile-first forms, /ticket/[token] printable PNG badge passes, and high-contrast gate scanner feedback.',
+        results: 'Complete workspace Next.js 14 + Firebase implementation; public live deployment URL is not publicly documented.',
+        screenshots: [{ src: 'assets/images/project-meeting-registrasi.png', webp: 'assets/images/webp/project-meeting-registrasi.webp', caption: 'Meeting-Registrasi Multi-Gate Architecture' }]
+      },
+      tabs: {
+        overview: `<div class="bp-section"><h5><i class="fa-solid fa-qrcode"></i> Meeting-Registrasi QR System</h5><p>Supports parent/sub-event hierarchies, instant or manual approval workflows, 48-char cryptographic QR tickets, and role-scoped gate scanning.</p></div><div class="bp-media"><img src="assets/images/project-meeting-registrasi.png" alt="Meeting-Registrasi" loading="lazy" /></div>`,
+        specs: `<p class="bp-note">Next.js 14 • React 18 • Firebase &amp; Firebase Admin SDK • QRCode • html5-qrcode.</p>`
+      }
+    },
+    {
+      id: 'ai-elysia',
+      title: 'Elysia AI Chatbot (Informa Proxy)',
+      badge: 'Vercel Serverless • AI Bridge',
+      metaLine: 'Node.js • Vercel Functions • AWS Cognito • Iris AI',
+      categories: ['vercel', 'ai', 'web'],
+      categoryLabel: 'Vercel App • Serverless AI Proxy',
+      featured: false,
+      shortDesc: 'Secure Vercel serverless API proxy and embeddable WordPress floating chatbot widget connecting public web clients to Informa Iris AI while keeping Cognito credentials server-side.',
+      img: 'assets/images/project-ai-elysia.png',
+      webp: 'assets/images/webp/project-ai-elysia.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: null,
+      repoUrl: null,
+      tags: ['Node.js', 'Vercel Serverless', 'AWS Cognito', 'Informa Iris AI', 'WordPress Widget'],
+      caseStudy: {
+        overview: 'Elysia AI Chatbot is a Vercel serverless API proxy (api/chat.js, api/health.js) and embeddable floating widget (public/widget.js) bridging WordPress and web clients to Informa Iris AI.',
+        background: 'Built to let WordPress exhibition sites embed an interactive AI assistant without exposing AWS Cognito APP_CLIENT_SECRET or running into browser CORS blocks.',
+        problem: 'Calling OAuth2 Cognito + AI completion endpoints directly from client-side WordPress JavaScript leaks secrets in View Source and triggers CORS errors.',
+        role: 'Backend & Integration Engineer — built the Node.js/Vercel serverless token caching proxy and standalone embeddable chat widget.',
+        approach: 'Moved Cognito authentication and token caching into Vercel environment-variable-backed serverless endpoints, exposing a safe CORS-configured chat endpoint to public/widget.js.',
+        implementation: 'Delivered standalone web chat UI (public/index.html), drop-in WordPress script widget (widget.js), health endpoint, and vercel.json routing.',
+        results: 'Verified Vercel serverless proxy implementation in local workspace; live production URL status is not verified in this audit.',
+        screenshots: [{ src: 'assets/images/project-ai-elysia.png', webp: 'assets/images/webp/project-ai-elysia.webp', caption: 'Elysia AI Serverless Proxy Architecture' }]
+      },
+      tabs: {
+        overview: `<div class="bp-section"><h5><i class="fa-solid fa-comments"></i> Elysia AI Serverless Proxy</h5><p>Protects AWS Cognito credentials inside Vercel environment variables, caches OAuth tokens, and provides a 1-line embeddable WordPress chatbot widget.</p></div><div class="bp-media"><img src="assets/images/project-ai-elysia.png" alt="Elysia AI Proxy" loading="lazy" /></div>`,
+        specs: `<p class="bp-note">Node.js ES Modules • Vercel Serverless Functions • AWS Cognito OAuth2 • Embeddable JS Widget.</p>`
       }
     }
   ],
