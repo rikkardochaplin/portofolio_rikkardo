@@ -1124,6 +1124,12 @@
       camLook.x += (targetLookX - camLook.x) * 0.15;
       camLook.y += (camCfg.lookY - camLook.y) * 0.15;
       camLook.z += (targetLookZ - camLook.z) * 0.15;
+      // Subtle aerodynamic micro-tremor at Nitro speeds
+      if (isBoosting && Math.abs(carState.speed) > 0.92) {
+        const shakeAmt = 0.055;
+        camera.position.x += (Math.random() - 0.5) * shakeAmt;
+        camera.position.y += (Math.random() - 0.5) * shakeAmt;
+      }
       camera.lookAt(camLook);
 
       // 4. Check Billboard & Satellite Island Portal Proximity

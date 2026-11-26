@@ -1,7 +1,7 @@
 # Testing Report — Rikkardo L. Tobing Portfolio Redesign
 
 **Test Date:** 2026-11-26  
-**Environment:** Local HTTP server (`python -m http.server 8775`), Google Chrome Headless via Chrome DevTools Protocol, Node.js `v25.1.0`, Python `3.14.2`
+**Environment:** Local HTTP server (`python -m http.server 8776`), Google Chrome Headless via Chrome DevTools Protocol, Node.js `v25.1.0`, Python `3.14.2`
 
 ---
 

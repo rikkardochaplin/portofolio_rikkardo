@@ -2161,7 +2161,7 @@ a.contact-channel-card:hover .contact-channel-val {
   color: var(--text-on-light);
 }
 
-/* Subtle pointer-reactive spotlight & depth tilt targets */
+/* Interactive Studio Spotlight, Top-Trace & Optical Depth Targets */
 .project-card,
 .story-card,
 .monograph-frame,
@@ -2172,22 +2172,70 @@ a.contact-channel-card:hover .contact-channel-val {
   --tilt-y: 0deg;
 }
 
+.hero-section {
+  --hero-gx: 72%;
+  --hero-gy: 42%;
+  --hero-parallax: 0px;
+}
+
+/* Slow-breathing + pointer-reactive ambient architectural light field in Hero */
+.hero-section::after {
+  content: "";
+  position: absolute;
+  inset: -10%;
+  background:
+    radial-gradient(620px circle at var(--hero-gx) var(--hero-gy), rgba(59, 130, 246, 0.16), transparent 60%),
+    radial-gradient(480px circle at 24% 82%, rgba(212, 188, 148, 0.08), transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+  transition: opacity 0.6s var(--ease-out);
+  animation: auraBreath 9s ease-in-out infinite;
+}
+
+@keyframes auraBreath {
+  0%, 100% { transform: scale(1) translate3d(0, 0, 0); opacity: 0.85; }
+  50% { transform: scale(1.04) translate3d(1%, -1%, 0); opacity: 1; }
+}
+
 .project-card,
 .story-card,
 .drivefolio-showcase-card {
   position: relative;
 }
 
+/* Enhanced radial studio sheen on dark cards */
 .project-card::before,
 .drivefolio-showcase-card::before {
   content: "";
   position: absolute;
   inset: 0;
-  background: radial-gradient(380px circle at var(--mx) var(--my), rgba(59, 130, 246, 0.10), transparent 65%);
+  background: radial-gradient(440px circle at var(--mx) var(--my), rgba(59, 130, 246, 0.18), transparent 62%);
   opacity: 0;
   transition: opacity 0.35s var(--ease-out);
   pointer-events: none;
   z-index: 2;
+}
+
+/* Crisp top architectural light trace on dark exhibition cards */
+.project-card::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--electric-blue-light), #93C5FD, transparent);
+  transform: scaleX(0);
+  transform-origin: center;
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+  z-index: 3;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(96, 165, 250, 0.42);
+  box-shadow: 0 22px 42px -18px rgba(0, 0, 0, 0.72);
 }
 
 .project-card:hover::before,
@@ -2195,63 +2243,189 @@ a.contact-channel-card:hover .contact-channel-val {
   opacity: 1;
 }
 
+.project-card:hover::after {
+  transform: scaleX(1);
+}
+
+.story-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--navy-deep);
+  box-shadow: 0 18px 36px -14px rgba(11, 17, 32, 0.18);
+}
+
+.story-card:hover .story-media img {
+  transform: scale(1.065);
+}
+
+.project-card:hover .project-thumb img {
+  transform: scale(1.055);
+}
+
+/* Matrix, Pillar, Expertise, Timeline, Stack Pill Hover Polish */
+.pillar-card,
+.principle-card,
+.expertise-card,
+.timeline-item,
+.edu-card,
+.cert-card {
+  position: relative;
+}
+
+.pillar-card:hover,
+.expertise-card:hover,
+.edu-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 30px -16px rgba(11, 17, 32, 0.12);
+  border-color: rgba(59, 130, 246, 0.45);
+}
+
+.principle-card {
+  transition: background-color 0.3s var(--ease-out), border-color 0.3s var(--ease-out), transform 0.35s var(--ease-out);
+}
+
+.principle-card:hover {
+  background: rgba(255, 255, 255, 0.045);
+  border-color: rgba(96, 165, 250, 0.4);
+  transform: translateY(-3px);
+}
+
+.timeline-item {
+  transition: padding-left 0.35s var(--ease-out), border-color 0.35s var(--ease-out), background-color 0.35s var(--ease-out);
+}
+
+.timeline-item:hover {
+  padding-left: 12px;
+  border-bottom-color: var(--electric-blue);
+  background: rgba(59, 130, 246, 0.025);
+}
+
+.cert-card {
+  transition: transform 0.28s var(--ease-out), border-color 0.28s var(--ease-out), box-shadow 0.28s var(--ease-out);
+}
+
+.cert-card:hover {
+  transform: translateX(4px);
+  border-color: var(--electric-blue);
+}
+
+.stack-pill {
+  transition: transform 0.24s var(--ease-out), border-color 0.24s var(--ease-out), color 0.24s var(--ease-out), background-color 0.24s var(--ease-out);
+}
+
+.stack-pill:hover {
+  transform: translateY(-2px);
+  border-color: var(--navy-deep);
+  color: var(--navy-deep);
+  background: #FFFFFF;
+}
+
+/* Magnetic CTAs */
+.btn-magnetic {
+  transform: translate3d(var(--mag-x, 0px), var(--mag-y, 0px), 0);
+  transition:
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    color var(--transition),
+    background-color var(--transition),
+    border-color var(--transition),
+    box-shadow var(--transition);
+  will-change: transform;
+}
+
 /* Hero Choreography on Initial Entry */
 @keyframes heroRiseIn {
   from {
     opacity: 0;
-    transform: translateY(16px);
+    transform: translateY(24px);
+    clip-path: inset(0 0 18% 0);
   }
   to {
     opacity: 1;
     transform: translateY(0);
+    clip-path: inset(0 0 0 0);
   }
 }
 
 @keyframes plateReveal {
   from {
     opacity: 0;
-    transform: translateY(18px) scale(0.985);
+    transform: translateY(26px) scale(0.95);
+    clip-path: inset(12% 0 12% 0);
   }
   to {
     opacity: 1;
     transform: translateY(0) scale(1);
+    clip-path: inset(0 0 0 0);
+  }
+}
+
+@keyframes imageUnveil {
+  from {
+    transform: scale(1.14);
+    filter: contrast(1.1) brightness(0.75);
+  }
+  to {
+    transform: scale(1);
+    filter: contrast(1.05) brightness(0.94);
   }
 }
 
 @keyframes meridianDrift {
   0%, 100% {
-    opacity: 0.72;
+    opacity: 0.65;
     transform: translateY(0);
   }
   50% {
     opacity: 1;
-    transform: translateY(-6px);
+    transform: translateY(-10px);
   }
 }
 
 .hero-section::before {
-  animation: meridianDrift 12s ease-in-out infinite;
+  animation: meridianDrift 11s ease-in-out infinite;
 }
 
-html.js-ready .hero-dateline { animation: heroRiseIn 0.65s var(--ease-out) 0.04s both; }
-html.js-ready .hero-name { animation: heroRiseIn 0.65s var(--ease-out) 0.10s both; }
-html.js-ready .hero-title { animation: heroRiseIn 0.75s var(--ease-out) 0.16s both; }
-html.js-ready .hero-role { animation: heroRiseIn 0.65s var(--ease-out) 0.22s both; }
-html.js-ready .hero-description { animation: heroRiseIn 0.65s var(--ease-out) 0.28s both; }
-html.js-ready .hero-ctas { animation: heroRiseIn 0.65s var(--ease-out) 0.34s both; }
-html.js-ready .hero-socials { animation: heroRiseIn 0.65s var(--ease-out) 0.40s both; }
-html.js-ready .hero-visual { animation: plateReveal 0.85s var(--ease-out) 0.20s both; }
-html.js-ready .hero-stats-strip { animation: heroRiseIn 0.7s var(--ease-out) 0.44s both; }
+html.js-ready .hero-dateline { animation: heroRiseIn 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.04s both; }
+html.js-ready .hero-name { animation: heroRiseIn 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both; }
+html.js-ready .hero-title { animation: heroRiseIn 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
+html.js-ready .hero-role { animation: heroRiseIn 0.72s cubic-bezier(0.16, 1, 0.3, 1) 0.26s both; }
+html.js-ready .hero-description { animation: heroRiseIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both; }
+html.js-ready .hero-ctas { animation: heroRiseIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.38s both; }
+html.js-ready .hero-socials { animation: heroRiseIn 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.44s both; }
+html.js-ready .hero-visual { animation: plateReveal 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.22s both; }
+html.js-ready .monograph-plate img {
+  animation: imageUnveil 1.25s cubic-bezier(0.16, 1, 0.3, 1) 0.25s both;
+  transform: translate3d(0, var(--hero-parallax, 0px), 0) scale(1.03);
+}
+html.js-ready .hero-stats-strip { animation: heroRiseIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.50s both; }
+
+/* Subpage Entry Choreography (project.html, article.html, 404.html) */
+html.js-ready .subpage-hero .container > * {
+  animation: heroRiseIn 0.72s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+html.js-ready .subpage-hero .container > *:nth-child(1) { animation-delay: 0.05s; }
+html.js-ready .subpage-hero .container > *:nth-child(2) { animation-delay: 0.12s; }
+html.js-ready .subpage-hero .container > *:nth-child(3) { animation-delay: 0.18s; }
+html.js-ready .subpage-hero .container > *:nth-child(4) { animation-delay: 0.24s; }
+html.js-ready .article-frame,
+html.js-ready .case-main-card,
+html.js-ready .case-aside-card {
+  animation: plateReveal 0.85s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both;
+}
 
 /* Smooth Interactive Card & Frame Depth */
 .monograph-frame {
-  transition: transform 0.35s var(--ease-out), border-color var(--transition), box-shadow var(--transition);
+  transition: transform 0.32s var(--ease-out), border-color var(--transition), box-shadow var(--transition);
   transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
   will-change: transform;
 }
 
 .monograph-frame:hover {
-  border-color: rgba(255, 255, 255, 0.34);
+  border-color: rgba(96, 165, 250, 0.45);
+  box-shadow: 0 28px 58px -18px rgba(0, 0, 0, 0.78);
+}
+
+.monograph-frame:hover .monograph-plate img {
+  transform: translate3d(0, var(--hero-parallax, 0px), 0) scale(1.07);
 }
 
 .card-action-link {
@@ -2263,19 +2437,24 @@ html.js-ready .hero-stats-strip { animation: heroRiseIn 0.7s var(--ease-out) 0.4
 }
 
 .card-action-link:hover i {
-  transform: translateX(3px);
+  transform: translateX(4px);
 }
 
-/* Staggered Section Children on Scroll Reveal */
+/* Staggered Section Curtain & Child Reveals on Scroll */
 html.js-ready [data-reveal] {
   opacity: 0;
-  transform: translateY(18px);
-  transition: opacity 0.68s var(--ease-out), transform 0.68s var(--ease-out);
+  transform: translateY(28px);
+  clip-path: inset(0 0 10% 0);
+  transition:
+    opacity 0.78s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.78s cubic-bezier(0.16, 1, 0.3, 1),
+    clip-path 0.85s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 html.js-ready [data-reveal].revealed {
   opacity: 1;
   transform: translateY(0);
+  clip-path: inset(0 0 0 0);
 }
 
 html.js-ready .pillars-grid-2 .pillar-card,
@@ -2285,16 +2464,19 @@ html.js-ready .stack-ledger .stack-row,
 html.js-ready .experience-timeline .timeline-item,
 html.js-ready .edu-stack .edu-card,
 html.js-ready .certs-grid .cert-card,
-html.js-ready .island-nodes-grid .island-node {
+html.js-ready .island-nodes-grid .island-node,
+html.js-ready .projects-grid .project-card,
+html.js-ready .stories-grid .story-card {
   opacity: 0;
-  transform: translateY(14px);
+  transform: translateY(22px) scale(0.98);
   transition:
-    opacity 0.56s var(--ease-out),
-    transform 0.56s var(--ease-out),
+    opacity 0.62s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.62s cubic-bezier(0.16, 1, 0.3, 1),
     border-color var(--transition),
     background-color var(--transition),
-    box-shadow var(--transition);
-  transition-delay: calc(var(--stagger-i, 0) * 55ms);
+    box-shadow var(--transition),
+    padding-left 0.3s var(--ease-out);
+  transition-delay: calc(var(--stagger-i, 0) * 65ms);
 }
 
 html.js-ready .revealed .pillar-card,
@@ -2304,15 +2486,21 @@ html.js-ready .revealed .stack-row,
 html.js-ready .revealed .timeline-item,
 html.js-ready .revealed .edu-card,
 html.js-ready .revealed .cert-card,
-html.js-ready .drivefolio-showcase-card.revealed .island-node {
+html.js-ready .drivefolio-showcase-card.revealed .island-node,
+html.js-ready .projects-grid.revealed .project-card,
+html.js-ready .stories-grid.revealed .story-card {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateY(0) scale(1);
 }
 
-/* SVG Architecture Diagram Line-Draw Motion */
+/* SVG Architecture Diagram Line-Draw & Node Pulse */
 .philosophy-diagram-card svg rect,
 .philosophy-diagram-card svg line {
-  transition: stroke-dashoffset 0.9s var(--ease-out), opacity 0.6s var(--ease-out);
+  transition: stroke-dashoffset 1.05s cubic-bezier(0.16, 1, 0.3, 1), stroke 0.35s var(--ease-out), opacity 0.6s var(--ease-out);
+}
+
+.philosophy-diagram-card:hover svg .circuit-node {
+  stroke: rgba(96, 165, 250, 0.45);
 }
 
 html.js-ready .philosophy-diagram-card svg line {
@@ -2324,13 +2512,17 @@ html.js-ready [data-reveal].revealed .philosophy-diagram-card svg line {
   stroke-dashoffset: 0;
 }
 
-/* Card Filter / Expand Entrance Keyframes */
+/* Tactile Spring Entrance on Filter & Expand */
 @keyframes cardEnter {
-  from {
+  0% {
     opacity: 0;
-    transform: translateY(14px) scale(0.985);
+    transform: translateY(22px) scale(0.96);
   }
-  to {
+  70% {
+    opacity: 1;
+    transform: translateY(-2px) scale(1.005);
+  }
+  100% {
     opacity: 1;
     transform: translateY(0) scale(1);
   }
@@ -2338,13 +2530,13 @@ html.js-ready [data-reveal].revealed .philosophy-diagram-card svg line {
 
 .project-card.card-entering,
 .story-card.card-entering {
-  animation: cardEnter 0.48s var(--ease-out) calc(var(--stagger-i, 0) * 45ms) both;
+  animation: cardEnter 0.56s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--stagger-i, 0) * 52ms) both !important;
 }
 
 /* Smooth Lightbox Stage Transition */
 .modal-backdrop-custom {
   opacity: 0;
-  transition: opacity 0.28s var(--ease-out);
+  transition: opacity 0.3s var(--ease-out);
 }
 
 .modal-backdrop-custom.active {
@@ -2353,8 +2545,8 @@ html.js-ready [data-reveal].revealed .philosophy-diagram-card svg line {
 }
 
 .modal-dialog-custom {
-  transform: translateY(12px) scale(0.98);
-  transition: transform 0.34s var(--ease-out);
+  transform: translateY(16px) scale(0.96);
+  transition: transform 0.38s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .modal-backdrop-custom.active .modal-dialog-custom {
@@ -2369,6 +2561,7 @@ html.js-ready [data-reveal].revealed .philosophy-diagram-card svg line {
     transition-duration: 0.01ms !important;
     transition-delay: 0ms !important;
   }
+  .circuit-pulse { display: none; }
   html.js-ready [data-reveal],
   html.js-ready .pillars-grid-2 .pillar-card,
   html.js-ready .principles-grid .principle-card,
@@ -2377,11 +2570,16 @@ html.js-ready [data-reveal].revealed .philosophy-diagram-card svg line {
   html.js-ready .experience-timeline .timeline-item,
   html.js-ready .edu-stack .edu-card,
   html.js-ready .certs-grid .cert-card,
-  html.js-ready .island-nodes-grid .island-node {
+  html.js-ready .island-nodes-grid .island-node,
+  html.js-ready .projects-grid .project-card,
+  html.js-ready .stories-grid .story-card {
     opacity: 1;
     transform: none;
+    clip-path: none;
   }
-  .monograph-frame {
+  .monograph-frame,
+  .monograph-plate img,
+  .btn-magnetic {
     transform: none !important;
   }
 }

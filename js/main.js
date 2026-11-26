@@ -95,8 +95,8 @@ function initBackToTop() {
 
 /* ── 4. Accessible Intersection Reveal & Stagger Choreography ── */
 function initRevealAnimations() {
-  const nodes = Array.from(document.querySelectorAll('[data-reveal]'));
-  if (!nodes.length) return;
+  const revealTargets = Array.from(document.querySelectorAll('[data-reveal], #projects-grid, #stories-grid'));
+  if (!revealTargets.length) return;
 
   // Assign stagger indices to architectural grid/list children
   const staggerSelectors = [
@@ -115,14 +115,22 @@ function initRevealAnimations() {
     });
   });
 
+  // Also stagger initial compact visible project/story cards cleanly
+  document.querySelectorAll('#projects-grid .project-card').forEach((card, idx) => {
+    card.style.setProperty('--stagger-i', String(idx % 6));
+  });
+  document.querySelectorAll('#stories-grid .story-card').forEach((card, idx) => {
+    card.style.setProperty('--stagger-i', String(idx % 3));
+  });
+
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
-    nodes.forEach(n => n.classList.add('revealed'));
+    revealTargets.forEach(n => n.classList.add('revealed'));
     return;
   }
 
   const revealVisible = () => {
     const vh = window.innerHeight || 900;
-    nodes.forEach(n => {
+    revealTargets.forEach(n => {
       if (n.classList.contains('revealed')) return;
       const rect = n.getBoundingClientRect();
       if (rect.top <= vh + 120) {
@@ -140,7 +148,7 @@ function initRevealAnimations() {
     });
   }, { threshold: 0.01, rootMargin: '120px 0px 120px 0px' });
 
-  nodes.forEach(n => observer.observe(n));
+  revealTargets.forEach(n => observer.observe(n));
   window.addEventListener('scroll', revealVisible, { passive: true });
   revealVisible();
 }
@@ -178,13 +186,39 @@ function initHeroStatCounters() {
   });
 }
 
-/* ── 4c. Pointer Depth Tilt & Architectural Spotlight Sheen ── */
+/* ── 4c. Pointer Depth Tilt, Studio Aura, Magnetic CTAs & Scroll Parallax ── */
 function initInteractiveMotion() {
-  if (
-    window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
-    !window.matchMedia('(hover: hover) and (pointer: fine)').matches
-  ) {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  const heroSec = document.getElementById('hero');
+  if (heroSec) {
+    let parallaxTicking = false;
+    const updateParallax = () => {
+      parallaxTicking = false;
+      const y = Math.min(26, Math.max(-10, window.scrollY * 0.042));
+      heroSec.style.setProperty('--hero-parallax', `${y.toFixed(1)}px`);
+    };
+    window.addEventListener('scroll', () => {
+      if (!parallaxTicking) {
+        parallaxTicking = true;
+        requestAnimationFrame(updateParallax);
+      }
+    }, { passive: true });
+  }
+
+  if (!window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
     return;
+  }
+
+  if (heroSec) {
+    heroSec.addEventListener('pointermove', (e) => {
+      const rect = heroSec.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const gx = ((e.clientX - rect.left) / rect.width) * 100;
+      const gy = ((e.clientY - rect.top) / rect.height) * 100;
+      heroSec.style.setProperty('--hero-gx', `${gx.toFixed(1)}%`);
+      heroSec.style.setProperty('--hero-gy', `${gy.toFixed(1)}%`);
+    }, { passive: true });
   }
 
   const spotlightTargets = document.querySelectorAll('.project-card, .drivefolio-showcase-card');
@@ -206,8 +240,8 @@ function initInteractiveMotion() {
       if (!rect.width || !rect.height) return;
       const nx = (e.clientX - rect.left) / rect.width - 0.5;
       const ny = (e.clientY - rect.top) / rect.height - 0.5;
-      frame.style.setProperty('--tilt-x', `${(-ny * 3.2).toFixed(2)}deg`);
-      frame.style.setProperty('--tilt-y', `${(nx * 3.2).toFixed(2)}deg`);
+      frame.style.setProperty('--tilt-x', `${(-ny * 4.5).toFixed(2)}deg`);
+      frame.style.setProperty('--tilt-y', `${(nx * 4.5).toFixed(2)}deg`);
     }, { passive: true });
 
     frame.addEventListener('pointerleave', () => {
@@ -215,6 +249,21 @@ function initInteractiveMotion() {
       frame.style.setProperty('--tilt-y', '0deg');
     });
   }
+
+  document.querySelectorAll('.hero-ctas .btn-primary, .nav-drivefolio-pill').forEach(btn => {
+    btn.classList.add('btn-magnetic');
+    btn.addEventListener('pointermove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const dx = (e.clientX - (rect.left + rect.width / 2)) * 0.16;
+      const dy = (e.clientY - (rect.top + rect.height / 2)) * 0.22;
+      btn.style.setProperty('--mag-x', `${dx.toFixed(1)}px`);
+      btn.style.setProperty('--mag-y', `${dy.toFixed(1)}px`);
+    }, { passive: true });
+    btn.addEventListener('pointerleave', () => {
+      btn.style.setProperty('--mag-x', '0px');
+      btn.style.setProperty('--mag-y', '0px');
+    });
+  });
 }
 
 /* ── 5. Shared Compact Catalog Filtering & Expand Toggle ── */
