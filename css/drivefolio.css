@@ -1,0 +1,515 @@
+/* ==========================================================================
+   DRIVEFOLIO 3D ARCHIPELAGO HUD & INTERACTIVE WORLD STYLESHEET
+   Loaded only on drivefolio.html for optimal homepage performance.
+   ========================================================================== */
+
+:root {
+  --df-navy: #0B1120;
+  --df-midnight: #111827;
+  --df-white: #FFFFFF;
+  --df-offwhite: #F7F8FA;
+  --df-blue: #3B82F6;
+  --df-border: rgba(148, 163, 184, 0.28);
+  --df-font-sans: 'Inter', 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --df-font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+}
+
+* { box-sizing: border-box; }
+
+html, body.drivefolio-body {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  overscroll-behavior: none;
+  background: var(--df-navy);
+  font-family: var(--df-font-sans);
+  color: var(--df-white);
+}
+
+.drivefolio-stage {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--df-navy);
+  overflow: hidden;
+  user-select: none;
+}
+
+#drivefolio-canvas-wrap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  cursor: grab;
+}
+
+#drivefolio-canvas-wrap:active { cursor: grabbing; }
+#drivefolio-canvas-wrap canvas { display: block; width: 100% !important; height: 100% !important; }
+
+/* ── Top HUD Bar ── */
+.drivefolio-hud-top {
+  position: absolute;
+  top: 14px;
+  left: 16px;
+  right: 16px;
+  z-index: 25;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+  pointer-events: none;
+}
+
+.drivefolio-hud-top > * { pointer-events: auto; }
+
+.df-hud-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.df-pill {
+  background: rgba(17, 24, 39, 0.9);
+  backdrop-filter: blur(10px);
+  color: var(--df-white);
+  border: 1px solid var(--df-border);
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.df-brand-pill {
+  background: var(--df-blue);
+  border-color: var(--df-blue);
+  color: var(--df-white);
+}
+
+.df-btn { cursor: pointer; }
+.df-btn:hover { background: var(--df-blue); border-color: var(--df-blue); color: var(--df-white); }
+.df-btn.active { background: var(--df-blue); border-color: var(--df-white); color: var(--df-white); }
+
+.df-visited-bar-wrap {
+  width: 50px;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.16);
+  border-radius: 99px;
+  overflow: hidden;
+}
+
+.df-visited-bar-fill {
+  height: 100%;
+  width: 0%;
+  background: #10B981;
+  transition: width 0.35s ease;
+}
+
+.df-gps-select {
+  background: rgba(17, 24, 39, 0.94);
+  color: var(--df-white);
+  border: 1px solid var(--df-border);
+  border-radius: 6px;
+  padding: 7px 12px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  cursor: pointer;
+  max-width: 215px;
+}
+
+.df-color-swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  display: inline-block;
+}
+
+/* ── Autopilot Banner ── */
+.df-autopilot-banner {
+  position: absolute;
+  top: 68px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-12px);
+  z-index: 24;
+  background: rgba(11, 17, 32, 0.94);
+  color: var(--df-white);
+  border: 1px solid var(--df-blue);
+  border-radius: 6px;
+  padding: 7px 14px;
+  font-family: var(--df-font-mono);
+  font-size: 0.75rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.22s ease;
+  pointer-events: none;
+}
+
+.df-autopilot-banner.active {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+.df-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+}
+
+/* ── Bottom-Left HUD: Minimap & Speedometer ── */
+.drivefolio-hud-bottom-left {
+  position: absolute;
+  bottom: 18px;
+  left: 16px;
+  z-index: 25;
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+
+.df-minimap-card {
+  background: rgba(11, 17, 32, 0.92);
+  border: 1px solid var(--df-border);
+  border-radius: 8px;
+  padding: 6px;
+  width: 168px;
+}
+
+.df-minimap-header {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--df-font-mono);
+  font-size: 0.64rem;
+  color: #CBD5E1;
+  margin-bottom: 4px;
+}
+
+#drivefolio-minimap {
+  width: 154px;
+  height: 132px;
+  display: block;
+  border-radius: 4px;
+  cursor: crosshair;
+}
+
+.df-speedometer-card {
+  background: rgba(17, 24, 39, 0.92);
+  border: 1px solid var(--df-border);
+  border-radius: 8px;
+  padding: 8px 12px;
+  min-width: 86px;
+  text-align: center;
+}
+
+.df-speed-num {
+  font-family: var(--df-font-mono);
+  font-size: 1.45rem;
+  font-weight: 700;
+  line-height: 1;
+}
+
+.df-speed-unit {
+  font-family: var(--df-font-mono);
+  font-size: 0.6rem;
+  color: #94A3B8;
+}
+
+.drivefolio-gear-badge {
+  margin-top: 4px;
+  display: inline-block;
+  padding: 2px 7px;
+  font-family: var(--df-font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  border-radius: 4px;
+  background: #1E293B;
+  color: #E2E8F0;
+}
+
+.drivefolio-gear-badge.drive { background: #10B981; color: #0B1120; }
+.drivefolio-gear-badge.turbo { background: #EF4444; color: #fff; }
+.drivefolio-gear-badge.rev { background: #F59E0B; color: #0B1120; }
+
+/* ── Proximity Billboard Card ── */
+.drivefolio-proximity-card {
+  position: absolute;
+  bottom: 62px;
+  left: 50%;
+  transform: translateX(-50%) translateY(24px);
+  z-index: 30;
+  width: min(630px, 92vw);
+  background: var(--df-white);
+  color: var(--df-navy);
+  border: 1px solid #CBD5E1;
+  border-radius: 10px;
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.45);
+  padding: 14px;
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.24s ease;
+}
+
+.drivefolio-proximity-card.active {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
+}
+
+.df-card-dismiss-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #F1F5F9;
+  border: 1px solid #CBD5E1;
+  color: var(--df-navy);
+  cursor: pointer;
+}
+
+.df-card-thumb {
+  width: 158px;
+  height: 118px;
+  flex-shrink: 0;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid #E2E8F0;
+}
+
+.df-card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.df-card-body { flex: 1; min-width: 0; }
+.df-card-meta-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 4px; }
+.df-card-badge { font-family: var(--df-font-mono); font-size: 0.66rem; font-weight: 700; color: #fff; padding: 2px 8px; border-radius: 4px; }
+.df-card-zone { font-family: var(--df-font-mono); font-size: 0.68rem; color: #64748B; }
+.df-card-title { font-size: 1.06rem; font-weight: 700; margin: 0 0 2px; color: var(--df-navy); }
+.df-card-sub { font-size: 0.76rem; font-weight: 600; color: #2563EB; margin-bottom: 5px; }
+.df-card-desc { font-size: 0.78rem; color: #475569; margin: 0 0 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.df-card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
+.df-tag-pill { font-family: var(--df-font-mono); font-size: 0.64rem; padding: 2px 6px; background: #F1F5F9; border: 1px solid #E2E8F0; border-radius: 4px; color: #334155; }
+.df-card-actions { display: flex; flex-wrap: wrap; gap: 7px; }
+
+.df-action-btn {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 6px;
+  border: 1px solid #CBD5E1;
+  text-decoration: none;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.df-action-btn.primary { background: var(--df-navy); color: #fff; border-color: var(--df-navy); }
+.df-action-btn.primary:hover { background: var(--df-blue); border-color: var(--df-blue); }
+.df-action-btn.secondary { background: #fff; color: var(--df-navy); }
+.df-action-btn.secondary:hover { border-color: var(--df-blue); color: #2563EB; }
+
+.df-key-hint {
+  font-family: var(--df-font-mono);
+  font-size: 0.65rem;
+  background: rgba(255, 255, 255, 0.16);
+  padding: 1px 4px;
+  border-radius: 3px;
+}
+
+/* ── Desktop Controls Hint Bar ── */
+.drivefolio-controls-bar {
+  position: absolute;
+  bottom: 14px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 22;
+  background: rgba(11, 17, 32, 0.9);
+  border: 1px solid var(--df-border);
+  border-radius: 99px;
+  padding: 6px 16px;
+  font-size: 0.74rem;
+  display: flex;
+  gap: 14px;
+  white-space: nowrap;
+}
+
+.df-kbd {
+  font-family: var(--df-font-mono);
+  font-size: 0.68rem;
+  background: #1E293B;
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  padding: 1px 5px;
+  border-radius: 3px;
+  margin-right: 3px;
+}
+
+/* ── Mobile Controls ── */
+.df-mobile-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 18px;
+  z-index: 28;
+  display: none;
+  align-items: center;
+  gap: 12px;
+}
+
+.df-mobile-action-stack { display: flex; flex-direction: column; gap: 8px; }
+
+.df-joystick-zone {
+  width: 88px;
+  height: 88px;
+  border-radius: 50%;
+  background: rgba(11, 17, 32, 0.78);
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  touch-action: none;
+}
+
+.df-joystick-knob {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--df-blue);
+  border: 2px solid #fff;
+  pointer-events: none;
+}
+
+.df-mobile-boost-btn,
+.df-mobile-open-btn {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 1px solid #fff;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  cursor: pointer;
+}
+
+.df-mobile-boost-btn { background: #EF4444; }
+.df-mobile-open-btn { background: var(--df-midnight); }
+.df-mobile-open-btn.ready { background: #10B981; }
+
+/* ── District Directory Overlay & WebGL Fallback ── */
+.df-district-overlay,
+.modal-backdrop-custom {
+  position: fixed;
+  inset: 0;
+  z-index: 950;
+  background: rgba(6, 10, 20, 0.84);
+  backdrop-filter: blur(8px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.df-district-overlay.active,
+.modal-backdrop-custom.active {
+  display: flex;
+}
+
+.df-district-window,
+.modal-dialog-custom {
+  width: min(960px, 100%);
+  max-height: 88vh;
+  background: var(--df-midnight);
+  border: 1px solid var(--df-border);
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.df-district-header,
+.modal-header-custom {
+  padding: 16px 20px;
+  background: var(--df-navy);
+  border-bottom: 1px solid var(--df-border);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.df-district-body,
+.modal-body-custom {
+  padding: 20px;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.df-fallback-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 1200;
+  background: var(--df-navy);
+  overflow-y: auto;
+  padding: 32px 20px;
+  display: none;
+}
+
+.df-fallback-screen.active { display: block; }
+
+.df-directory-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 14px;
+}
+
+.df-dir-card {
+  background: var(--df-navy);
+  border: 1px solid var(--df-border);
+  border-radius: 8px;
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.df-dir-card h4 { margin: 0; font-size: 0.96rem; color: #fff; }
+.df-dir-card p { margin: 0; font-size: 0.8rem; color: #94A3B8; }
+
+.postcard-preview-frame img { width: 100%; border-radius: 6px; border: 1px solid var(--df-border); }
+
+@media (max-width: 991px), (hover: none) and (pointer: coarse) {
+  .drivefolio-controls-bar { display: none; }
+  .df-mobile-controls { display: flex; }
+}
+
+@media (max-width: 767px) {
+  .drivefolio-hud-top { flex-direction: column; align-items: stretch; }
+  .df-hud-group { overflow-x: auto; flex-wrap: nowrap; }
+  .df-speedometer-card, .df-card-thumb, .df-card-tags { display: none; }
+  .drivefolio-proximity-card { bottom: 132px; }
+}

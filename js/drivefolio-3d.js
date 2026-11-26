@@ -352,8 +352,26 @@
 
   document.addEventListener('DOMContentLoaded', () => {
     const container = document.getElementById('drivefolio-canvas-wrap');
-    if (!container || typeof THREE === 'undefined') return;
-    initDrivefolioWorld(container);
+    const fallback = document.getElementById('df-fallback-screen');
+    const showFallback = () => {
+      if (fallback) fallback.classList.add('active');
+    };
+    if (!container || typeof THREE === 'undefined') {
+      showFallback();
+      return;
+    }
+    try {
+      const testCanvas = document.createElement('canvas');
+      const gl = testCanvas.getContext('webgl') || testCanvas.getContext('experimental-webgl');
+      if (!gl) {
+        showFallback();
+        return;
+      }
+      initDrivefolioWorld(container);
+    } catch (err) {
+      console.warn('WebGL unavailable, falling back to static directory:', err);
+      showFallback();
+    }
   });
 
   function initDrivefolioWorld(container) {
@@ -1125,6 +1143,9 @@
 
       overlay.classList.add('active');
       overlay.setAttribute('aria-hidden', 'false');
+      if (typeof window.renderDrivefolioDistrict === 'function') {
+        window.renderDrivefolioDistrict(currentDistrictTab, bodyEl);
+      }
       if (bodyEl) bodyEl.scrollTop = 0;
     }
 
@@ -1278,12 +1299,7 @@
         openDistrictOverlay(stop.districtTab);
         return;
       }
-      const fakeTrigger = document.createElement('button');
-      fakeTrigger.setAttribute('data-project', stop.id);
-      fakeTrigger.style.display = 'none';
-      document.body.appendChild(fakeTrigger);
-      fakeTrigger.click();
-      document.body.removeChild(fakeTrigger);
+      window.location.href = `project.html?id=${encodeURIComponent(stop.id)}`;
     }
 
     function driveToStop(index) {

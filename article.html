@@ -1,398 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Visual Story — Rikkardo L. Tobing</title>
-  <meta name="description" content="Photography &amp; Visual Story by Rikkardo L. Tobing" />
-  
-  <!-- Bootstrap 5.3.3 CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <meta name="description" content="Photography &amp; Visual Story by Rikkardo L. Tobing, Jakarta." />
+  <link rel="canonical" href="https://www.rikkardotobing.my.id/article.html" />
+  <meta property="og:type" content="article" />
+  <meta property="og:title" content="Visual Story — Rikkardo L. Tobing" />
+  <meta property="og:description" content="Urban stories and photography from Jakarta by Rikkardo L. Tobing." />
 
-  <!-- Editorial Collage Google Fonts & Font Awesome 6 -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&family=Fira+Code:wght@400;500&family=Space+Grotesk:wght@500;600;700;800&display=swap"
-    rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Geist:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
-  <link rel="stylesheet" href="css/style.css?v=10.0" />
-  
-  <style>
-    .article-page {
-      padding: 110px 0 60px;
-    }
-    .back-nav-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-heading);
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-ink);
-      margin-bottom: 24px;
-      padding: 8px 18px;
-      background: var(--surface-paper);
-      border: 2px solid var(--border-ink);
-      border-radius: var(--radius-xs);
-      box-shadow: var(--shadow-flat-sm);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-    .back-nav-btn:hover {
-      background: var(--accent-yellow);
-      color: var(--text-ink) !important;
-      transform: translate(-2px, -2px);
-      box-shadow: var(--shadow-flat-md);
-    }
-    .article-img-frame {
-      border-radius: var(--radius-xs);
-      overflow: hidden;
-      border: 2px solid var(--border-ink);
-      box-shadow: var(--shadow-flat-lg);
-      background: #FAF8F1;
-      padding: 12px 12px 28px 12px;
-      margin-bottom: 34px;
-      position: relative;
-      transform: rotate(-0.5deg);
-    }
-    .article-img-frame::before {
-      content: "";
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translateX(-50%) rotate(1deg);
-      width: 80px;
-      height: 22px;
-      background: var(--tape-translucent);
-      box-shadow: var(--shadow-tape);
-      z-index: 5;
-    }
-    .article-img-frame img {
-      width: 100%;
-      max-height: 75vh;
-      object-fit: contain;
-      background: #000;
-      display: block;
-      margin: 0 auto;
-      border: 1px solid var(--border-ink);
-    }
-    .article-body-wrapper {
-      max-width: 800px;
-      margin: 0 auto 40px;
-      font-size: 1.05rem;
-      line-height: 1.8;
-      color: var(--text-ink-secondary);
-    }
-    .article-quote-box {
-      border-left: 4px solid var(--accent-coral);
-      padding: 16px 24px;
-      margin: 28px 0;
-      font-family: var(--font-serif);
-      font-style: italic;
-      font-size: 1.25rem;
-      color: var(--text-ink);
-      background: var(--surface-paper);
-      border-top: 1px solid var(--border-paper);
-      border-right: 1px solid var(--border-paper);
-      border-bottom: 1px solid var(--border-paper);
-      box-shadow: 2px 2px 0px rgba(37, 35, 31, 0.08);
-      border-radius: 0 var(--radius-xs) var(--radius-xs) 0;
-    }
-    .related-card {
-      background: var(--surface-paper);
-      border: 2px solid var(--border-ink);
-      border-radius: var(--radius-xs);
-      overflow: hidden;
-      text-decoration: none;
-      transition: var(--transition);
-      display: flex;
-      flex-direction: column;
-      height: 100%;
-      box-shadow: var(--shadow-flat-sm);
-    }
-    .related-card:hover {
-      transform: translateY(-5px);
-      box-shadow: var(--shadow-flat-md);
-      background: var(--surface-card-hover);
-    }
-    .related-card-thumb {
-      height: 180px;
-      background: #000;
-      overflow: hidden;
-      border-bottom: 2px solid var(--border-ink);
-    }
-    .related-card-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      transition: var(--transition-slow);
-    }
-    .related-card:hover .related-card-thumb img {
-      transform: scale(1.04);
-    }
-    .article-details-strip {
-      background: var(--surface-paper);
-      border: 2px solid var(--border-ink);
-      border-radius: var(--radius-xs);
-      box-shadow: var(--shadow-flat-sm);
-    }
-  </style>
+  <link rel="stylesheet" href="css/style.css?v=14.0" />
 </head>
-<body id="page-top">
 
-  <!-- Scroll Progress -->
-  <div id="scroll-progress"></div>
+<body>
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+  <div id="scroll-progress" aria-hidden="true"></div>
 
-  <!-- Navbar -->
-  <nav class="navbar navbar-expand-lg navbar-dark fixed-top navbar-shrink" id="mainNav">
-    <div class="container px-4 px-lg-5">
-      <a class="navbar-brand" href="index.html">
-        <i class="fa-solid fa-code text-info me-1"></i> Rikkardo<span> L. Tobing</span>
+  <nav class="site-nav scrolled" id="mainNav" aria-label="Primary Navigation">
+    <div class="container nav-inner">
+      <a class="nav-brand" href="index.html">
+        <span class="nav-brand-mark" aria-hidden="true">RT</span>
+        <span>Rikkardo L. Tobing</span>
       </a>
-      <div class="ms-auto d-flex align-items-center gap-3">
-        <a href="index.html#stories" class="nav-link text-info fw-bold fs-6">
-          <i class="fa-solid fa-arrow-left me-1"></i> Back to Gallery
-        </a>
-        <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
-          <i class="fa-solid fa-moon" id="theme-icon"></i>
-        </button>
+      <ul class="nav-links">
+        <li><a href="index.html#stories">All Visual Stories</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+      <div class="nav-actions">
+        <a class="nav-drivefolio-pill" href="drivefolio.html"><i class="fa-solid fa-car-side" aria-hidden="true"></i> 3D Drivefolio</a>
+        <a class="btn btn-primary btn-sm" href="index.html#stories">Back to Gallery</a>
       </div>
+      <button class="nav-toggle" id="nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false" aria-controls="mobile-drawer">
+        <i class="fa-solid fa-bars" aria-hidden="true"></i>
+      </button>
+    </div>
+    <div class="mobile-drawer" id="mobile-drawer">
+      <ul>
+        <li><a href="index.html#stories">All Visual Stories</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
     </div>
   </nav>
 
-  <main class="article-page">
-    <div class="container px-4 px-lg-5">
-      
-      <a href="index.html#stories" class="back-nav-btn">
-        <i class="fa-solid fa-arrow-left"></i> Back to Visual Stories Gallery
-      </a>
-
-      <div class="text-center mb-4">
-        <span class="section-tag" id="art-tag"><i class="fa-solid fa-camera"></i> Street Photography</span>
-        <h1 class="display-5 fw-bold mb-3" id="art-title">Gold in the Mist: The Unseen Workers</h1>
-        <div class="d-flex justify-content-center gap-4 text-muted small flex-wrap">
-          <span><i class="fa-solid fa-location-dot text-info me-1"></i> <span id="art-location">Jakarta, Indonesia</span></span>
-          <span><i class="fa-solid fa-calendar text-info me-1"></i> <span id="art-date">August 2026</span></span>
-          <span><i class="fa-solid fa-user text-primary me-1"></i> Captured by Rikkardo L. Tobing</span>
+  <main id="main-content">
+    <header class="subpage-hero">
+      <div class="container">
+        <a href="index.html#stories" class="back-link"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> Back to Visual Stories Gallery</a>
+        <span class="project-badge" id="art-tag">Street Photography</span>
+        <h1 class="section-title" id="art-title" style="margin-top: 12px;">Gold in the Mist: The Unseen Workers</h1>
+        <div class="case-hero-meta">
+          <span><i class="fa-solid fa-location-dot" aria-hidden="true"></i> <span id="art-location">Jakarta, Indonesia</span></span>
+          <span><i class="fa-solid fa-calendar" aria-hidden="true"></i> <span id="art-date">August 2026</span></span>
+          <span><i class="fa-solid fa-sun" aria-hidden="true"></i> <span id="det-mood">Golden Hour Mist</span></span>
+          <span><i class="fa-solid fa-layer-group" aria-hidden="true"></i> <span id="det-cat">Street &amp; Everyday Life</span></span>
         </div>
       </div>
+    </header>
 
-      <div class="article-img-frame">
-        <img id="art-img" src="Photo/f732741c-ebf2-44c7-a695-bb22e67b1b09.jpeg" alt="Story Photo" />
-      </div>
+    <section class="section section-offwhite">
+      <div class="container">
+        <div class="article-frame">
+          <img id="art-img" src="Photo/f732741c-ebf2-44c7-a695-bb22e67b1b09.jpeg" alt="Gold in the Mist: The Unseen Workers" />
+        </div>
 
-      <div class="article-body-wrapper">
-        <div class="row g-3 p-3 article-details-strip mb-4 text-center">
-          <div class="col-md-4">
-            <div class="small text-muted text-uppercase fw-bold">Location</div>
-            <div class="fw-bold" id="det-location">Jakarta, Indonesia</div>
+        <article class="article-prose" id="art-content"></article>
+
+        <div style="margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--border-light);">
+          <div class="section-header" style="margin-bottom: 24px;">
+            <span class="section-kicker">More Perspectives</span>
+            <h2 class="section-title" style="font-size: 1.75rem;">Explore Other <span class="accent-blue">Visual Stories</span></h2>
           </div>
-          <div class="col-md-4">
-            <div class="small text-muted text-uppercase fw-bold">Atmosphere / Lighting</div>
-            <div class="fw-bold" id="det-mood">Golden Hour Sunset</div>
-          </div>
-          <div class="col-md-4">
-            <div class="small text-muted text-uppercase fw-bold">Category</div>
-            <div class="fw-bold" id="det-cat">Street Photography</div>
-          </div>
-        </div>
-
-        <div id="art-content">
-          <!-- Content populated via JavaScript -->
+          <div class="stories-grid" id="related-stories-grid"></div>
         </div>
       </div>
-
-      <!-- Related Stories -->
-      <div class="border-top border-dark pt-5 mt-5">
-        <div class="text-center mb-4">
-          <span class="section-tag"><i class="fa-solid fa-images"></i> More Perspectives</span>
-          <h3 class="fw-bold">Explore Other <span class="blue-text">Visual Stories</span></h3>
-        </div>
-        <div class="row g-4" id="related-stories-grid">
-          <!-- Injected via JavaScript -->
-        </div>
-      </div>
-
-    </div>
+    </section>
   </main>
 
-  <footer>
-    <div class="container px-4 px-lg-5">
-      <p class="footer-copy mb-0">© 2026 <strong>Rikkardo L. Tobing</strong>. All rights reserved. Data &amp; Tech Support Executive | Informa Markets Asia.</p>
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div>© 2026 <strong style="color: var(--pure-white);">Rikkardo L. Tobing</strong> — Captured around Jakarta, Indonesia.</div>
+      <div class="footer-links">
+        <a href="index.html">Home</a>
+        <a href="index.html#stories">All 9 Stories</a>
+        <a href="index.html#contact">Contact</a>
+      </div>
     </div>
   </footer>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="js/main.js?v=10.0"></script>
+  <script src="js/data.js?v=14.0"></script>
+  <script src="js/main.js?v=14.0"></script>
   <script>
-    // Complete Stories Database (All 9 Photos)
-    const stories = {
-      'gold-in-the-mist': {
-        title: 'Gold in the Mist: The Unseen Workers',
-        tag: 'Street Photography',
-        location: 'Jakarta, Indonesia',
-        date: 'August 2026',
-        mood: 'Golden Hour Mist • Liquid Gold',
-        cat: 'Street & Everyday Life',
-        img: 'Photo/f732741c-ebf2-44c7-a695-bb22e67b1b09.jpeg',
-        content: `
-          <p>Under the relentless afternoon heat in Jakarta, the city's pulse never slows down. This photograph captures a humble yet deeply resonant moment of daily dedication beneath the glowing afternoon sunlight.</p>
-          <div class="article-quote-box">"Sunlight never chooses where to fall — it illuminates every drop of water and every effort with equal grace."</div>
-          <p>As water is sprayed to wash down the street, fine droplets catch the warm slant of the setting sun, momentarily transforming the spray into a shimmering veil of liquid gold. The entire scene lasted only a few fleeting seconds before the breeze shifted its shape.</p>
-          <p>Through this lens, I wanted to document the quiet beauty found in everyday, overlooked corners of the metropolis — reminding us that amidst the urban rush, there is always poetry between human effort and natural light.</p>
-        `
-      },
-      'silhouettes-scbd': {
-        title: 'Silhouettes of Ambition: Sunset Over SCBD',
-        tag: 'Urban Sunset',
-        location: 'SCBD Sudirman, Jakarta',
-        date: 'July 2026',
-        mood: 'Deep Amber • Skyline Silhouette',
-        cat: 'Architecture & Sunset',
-        img: 'Photo/70422342-1920-42e3-93aa-901bd73044f4.jpeg',
-        content: `
-          <p>A dramatic perspective of Jakarta as the sun descends directly between the glass and steel monoliths of the SCBD financial district. Towering skyscrapers stand in sharp, grounded silhouette against the dying light.</p>
-          <div class="article-quote-box">"Every high-rise carries thousands of dreams, and dusk arrives as a gentle reminder that every hard day's work deserves a moment of rest."</div>
-          <p>The sky transitions through a rich spectrum from warm amber to cool slate gray, casting a reflective mood across modern architecture. It captures the transition from the bustling daytime tempo to the luminous energy of Jakarta at night.</p>
-        `
-      },
-      'kebayoran-station': {
-        title: 'Golden Hour at Platform 2: Kebayoran Station',
-        tag: 'Transit Series',
-        location: 'Kebayoran Station, Jakarta',
-        date: 'June 2026',
-        mood: 'Warm Amber • Quiet Commute',
-        cat: 'Urban Commute & Transit',
-        img: 'Photo/1c5ec77c-2dbb-4c94-8972-b37be21b970b.jpeg',
-        content: `
-          <p>Railway stations in the late afternoon carry countless quiet stories. Low-angled sunlight filters through the canopy beams of Kebayoran Station, casting elongated shadows across the platform and tracks.</p>
-          <div class="article-quote-box">"The rails represent our destinations, but the platform at dusk is where we quietly reflect on the journey itself."</div>
-          <p>A peaceful stillness takes over Platform 2 just before the arrival of the next commuter train. The interplay of industrial steel geometry and natural warmth creates a grounding moment for commuters heading home.</p>
-        `
-      },
-      'welcome-to-isekai': {
-        title: 'Welcome to Isekai: Among Books & Dreams',
-        tag: 'Culture & Imagination',
-        location: 'Gramedia Jakarta',
-        date: 'May 2026',
-        mood: 'Warm Wooden Tones • Imagination',
-        cat: 'Interior & Literature',
-        img: 'Photo/ac62e452-a485-48c3-8910-3121f9d75b12.jpeg',
-        content: `
-          <p>Tall wooden bookshelves reach toward the ceiling, lined with thousands of books and stories. Stepping into this space feels like crossing into an alternate realm (*isekai*) — a quiet sanctuary away from the relentless noise of the capital.</p>
-          <div class="article-quote-box">"Reading is travel without boundaries. Between these shelves, every title is an open doorway to another adventure."</div>
-          <p>The structured lines and warm ambient lighting invite anyone who enters to slow down and immerse themselves in literature, imagination, and quiet contemplation.</p>
-        `
-      },
-      'sun-and-bulb': {
-        title: 'Two Sources of Light: Sun & Filament',
-        tag: 'Minimalist Perspective',
-        location: 'Rooftop Vista, Jakarta',
-        date: 'April 2026',
-        mood: 'Monochrome Skies • Conceptual',
-        cat: 'Minimalist & Perspective',
-        img: 'Photo/927d476c-ebb0-4711-a1b9-5663bb9dc8e8.jpeg',
-        content: `
-          <p>A study in conceptual alignment and perspective. A simple hanging filament bulb aligns in vertical symmetry directly above the natural sun, glowing softly behind a blanket of cloud cover.</p>
-          <div class="article-quote-box">"Humanity crafted the light bulb to pierce the dark, yet nature remains the original source of all radiance."</div>
-          <p>This minimalist composition invites the viewer to reflect on the quiet balance between human engineering and the natural world in clean visual harmony.</p>
-        `
-      },
-      'jiexpo-dusk': {
-        title: 'Dusk Over JIEXPO Kemayoran',
-        tag: 'Architecture & Event',
-        location: 'JIEXPO Kemayoran, Jakarta',
-        date: 'March 2026',
-        mood: 'Twilight Horizon • Exhibition Hub',
-        cat: 'Exhibition & Skyline',
-        img: 'Photo/d4b42879-a92f-4b67-b5ab-276e1b17499b.jpeg',
-        content: `
-          <p>After thousands of international trade visitors and business delegates depart the exhibition halls, the evening twilight rests gently over the architectural facade of JIEXPO Kemayoran.</p>
-          <div class="article-quote-box">"Trade exhibitions bring people and future ideas together; dusk brings an elegant close to a day of meaningful connections."</div>
-          <p>Overseeing the digital event infrastructure and web operations here, moments like these at dusk offer a grounding sense of accomplishment and calm after high-energy event days.</p>
-        `
-      },
-      'crimson-skyline': {
-        title: 'Crimson Skyline: Fiery Horizon Over Jakarta',
-        tag: 'Sunset Series',
-        location: 'South Jakarta Canopy',
-        date: 'February 2026',
-        mood: 'Vivid Tangerine & Crimson Glow',
-        cat: 'Atmospheric Landscape',
-        img: 'Photo/670a2ccb-33de-4b97-b830-467f1d16b05f.jpeg',
-        content: `
-          <p>The Jakarta sky turns into a fiery canvas as deep tangerine and crimson gradients cut across evening cloud banks, contrasting sharply with the silhouettes of lush tree canopies below.</p>
-          <div class="article-quote-box">"There is magic when the twilight sky blazes — as if reminding us that at the end of every demanding day, beauty awaits."</div>
-          <p>This atmospheric phenomenon showcases a dramatic side of the capital rarely captured in full. The intense warm glow blankets the skyline just before twilight fades to night.</p>
-        `
-      },
-      'golden-corona': {
-        title: 'Golden Corona: The Piercing Sun',
-        tag: 'Golden Hour',
-        location: 'West Jakarta Sky',
-        date: 'January 2026',
-        mood: 'Radiant Solar Amber • Atmospheric Haze',
-        cat: 'Solar & Cloud Study',
-        img: 'Photo/cab028f6-9277-47ab-863f-b52cd385f268.jpeg',
-        content: `
-          <p>Intense late afternoon sunlight pierces through fine atmospheric haze and cloud layers over West Jakarta, generating an ethereal, radiant golden corona across the horizon.</p>
-          <div class="article-quote-box">"Even through the thickest veil of haze, true light never loses its power to pierce through and illuminate."</div>
-          <p>Warm amber light bathes the upper atmosphere in a deep solar glow, turning an ordinary urban horizon into an evocative, surreal study of light and atmosphere.</p>
-        `
-      },
-      'amber-horizon': {
-        title: 'Amber Horizon: Solitude of the Street Lamp',
-        tag: 'Urban Geometry',
-        location: 'Central Jakarta Promenade',
-        date: 'August 2026',
-        mood: 'Pastel Dusk • Geometric Harmony',
-        cat: 'Minimalism & Street Architecture',
-        img: 'Photo/cb5bf88a-7803-481b-a2e6-abdaa241dadb.jpeg',
-        content: `
-          <p>A solitary Y-shaped street lamp stands along the promenade edge, framing a warm copper-toned sun nestled between delicate branches and clean vertical pillars.</p>
-          <div class="article-quote-box">"Man-made geometric precision and organic natural forms meet in effortless balance when united by evening sunlight."</div>
-          <p>The soft sunset glow casts gentle peach and amber hues across the sky, offering a clean, structured, and peaceful visual rhythm.</p>
-        `
-      }
-    };
+    (function () {
+      const stories = (window.PORTFOLIO_DATA && window.PORTFOLIO_DATA.stories) || [];
+      if (!stories.length) return;
 
-    const params = new URLSearchParams(window.location.search);
-    const storyId = params.get('id') || 'gold-in-the-mist';
-    const data = stories[storyId] || stories['gold-in-the-mist'];
+      const params = new URLSearchParams(window.location.search);
+      const storyId = params.get('id') || 'gold-in-the-mist';
+      const story = stories.find(s => s.id === storyId) || stories[0];
 
-    document.getElementById('art-title').innerText = data.title;
-    document.title = data.title + ' — Rikkardo L. Tobing';
-    document.getElementById('art-tag').innerHTML = `<i class="fa-solid fa-camera me-1"></i> ${data.tag}`;
-    document.getElementById('art-location').innerText = data.location;
-    document.getElementById('art-date').innerText = data.date;
-    document.getElementById('art-img').src = data.img;
-    document.getElementById('art-img').alt = data.title;
-    document.getElementById('det-location').innerText = data.location;
-    document.getElementById('det-mood').innerText = data.mood;
-    document.getElementById('det-cat').innerText = data.cat;
-    document.getElementById('art-content').innerHTML = data.content;
+      document.title = story.title + ' — Rikkardo L. Tobing';
+      const descMeta = document.querySelector('meta[name="description"]');
+      if (descMeta) descMeta.setAttribute('content', story.excerpt);
+      const canonical = document.querySelector('link[rel="canonical"]');
+      if (canonical) canonical.setAttribute('href', 'https://www.rikkardotobing.my.id/article.html?id=' + encodeURIComponent(story.id));
 
-    const relatedContainer = document.getElementById('related-stories-grid');
-    if (relatedContainer) {
-      const otherKeys = Object.keys(stories).filter(k => k !== storyId).slice(0, 3);
-      relatedContainer.innerHTML = otherKeys.map(k => {
-        const item = stories[k];
-        return `
-          <div class="col-md-4">
-            <a href="article.html?id=${k}" class="related-card">
-              <div class="related-card-thumb">
-                <img src="${item.img}" alt="${item.title}" loading="lazy" />
-              </div>
-              <div class="p-3">
-                <div class="small text-muted mb-1"><i class="fa-solid fa-location-dot text-info me-1"></i> ${item.location} • ${item.tag}</div>
-                <h5 class="h6 fw-bold mb-0">${item.title}</h5>
-              </div>
-            </a>
+      document.getElementById('art-title').textContent = story.title;
+      document.getElementById('art-tag').textContent = story.tag;
+      document.getElementById('art-location').textContent = story.location;
+      document.getElementById('art-date').textContent = story.date;
+      document.getElementById('det-mood').textContent = story.mood;
+      document.getElementById('det-cat').textContent = story.cat;
+
+      const img = document.getElementById('art-img');
+      img.src = story.webp || story.img;
+      img.alt = story.title;
+
+      document.getElementById('art-content').innerHTML = story.content;
+
+      const related = stories.filter(s => s.id !== story.id).slice(0, 3);
+      document.getElementById('related-stories-grid').innerHTML = related.map(item => `
+        <article class="story-card">
+          <div class="story-media">
+            <picture>
+              <source srcset="${item.webp}" type="image/webp" />
+              <img src="${item.img}" alt="${item.title}" loading="lazy" />
+            </picture>
+            <span class="story-badge">${item.tag}</span>
           </div>
-        `;
-      }).join('');
-    }
+          <div class="story-body">
+            <div class="story-meta"><span>${item.location}</span><span>${item.date}</span></div>
+            <h4>${item.title}</h4>
+            <p>${item.excerpt}</p>
+            <div class="story-actions">
+              <a href="article.html?id=${item.id}" class="card-action-link">Read Visual Story <i class="fa-solid fa-arrow-right"></i></a>
+            </div>
+          </div>
+        </article>
+      `).join('');
+    })();
   </script>
 </body>
+
 </html>

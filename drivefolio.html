@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>3D Drivefolio Archipelago — Rikkardo L. Tobing</title>
+  <meta name="description" content="Interactive 5-island WebGL 3D Drivefolio by Rikkardo L. Tobing. Explore 12 project billboards, 9 visual stories, and career milestones." />
+  <link rel="canonical" href="https://www.rikkardotobing.my.id/drivefolio.html" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@400;500;600;700&family=Geist:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <link rel="stylesheet" href="css/drivefolio.css?v=14.0" />
+</head>
+
+<body class="drivefolio-body">
+  <section class="drivefolio-stage" id="drivefolio-stage" aria-label="Interactive 3D Portfolio Island">
+    <div id="drivefolio-canvas-wrap"></div>
+
+    <!-- Top HUD -->
+    <div class="drivefolio-hud-top">
+      <div class="df-hud-group">
+        <a href="index.html" class="df-pill df-brand-pill" title="Return to Main Portfolio">
+          <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+          <span>Back to Portfolio</span>
+        </a>
+
+        <div class="df-pill" title="Visited Case Study Billboards">
+          <i class="fa-solid fa-flag-checkered" aria-hidden="true" style="color: #10B981;"></i>
+          <span id="drivefolio-visited-count">0 of 12 Seen</span>
+          <div class="df-visited-bar-wrap">
+            <div class="df-visited-bar-fill" id="drivefolio-visited-bar"></div>
+          </div>
+        </div>
+
+        <select id="df-gps-select" class="df-gps-select" aria-label="GPS Teleport to Stop">
+          <option value="">GPS Teleport (16 Stops)...</option>
+        </select>
+      </div>
+
+      <!-- Island Destinations -->
+      <div class="df-hud-group df-zones-nav" role="navigation" aria-label="Island Destinations">
+        <button type="button" class="df-pill df-btn active" id="df-zone-main-btn" data-island-jump="main">
+          <i class="fa-solid fa-road" aria-hidden="true"></i> Main Circuit
+        </button>
+        <button type="button" class="df-pill df-btn" data-district-open="about">North: About &amp; Stack</button>
+        <button type="button" class="df-pill df-btn" data-district-open="projects">12 Projects</button>
+        <button type="button" class="df-pill df-btn" data-district-open="stories">East: Stories (9)</button>
+        <button type="button" class="df-pill df-btn" data-district-open="journey">South: Journey &amp; CV</button>
+        <button type="button" class="df-pill df-btn" data-district-open="contact">West: Contact</button>
+      </div>
+
+      <!-- Controls -->
+      <div class="df-hud-group">
+        <button type="button" class="df-pill df-btn" id="df-autopilot-btn"><i class="fa-solid fa-route" aria-hidden="true"></i> Autopilot</button>
+        <button type="button" class="df-pill df-btn" id="df-time-btn"><i class="fa-solid fa-sun" aria-hidden="true"></i> Day</button>
+        <button type="button" class="df-pill df-btn" id="df-car-model-btn"><i class="fa-solid fa-car-side" aria-hidden="true"></i> GT Supercar</button>
+        <button type="button" class="df-pill df-btn" id="df-color-btn">
+          <span class="df-color-swatch" id="df-color-dot" style="background: #E11D48;"></span> Paint
+        </button>
+        <button type="button" class="df-pill df-btn" id="df-postcard-btn"><i class="fa-solid fa-camera-retro" aria-hidden="true"></i> Postcard</button>
+        <button type="button" class="df-pill df-btn" id="df-sound-btn" aria-label="Toggle Sound"><i class="fa-solid fa-volume-xmark" aria-hidden="true"></i></button>
+        <button type="button" class="df-pill df-btn" id="df-static-toggle-btn" title="Open accessible static directory">Directory</button>
+      </div>
+    </div>
+
+    <!-- Autopilot Banner -->
+    <div class="df-autopilot-banner" id="df-autopilot-banner">
+      <span class="df-pulse-dot"></span>
+      <span>AUTOPILOT ACTIVE — Driving to: <strong id="df-autopilot-target-name">PT Pamerindo Indonesia</strong></span>
+    </div>
+
+    <!-- Bottom-Left Minimap & Speedometer -->
+    <div class="drivefolio-hud-bottom-left">
+      <div class="df-minimap-card" title="Click anywhere on radar to drive there">
+        <div class="df-minimap-header">
+          <span>Island Radar</span>
+          <span>16 Stops</span>
+        </div>
+        <canvas id="drivefolio-minimap" width="160" height="132"></canvas>
+      </div>
+
+      <div class="df-speedometer-card">
+        <div class="df-speed-num" id="drivefolio-speed-val">0</div>
+        <div class="df-speed-unit">KM/H</div>
+        <div class="drivefolio-gear-badge" id="drivefolio-gear-badge">PARK</div>
+      </div>
+    </div>
+
+    <!-- Proximity Billboard Popup Card -->
+    <div class="drivefolio-proximity-card" id="drivefolio-proximity-card" role="region" aria-live="polite">
+      <button type="button" class="df-card-dismiss-btn" id="df-card-dismiss-btn" aria-label="Minimize card">
+        <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+      </button>
+      <div class="df-card-thumb">
+        <img id="df-card-img" src="assets/images/project-pamerindo.png" alt="Project Preview" />
+      </div>
+      <div class="df-card-body">
+        <div class="df-card-meta-row">
+          <span class="df-card-badge" id="df-card-badge">Flagship Portal</span>
+          <span class="df-card-zone" id="df-card-zone">Main Circuit</span>
+        </div>
+        <h3 class="df-card-title" id="df-card-title">PT Pamerindo Indonesia</h3>
+        <div class="df-card-sub" id="df-card-sub">Informa Markets Asia • 500K+ Trade Visitors</div>
+        <p class="df-card-desc" id="df-card-desc">The primary digital gateway for Indonesia’s leading trade exhibition organizer.</p>
+        <div class="df-card-tags" id="df-card-tags"></div>
+        <div class="df-card-actions">
+          <button type="button" class="df-action-btn primary" id="df-card-primary-btn">
+            Open Case Study <span class="df-key-hint">[E]</span>
+          </button>
+          <a href="https://www.pamerindo.com" target="_blank" rel="noopener noreferrer" class="df-action-btn secondary" id="df-card-visit-btn">
+            Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+          </a>
+          <button type="button" class="df-action-btn secondary" id="df-card-next-btn">Next Stop</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Desktop Controls Bar -->
+    <div class="drivefolio-controls-bar">
+      <span><kbd class="df-kbd">W</kbd><kbd class="df-kbd">A</kbd><kbd class="df-kbd">S</kbd><kbd class="df-kbd">D</kbd> or <kbd class="df-kbd">Arrows</kbd> Drive</span>
+      <span><kbd class="df-kbd">Shift</kbd> Turbo</span>
+      <span><kbd class="df-kbd">Space</kbd> Brake</span>
+      <span><kbd class="df-kbd">Click</kbd> Road / Billboard</span>
+      <span><kbd class="df-kbd">E</kbd> Open Stop</span>
+    </div>
+
+    <!-- Mobile Touch Controls -->
+    <div class="df-mobile-controls">
+      <div class="df-mobile-action-stack">
+        <button type="button" class="df-mobile-open-btn" id="df-mobile-open-btn" aria-label="Open Active Stop">
+          <i class="fa-solid fa-expand" aria-hidden="true"></i>
+          <span>OPEN</span>
+        </button>
+        <button type="button" class="df-mobile-boost-btn" id="df-mobile-boost-btn" aria-label="Hold for Turbo Boost">
+          <i class="fa-solid fa-bolt" aria-hidden="true"></i>
+          <span>TURBO</span>
+        </button>
+      </div>
+      <div class="df-joystick-zone" id="df-joystick-zone" aria-label="Touch Steering Joystick">
+        <div class="df-joystick-knob" id="df-joystick-knob"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- District Hub Overlay -->
+  <div class="df-district-overlay" id="df-district-overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="df-district-window">
+      <div class="df-district-header">
+        <div>
+          <span class="df-pill df-brand-pill" id="df-district-badge">NORTH ISLAND</span>
+          <h2 id="df-district-heading" style="margin: 8px 0 0; font-size: 1.05rem;">Island Hub</h2>
+        </div>
+        <div class="df-hud-group">
+          <button type="button" class="df-pill df-btn df-dist-tab active" data-dist-tab="about">About &amp; Stack</button>
+          <button type="button" class="df-pill df-btn df-dist-tab" data-dist-tab="projects">12 Projects</button>
+          <button type="button" class="df-pill df-btn df-dist-tab" data-dist-tab="stories">9 Stories</button>
+          <button type="button" class="df-pill df-btn df-dist-tab" data-dist-tab="journey">Journey &amp; CV</button>
+          <button type="button" class="df-pill df-btn df-dist-tab" data-dist-tab="contact">Contact</button>
+        </div>
+        <div class="df-hud-group">
+          <button type="button" class="df-pill df-btn" id="df-district-drive-here-btn">Drive Car Here</button>
+          <button type="button" class="df-pill df-btn" id="df-district-close-btn">Back to 3D Drive</button>
+        </div>
+      </div>
+      <div class="df-district-body" id="df-district-body"></div>
+    </div>
+  </div>
+
+  <!-- Postcard Snapshot Modal -->
+  <div class="modal-backdrop-custom" id="postcard-modal-backdrop" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-dialog-custom">
+      <div class="modal-header-custom">
+        <div>
+          <span class="df-pill df-brand-pill">Island Souvenir</span>
+          <h3 style="margin: 8px 0 0;">Drivefolio 3D Island Postcard</h3>
+        </div>
+        <button type="button" class="df-pill df-btn" id="postcard-close-btn" aria-label="Close postcard modal"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+      </div>
+      <div class="modal-body-custom" style="text-align: center;">
+        <div class="postcard-preview-frame" style="margin-bottom: 12px;">
+          <img id="postcard-preview-img" src="" alt="Drivefolio Island Postcard Snapshot" />
+        </div>
+        <p id="postcard-caption-text" style="font-size: 0.86rem; color: #94A3B8; margin-bottom: 16px;">Greetings from Rikkardo L. Tobing's 3D Drivefolio Island • Jakarta, ID</p>
+        <a href="#" id="postcard-download-btn" download="Rikkardo-Drivefolio-Postcard.png" class="df-action-btn primary">
+          <i class="fa-solid fa-download" aria-hidden="true"></i> Save Postcard PNG
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Static WebGL Fallback & Mobile-Friendly Directory -->
+  <div class="df-fallback-screen" id="df-fallback-screen" role="region" aria-label="Static Archipelago Directory">
+    <div style="max-width: 1100px; margin: 0 auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; margin-bottom: 24px;">
+        <div>
+          <h1 style="margin: 0 0 6px; font-size: 1.65rem;">3D Drivefolio — Archipelago Directory</h1>
+          <p style="margin: 0; color: #94A3B8; font-size: 0.92rem;">Accessible static &amp; mobile directory of all 16 stops (shown automatically if WebGL is unavailable).</p>
+        </div>
+        <div style="display: flex; gap: 10px;">
+          <button type="button" class="df-pill df-btn" id="df-fallback-close-btn" style="display: none;">Return to 3D Canvas</button>
+          <a href="index.html" class="df-pill df-brand-pill">Back to Main Portfolio</a>
+        </div>
+      </div>
+      <div class="df-directory-grid" id="df-fallback-grid"></div>
+    </div>
+  </div>
+
+  <script src="js/data.js?v=14.0"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="js/drivefolio-3d.js?v=5.0"></script>
+  <script>
+    (function () {
+      const data = window.PORTFOLIO_DATA;
+      if (!data) return;
+
+      window.renderDrivefolioDistrict = function (tab, container) {
+        if (!container) return;
+        if (tab === 'projects') {
+          container.innerHTML = `<div class="df-directory-grid">${data.projects.map(p => `
+            <div class="df-dir-card">
+              <span style="font-family:var(--df-font-mono);font-size:0.7rem;color:#60A5FA;">${p.badge}</span>
+              <h4>${p.title}</h4>
+              <p>${p.shortDesc}</p>
+              <div style="display:flex;gap:8px;margin-top:auto;padding-top:8px;">
+                <a href="project.html?id=${p.id}" class="df-action-btn primary">Case Study</a>
+                ${p.liveUrl ? `<a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="df-action-btn secondary">Live Site</a>` : ''}
+              </div>
+            </div>
+          `).join('')}</div>`;
+        } else if (tab === 'stories') {
+          container.innerHTML = `<div class="df-directory-grid">${data.stories.map(s => `
+            <div class="df-dir-card">
+              <span style="font-family:var(--df-font-mono);font-size:0.7rem;color:#60A5FA;">${s.location} • ${s.date}</span>
+              <h4>${s.title}</h4>
+              <p>${s.excerpt}</p>
+              <div style="margin-top:auto;padding-top:8px;">
+                <a href="article.html?id=${s.id}" class="df-action-btn primary">Read Story</a>
+              </div>
+            </div>
+          `).join('')}</div>`;
+        } else if (tab === 'journey') {
+          container.innerHTML = `<div class="df-directory-grid">
+            ${data.experience.map(e => `<div class="df-dir-card"><span style="color:#60A5FA;font-size:0.72rem;">${e.period}</span><h4>${e.role} — ${e.company}</h4><p>${e.description}</p></div>`).join('')}
+            ${data.education.map(ed => `<div class="df-dir-card"><span style="color:#60A5FA;font-size:0.72rem;">${ed.period} • ${ed.gpa}</span><h4>${ed.degree}</h4><p>${ed.institution}. ${ed.description}</p></div>`).join('')}
+            <div class="df-dir-card"><span style="color:#60A5FA;font-size:0.72rem;">Credentials</span><h4>Certifications &amp; CV</h4><p>${data.certifications.map(c => c.name).join(' · ')}</p><a href="${data.meta.resumeUrl}" download class="df-action-btn primary" style="margin-top:auto;">Download CV</a></div>
+          </div>`;
+        } else if (tab === 'contact') {
+          container.innerHTML = `<div class="df-directory-grid">
+            <div class="df-dir-card"><h4>Direct Email</h4><p>${data.meta.email}</p><a href="mailto:${data.meta.email}" class="df-action-btn primary">Send Email</a></div>
+            <div class="df-dir-card"><h4>Phone &amp; WhatsApp</h4><p>${data.meta.phone}</p><a href="${data.meta.whatsappUrl}" target="_blank" rel="noopener noreferrer" class="df-action-btn primary">Open WhatsApp</a></div>
+            <div class="df-dir-card"><h4>Contact Form</h4><p>Open the full validated contact form on the main portfolio.</p><a href="index.html#contact" class="df-action-btn primary">Go to Contact Section</a></div>
+          </div>`;
+        } else {
+          container.innerHTML = `<div class="df-directory-grid">
+            ${data.expertise.map(ex => `<div class="df-dir-card"><span style="color:#60A5FA;font-size:0.72rem;">EXPERTISE ${ex.code}</span><h4>${ex.title}</h4><p>${ex.summary}</p></div>`).join('')}
+            <div class="df-dir-card"><span style="color:#60A5FA;font-size:0.72rem;">FULL PROFILE</span><h4>About &amp; Technical Stack</h4><p>View complete biography, engineering philosophy, and full 7-category technical stack on the main portfolio.</p><a href="index.html#about" class="df-action-btn primary">Open Main Portfolio</a></div>
+          </div>`;
+        }
+      };
+
+      const fallbackGrid = document.getElementById('df-fallback-grid');
+      if (fallbackGrid) {
+        fallbackGrid.innerHTML = data.projects.map(p => `
+          <div class="df-dir-card">
+            <span style="font-family:var(--df-font-mono);font-size:0.7rem;color:#60A5FA;">${p.badge}</span>
+            <h4>${p.title}</h4>
+            <p>${p.shortDesc}</p>
+            <div style="display:flex;gap:8px;margin-top:auto;padding-top:8px;">
+              <a href="project.html?id=${p.id}" class="df-action-btn primary">Case Study</a>
+              ${p.liveUrl ? `<a href="${p.liveUrl}" target="_blank" rel="noopener noreferrer" class="df-action-btn secondary">Live</a>` : ''}
+            </div>
+          </div>
+        `).join('') + `
+          <div class="df-dir-card"><span>NORTH HUB</span><h4>About &amp; Technical Stack</h4><p>Explore background, philosophy, expertise &amp; stack.</p><a href="index.html#about" class="df-action-btn primary">View About</a></div>
+          <div class="df-dir-card"><span>EAST HUB</span><h4>9 Visual Stories</h4><p>Jakarta street &amp; golden hour photography.</p><a href="index.html#stories" class="df-action-btn primary">View Stories</a></div>
+          <div class="df-dir-card"><span>SOUTH HUB</span><h4>Experience &amp; Education</h4><p>Informa Markets, Pamerindo, Gunadarma &amp; CV.</p><a href="index.html#experience" class="df-action-btn primary">View Journey</a></div>
+          <div class="df-dir-card"><span>WEST HUB</span><h4>Contact &amp; Inquiry</h4><p>${data.meta.email} • ${data.meta.phone}</p><a href="index.html#contact" class="df-action-btn primary">Contact</a></div>
+        `;
+      }
+
+      const staticBtn = document.getElementById('df-static-toggle-btn');
+      const fallbackScreen = document.getElementById('df-fallback-screen');
+      const fallbackClose = document.getElementById('df-fallback-close-btn');
+      if (staticBtn && fallbackScreen && fallbackClose) {
+        staticBtn.addEventListener('click', () => {
+          fallbackScreen.classList.add('active');
+          fallbackClose.style.display = 'inline-flex';
+        });
+        fallbackClose.addEventListener('click', () => {
+          fallbackScreen.classList.remove('active');
+        });
+      }
+    })();
+  </script>
+</body>
+
+</html>
