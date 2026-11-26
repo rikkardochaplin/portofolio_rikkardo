@@ -104,7 +104,7 @@
             <h3 style="font-size: 1.1rem; margin-bottom: 14px;">Technology Stack</h3>
             <div class="stack-pills" id="cs-tags" style="margin-bottom: 22px;"></div>
 
-            <h3 style="font-size: 1.1rem; margin-bottom: 12px;">Live Website or Repository</h3>
+            <h3 style="font-size: 1.1rem; margin-bottom: 12px;">Live Website</h3>
             <div id="cs-links" style="display: grid; gap: 10px; margin-bottom: 24px;"></div>
 
             <h3 style="font-size: 1.1rem; margin-bottom: 12px;">More Case Studies</h3>
@@ -126,8 +126,8 @@
     </div>
   </footer>
 
-  <script src="js/data.js?v=15.2"></script>
-  <script src="js/main.js?v=15.2"></script>
+  <script src="js/data.js?v=15.3"></script>
+  <script src="js/main.js?v=15.3"></script>
   <script>
     (function () {
       const data = window.PORTFOLIO_DATA;
@@ -176,12 +176,7 @@
       if (project.liveUrl) {
         links.push(`<a href="${project.liveUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit Live Website <i class="fa-solid fa-arrow-up-right-from-square"></i></a>`);
       } else {
-        links.push(`<p style="font-size: 0.86rem; color: var(--text-on-light-muted); margin: 0;">Live Website: Not publicly hosted (internal / simulator project).</p>`);
-      }
-      if (project.repoUrl) {
-        links.push(`<a href="${project.repoUrl}" target="_blank" rel="noopener noreferrer" class="btn btn-secondary-light btn-sm">View Repository</a>`);
-      } else {
-        links.push(`<p style="font-size: 0.86rem; color: var(--text-on-light-muted); margin: 0;">Repository: Not publicly documented${project.docFile ? ` (Technical documentation: ${project.docFile})` : ''}.</p>`);
+        links.push(`<p style="font-size: 0.86rem; color: var(--text-on-light-muted); margin: 0;">Live Website: Private / internal deployment.</p>`);
       }
       document.getElementById('cs-links').innerHTML = links.join('');
 

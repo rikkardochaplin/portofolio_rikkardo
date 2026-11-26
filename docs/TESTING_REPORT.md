@@ -6,13 +6,14 @@
 ---
 
 ## 1. Content & Asset Integrity Verification (`docs/verify_content_integrity.py`)
-- **Result:** `156 / 156` checks passed, `0` failures.
+- **Result:** `157 / 157` checks passed, `0` failures.
 - Verified:
   - All 23 projects (12 core + 11 cloud full-stack SaaS & web apps) present in both `index.html` and `js/data.js`, ranked Tier 1 → Tier 2 → Tier 3 (`docs/PROJECT_PRIORITY_AUDIT.md`)
   - All 9 visual stories present in both `index.html` and `js/data.js`
   - Professional identity (`Multi-disciplinary Technology Engineer`), tagline (`Beyond Code. Across Technology.`), and all 4 career stats (`8+`, `500K+`, `99.9%`, `5+ Yrs`)
   - All experience entries (`Informa Markets Asia`, `PT Pamerindo Indonesia`), education (`Universitas Gunadarma` Bachelor's GPA `3.78 / 4.00` & Diploma GPA `3.77 / 4.00`), and all 6 certifications
-  - All contact details, CV PDF link, all 8 exhibition/corporate live links, GitHub repositories, and all 6 verified public live full-stack SaaS URLs (`tixlantra`, `kelantra`, `seolantra`, `lemburyukk`, `reportlantra`, `emaildetector`), with `AssetFlow IT (Pinjam-Barang)` rendered as a non-clickable `Private Portal` badge while retaining its live UI screenshot
+  - All contact details, CV PDF link, all 8 exhibition/corporate live links, and all 6 verified public live full-stack SaaS URLs (`tixlantra`, `kelantra`, `seolantra`, `lemburyukk`, `reportlantra`, `emaildetector`), with `AssetFlow IT (Pinjam-Barang)` rendered as a non-clickable `Private Portal` badge while retaining its live UI screenshot
+  - Project repository buttons & `View Repository` links hidden across cards and case study pages while preserving main personal GitHub profile link
   - Public `"Vercel Apps"` / `"Live Vercel"` labels removed (`Full-Stack SaaS`, `Production Web App`, `Private Internal App`, `Cloud Hosting & Edge Functions`)
   - Zero Blueprint remnants (`arch-modal-backdrop` and `.btn-open-modal` completely removed; compact `#projects-expand-btn` toggle verified)
   - All referenced PNG, JPEG, and WebP assets exist on disk

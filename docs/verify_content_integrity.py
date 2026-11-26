@@ -159,6 +159,10 @@ def verify():
         checks.append("CLOUD REBRAND APPLIED: Public Vercel labels removed")
     else:
         errors.append("PUBLIC VERCEL LABEL STILL IN index.html")
+    if "View Repository" not in project_html and "repoUrl: 'https://github.com" not in data_js and "github.com/rikkardochaplin/" not in index_html:
+        checks.append("PROJECT REPO LINKS HIDDEN: Zero View Repository / project GitHub buttons")
+    else:
+        errors.append("PROJECT REPOSITORY LINK LEFTOVER FOUND")
 
     # 5b. Check Blueprint removal & Compact toggle presence
     if "arch-modal-backdrop" not in index_html and "btn-open-modal" not in index_html:

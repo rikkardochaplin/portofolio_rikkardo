@@ -257,7 +257,7 @@ window.PORTFOLIO_DATA = {
       width: 1280,
       height: 720,
       liveUrl: 'https://tixlantra.vercel.app',
-      repoUrl: 'https://github.com/rikkardochaplin/tixlantra',
+      repoUrl: null,
       tags: ['Next.js 16', 'React 19', 'Supabase RLS', 'Resend', 'html5-qrcode', 'ExcelJS'],
       caseStudy: {
         overview: 'Tixlantra (part of the Lantra ecosystem) is a mobile-first multi-event registration and QR e-ticket platform built with Next.js 16 App Router, React 19, TypeScript, Supabase PostgreSQL with Row-Level Security, and Resend.',
@@ -284,7 +284,7 @@ window.PORTFOLIO_DATA = {
       width: 1280,
       height: 720,
       liveUrl: 'https://kelantra.vercel.app',
-      repoUrl: 'https://github.com/rikkardochaplin/kelantra',
+      repoUrl: null,
       tags: ['Next.js 15', 'React 19', 'TypeScript', 'Supabase RLS', 'Vitest', 'Zod'],
       caseStudy: {
         overview: 'Kelantra ("Control Every Purchase") is an enterprise multi-tenant B2B procurement and vendor management SaaS engineered with Next.js 15 App Router, TypeScript strict mode, and Supabase PostgreSQL.',
@@ -369,7 +369,7 @@ window.PORTFOLIO_DATA = {
       width: 1280,
       height: 720,
       liveUrl: 'https://seolantra.vercel.app',
-      repoUrl: 'https://github.com/rikkardochaplin/seolantra',
+      repoUrl: null,
       tags: ['Next.js 16', 'PageSpeed API v5', 'Inngest', 'Firebase', 'React-PDF'],
       caseStudy: {
         overview: 'Seolantra ("See deeper. Build better.") is a website intelligence SaaS running automated Mobile & Desktop Core Web Vitals, SEO, accessibility, and best-practices audits.',
@@ -494,7 +494,7 @@ window.PORTFOLIO_DATA = {
       width: 1280,
       height: 720,
       liveUrl: null,
-      repoUrl: 'https://github.com/rikkardochaplin/pinjaminpamerindo',
+      repoUrl: null,
       tags: ['React 18', 'Vite', 'Firebase', 'QR Scanner', 'ExcelJS', 'Docker'],
       caseStudy: {
         overview: 'AssetFlow IT (pinjaminpamerindo) is a dedicated IT asset lending and inventory tracking platform for PT Pamerindo Indonesia & Informa Markets operations.',
@@ -521,7 +521,7 @@ window.PORTFOLIO_DATA = {
       width: 1280,
       height: 720,
       liveUrl: 'https://lemburyukk.vercel.app',
-      repoUrl: 'https://github.com/rikkardochaplin/lemburyukk',
+      repoUrl: null,
       tags: ['Next.js 16', 'Tailwind v4', 'Firebase', 'ExcelJS', 'jsPDF'],
       caseStudy: {
         overview: 'Lemburyukk is a minimalist overtime record and official report generator built around PT Pamerindo Indonesia’s official spreadsheet and A4 printable form specifications.',
@@ -548,7 +548,7 @@ window.PORTFOLIO_DATA = {
       width: 1280,
       height: 720,
       liveUrl: 'https://reportlantra.vercel.app',
-      repoUrl: 'https://github.com/rikkardochaplin/reportlantra',
+      repoUrl: null,
       tags: ['Next.js 15', 'TypeScript', 'Firebase', 'Recharts', 'SheetJS'],
       caseStudy: {
         overview: 'Reportlantra is a multi-user, multi-brand social media analytics platform covering LinkedIn, Instagram, and TikTok monthly performance reporting.',
@@ -575,7 +575,7 @@ window.PORTFOLIO_DATA = {
       width: 1280,
       height: 720,
       liveUrl: 'https://emaildetector.vercel.app',
-      repoUrl: 'https://github.com/rikkardochaplin/emaildetector',
+      repoUrl: null,
       tags: ['Next.js 16', 'React 19', 'Gemini 2.5 Flash', 'TypeScript', 'Web Audio API'],
       caseStudy: {
         overview: 'XP MailShield Pro 2006 (email-check-xp) is a dual-engine email threat inspector detecting phishing, CEO Whaling/BEC, spoofed senders, malicious links, and double-extension malware attachments.',
@@ -778,7 +778,7 @@ window.PORTFOLIO_DATA = {
       width: 1280,
       height: 720,
       liveUrl: null,
-      repoUrl: 'https://github.com/rikkardochaplin/Online-Invitation',
+      repoUrl: null,
       tags: ['Next.js 16', 'React 19', 'Supabase RLS', 'QRCode', 'Zod'],
       caseStudy: {
         overview: 'Online Invitation Builder & Guest Management System is a SaaS platform built with Next.js 16, TypeScript, Tailwind CSS v4, and Supabase PostgreSQL/Auth/Storage/RLS.',
