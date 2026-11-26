@@ -34,9 +34,9 @@
   --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
   --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
-  /* Spacing & Geometry (Sharp Architectural Minimalism) */
+  /* Spacing & Geometry (Compact Architectural Minimalism) */
   --container-max: 1240px;
-  --section-pad: clamp(46px, 5.2vw, 74px);
+  --section-pad: clamp(32px, 3.6vw, 52px);
   --radius-xs: 2px;
   --radius-sm: 3px;
   --radius-md: 4px;
@@ -173,7 +173,7 @@ ul {
 /* Editorial Section Headers */
 .section-header {
   max-width: 780px;
-  margin-bottom: clamp(26px, 3.4vw, 40px);
+  margin-bottom: clamp(16px, 2.1vw, 24px);
 }
 
 .section-header-center {
@@ -216,10 +216,10 @@ ul {
 }
 
 .section-title {
-  font-size: clamp(1.95rem, 3.5vw, 2.85rem);
+  font-size: clamp(1.75rem, 3.1vw, 2.45rem);
   font-weight: 600;
   letter-spacing: -0.03em;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .section-dark .section-title,
@@ -534,8 +534,8 @@ ul {
 .hero-section {
   background-color: var(--navy-deep);
   color: var(--text-on-dark);
-  padding-top: clamp(92px, 7.5vw, 112px);
-  padding-bottom: clamp(36px, 4vw, 56px);
+  padding-top: clamp(76px, 5.5vw, 88px);
+  padding-bottom: clamp(24px, 2.6vw, 36px);
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--border-dark);
@@ -700,7 +700,7 @@ ul {
   overflow: hidden;
   border-radius: var(--radius-xs);
   border: 1px solid var(--border-dark);
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
   background: #070B14;
 }
 
@@ -748,12 +748,12 @@ ul {
 
 /* Architectural Metrics Strip */
 .hero-stats-strip {
-  margin-top: clamp(28px, 3.6vw, 40px);
-  padding-top: 22px;
+  margin-top: clamp(20px, 2.4vw, 28px);
+  padding-top: 16px;
   border-top: 1px solid var(--border-dark);
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 20px;
+  gap: 16px;
   position: relative;
   z-index: 1;
 }
@@ -808,10 +808,10 @@ ul {
 .about-highlights-list li {
   display: flex;
   align-items: flex-start;
-  gap: 12px;
-  font-size: 0.92rem;
+  gap: 10px;
+  font-size: 0.9rem;
   color: var(--text-on-light-body);
-  padding: 13px 0;
+  padding: 9px 0;
   border-bottom: 1px solid var(--border-light);
 }
 
@@ -839,10 +839,10 @@ ul {
   background: var(--pure-white);
   border-right: 1px solid var(--border-light);
   border-bottom: 1px solid var(--border-light);
-  padding: 22px 24px;
+  padding: 15px 18px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 5px;
   transition: background-color var(--transition);
 }
 
@@ -924,7 +924,7 @@ ul {
   background: transparent;
   border-right: 1px solid var(--border-dark);
   border-bottom: 1px solid var(--border-dark);
-  padding: 22px 24px;
+  padding: 16px 18px;
   transition: background-color var(--transition);
 }
 
@@ -958,13 +958,13 @@ ul {
 .expertise-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 28px 40px;
+  gap: 20px 32px;
 }
 
 .expertise-card {
   background: transparent;
   border-top: 2px solid var(--navy-deep);
-  padding: 20px 0 6px;
+  padding: 14px 0 4px;
 }
 
 .expertise-head {
@@ -1026,10 +1026,10 @@ ul {
 
 .stack-row {
   display: grid;
-  grid-template-columns: 270px minmax(0, 1fr);
-  gap: 16px 32px;
+  grid-template-columns: 245px minmax(0, 1fr);
+  gap: 10px 24px;
   align-items: baseline;
-  padding: 15px 0;
+  padding: 10px 0;
   border-bottom: 1px solid var(--border-light);
 }
 
@@ -1162,7 +1162,7 @@ ul {
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 24px 20px;
+  gap: 18px;
 }
 
 .project-card {
@@ -1207,11 +1207,11 @@ ul {
 }
 
 .project-card-body {
-  padding: 16px 18px 18px;
+  padding: 13px 15px 15px;
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 8px;
+  gap: 6px;
 }
 
 .project-meta {
@@ -1267,21 +1267,21 @@ ul {
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: flex-end;
-  gap: 18px;
-  margin-bottom: 26px;
+  gap: 14px;
+  margin-bottom: 18px;
 }
 
 .stories-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  gap: 16px;
 }
 
 .story-card {
   background: var(--pure-white);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-xs);
-  padding: 10px 10px 16px;
+  padding: 7px 7px 12px;
   display: flex;
   flex-direction: column;
   transition: border-color var(--transition), transform var(--transition), box-shadow var(--transition);
@@ -1293,13 +1293,14 @@ ul {
   box-shadow: var(--shadow-light-md);
 }
 
-.story-card.is-hidden {
+.story-card.is-hidden,
+.story-card.is-compact-hidden {
   display: none;
 }
 
 .story-media {
   position: relative;
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 16 / 9;
   background: #0F172A;
   overflow: hidden;
 }
@@ -1473,10 +1474,10 @@ ul {
 
 .timeline-item {
   border-bottom: 1px solid var(--border-light);
-  padding: 24px 0;
+  padding: 16px 0;
   display: grid;
-  grid-template-columns: 240px minmax(0, 1fr);
-  gap: 24px;
+  grid-template-columns: 230px minmax(0, 1fr);
+  gap: 20px;
 }
 
 .timeline-period {
@@ -1544,7 +1545,7 @@ ul {
   border: 1px solid var(--border-light);
   border-top: 2px solid var(--navy-deep);
   border-radius: var(--radius-xs);
-  padding: 20px 22px;
+  padding: 15px 18px;
 }
 
 .edu-top {
@@ -1609,7 +1610,7 @@ ul {
   border: 1px solid var(--border-light);
   border-top: 2px solid var(--navy-deep);
   border-radius: var(--radius-xs);
-  padding: 20px 22px;
+  padding: 15px 18px;
 }
 
 .certs-panel h3 {
@@ -2170,12 +2171,20 @@ html.js-ready [data-reveal].revealed {
     grid-template-columns: 1fr;
   }
 
+  .monograph-frame {
+    max-width: 560px;
+  }
+
   .expertise-grid { grid-template-columns: 1fr; }
-  .timeline-item { grid-template-columns: 1fr; gap: 10px; }
+  .timeline-item { grid-template-columns: 1fr; gap: 8px; }
   .case-aside-card { position: static; }
 }
 
 @media (max-width: 767px) {
+  .container {
+    padding-inline: 16px;
+  }
+
   .hero-stats-strip { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .pillars-grid,
   .pillars-grid-2,
@@ -2197,6 +2206,17 @@ html.js-ready [data-reveal].revealed {
   .pillar-card,
   .principle-card {
     border-right: none;
+    padding-inline: 0;
+  }
+
+  .filter-group {
+    gap: 5px;
+  }
+
+  .filter-btn {
+    font-size: 0.7rem;
+    padding: 6px 10px;
+    min-height: 36px;
   }
 
   .hero-ctas .btn {
@@ -2210,5 +2230,18 @@ html.js-ready [data-reveal].revealed {
   .lightbox-nav {
     width: 34px;
     height: 34px;
+  }
+}
+
+@media (max-width: 420px) {
+  .monograph-specs {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .monograph-spec + .monograph-spec {
+    border-left: none;
+    border-top: 1px solid var(--border-dark);
+    padding-left: 0;
+    padding-top: 8px;
   }
 }

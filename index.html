@@ -31,7 +31,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,600&family=Geist+Mono:wght@400;500;600;700&family=Geist:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
 
-  <link rel="stylesheet" href="css/style.css?v=16.0" />
+  <link rel="stylesheet" href="css/style.css?v=16.1" />
 
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
@@ -569,10 +569,10 @@
         <div class="catalog-header">
           <div>
             <h3>Selected Projects <span class="accent-blue">(23)</span></h3>
-            <p class="mono-label" id="projects-count-label" style="color: var(--text-on-dark-subtle); margin: 4px 0 0;">Showing top 9 flagship of 23 projects</p>
+            <p class="mono-label" id="projects-count-label" style="color: var(--text-on-dark-subtle); margin: 4px 0 0;">Showing top 6 featured of 23 projects</p>
           </div>
           <div class="filter-group" id="project-filters" role="group" aria-label="Filter projects by category">
-            <button type="button" class="filter-btn active" data-filter="all">Featured (9) / All (23)</button>
+            <button type="button" class="filter-btn active" data-filter="all">Featured (6) / All (23)</button>
             <button type="button" class="filter-btn" data-filter="fullstack">Full-Stack SaaS (11)</button>
             <button type="button" class="filter-btn" data-filter="web">Web Development</button>
             <button type="button" class="filter-btn" data-filter="enterprise">Enterprise Systems</button>
@@ -685,7 +685,7 @@
           </article>
 
           <!-- TIER 1 // 07: NexusAgent & PamerAi Ecosystem -->
-          <article class="project-card" data-category="ai">
+          <article class="project-card is-compact-hidden" data-category="ai">
             <div class="project-thumb">
               <picture><source srcset="assets/images/webp/project-nexusagent.webp?v=15.2" type="image/webp" /><img src="assets/images/project-nexusagent.png?v=15.2" alt="NexusAgent &amp; PamerAi Ecosystem" width="1280" height="710" loading="lazy" /></picture>
             </div>
@@ -701,7 +701,7 @@
           </article>
 
           <!-- TIER 1 // 08: Enterprise IoT Remote Hub -->
-          <article class="project-card" data-category="iot enterprise">
+          <article class="project-card is-compact-hidden" data-category="iot enterprise">
             <div class="project-thumb">
               <picture><source srcset="assets/images/webp/project-monitor-tablet-2.webp?v=15.2" type="image/webp" /><img src="assets/images/project-monitor-tablet-2.png?v=15.2" alt="Enterprise IoT Remote Hub" width="720" height="1280" loading="lazy" style="object-fit: contain; background: #0B1120;" /></picture>
             </div>
@@ -717,7 +717,7 @@
           </article>
 
           <!-- TIER 1 // 09: Cosmobeauté Indonesia -->
-          <article class="project-card" data-category="web">
+          <article class="project-card is-compact-hidden" data-category="web">
             <div class="project-thumb">
               <picture><source srcset="assets/images/webp/project-cosmobeaute.webp?v=15.2" type="image/webp" /><img src="assets/images/project-cosmobeaute.png?v=15.2" alt="Cosmobeauté Indonesia" width="1280" height="710" loading="lazy" /></picture>
             </div>
@@ -966,9 +966,9 @@
           </article>
         </div>
 
-        <div style="text-align: center; margin-top: 26px;">
+        <div style="text-align: center; margin-top: 22px;">
           <button type="button" class="btn btn-secondary-dark" id="projects-expand-btn" aria-expanded="false">
-            Show All 23 Projects (+14 more)
+            Show All 23 Projects (+17 more)
           </button>
         </div>
       </div>
@@ -984,14 +984,15 @@
             <span class="section-kicker">07 · Visual Stories &amp; Photography</span>
             <h2 class="section-title">Urban Stories &amp; <span class="serif-italic">Perspectives</span></h2>
             <p class="section-lead">Moments captured through my lens around Jakarta — everyday street scenes, golden hours, transit geometry, and quiet urban observations.</p>
+            <p class="mono-label" id="stories-count-label" style="color: var(--muted-gray); margin: 6px 0 0;">Showing top 3 featured of 9 visual stories</p>
           </div>
 
           <div class="filter-group" id="photo-filters" role="group" aria-label="Filter visual stories by category">
-            <button type="button" class="filter-btn active" data-filter="all">All Stories (9)</button>
-            <button type="button" class="filter-btn" data-filter="street">Street &amp; Everyday Life</button>
-            <button type="button" class="filter-btn" data-filter="golden-hour">Golden Hour &amp; Sunset</button>
-            <button type="button" class="filter-btn" data-filter="architecture">Architecture &amp; Transit</button>
-            <button type="button" class="filter-btn" data-filter="minimalist">Minimalist &amp; Conceptual</button>
+            <button type="button" class="filter-btn active" data-filter="all">Featured (3) / All (9)</button>
+            <button type="button" class="filter-btn" data-filter="street">Street</button>
+            <button type="button" class="filter-btn" data-filter="golden-hour">Golden Hour</button>
+            <button type="button" class="filter-btn" data-filter="architecture">Architecture</button>
+            <button type="button" class="filter-btn" data-filter="minimalist">Minimalist</button>
           </div>
         </div>
 
@@ -1054,7 +1055,7 @@
           </article>
 
           <!-- Story 4 -->
-          <article class="story-card" data-category="street">
+          <article class="story-card is-compact-hidden" data-category="street">
             <div class="story-media">
               <picture><source srcset="Photo/webp/ac62e452-a485-48c3-8910-3121f9d75b12.webp" type="image/webp" /><img src="Photo/ac62e452-a485-48c3-8910-3121f9d75b12.jpeg" alt="Welcome to Isekai: Among Books &amp; Dreams" width="1050" height="1400" loading="lazy" /></picture>
               <button type="button" class="story-preview-trigger" data-photo-index="3" aria-label="Preview Welcome to Isekai">
@@ -1073,7 +1074,7 @@
           </article>
 
           <!-- Story 5 -->
-          <article class="story-card" data-category="minimalist">
+          <article class="story-card is-compact-hidden" data-category="minimalist">
             <div class="story-media">
               <picture><source srcset="Photo/webp/927d476c-ebb0-4711-a1b9-5663bb9dc8e8.webp" type="image/webp" /><img src="Photo/927d476c-ebb0-4711-a1b9-5663bb9dc8e8.jpeg" alt="Two Sources of Light: Sun &amp; Filament" width="1050" height="1400" loading="lazy" /></picture>
               <button type="button" class="story-preview-trigger" data-photo-index="4" aria-label="Preview Two Sources of Light">
@@ -1092,7 +1093,7 @@
           </article>
 
           <!-- Story 6 -->
-          <article class="story-card" data-category="architecture">
+          <article class="story-card is-compact-hidden" data-category="architecture">
             <div class="story-media">
               <picture><source srcset="Photo/webp/d4b42879-a92f-4b67-b5ab-276e1b17499b.webp" type="image/webp" /><img src="Photo/d4b42879-a92f-4b67-b5ab-276e1b17499b.jpeg" alt="Dusk Over JIEXPO Kemayoran" width="1050" height="1400" loading="lazy" /></picture>
               <button type="button" class="story-preview-trigger" data-photo-index="5" aria-label="Preview Dusk Over JIEXPO Kemayoran">
@@ -1111,7 +1112,7 @@
           </article>
 
           <!-- Story 7 -->
-          <article class="story-card" data-category="golden-hour">
+          <article class="story-card is-compact-hidden" data-category="golden-hour">
             <div class="story-media">
               <picture><source srcset="Photo/webp/670a2ccb-33de-4b97-b830-467f1d16b05f.webp" type="image/webp" /><img src="Photo/670a2ccb-33de-4b97-b830-467f1d16b05f.jpeg" alt="Crimson Skyline: Fiery Horizon Over Jakarta" width="1050" height="1400" loading="lazy" /></picture>
               <button type="button" class="story-preview-trigger" data-photo-index="6" aria-label="Preview Crimson Skyline">
@@ -1130,7 +1131,7 @@
           </article>
 
           <!-- Story 8 -->
-          <article class="story-card" data-category="golden-hour">
+          <article class="story-card is-compact-hidden" data-category="golden-hour">
             <div class="story-media">
               <picture><source srcset="Photo/webp/cab028f6-9277-47ab-863f-b52cd385f268.webp" type="image/webp" /><img src="Photo/cab028f6-9277-47ab-863f-b52cd385f268.jpeg" alt="Golden Corona: The Piercing Sun" width="1050" height="1400" loading="lazy" /></picture>
               <button type="button" class="story-preview-trigger" data-photo-index="7" aria-label="Preview Golden Corona">
@@ -1149,7 +1150,7 @@
           </article>
 
           <!-- Story 9 -->
-          <article class="story-card" data-category="minimalist">
+          <article class="story-card is-compact-hidden" data-category="minimalist">
             <div class="story-media">
               <picture><source srcset="Photo/webp/cb5bf88a-7803-481b-a2e6-abdaa241dadb.webp" type="image/webp" /><img src="Photo/cb5bf88a-7803-481b-a2e6-abdaa241dadb.jpeg" alt="Amber Horizon: Solitude of the Street Lamp" width="1050" height="1400" loading="lazy" /></picture>
               <button type="button" class="story-preview-trigger" data-photo-index="8" aria-label="Preview Amber Horizon">
@@ -1166,6 +1167,12 @@
               </div>
             </div>
           </article>
+        </div>
+
+        <div style="text-align: center; margin-top: 20px;">
+          <button type="button" class="btn btn-secondary-light" id="stories-expand-btn" aria-expanded="false">
+            Show All 9 Visual Stories (+6 more)
+          </button>
         </div>
       </div>
     </section>
@@ -1479,8 +1486,8 @@
     </div>
   </div>
 
-  <script src="js/data.js?v=16.0"></script>
-  <script src="js/main.js?v=16.0"></script>
+  <script src="js/data.js?v=16.1"></script>
+  <script src="js/main.js?v=16.1"></script>
 </body>
 
 </html>

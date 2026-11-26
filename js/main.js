@@ -126,28 +126,34 @@ function initRevealAnimations() {
   revealVisible();
 }
 
-/* ── 5. Project Category Filtering & Compact Toggle ── */
-function initProjectFilters() {
-  const filterGroup = document.getElementById('project-filters');
-  const cards = Array.from(document.querySelectorAll('#projects-grid .project-card'));
-  const countLabel = document.getElementById('projects-count-label');
-  const toggleBtn = document.getElementById('projects-expand-btn');
+/* ── 5. Shared Compact Catalog Filtering & Expand Toggle ── */
+function initCompactCatalog({
+  filterGroupId,
+  gridId,
+  cardSelector,
+  expandBtnId,
+  countLabelId,
+  compactLimit,
+  filterMatcher,
+  noun,
+  expandLabel,
+  expandIcon
+}) {
+  const filterGroup = document.getElementById(filterGroupId);
+  const cards = Array.from(document.querySelectorAll(`#${gridId} ${cardSelector}`));
+  const countLabel = document.getElementById(countLabelId);
+  const toggleBtn = document.getElementById(expandBtnId);
   if (!filterGroup || !cards.length) return;
 
   let activeFilter = 'all';
   let expandedAll = false;
-  const COMPACT_LIMIT = 9;
 
   function applyState() {
     let visible = 0;
-    let totalMatching = 0;
 
     cards.forEach((card, idx) => {
-      const cats = (card.getAttribute('data-category') || '').split(/\s+/);
-      const matchesFilter = activeFilter === 'all' || cats.includes(activeFilter);
-      if (matchesFilter) totalMatching += 1;
-
-      const hiddenByCompact = activeFilter === 'all' && !expandedAll && idx >= COMPACT_LIMIT;
+      const matchesFilter = activeFilter === 'all' || filterMatcher(card, activeFilter);
+      const hiddenByCompact = activeFilter === 'all' && !expandedAll && idx >= compactLimit;
       const show = matchesFilter && !hiddenByCompact;
       card.classList.toggle('is-hidden', !matchesFilter);
       card.classList.toggle('is-compact-hidden', hiddenByCompact);
@@ -156,16 +162,17 @@ function initProjectFilters() {
 
     if (countLabel) {
       countLabel.textContent = activeFilter === 'all' && !expandedAll
-        ? `Showing top ${visible} flagship of ${cards.length} projects`
-        : `Showing ${visible} of ${cards.length} projects`;
+        ? `Showing top ${visible} featured of ${cards.length} ${noun}`
+        : `Showing ${visible} of ${cards.length} ${noun}`;
     }
 
     if (toggleBtn) {
-      if (activeFilter === 'all' && cards.length > COMPACT_LIMIT) {
+      if (activeFilter === 'all' && cards.length > compactLimit) {
         toggleBtn.style.display = 'inline-flex';
+        toggleBtn.setAttribute('aria-expanded', String(expandedAll));
         toggleBtn.innerHTML = expandedAll
-          ? `<i class="fa-solid fa-compress" aria-hidden="true"></i> Show Compact View (Top ${COMPACT_LIMIT})`
-          : `<i class="fa-solid fa-layer-group" aria-hidden="true"></i> Show All ${cards.length} Projects (+${cards.length - COMPACT_LIMIT} more)`;
+          ? `<i class="fa-solid fa-compress" aria-hidden="true"></i> Show Compact View (Top ${compactLimit})`
+          : `<i class="${expandIcon}" aria-hidden="true"></i> Show All ${cards.length} ${expandLabel} (+${cards.length - compactLimit} more)`;
       } else {
         toggleBtn.style.display = 'none';
       }
@@ -192,24 +199,34 @@ function initProjectFilters() {
   applyState();
 }
 
-/* ── 6. Visual Stories Category Filtering ── */
+function initProjectFilters() {
+  initCompactCatalog({
+    filterGroupId: 'project-filters',
+    gridId: 'projects-grid',
+    cardSelector: '.project-card',
+    expandBtnId: 'projects-expand-btn',
+    countLabelId: 'projects-count-label',
+    compactLimit: 6,
+    filterMatcher: (card, filter) => (card.getAttribute('data-category') || '').split(/\s+/).includes(filter),
+    noun: 'projects',
+    expandLabel: 'Projects',
+    expandIcon: 'fa-solid fa-layer-group'
+  });
+}
+
+/* ── 6. Visual Stories Category Filtering & Compact Toggle ── */
 function initStoryFilters() {
-  const filterGroup = document.getElementById('photo-filters');
-  const cards = document.querySelectorAll('#stories-grid .story-card');
-  if (!filterGroup || !cards.length) return;
-
-  const buttons = filterGroup.querySelectorAll('.filter-btn');
-  buttons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      buttons.forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      const filter = btn.getAttribute('data-filter');
-
-      cards.forEach(card => {
-        const cat = card.getAttribute('data-category');
-        card.classList.toggle('is-hidden', filter !== 'all' && cat !== filter);
-      });
-    });
+  initCompactCatalog({
+    filterGroupId: 'photo-filters',
+    gridId: 'stories-grid',
+    cardSelector: '.story-card',
+    expandBtnId: 'stories-expand-btn',
+    countLabelId: 'stories-count-label',
+    compactLimit: 3,
+    filterMatcher: (card, filter) => card.getAttribute('data-category') === filter,
+    noun: 'visual stories',
+    expandLabel: 'Visual Stories',
+    expandIcon: 'fa-regular fa-images'
   });
 }
 

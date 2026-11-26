@@ -1,7 +1,7 @@
 # Testing Report — Rikkardo L. Tobing Portfolio Redesign
 
 **Test Date:** 2026-11-26  
-**Environment:** Local HTTP server (`python -m http.server 8772`), Google Chrome Headless via Chrome DevTools Protocol, Node.js `v25.1.0`, Python `3.14.2`
+**Environment:** Local HTTP server (`python -m http.server 8773`), Google Chrome Headless via Chrome DevTools Protocol, Node.js `v25.1.0`, Python `3.14.2`
 
 ---
 
@@ -31,20 +31,21 @@
 ## 3. Automated Headless Browser & 4-Viewport Responsive Verification
 - **Runtime Exceptions:** `0` (`[]`) across `index.html`, `project.html`, and `drivefolio.html`.
 - **Blueprint Removal:** `archModalExists: false`, `openModalButtons: 0`.
-- **Compact Default & Expand Toggle:**
-  - Initial load: `9 / 23` flagship cards visible (`is-compact-hidden` pre-applied for zero FOUC), `compactHeight = 11,178px` on Desktop (`1440px`)
-  - Expanded via `#projects-expand-btn`: `23 / 23` cards visible (`expandedHeight = 13,490px`)
-  - Collapsed back via `#projects-expand-btn`: `9 / 23` cards visible
-- **Image Loading (after full scroll across all 23 cards + 9 stories + monograph plate):** `33 / 33` images on `index.html` loaded with `naturalWidth > 0` (`broken: []`); `0` broken images across sampled case studies (`pamerindo`, `tixlantra`, `kelantra`, `pinjam-barang`, `meeting-registrasi`, `absenlantra`).
-- **Responsive Overflow & Layout Checks:**
-  - Desktop (`1440x900`): `scrollW = 1425`, `innerW = 1440`, `scrollH = 11,178`, `overflow: false`, `wrappedNav: []`, `navHeight: 71`
-  - Laptop (`1024x768`): `scrollW = 1009`, `innerW = 1024`, `scrollH = 13,214`, `overflow: false`, `wrappedNav: []`, `navHeight: 71`
-  - Tablet (`768x1024`): `scrollW = 753`, `innerW = 768`, `scrollH = 15,533`, `overflow: false`, `navHeight: 71`
-  - Mobile (`375x812`): `scrollW = 375`, `innerW = 375`, `scrollH = 23,527`, `overflow: false`, `navHeight: 71`
+- **Compact Default & Expand Toggles:**
+  - Initial load: `6 / 23` flagship projects (`is-compact-hidden`) and `3 / 9` featured visual stories (`is-compact-hidden`), `compactHeight = 8,917px` on Desktop (`1440px`)
+  - Expanded via `#projects-expand-btn` & `#stories-expand-btn`: `23 / 23` projects and `9 / 9` stories visible (`expandedHeight = 12,399px`)
+  - Collapsed back cleanly to `6` projects and `3` stories
+- **Image Loading (after full scroll across all 23 cards + 9 stories + monograph plate):** `33 / 33` images on `index.html` loaded with `naturalWidth > 0` (`broken: []`); `0` broken images across sampled case studies (`pamerindo`, `kelantra`, `pinjam-barang`).
+- **5-Device Responsive Overflow & Layout Checks:**
+  - Desktop (`1440x900`): `scrollW = 1425`, `innerW = 1440`, `scrollH = 8,917`, `overflow: false`, `overflowingEls: []`, `wrappedNav: []`, `navHeight: 71`
+  - Laptop (`1024x768`): `scrollW = 1009`, `innerW = 1024`, `scrollH = 9,937`, `overflow: false`, `overflowingEls: []`, `wrappedNav: []`, `navHeight: 71`
+  - Tablet (`768x1024`): `scrollW = 753`, `innerW = 768`, `scrollH = 12,348`, `overflow: false`, `overflowingEls: []`, `navHeight: 71`
+  - Large Mobile (`430x932`): `scrollW = 430`, `innerW = 430`, `scrollH = 17,133`, `overflow: false`, `overflowingEls: []`, `navHeight: 71`
+  - Small Mobile (`360x800`): `scrollW = 360`, `innerW = 360`, `scrollH = 18,599`, `overflow: false`, `overflowingEls: []`, `navHeight: 71`
   - Mobile Navigation Drawer: opens and closes cleanly (`opened: true, closed: true`)
 - **Interactive Flows Tested:**
-  - **Project Filters:** `all` -> 9 (compact) / 23 (expanded), `fullstack` -> 11, `web` -> 14, `enterprise` -> 10, `ai` -> 6, `iot` -> 3
-  - **Visual Story Filters:** `all` -> 9, `street` -> 2, `golden-hour` -> 3, `architecture` -> 2, `minimalist` -> 2
+  - **Project Filters:** `all` -> 6 (compact) / 23 (expanded), `fullstack` -> 11, `web` -> 14, `enterprise` -> 10, `ai` -> 6, `iot` -> 3
+  - **Visual Story Filters:** `all` -> 3 (compact) / 9 (expanded), `street` -> 2, `golden-hour` -> 3, `architecture` -> 2, `minimalist` -> 2
   - **Photography Lightbox:** opens on `Gold in the Mist: The Unseen Workers`, navigates Next to `Silhouettes of Ambition: Sunset Over SCBD`, closes cleanly (`closed: true`)
   - **3D Drivefolio (`drivefolio.html`):** WebGL `<canvas>` rendered cleanly (`hasCanvas: true`), District Overlay rendered all `23` project directory cards cleanly
 

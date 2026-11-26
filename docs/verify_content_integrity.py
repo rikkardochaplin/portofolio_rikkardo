@@ -169,10 +169,10 @@ def verify():
         checks.append("BLUEPRINT REMOVED: Zero arch-modal-backdrop or btn-open-modal in index.html")
     else:
         errors.append("BLUEPRINT LEFTOVER FOUND IN index.html")
-    if 'id="projects-expand-btn"' in index_html:
-        checks.append("COMPACT EXPAND TOGGLE PRESENT IN index.html")
+    if 'id="projects-expand-btn"' in index_html and 'id="stories-expand-btn"' in index_html:
+        checks.append("COMPACT EXPAND TOGGLES PRESENT IN index.html (Projects + Stories)")
     else:
-        errors.append("MISSING projects-expand-btn IN index.html")
+        errors.append("MISSING compact expand toggle IN index.html")
 
     # 6. Check All Referenced Images & WebP variants Exist on Disk
     all_html = index_html + "\n" + article_html + "\n" + project_html + "\n" + drivefolio_html
