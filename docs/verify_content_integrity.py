@@ -141,7 +141,6 @@ def verify():
         "https://kelantra.vercel.app/",
         "https://seolantra.vercel.app/",
         "https://lemburyukk.vercel.app/",
-        "https://pinjaminpamerindo.vercel.app/",
         "https://reportlantra.vercel.app/",
         "https://emaildetector.vercel.app/"
     ]
@@ -150,6 +149,16 @@ def verify():
             checks.append(f"LINK/CONTACT PRESERVED: {c}")
         else:
             errors.append(f"MISSING LINK/CONTACT: {c}")
+
+    # 5a. Check PinjaminPamerindo Live link disabled & Vercel label removed
+    if 'href="https://pinjaminpamerindo.vercel.app' not in index_html and "liveUrl: 'https://pinjaminpamerindo" not in data_js:
+        checks.append("PINJAMIN LIVE DISABLED: No active live link on AssetFlow IT (Pinjam-Barang)")
+    else:
+        errors.append("PINJAMIN LIVE STILL CLICKABLE IN HTML OR DATA")
+    if "Vercel Apps" not in index_html and "Live Vercel" not in index_html and "Vercel Full-Stack" not in index_html and "Vercel Serverless" not in index_html:
+        checks.append("CLOUD REBRAND APPLIED: Public Vercel labels removed")
+    else:
+        errors.append("PUBLIC VERCEL LABEL STILL IN index.html")
 
     # 5b. Check Blueprint removal & Compact toggle presence
     if "arch-modal-backdrop" not in index_html and "btn-open-modal" not in index_html:

@@ -29,9 +29,9 @@ This repository powers the personal engineering portfolio of **Rikkardo L. Tobin
 
 ## Preserved & Expanded Content Inventory
 
-- **23 Featured Projects (12 Core + 11 Vercel Full-Stack Apps):**
+- **23 Featured Projects (12 Core + 11 Cloud Full-Stack SaaS Apps):**
   - *Core Corporate, B2B Exhibition & Systems (12):* PT Pamerindo Indonesia, Food & Hospitality Indonesia (FHI), Lab Indonesia, Food, Hotel & Tourism Bali (FHTB), Cosmobeauté Indonesia, Vape Fair Indonesia, Clouds Fest, Beauté Festival, NexusAgent & PamerAi Ecosystem, Orion ERP & IBM iSeries Simulator, CV Examiner AI Pro Platform, Enterprise IoT Remote Hub.
-  - *Vercel Full-Stack Applications (11):* Tixlantra, Kelantra, Seolantra, Lemburyukk, AssetFlow IT (Pinjam-Barang), Reportlantra (Sosmed-Report), XP MailShield Pro 2006, Online Invitation Builder, Absenlantra, Meeting-Registrasi, Elysia AI Chatbot (Informa Proxy).
+  - *Full-Stack SaaS & Cloud Web Applications (11):* Tixlantra, Kelantra, Seolantra, Lemburyukk, AssetFlow IT (Pinjam-Barang), Reportlantra (Sosmed-Report), XP MailShield Pro 2006, Online Invitation Builder, Absenlantra, Meeting-Registrasi, Elysia AI Chatbot (Informa Proxy).
 - **9 Visual Stories:** All 9 Jakarta photography stories preserved with original photography, WebP derivatives, lightbox preview, and full narrative pages.
 - **Experience, Education & Certifications:** Informa Markets Asia, PT Pamerindo Indonesia, Universitas Gunadarma (Bachelor's GPA 3.78 & Diploma GPA 3.77), and all 6 certifications.
 

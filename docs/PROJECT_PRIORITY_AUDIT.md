@@ -1,7 +1,7 @@
 # Project Priority & Impact Audit — Rikkardo L. Tobing Portfolio
 
 **Audit Date:** 2026-11-26  
-**Scope:** Ranking all 23 portfolio projects (12 core + 11 Vercel workspace applications) by business impact, live production status, technical complexity, and recruiter relevance.
+**Scope:** Ranking all 23 portfolio projects (12 core + 11 full-stack cloud SaaS & web applications) by business impact, live production status, technical complexity, and recruiter relevance.
 
 ---
 
@@ -28,9 +28,9 @@
 
 ---
 
-## Tier 2 — Live Published Vercel Apps & Specialized Enterprise Systems
+## Tier 2 — Production Web Apps & Specialized Enterprise Systems
 
-10. **AssetFlow IT (Pinjam-Barang)** (`https://pinjaminpamerindo.vercel.app`) — Real PT Pamerindo IT operations app (React 18 + Vite + Firebase + QR scanning + printable A4 handover).
+10. **AssetFlow IT (Pinjam-Barang)** (Private internal live portal — screenshot showcase only, live link disabled) — Real PT Pamerindo IT operations app (React 18 + Vite + Firebase + QR scanning + printable A4 handover).
 11. **Lemburyukk** (`https://lemburyukk.vercel.app`) — Live Next.js 16 overtime tracking & PT Pamerindo Excel/PDF report generator with dual digital signatures.
 12. **Reportlantra** (`https://reportlantra.vercel.app`) — Live Next.js 15 multi-brand social media analytics SaaS replacing Excel workflows.
 13. **XP MailShield Pro 2006** (`https://emaildetector.vercel.app`) — Live AI phishing/malware/BEC email analyzer (Gemini 2.5 Flash + Heuristic v2.6 + XP Luna UI).
