@@ -17,8 +17,8 @@ window.PORTFOLIO_DATA = {
     linkedinUrl: 'https://id.linkedin.com/in/rikkardo-l-tobing',
     githubUrl: 'https://github.com/rikkardochaplin',
     resumeUrl: 'assets/data/Rikkardo L. Tobing - Resume.pdf',
-    profileImg: 'assets/images/profile.png',
-    profileWebp: 'assets/images/webp/profile.webp'
+    profileImg: 'assets/images/profile.png?v=15.2',
+    profileWebp: 'assets/images/webp/profile.webp?v=15.2'
   },
 
   stats: [
@@ -218,8 +218,8 @@ window.PORTFOLIO_DATA = {
       featured: true,
       featuredOrder: 1,
       shortDesc: 'The primary digital gateway for Indonesia’s leading trade exhibition organizer. Connects over 200 international events and 500,000+ yearly trade visitors with a fast, content-managed platform built for peak event traffic.',
-      img: 'assets/images/project-pamerindo.png',
-      webp: 'assets/images/webp/project-pamerindo.webp',
+      img: 'assets/images/project-pamerindo.png?v=15.2',
+      webp: 'assets/images/webp/project-pamerindo.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: 'https://www.pamerindo.com',
@@ -239,7 +239,7 @@ window.PORTFOLIO_DATA = {
         implementation: 'Coordinated ongoing CMS releases, asset optimization, security hardening, and cross-event directory linking across Pamerindo’s corporate and sector-specific exhibition portals.',
         results: 'Maintained 99.9% platform uptime across major exhibition cycles and contributed to a documented 30% improvement in site load speed across managed event platforms.',
         screenshots: [
-          { src: 'assets/images/project-pamerindo.png', webp: 'assets/images/webp/project-pamerindo.webp', caption: 'PT Pamerindo Indonesia Corporate Portal' }
+          { src: 'assets/images/project-pamerindo.png?v=15.2', webp: 'assets/images/webp/project-pamerindo.webp?v=15.2', caption: 'PT Pamerindo Indonesia Corporate Portal' }
         ]
       },
     },
@@ -252,8 +252,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Full-Stack SaaS • Event Ticketing',
       featured: false,
       shortDesc: 'Multi-event registration and cryptographic QR e-ticket platform with white-label client branding, payment proof confirmation, atomic check-in validation, and Excel export.',
-      img: 'assets/images/project-tixlantra.png',
-      webp: 'assets/images/webp/project-tixlantra.webp',
+      img: 'assets/images/project-tixlantra.png?v=15.2',
+      webp: 'assets/images/webp/project-tixlantra.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: 'https://tixlantra.vercel.app',
@@ -267,7 +267,7 @@ window.PORTFOLIO_DATA = {
         approach: 'Used 32-byte base64url cryptographic ticket tokens, atomic Postgres partial unique indexes (1x check-in per paid event day), and Signed URL payment proof review.',
         implementation: 'Implemented /e/[slug] registration, /payment/[token] transfer upload, /ticket/[token] pass page, /admin/scan camera validator (html5-qrcode), and 2-sheet ExcelJS export.',
         results: 'Complete production-structured Next.js + Supabase repository verified on GitHub; public live deployment URL and event attendee metrics are not publicly documented.',
-        screenshots: [{ src: 'assets/images/project-tixlantra.png', webp: 'assets/images/webp/project-tixlantra.webp', caption: 'Tixlantra Multi-Event Ticketing Architecture' }]
+        screenshots: [{ src: 'assets/images/project-tixlantra.png?v=15.2', webp: 'assets/images/webp/project-tixlantra.webp?v=15.2', caption: 'Tixlantra Multi-Event Ticketing Architecture' }]
       },
     },
     {
@@ -279,8 +279,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Full-Stack SaaS • Procurement SaaS',
       featured: false,
       shortDesc: 'Multi-tenant B2B procurement and vendor management SaaS with strict PostgreSQL Row-Level Security, multi-tier approval workflows, and Vitest tenant isolation tests.',
-      img: 'assets/images/project-kelantra.png',
-      webp: 'assets/images/webp/project-kelantra.webp',
+      img: 'assets/images/project-kelantra.png?v=15.2',
+      webp: 'assets/images/webp/project-kelantra.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: 'https://kelantra.vercel.app',
@@ -294,7 +294,7 @@ window.PORTFOLIO_DATA = {
         approach: 'Every transactional table carries organization_id enforced by PostgreSQL RLS helpers (is_member_of_org, has_org_roles) alongside server-side getTenantContext() verification.',
         implementation: 'Built multi-tier purchase approval flows, private tenant Supabase Storage buckets, Platform Superadmin governance (/platform-admin), and React Hook Form + Zod validation.',
         results: 'Verified Next.js 15 multi-tenant architecture with Vitest isolation tests on GitHub; production tenant counts are not publicly documented.',
-        screenshots: [{ src: 'assets/images/project-kelantra.png', webp: 'assets/images/webp/project-kelantra.webp', caption: 'Kelantra Multi-Tenant Procurement Architecture' }]
+        screenshots: [{ src: 'assets/images/project-kelantra.png?v=15.2', webp: 'assets/images/webp/project-kelantra.webp?v=15.2', caption: 'Kelantra Multi-Tenant Procurement Architecture' }]
       },
     },
     {
@@ -306,8 +306,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Web Development • B2B Exhibition',
       featured: false,
       shortDesc: 'Premier trade platform for the F&B and HoReCa sectors, featuring digital exhibitor discovery, seminar schedules, and business matchmaking.',
-      img: 'assets/images/project-fhi.png',
-      webp: 'assets/images/webp/project-fhi.webp',
+      img: 'assets/images/project-fhi.png?v=15.2',
+      webp: 'assets/images/webp/project-fhi.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: 'https://www.foodhospitalityindonesia.com',
@@ -322,7 +322,7 @@ window.PORTFOLIO_DATA = {
         implementation: 'Executed continuous page updates, landing page rollouts, SEO metadata improvements, and pre-event load readiness checks.',
         results: 'Supports 40,000+ trade attendees and 700+ exhibitors per cycle at JIEXPO Jakarta.',
         screenshots: [
-          { src: 'assets/images/project-fhi.png', webp: 'assets/images/webp/project-fhi.webp', caption: 'Food & Hospitality Indonesia (FHI) Portal' }
+          { src: 'assets/images/project-fhi.png?v=15.2', webp: 'assets/images/webp/project-fhi.webp?v=15.2', caption: 'Food & Hospitality Indonesia (FHI) Portal' }
         ]
       },
     },
@@ -335,8 +335,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Web Development • Scientific B2B',
       featured: false,
       shortDesc: 'Southeast Asia’s largest trade platform for laboratory technology and scientific instrumentation, equipped with searchable exhibitor catalogues.',
-      img: 'assets/images/project-labindo.png',
-      webp: 'assets/images/webp/project-labindo.webp',
+      img: 'assets/images/project-labindo.png?v=15.2',
+      webp: 'assets/images/webp/project-labindo.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: 'https://www.lab-indo.com',
@@ -351,7 +351,7 @@ window.PORTFOLIO_DATA = {
         implementation: 'Delivered new site updates, responsive layouts, exhibitor catalogue integration, and visitor analytics tracking.',
         results: 'Serves 22,000+ trade attendees and regional scientific exhibitors; contributed to overall 30% load speed improvement across managed event sites.',
         screenshots: [
-          { src: 'assets/images/project-labindo.png', webp: 'assets/images/webp/project-labindo.webp', caption: 'Lab Indonesia Exhibition Platform' }
+          { src: 'assets/images/project-labindo.png?v=15.2', webp: 'assets/images/webp/project-labindo.webp?v=15.2', caption: 'Lab Indonesia Exhibition Platform' }
         ]
       },
     },
@@ -364,8 +364,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Full-Stack SaaS • SEO & Performance',
       featured: false,
       shortDesc: 'Website performance, SEO, accessibility, and best-practices audit SaaS powered by Google PageSpeed Insights API v5, Inngest durable workflows, Recharts, and PDF reports.',
-      img: 'assets/images/project-seolantra.png',
-      webp: 'assets/images/webp/project-seolantra.webp',
+      img: 'assets/images/project-seolantra.png?v=15.2',
+      webp: 'assets/images/webp/project-seolantra.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: 'https://seolantra.vercel.app',
@@ -379,7 +379,7 @@ window.PORTFOLIO_DATA = {
         approach: 'Offloaded long-running PageSpeed Insights v5 API polling to durable Inngest workflows (/api/inngest) while persisting audit snapshots in Cloud Firestore.',
         implementation: 'Integrated OpenTelemetry instrumentation, Recharts trend graphs, @react-pdf/renderer executive reports, and accessible Zod-validated audit triggers.',
         results: 'Complete Next.js 16 + Inngest + PageSpeed SaaS codebase on GitHub; public live domain metrics are not publicly documented.',
-        screenshots: [{ src: 'assets/images/project-seolantra.png', webp: 'assets/images/webp/project-seolantra.webp', caption: 'Seolantra Website Intelligence Architecture' }]
+        screenshots: [{ src: 'assets/images/project-seolantra.png?v=15.2', webp: 'assets/images/webp/project-seolantra.webp?v=15.2', caption: 'Seolantra Website Intelligence Architecture' }]
       },
     },
     {
@@ -392,8 +392,8 @@ window.PORTFOLIO_DATA = {
       featured: true,
       featuredOrder: 2,
       shortDesc: 'An end-to-end AI engineering platform featuring an autonomous ReAct agent, live token expense tracking in USD and IDR, a desktop developer companion, and a WhatsApp assistant grounded in exhibition documentation.',
-      img: 'assets/images/project-nexusagent.png',
-      webp: 'assets/images/webp/project-nexusagent.webp',
+      img: 'assets/images/project-nexusagent.png?v=15.2',
+      webp: 'assets/images/webp/project-nexusagent.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: null,
@@ -414,7 +414,7 @@ window.PORTFOLIO_DATA = {
         implementation: 'Implemented thought-action-observation agent cycles, SQLAlchemy 2.0 token logging with dynamic pricing catalog conversion (USD to IDR), psutil/Win32 hardware telemetry endpoints, and PDF extraction grounding across 7 Pamerindo exhibition industry clusters.',
         results: 'Documented in Project-AI Agent.md as a complete local/enterprise prototype supporting multi-provider LLM routing (Gemini, OpenAI, Claude, Groq, Ollama) and real-time cost observability. Production deployment metrics outside local testing are not publicly documented.',
         screenshots: [
-          { src: 'assets/images/project-nexusagent.png', webp: 'assets/images/webp/project-nexusagent.webp', caption: 'NexusAgent Real-Time Observability Web Dashboard & Token Analytics' }
+          { src: 'assets/images/project-nexusagent.png?v=15.2', webp: 'assets/images/webp/project-nexusagent.webp?v=15.2', caption: 'NexusAgent Real-Time Observability Web Dashboard & Token Analytics' }
         ]
       },
     },
@@ -427,8 +427,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'IoT & Technology Operations',
       featured: false,
       shortDesc: 'Low-latency device administration hub providing real-time health telemetry and non-root remote control for 30+ Android tablets and Windows event kiosks.',
-      img: 'assets/images/project-monitor-tablet-2.png',
-      webp: 'assets/images/webp/project-monitor-tablet-2.webp',
+      img: 'assets/images/project-monitor-tablet-2.png?v=15.2',
+      webp: 'assets/images/webp/project-monitor-tablet-2.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: null,
@@ -444,10 +444,10 @@ window.PORTFOLIO_DATA = {
         implementation: 'Used Android AccessibilityService + MediaProjection API (no root required) on tablets, thread-isolated PyAutoGUI/psutil workers on Windows PCs, and percentage-normalized coordinates (0–100%) for DPI-accurate remote clicks and virtual keyboard control.',
         results: 'Documented in Project-Monitor Tablet.md: achieved sub-200ms frame transmission latency, <2% CPU overhead on Windows kiosks, and ~90% reduction in downtime response time by allowing one IT technician to monitor and control kiosks from a central console.',
         screenshots: [
-          { src: 'assets/images/project-monitor-tablet.png', webp: 'assets/images/webp/project-monitor-tablet.webp', caption: 'Multi-Slot IT Admin Telemetry Dashboard' },
-          { src: 'assets/images/project-monitor-tablet-2.png', webp: 'assets/images/webp/project-monitor-tablet-2.webp', caption: 'Live Device Fleet Health & Battery Status' },
-          { src: 'assets/images/project-monitor-tablet-3.png', webp: 'assets/images/webp/project-monitor-tablet-3.webp', caption: 'Interactive Remote Screen & Control Modal' },
-          { src: 'assets/images/project-monitor-tablet-4.png', webp: 'assets/images/webp/project-monitor-tablet-4.webp', caption: 'Android Tablet Client & Connectivity State' }
+          { src: 'assets/images/project-monitor-tablet.png?v=15.2', webp: 'assets/images/webp/project-monitor-tablet.webp?v=15.2', caption: 'Multi-Slot IT Admin Telemetry Dashboard' },
+          { src: 'assets/images/project-monitor-tablet-2.png?v=15.2', webp: 'assets/images/webp/project-monitor-tablet-2.webp?v=15.2', caption: 'Live Device Fleet Health & Battery Status' },
+          { src: 'assets/images/project-monitor-tablet-3.png?v=15.2', webp: 'assets/images/webp/project-monitor-tablet-3.webp?v=15.2', caption: 'Interactive Remote Screen & Control Modal' },
+          { src: 'assets/images/project-monitor-tablet-4.png?v=15.2', webp: 'assets/images/webp/project-monitor-tablet-4.webp?v=15.2', caption: 'Android Tablet Client & Connectivity State' }
         ]
       },
     },
@@ -460,8 +460,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Web Development • Beauty & Aesthetics',
       featured: false,
       shortDesc: 'The nation’s largest B2B beauty and aesthetic trade portal, tailored for supplier networking, brand showcases, and visitor registration.',
-      img: 'assets/images/project-cosmobeaute.png',
-      webp: 'assets/images/webp/project-cosmobeaute.webp',
+      img: 'assets/images/project-cosmobeaute.png?v=15.2',
+      webp: 'assets/images/webp/project-cosmobeaute.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: 'https://www.cosmobeauteasia.com/indonesia/',
@@ -476,7 +476,7 @@ window.PORTFOLIO_DATA = {
         implementation: 'Deployed tailored page templates, optimized visual showcases, and coordinated multi-team content updates ahead of annual editions.',
         results: 'Successfully launched and maintained for annual ICE BSD editions; private commercial lead totals are not publicly documented.',
         screenshots: [
-          { src: 'assets/images/project-cosmobeaute.png', webp: 'assets/images/webp/project-cosmobeaute.webp', caption: 'Cosmobeauté Indonesia Portal' }
+          { src: 'assets/images/project-cosmobeaute.png?v=15.2', webp: 'assets/images/webp/project-cosmobeaute.webp?v=15.2', caption: 'Cosmobeauté Indonesia Portal' }
         ]
       },
     },
@@ -489,8 +489,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Production Web App • IT Asset Management',
       featured: false,
       shortDesc: 'IT asset lending and inventory system for PT Pamerindo Indonesia with dual employee/admin portals, QR code scanning, printable A4 handover letters, and Docker/Nginx deployment.',
-      img: 'assets/images/project-pinjam-barang.png',
-      webp: 'assets/images/webp/project-pinjam-barang.webp',
+      img: 'assets/images/project-pinjam-barang.png?v=15.2',
+      webp: 'assets/images/webp/project-pinjam-barang.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: null,
@@ -504,7 +504,7 @@ window.PORTFOLIO_DATA = {
         approach: 'Built as a fast React 18 + Vite SPA backed by Firebase with QR code generation/scanning (qrcode & html5-qrcode) and client-side PDF/Excel exports.',
         implementation: 'Added automatic loan duration calculation, manager approval flags, @media print A4 letterhead with 3 signature columns (Borrower, IT Custodian, Approver), and containerized Docker/Nginx deployment configs.',
         results: 'Complete dual-portal internal corporate asset system verified on GitHub; public access is intentionally restricted to authorized PT Pamerindo / Informa staff.',
-        screenshots: [{ src: 'assets/images/project-pinjam-barang.png', webp: 'assets/images/webp/project-pinjam-barang.webp', caption: 'AssetFlow IT Dual-Portal Lending System' }]
+        screenshots: [{ src: 'assets/images/project-pinjam-barang.png?v=15.2', webp: 'assets/images/webp/project-pinjam-barang.webp?v=15.2', caption: 'AssetFlow IT Dual-Portal Lending System' }]
       },
     },
     {
@@ -516,8 +516,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Production Web App • Overtime & Reporting',
       featured: false,
       shortDesc: 'Overtime tracking and official PT Pamerindo Indonesia report generator featuring dual canvas digital signatures, multi-session duration logic, and A4 PDF / Excel exports.',
-      img: 'assets/images/project-lemburyukk.png',
-      webp: 'assets/images/webp/project-lemburyukk.webp',
+      img: 'assets/images/project-lemburyukk.png?v=15.2',
+      webp: 'assets/images/webp/project-lemburyukk.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: 'https://lemburyukk.vercel.app',
@@ -531,7 +531,7 @@ window.PORTFOLIO_DATA = {
         approach: 'Supports both Cloud Firestore multi-device sync and a standalone local/offline mode with tabular monospace time displays and automatic dark/light theming.',
         implementation: 'Implemented 24-hour multi-session calculations, configurable 1-hour weekend/holiday break deductions (>4h), national holiday markers, and toast notifications.',
         results: 'Verified Next.js 16 repository on GitHub producing pixel-accurate PT Pamerindo Excel (.xlsx) and A4 Landscape PDF overtime forms.',
-        screenshots: [{ src: 'assets/images/project-lemburyukk.png', webp: 'assets/images/webp/project-lemburyukk.webp', caption: 'Lemburyukk Overtime & Reporting Architecture' }]
+        screenshots: [{ src: 'assets/images/project-lemburyukk.png?v=15.2', webp: 'assets/images/webp/project-lemburyukk.webp?v=15.2', caption: 'Lemburyukk Overtime & Reporting Architecture' }]
       },
     },
     {
@@ -543,8 +543,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Production Web App • Social Analytics SaaS',
       featured: false,
       shortDesc: 'Multi-brand social media monthly performance reporting app (LinkedIn, Instagram, TikTok) replacing manual Excel files with multi-sheet .xlsx import/export and Recharts dashboards.',
-      img: 'assets/images/project-reportlantra.png',
-      webp: 'assets/images/webp/project-reportlantra.webp',
+      img: 'assets/images/project-reportlantra.png?v=15.2',
+      webp: 'assets/images/webp/project-reportlantra.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: 'https://reportlantra.vercel.app',
@@ -558,7 +558,7 @@ window.PORTFOLIO_DATA = {
         approach: 'Organized 13 App Router routes including /dashboard, /platform, /input, /top-konten, /highlights, /target, /kalender, /laporan, and /admin.',
         implementation: 'Added merge/overwrite Excel import modes, real-time ER preview while typing, +10% target suggestions, and print-ready A4 portrait light-mode PDF layouts.',
         results: 'Complete multi-brand analytics platform verified on GitHub; internal adoption counts are not publicly documented.',
-        screenshots: [{ src: 'assets/images/project-reportlantra.png', webp: 'assets/images/webp/project-reportlantra.webp', caption: 'Reportlantra Multi-Brand Analytics Architecture' }]
+        screenshots: [{ src: 'assets/images/project-reportlantra.png?v=15.2', webp: 'assets/images/webp/project-reportlantra.webp?v=15.2', caption: 'Reportlantra Multi-Brand Analytics Architecture' }]
       },
     },
     {
@@ -570,8 +570,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Production Web App • Cybersecurity & AI',
       featured: false,
       shortDesc: 'AI-powered email phishing, BEC, and malware inspector built with a responsive Windows XP Luna interface, dual Heuristic + Gemini 2.5 Flash engine, and Web Audio retro SFX.',
-      img: 'assets/images/project-email-check.png',
-      webp: 'assets/images/webp/project-email-check.webp',
+      img: 'assets/images/project-email-check.png?v=15.2',
+      webp: 'assets/images/webp/project-email-check.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: 'https://emaildetector.vercel.app',
@@ -585,7 +585,7 @@ window.PORTFOLIO_DATA = {
         approach: 'Runs an instant zero-API-key heuristic engine locally (covering Indonesian banking scams & dangerous file extensions) alongside optional Gemini 2.5 Flash psychological context analysis.',
         implementation: 'Implemented responsive Windows XP taskbar/Start menu layout, 4-pillar threat scoring (Spoofing, Psychological Urgency, URLs, Malware), and eventvwr.msc audit logging.',
         results: 'Complete Next.js 16 + Tailwind v4 cybersecurity tool verified on GitHub; external deployment usage is not publicly documented.',
-        screenshots: [{ src: 'assets/images/project-email-check.png', webp: 'assets/images/webp/project-email-check.webp', caption: 'XP MailShield Pro 2006 Inspection Architecture' }]
+        screenshots: [{ src: 'assets/images/project-email-check.png?v=15.2', webp: 'assets/images/webp/project-email-check.webp?v=15.2', caption: 'XP MailShield Pro 2006 Inspection Architecture' }]
       },
     },
     {
@@ -597,8 +597,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Enterprise Systems • ERP & Mainframe',
       featured: false,
       shortDesc: 'Enterprise manufacturing ERP platform featuring live IBM AS/400 DB2 terminal connectivity, multi-level BOM explosion, MRP engine, and WRKSPLF/WRKACTJOB emulators.',
-      img: 'assets/images/project-orion-erp.png',
-      webp: 'assets/images/webp/project-orion-erp.webp',
+      img: 'assets/images/project-orion-erp.png?v=15.2',
+      webp: 'assets/images/webp/project-orion-erp.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: null,
@@ -614,7 +614,7 @@ window.PORTFOLIO_DATA = {
         implementation: 'Implemented BOM explosion (BOM_EXPLODE.RPGLE), net-demand MRP planning (MRP_ENGINE.RPGLE), auto-reorder triggers (INV_REORDER_AUTO), batch GL voucher posting (GL_POST_BATCH.RPGLE), and RBAC enforcement blocking destructive SQL statements.',
         results: 'Complete interactive 12-module ERP & AS/400 simulation verified with screenshots and technical documentation in portfolio_presentation.md. Designed as a technical showcase/simulator rather than a live factory deployment.',
         screenshots: [
-          { src: 'assets/images/project-orion-erp.png', webp: 'assets/images/webp/project-orion-erp.webp', caption: 'Orion ERP Executive Operations & AS/400 Dashboard' }
+          { src: 'assets/images/project-orion-erp.png?v=15.2', webp: 'assets/images/webp/project-orion-erp.webp?v=15.2', caption: 'Orion ERP Executive Operations & AS/400 Dashboard' }
         ]
       },
     },
@@ -627,8 +627,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'AI & Automation • Career SaaS',
       featured: false,
       shortDesc: 'AI-powered recruitment SaaS providing automated resume parsing, ATS keyword gap analysis, STAR-method suggestions, and candidate scoring.',
-      img: 'assets/images/project-cv-examiner.png',
-      webp: 'assets/images/webp/project-cv-examiner.webp',
+      img: 'assets/images/project-cv-examiner.png?v=15.2',
+      webp: 'assets/images/webp/project-cv-examiner.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: null,
@@ -644,7 +644,7 @@ window.PORTFOLIO_DATA = {
         implementation: 'Built multi-format file upload (PDF/DOCX/TXT), structured JSON/Text/PDF-ready export, automated Puppeteer screenshot capture pipeline, and 6 specialized analysis studios.',
         results: 'Complete full-stack SaaS application documented in Project-CV.md with 9 verified UI module captures. External public usage metrics are not publicly documented.',
         screenshots: [
-          { src: 'assets/images/project-cv-examiner.png', webp: 'assets/images/webp/project-cv-examiner.webp', caption: 'CV Examiner AI Pro Dashboard' }
+          { src: 'assets/images/project-cv-examiner.png?v=15.2', webp: 'assets/images/webp/project-cv-examiner.webp?v=15.2', caption: 'CV Examiner AI Pro Dashboard' }
         ]
       },
     },
@@ -657,8 +657,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Web Development • Hospitality & Tourism',
       featured: false,
       shortDesc: 'High-traffic hospitality and tourism trade platform connecting international suppliers with resort operators across Bali and the Asia-Pacific.',
-      img: 'assets/images/project-fhtbali.png',
-      webp: 'assets/images/webp/project-fhtbali.webp',
+      img: 'assets/images/project-fhtbali.png?v=15.2',
+      webp: 'assets/images/webp/project-fhtbali.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: 'https://www.fhtbali.com',
@@ -673,7 +673,7 @@ window.PORTFOLIO_DATA = {
         implementation: 'Maintained bilingual schedules, sponsor showcases, and conversion-focused registration pages.',
         results: 'Active regional hospitality trade gateway serving Bali and Asia-Pacific delegates; specific private conversion metrics are not publicly documented.',
         screenshots: [
-          { src: 'assets/images/project-fhtbali.png', webp: 'assets/images/webp/project-fhtbali.webp', caption: 'Food, Hotel & Tourism Bali Portal' }
+          { src: 'assets/images/project-fhtbali.png?v=15.2', webp: 'assets/images/webp/project-fhtbali.webp?v=15.2', caption: 'Food, Hotel & Tourism Bali Portal' }
         ]
       },
     },
@@ -686,8 +686,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Web Development • Industry Expo',
       featured: false,
       shortDesc: 'Dedicated international trade portal for manufacturers, distributors, and consumers, featuring age-verified digital ticketing.',
-      img: 'assets/images/project-vapefair.png',
-      webp: 'assets/images/webp/project-vapefair.webp',
+      img: 'assets/images/project-vapefair.png?v=15.2',
+      webp: 'assets/images/webp/project-vapefair.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: 'https://www.vapefair.id',
@@ -702,7 +702,7 @@ window.PORTFOLIO_DATA = {
         implementation: 'Updated annual event branding, exhibitor listings, and high-traffic ticket funnel links.',
         results: 'Live production portal at vapefair.id; internal ticket conversion metrics are not publicly documented.',
         screenshots: [
-          { src: 'assets/images/project-vapefair.png', webp: 'assets/images/webp/project-vapefair.webp', caption: 'Vape Fair Indonesia Website' }
+          { src: 'assets/images/project-vapefair.png?v=15.2', webp: 'assets/images/webp/project-vapefair.webp?v=15.2', caption: 'Vape Fair Indonesia Website' }
         ]
       },
     },
@@ -715,8 +715,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Web Development • Lifestyle Trade',
       featured: false,
       shortDesc: 'Dynamic lifestyle and trade showcase platform for alternative consumer products across Southeast Asia.',
-      img: 'assets/images/project-cloudsfest.png',
-      webp: 'assets/images/webp/project-cloudsfest.webp',
+      img: 'assets/images/project-cloudsfest.png?v=15.2',
+      webp: 'assets/images/webp/project-cloudsfest.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: 'https://www.cloudsfest.com',
@@ -731,7 +731,7 @@ window.PORTFOLIO_DATA = {
         implementation: 'Maintained lineup schedules, brand exhibitor blocks, and cross-linked ticketing CTAs.',
         results: 'Live production festival portal at cloudsfest.com; attendance figures are not publicly documented.',
         screenshots: [
-          { src: 'assets/images/project-cloudsfest.png', webp: 'assets/images/webp/project-cloudsfest.webp', caption: 'Clouds Fest Portal' }
+          { src: 'assets/images/project-cloudsfest.png?v=15.2', webp: 'assets/images/webp/project-cloudsfest.webp?v=15.2', caption: 'Clouds Fest Portal' }
         ]
       },
     },
@@ -744,8 +744,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Web Development • D2C Festival',
       featured: false,
       shortDesc: 'Consumer-facing beauty and wellness festival portal blending digital registration, brand activations, and influencer schedules.',
-      img: 'assets/images/project-beautefestival.png',
-      webp: 'assets/images/webp/project-beautefestival.webp',
+      img: 'assets/images/project-beautefestival.png?v=15.2',
+      webp: 'assets/images/webp/project-beautefestival.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: 'https://www.beautefestival.com',
@@ -760,7 +760,7 @@ window.PORTFOLIO_DATA = {
         implementation: 'Deployed editorial event blocks, influencer schedule modules, and campaign tracking.',
         results: 'Live production portal at beautefestival.com; private registration numbers are not publicly documented.',
         screenshots: [
-          { src: 'assets/images/project-beautefestival.png', webp: 'assets/images/webp/project-beautefestival.webp', caption: 'Beauté Festival Portal' }
+          { src: 'assets/images/project-beautefestival.png?v=15.2', webp: 'assets/images/webp/project-beautefestival.webp?v=15.2', caption: 'Beauté Festival Portal' }
         ]
       },
     },
@@ -773,8 +773,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Full-Stack SaaS • Invitation Builder',
       featured: false,
       shortDesc: 'Production-ready SaaS invitation builder and guest management platform with 6 themes, 80-bit personalized guest tokens, bulk CSV import, WhatsApp compiler, and live RSVP metrics.',
-      img: 'assets/images/project-online-invitation.png',
-      webp: 'assets/images/webp/project-online-invitation.webp',
+      img: 'assets/images/project-online-invitation.png?v=15.2',
+      webp: 'assets/images/webp/project-online-invitation.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: null,
@@ -788,7 +788,7 @@ window.PORTFOLIO_DATA = {
         approach: 'Used Supabase SSR session protection for /admin routes, Zod validation for RSVP submissions, and unique per-guest tokens (/invite/[slug]/g/[token]).',
         implementation: 'Added 13 customizable content blocks, MP3 background audio support, dynamic WhatsApp template compilation, QR pass generation, and token revocation.',
         results: 'Complete Next.js 16 + Supabase SaaS repository verified on GitHub; public live customer numbers are not publicly documented.',
-        screenshots: [{ src: 'assets/images/project-online-invitation.png', webp: 'assets/images/webp/project-online-invitation.webp', caption: 'Online Invitation SaaS Architecture' }]
+        screenshots: [{ src: 'assets/images/project-online-invitation.png?v=15.2', webp: 'assets/images/webp/project-online-invitation.webp?v=15.2', caption: 'Online Invitation SaaS Architecture' }]
       },
     },
     {
@@ -800,8 +800,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Full-Stack System • Event Registration',
       featured: false,
       shortDesc: 'Minimalist event registration and multi-gate QR check-in platform supporting nested parent/sub-events, 48-character cryptographic QR passes, and role-scoped gate scanners.',
-      img: 'assets/images/project-meeting-registrasi.png',
-      webp: 'assets/images/webp/project-meeting-registrasi.webp',
+      img: 'assets/images/project-meeting-registrasi.png?v=15.2',
+      webp: 'assets/images/webp/project-meeting-registrasi.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: null,
@@ -815,7 +815,7 @@ window.PORTFOLIO_DATA = {
         approach: 'Generates unpredictable 48-character pass tokens mapped server-side via Firebase Admin SDK, paired with duplicate email checks and quota enforcement.',
         implementation: 'Built /register/[event-slug] mobile-first forms, /ticket/[token] printable PNG badge passes, and high-contrast gate scanner feedback.',
         results: 'Complete workspace Next.js 14 + Firebase implementation; public live deployment URL is not publicly documented.',
-        screenshots: [{ src: 'assets/images/project-meeting-registrasi.png', webp: 'assets/images/webp/project-meeting-registrasi.webp', caption: 'Meeting-Registrasi Multi-Gate Architecture' }]
+        screenshots: [{ src: 'assets/images/project-meeting-registrasi.png?v=15.2', webp: 'assets/images/webp/project-meeting-registrasi.webp?v=15.2', caption: 'Meeting-Registrasi Multi-Gate Architecture' }]
       },
     },
     {
@@ -827,8 +827,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Full-Stack System • Biometric Attendance',
       featured: false,
       shortDesc: 'Decentralized mobile & web office attendance system using 128-dim OpenCV SFace ONNX facial verification, AES-256-GCM template encryption, and Haversine geofence radius validation.',
-      img: 'assets/images/project-absenlantra.png',
-      webp: 'assets/images/webp/project-absenlantra.webp',
+      img: 'assets/images/project-absenlantra.png?v=15.2',
+      webp: 'assets/images/webp/project-absenlantra.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: null,
@@ -842,7 +842,7 @@ window.PORTFOLIO_DATA = {
         approach: 'Extracts 128-dimensional SFace ONNX embeddings server-side, encrypts templates with AES-256-GCM, verifies Cosine Similarity (>= 0.363), and enforces Haversine geofencing + 60s anti-replay nonces.',
         implementation: 'Delivered 7 admin modules (Stats, Employees, Attendance Logs, Leave/Correction Approvals, Face Review, Formula-Injection-Safe CSV Export, Office Schedule Config).',
         results: 'Documented local LAN prototype with atomic Firestore transactions and disk persistence; external production metrics are not publicly documented.',
-        screenshots: [{ src: 'assets/images/project-absenlantra.png', webp: 'assets/images/webp/project-absenlantra.webp', caption: 'Absenlantra Biometric Attendance Architecture' }]
+        screenshots: [{ src: 'assets/images/project-absenlantra.png?v=15.2', webp: 'assets/images/webp/project-absenlantra.webp?v=15.2', caption: 'Absenlantra Biometric Attendance Architecture' }]
       },
     },
     {
@@ -854,8 +854,8 @@ window.PORTFOLIO_DATA = {
       categoryLabel: 'Serverless Cloud App • AI Proxy',
       featured: false,
       shortDesc: 'Secure serverless API proxy and embeddable WordPress floating chatbot widget connecting public web clients to Informa Iris AI while keeping Cognito credentials server-side.',
-      img: 'assets/images/project-ai-elysia.png',
-      webp: 'assets/images/webp/project-ai-elysia.webp',
+      img: 'assets/images/project-ai-elysia.png?v=15.2',
+      webp: 'assets/images/webp/project-ai-elysia.webp?v=15.2',
       width: 1280,
       height: 720,
       liveUrl: null,
@@ -869,7 +869,7 @@ window.PORTFOLIO_DATA = {
         approach: 'Moved Cognito authentication and token caching into environment-variable-backed serverless endpoints, exposing a safe CORS-configured chat endpoint to public/widget.js.',
         implementation: 'Delivered standalone web chat UI (public/index.html), drop-in WordPress script widget (widget.js), health endpoint, and cloud routing configuration.',
         results: 'Verified serverless proxy implementation in local workspace; live production URL status is not verified in this audit.',
-        screenshots: [{ src: 'assets/images/project-ai-elysia.png', webp: 'assets/images/webp/project-ai-elysia.webp', caption: 'Elysia AI Serverless Proxy Architecture' }]
+        screenshots: [{ src: 'assets/images/project-ai-elysia.png?v=15.2', webp: 'assets/images/webp/project-ai-elysia.webp?v=15.2', caption: 'Elysia AI Serverless Proxy Architecture' }]
       },
     }
   ],

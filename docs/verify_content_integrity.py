@@ -172,7 +172,7 @@ def verify():
 
     # 6. Check All Referenced Images & WebP variants Exist on Disk
     all_html = index_html + "\n" + article_html + "\n" + project_html + "\n" + drivefolio_html
-    img_matches = re.findall(r'(?:src|srcset)=["\']([^"\']+\.(?:png|jpe?g|svg|webp))["\']', all_html)
+    img_matches = re.findall(r'(?:src|srcset)=["\']([^"\']+\.(?:png|jpe?g|svg|webp))(?:\?[^"\']*)?["\']', all_html)
     for img in set(img_matches):
         if not img.startswith("http"):
             full_img_path = os.path.join(base_dir, img)
