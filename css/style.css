@@ -274,6 +274,8 @@ ul {
 
 /* ── Bespoke Buttons ── */
 .btn {
+  position: relative;
+  overflow: hidden;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -288,8 +290,35 @@ ul {
   border: 1px solid transparent;
   text-decoration: none;
   cursor: pointer;
-  transition: all var(--transition);
+  transition: color var(--transition), background-color var(--transition), border-color var(--transition), transform var(--transition), box-shadow var(--transition);
   white-space: nowrap;
+}
+
+.btn::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.22) 50%, transparent 80%);
+  transform: translateX(-115%);
+  transition: transform 0.65s var(--ease-out);
+  pointer-events: none;
+}
+
+.btn:hover::after {
+  transform: translateX(115%);
+}
+
+.btn i {
+  transition: transform 0.28s var(--ease-out);
+}
+
+.btn:hover i.fa-arrow-right,
+.btn:hover i.fa-arrow-up-right-from-square {
+  transform: translateX(3px);
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.985);
 }
 
 .btn-sm {
@@ -439,7 +468,7 @@ ul {
   color: var(--pure-white);
 }
 
-.nav-links a.active::after {
+.nav-links a::after {
   content: "";
   position: absolute;
   left: 0;
@@ -447,6 +476,14 @@ ul {
   bottom: -2px;
   height: 1.5px;
   background: var(--electric-blue);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.3s var(--ease-out);
+}
+
+.nav-links a:hover::after,
+.nav-links a.active::after {
+  transform: scaleX(1);
 }
 
 .nav-actions {
@@ -2124,11 +2161,116 @@ a.contact-channel-card:hover .contact-channel-val {
   color: var(--text-on-light);
 }
 
-/* Reveal Animation */
+/* Subtle pointer-reactive spotlight & depth tilt targets */
+.project-card,
+.story-card,
+.monograph-frame,
+.drivefolio-showcase-card {
+  --mx: 50%;
+  --my: 50%;
+  --tilt-x: 0deg;
+  --tilt-y: 0deg;
+}
+
+.project-card,
+.story-card,
+.drivefolio-showcase-card {
+  position: relative;
+}
+
+.project-card::before,
+.drivefolio-showcase-card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(380px circle at var(--mx) var(--my), rgba(59, 130, 246, 0.10), transparent 65%);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-out);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.project-card:hover::before,
+.drivefolio-showcase-card:hover::before {
+  opacity: 1;
+}
+
+/* Hero Choreography on Initial Entry */
+@keyframes heroRiseIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes plateReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes meridianDrift {
+  0%, 100% {
+    opacity: 0.72;
+    transform: translateY(0);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(-6px);
+  }
+}
+
+.hero-section::before {
+  animation: meridianDrift 12s ease-in-out infinite;
+}
+
+html.js-ready .hero-dateline { animation: heroRiseIn 0.65s var(--ease-out) 0.04s both; }
+html.js-ready .hero-name { animation: heroRiseIn 0.65s var(--ease-out) 0.10s both; }
+html.js-ready .hero-title { animation: heroRiseIn 0.75s var(--ease-out) 0.16s both; }
+html.js-ready .hero-role { animation: heroRiseIn 0.65s var(--ease-out) 0.22s both; }
+html.js-ready .hero-description { animation: heroRiseIn 0.65s var(--ease-out) 0.28s both; }
+html.js-ready .hero-ctas { animation: heroRiseIn 0.65s var(--ease-out) 0.34s both; }
+html.js-ready .hero-socials { animation: heroRiseIn 0.65s var(--ease-out) 0.40s both; }
+html.js-ready .hero-visual { animation: plateReveal 0.85s var(--ease-out) 0.20s both; }
+html.js-ready .hero-stats-strip { animation: heroRiseIn 0.7s var(--ease-out) 0.44s both; }
+
+/* Smooth Interactive Card & Frame Depth */
+.monograph-frame {
+  transition: transform 0.35s var(--ease-out), border-color var(--transition), box-shadow var(--transition);
+  transform: perspective(900px) rotateX(var(--tilt-x)) rotateY(var(--tilt-y));
+  will-change: transform;
+}
+
+.monograph-frame:hover {
+  border-color: rgba(255, 255, 255, 0.34);
+}
+
+.card-action-link {
+  position: relative;
+}
+
+.card-action-link i {
+  transition: transform 0.24s var(--ease-out);
+}
+
+.card-action-link:hover i {
+  transform: translateX(3px);
+}
+
+/* Staggered Section Children on Scroll Reveal */
 html.js-ready [data-reveal] {
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+  transform: translateY(18px);
+  transition: opacity 0.68s var(--ease-out), transform 0.68s var(--ease-out);
 }
 
 html.js-ready [data-reveal].revealed {
@@ -2136,15 +2278,111 @@ html.js-ready [data-reveal].revealed {
   transform: translateY(0);
 }
 
+html.js-ready .pillars-grid-2 .pillar-card,
+html.js-ready .principles-grid .principle-card,
+html.js-ready .expertise-grid .expertise-card,
+html.js-ready .stack-ledger .stack-row,
+html.js-ready .experience-timeline .timeline-item,
+html.js-ready .edu-stack .edu-card,
+html.js-ready .certs-grid .cert-card,
+html.js-ready .island-nodes-grid .island-node {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.56s var(--ease-out),
+    transform 0.56s var(--ease-out),
+    border-color var(--transition),
+    background-color var(--transition),
+    box-shadow var(--transition);
+  transition-delay: calc(var(--stagger-i, 0) * 55ms);
+}
+
+html.js-ready .revealed .pillar-card,
+html.js-ready .revealed .principle-card,
+html.js-ready .revealed .expertise-card,
+html.js-ready .revealed .stack-row,
+html.js-ready .revealed .timeline-item,
+html.js-ready .revealed .edu-card,
+html.js-ready .revealed .cert-card,
+html.js-ready .drivefolio-showcase-card.revealed .island-node {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* SVG Architecture Diagram Line-Draw Motion */
+.philosophy-diagram-card svg rect,
+.philosophy-diagram-card svg line {
+  transition: stroke-dashoffset 0.9s var(--ease-out), opacity 0.6s var(--ease-out);
+}
+
+html.js-ready .philosophy-diagram-card svg line {
+  stroke-dasharray: 42;
+  stroke-dashoffset: 42;
+}
+
+html.js-ready [data-reveal].revealed .philosophy-diagram-card svg line {
+  stroke-dashoffset: 0;
+}
+
+/* Card Filter / Expand Entrance Keyframes */
+@keyframes cardEnter {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.985);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.project-card.card-entering,
+.story-card.card-entering {
+  animation: cardEnter 0.48s var(--ease-out) calc(var(--stagger-i, 0) * 45ms) both;
+}
+
+/* Smooth Lightbox Stage Transition */
+.modal-backdrop-custom {
+  opacity: 0;
+  transition: opacity 0.28s var(--ease-out);
+}
+
+.modal-backdrop-custom.active {
+  display: flex;
+  opacity: 1;
+}
+
+.modal-dialog-custom {
+  transform: translateY(12px) scale(0.98);
+  transition: transform 0.34s var(--ease-out);
+}
+
+.modal-backdrop-custom.active .modal-dialog-custom {
+  transform: translateY(0) scale(1);
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
+    animation-delay: 0ms !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
   }
-  html.js-ready [data-reveal] {
+  html.js-ready [data-reveal],
+  html.js-ready .pillars-grid-2 .pillar-card,
+  html.js-ready .principles-grid .principle-card,
+  html.js-ready .expertise-grid .expertise-card,
+  html.js-ready .stack-ledger .stack-row,
+  html.js-ready .experience-timeline .timeline-item,
+  html.js-ready .edu-stack .edu-card,
+  html.js-ready .certs-grid .cert-card,
+  html.js-ready .island-nodes-grid .island-node {
     opacity: 1;
     transform: none;
+  }
+  .monograph-frame {
+    transform: none !important;
   }
 }
 

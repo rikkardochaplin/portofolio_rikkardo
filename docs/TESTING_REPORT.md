@@ -1,7 +1,7 @@
 # Testing Report — Rikkardo L. Tobing Portfolio Redesign
 
 **Test Date:** 2026-11-26  
-**Environment:** Local HTTP server (`python -m http.server 8773`), Google Chrome Headless via Chrome DevTools Protocol, Node.js `v25.1.0`, Python `3.14.2`
+**Environment:** Local HTTP server (`python -m http.server 8775`), Google Chrome Headless via Chrome DevTools Protocol, Node.js `v25.1.0`, Python `3.14.2`
 
 ---
 
@@ -47,7 +47,8 @@
   - **Project Filters:** `all` -> 6 (compact) / 23 (expanded), `fullstack` -> 11, `web` -> 14, `enterprise` -> 10, `ai` -> 6, `iot` -> 3
   - **Visual Story Filters:** `all` -> 3 (compact) / 9 (expanded), `street` -> 2, `golden-hour` -> 3, `architecture` -> 2, `minimalist` -> 2
   - **Photography Lightbox:** opens on `Gold in the Mist: The Unseen Workers`, navigates Next to `Silhouettes of Ambition: Sunset Over SCBD`, closes cleanly (`closed: true`)
-  - **3D Drivefolio (`drivefolio.html`):** WebGL `<canvas>` rendered cleanly (`hasCanvas: true`), District Overlay rendered all `23` project directory cards cleanly
+  - **Architectural Motion & Choreography (`css/style.css?v=17.0`, `js/main.js?v=17.0`):** hero stat count-ups settle identically to `["8+", "500K+", "99.9%", "5+ Yrs"]`, `--stagger-i` indices assigned, `17 / 17` `[data-reveal]` blocks revealed cleanly, SVG diagram line-draw & pointer sheen active, full `prefers-reduced-motion: reduce` respected
+  - **3D Drivefolio (`drivefolio.html`, `css/drivefolio.css?v=17.0`, `js/drivefolio-3d.js?v=17.0`):** WebGL `<canvas>` rendered cleanly (`hasCanvas: true`), camera mode cycling (`Chase Cam` -> `Low Pursuit` -> `Drone Cam`), time-of-day cycling (`Sunset`), vehicle swap (`Cyber 4x4 SUV`), live physics + Nitro boost (`187 KM/H`, `NITRO`, `df-speed-fx boost`), Swiss Atelier 3D billboards, animated ocean swells/fireflies, and District Overlay rendering all `23` project cards cleanly
 
 ---
 

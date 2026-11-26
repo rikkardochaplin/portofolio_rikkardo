@@ -10,6 +10,8 @@ document.addEventListener('DOMContentLoaded', () => {
   initScrollProgress();
   initBackToTop();
   initRevealAnimations();
+  initHeroStatCounters();
+  initInteractiveMotion();
   initProjectFilters();
   initStoryFilters();
   initPhotoLightbox();
@@ -91,10 +93,27 @@ function initBackToTop() {
   });
 }
 
-/* ── 4. Accessible Intersection Reveal ── */
+/* ── 4. Accessible Intersection Reveal & Stagger Choreography ── */
 function initRevealAnimations() {
   const nodes = Array.from(document.querySelectorAll('[data-reveal]'));
   if (!nodes.length) return;
+
+  // Assign stagger indices to architectural grid/list children
+  const staggerSelectors = [
+    '.pillars-grid-2 .pillar-card',
+    '.principles-grid .principle-card',
+    '.expertise-grid .expertise-card',
+    '.stack-ledger .stack-row',
+    '.experience-timeline .timeline-item',
+    '.edu-stack .edu-card',
+    '.certs-grid .cert-card',
+    '.island-nodes-grid .island-node'
+  ];
+  staggerSelectors.forEach(sel => {
+    document.querySelectorAll(sel).forEach((child, idx) => {
+      child.style.setProperty('--stagger-i', String(Math.min(idx, 8)));
+    });
+  });
 
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches || !('IntersectionObserver' in window)) {
     nodes.forEach(n => n.classList.add('revealed'));
@@ -126,6 +145,78 @@ function initRevealAnimations() {
   revealVisible();
 }
 
+/* ── 4b. Hero Metric Count-Up (Preserves exact final labels) ── */
+function initHeroStatCounters() {
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const stats = Array.from(document.querySelectorAll('.hero-stat-val'));
+  if (!stats.length) return;
+
+  stats.forEach((el, index) => {
+    const finalStr = el.textContent.trim();
+    const match = finalStr.match(/^(\d+(?:\.\d+)?)(.*)$/);
+    if (!match) return;
+
+    const targetVal = parseFloat(match[1]);
+    const suffix = match[2];
+    const decimals = (match[1].split('.')[1] || '').length;
+    const duration = 950 + index * 110;
+    const startTime = performance.now() + 260;
+
+    function tick(now) {
+      if (now < startTime) {
+        requestAnimationFrame(tick);
+        return;
+      }
+      const t = Math.min(1, (now - startTime) / duration);
+      const eased = 1 - Math.pow(1 - t, 3);
+      const current = targetVal * eased;
+      el.textContent = t >= 1 ? finalStr : `${current.toFixed(decimals)}${suffix}`;
+      if (t < 1) requestAnimationFrame(tick);
+    }
+
+    requestAnimationFrame(tick);
+  });
+}
+
+/* ── 4c. Pointer Depth Tilt & Architectural Spotlight Sheen ── */
+function initInteractiveMotion() {
+  if (
+    window.matchMedia('(prefers-reduced-motion: reduce)').matches ||
+    !window.matchMedia('(hover: hover) and (pointer: fine)').matches
+  ) {
+    return;
+  }
+
+  const spotlightTargets = document.querySelectorAll('.project-card, .drivefolio-showcase-card');
+  spotlightTargets.forEach(card => {
+    card.addEventListener('pointermove', (e) => {
+      const rect = card.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const x = ((e.clientX - rect.left) / rect.width) * 100;
+      const y = ((e.clientY - rect.top) / rect.height) * 100;
+      card.style.setProperty('--mx', `${x.toFixed(1)}%`);
+      card.style.setProperty('--my', `${y.toFixed(1)}%`);
+    }, { passive: true });
+  });
+
+  const frame = document.querySelector('.monograph-frame');
+  if (frame) {
+    frame.addEventListener('pointermove', (e) => {
+      const rect = frame.getBoundingClientRect();
+      if (!rect.width || !rect.height) return;
+      const nx = (e.clientX - rect.left) / rect.width - 0.5;
+      const ny = (e.clientY - rect.top) / rect.height - 0.5;
+      frame.style.setProperty('--tilt-x', `${(-ny * 3.2).toFixed(2)}deg`);
+      frame.style.setProperty('--tilt-y', `${(nx * 3.2).toFixed(2)}deg`);
+    }, { passive: true });
+
+    frame.addEventListener('pointerleave', () => {
+      frame.style.setProperty('--tilt-x', '0deg');
+      frame.style.setProperty('--tilt-y', '0deg');
+    });
+  }
+}
+
 /* ── 5. Shared Compact Catalog Filtering & Expand Toggle ── */
 function initCompactCatalog({
   filterGroupId,
@@ -148,7 +239,7 @@ function initCompactCatalog({
   let activeFilter = 'all';
   let expandedAll = false;
 
-  function applyState() {
+  function applyState(animateEntries = false) {
     let visible = 0;
 
     cards.forEach((card, idx) => {
@@ -157,7 +248,15 @@ function initCompactCatalog({
       const show = matchesFilter && !hiddenByCompact;
       card.classList.toggle('is-hidden', !matchesFilter);
       card.classList.toggle('is-compact-hidden', hiddenByCompact);
-      if (show) visible += 1;
+      card.classList.remove('card-entering');
+      if (show) {
+        if (animateEntries) {
+          card.style.setProperty('--stagger-i', String(Math.min(visible, 9)));
+          void card.offsetWidth;
+          card.classList.add('card-entering');
+        }
+        visible += 1;
+      }
     });
 
     if (countLabel) {
@@ -185,18 +284,18 @@ function initCompactCatalog({
       buttons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       activeFilter = btn.getAttribute('data-filter') || 'all';
-      applyState();
+      applyState(true);
     });
   });
 
   if (toggleBtn) {
     toggleBtn.addEventListener('click', () => {
       expandedAll = !expandedAll;
-      applyState();
+      applyState(true);
     });
   }
 
-  applyState();
+  applyState(false);
 }
 
 function initProjectFilters() {

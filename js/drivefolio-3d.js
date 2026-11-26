@@ -199,10 +199,16 @@
       tags: ['WordPress', 'D2C Portal', 'Brand Activations'],
       accent: '#F43F5E'
     }
-  ].map((stop, idx) => ({
-    ...stop,
-    angle: (PROJECT_Angles_Deg[idx] * Math.PI) / 180
-  }));
+  ].map((stop, idx) => {
+    const liveData = (window.PORTFOLIO_DATA && Array.isArray(window.PORTFOLIO_DATA.projects))
+      ? window.PORTFOLIO_DATA.projects.find(p => p.id === stop.id)
+      : null;
+    return {
+      ...stop,
+      img: liveData ? liveData.img : stop.img,
+      angle: (PROJECT_Angles_Deg[idx] * Math.PI) / 180
+    };
+  });
 
   // 4 Satellite Island Hubs ("Ke Tempat Lain" across the 4 Ocean Bridges!)
   const SATELLITE_ISLANDS = [
@@ -320,6 +326,12 @@
 
   const TIME_MODES = ['day', 'sunset', 'night'];
 
+  const CAMERA_MODES = [
+    { id: 'chase', label: 'Chase Cam', dist: 21.5, height: 11.4, lookAhead: 7.0, lookY: 2.3, fovDelta: 0, icon: 'fa-video' },
+    { id: 'low', label: 'Low Pursuit', dist: 13.8, height: 4.9, lookAhead: 11.5, lookY: 2.0, fovDelta: 6, icon: 'fa-film' },
+    { id: 'drone', label: 'Drone Cam', dist: 28.0, height: 25.5, lookAhead: 3.5, lookY: 1.5, fovDelta: -2, icon: 'fa-compass' }
+  ];
+
   function getRoadPoint(t) {
     const x = Math.cos(t) * OUTER_ROAD_RADIUS;
     const z = Math.sin(t) * OUTER_ROAD_RADIUS;
@@ -387,6 +399,7 @@
     let engineOsc = null;
     let engineGain = null;
     let currentDistrictTab = 'about';
+    let cameraModeIndex = 0;
 
     const hour = new Date().getHours();
     let timeModeIndex = (hour >= 19 || hour < 6) ? 2 : (hour >= 16 && hour < 19) ? 1 : 0;
@@ -444,16 +457,26 @@
     starsGroup.visible = false;
     scene.add(starsGroup);
 
-    // ── Ocean & Lagoon Reefs ──
+    // ── Animated Ocean & Coastal Reefs ──
+    const oceanGeo = new THREE.PlaneGeometry(2400, 2400, 44, 44).rotateX(-Math.PI / 2);
+    const oceanPosAttr = oceanGeo.attributes.position;
+    const oceanBaseX = new Float32Array(oceanPosAttr.count);
+    const oceanBaseZ = new Float32Array(oceanPosAttr.count);
+    for (let i = 0; i < oceanPosAttr.count; i++) {
+      oceanBaseX[i] = oceanPosAttr.getX(i);
+      oceanBaseZ[i] = oceanPosAttr.getZ(i);
+    }
+
     const oceanMesh = new THREE.Mesh(
-      new THREE.PlaneGeometry(2400, 2400).rotateX(-Math.PI / 2),
+      oceanGeo,
       new THREE.MeshStandardMaterial({
         color: 0x0E7490,
-        roughness: 0.18,
-        metalness: 0.22
+        roughness: 0.16,
+        metalness: 0.28,
+        flatShading: false
       })
     );
-    oceanMesh.position.y = -2.2;
+    oceanMesh.position.y = -2.25;
     oceanMesh.receiveShadow = true;
     scene.add(oceanMesh);
 
@@ -462,7 +485,7 @@
       new THREE.MeshBasicMaterial({
         color: 0x22D3EE,
         transparent: true,
-        opacity: 0.32,
+        opacity: 0.30,
         side: THREE.DoubleSide
       })
     );
@@ -480,6 +503,44 @@
     );
     foamRing1.position.y = -1.95;
     scene.add(foamRing1);
+
+    const foamRing2 = new THREE.Mesh(
+      new THREE.RingGeometry(MAIN_ISLAND_RADIUS + 16.5, MAIN_ISLAND_RADIUS + 18.0, 96).rotateX(-Math.PI / 2),
+      new THREE.MeshBasicMaterial({
+        color: 0xBAE6FD,
+        transparent: true,
+        opacity: 0.28,
+        side: THREE.DoubleSide
+      })
+    );
+    foamRing2.position.y = -1.98;
+    scene.add(foamRing2);
+
+    // ── Floating Coastal Fireflies / Atmosphere Particles ──
+    const fireflyCount = 110;
+    const fireflyGeo = new THREE.BufferGeometry();
+    const fireflyPos = new Float32Array(fireflyCount * 3);
+    const fireflySeeds = [];
+    for (let i = 0; i < fireflyCount; i++) {
+      const ang = Math.random() * Math.PI * 2;
+      const rad = 28 + Math.random() * 195;
+      const fx = Math.cos(ang) * rad;
+      const fy = 2.0 + Math.random() * 14.0;
+      const fz = Math.sin(ang) * rad;
+      fireflyPos[i * 3] = fx;
+      fireflyPos[i * 3 + 1] = fy;
+      fireflyPos[i * 3 + 2] = fz;
+      fireflySeeds.push({ x: fx, y: fy, z: fz, phase: Math.random() * Math.PI * 2 });
+    }
+    fireflyGeo.setAttribute('position', new THREE.BufferAttribute(fireflyPos, 3));
+    const fireflyMat = new THREE.PointsMaterial({
+      color: 0xFDE68A,
+      size: 0.85,
+      transparent: true,
+      opacity: 0.55
+    });
+    const ambientFireflies = new THREE.Points(fireflyGeo, fireflyMat);
+    scene.add(ambientFireflies);
 
     // ── Main Island + 4 Bridges + 4 Satellite Islands Group ──
     const islandGroup = new THREE.Group();
@@ -633,13 +694,15 @@
       z: startPt.z,
       heading: Math.atan2(startPt.tx, startPt.tz),
       speed: 0,
-      maxSpeed: 0.8,
-      boostMaxSpeed: 1.22,
-      accel: 0.025,
-      ReverseMax: -0.38,
+      maxSpeed: 0.84,
+      boostMaxSpeed: 1.32,
+      accel: 0.027,
+      ReverseMax: -0.4,
       friction: 0.962,
       steerAngle: 0,
-      wheelRotation: 0
+      wheelRotation: 0,
+      suspPitch: 0,
+      suspRoll: 0
     };
 
     // Exhaust & Skid Marks Pools
@@ -715,6 +778,12 @@
         case 'Space':
           keys.brake = true;
           e.preventDefault();
+          break;
+        case 'KeyC':
+          cycleCameraMode();
+          break;
+        case 'KeyR':
+          resetVehiclePosition();
           break;
         case 'KeyE':
         case 'Enter':
@@ -984,8 +1053,30 @@
       carRoot.position.set(carState.x, 0.38, carState.z);
       carRoot.rotation.y = carState.heading;
 
-      carBuilder.bodyPivot.rotation.x = -carState.speed * 0.055;
-      carBuilder.bodyPivot.rotation.z = carState.steerAngle * carState.speed * 1.5;
+      // Smooth damped spring suspension & cornering body roll
+      const targetPitch = -carState.speed * 0.055 + (keys.brake && Math.abs(carState.speed) > 0.1 ? 0.045 : 0);
+      const targetRoll = carState.steerAngle * carState.speed * 1.65;
+      carState.suspPitch += (targetPitch - carState.suspPitch) * 0.16;
+      carState.suspRoll += (targetRoll - carState.suspRoll) * 0.16;
+      carBuilder.bodyPivot.rotation.x = carState.suspPitch;
+      carBuilder.bodyPivot.rotation.z = carState.suspRoll;
+
+      // Drift tire marks on sharp high-speed corners too
+      if (Math.abs(carState.speed) > 0.55 && Math.abs(carState.steerAngle) > 0.032) {
+        dropTireSkidMarks(carState);
+      }
+
+      // Dynamic brake taillights & nitro underglow
+      const isBraking = keys.brake || backwardInput > 0;
+      const isBoosting = keys.boost && Math.abs(carState.speed) > 0.15;
+      if (carBuilder.tlMat) {
+        carBuilder.tlMat.emissiveIntensity = isBraking ? 4.4 : 1.7;
+      }
+      if (carBuilder.underGlowMat) {
+        const targetGlow = isBoosting ? 0.55 : (timeModeIndex > 0 ? 0.22 : 0.08);
+        carBuilder.underGlowMat.opacity += (targetGlow - carBuilder.underGlowMat.opacity) * 0.15;
+        carBuilder.underGlowMat.color.setHex(isBoosting ? 0x38BDF8 : CAR_COLORS[carColorIndex].hex);
+      }
 
       carState.wheelRotation += carState.speed * 1.25;
       carBuilder.wheels.forEach((w, idx) => {
@@ -995,29 +1086,31 @@
         }
       });
 
-      // Responsive FOV & Chase Camera Distance for Portrait Mobile vs Desktop/Landscape
+      // Responsive FOV & Selected Camera Mode Distance
+      const camCfg = CAMERA_MODES[cameraModeIndex] || CAMERA_MODES[0];
       const aspect = container.clientWidth / Math.max(1, container.clientHeight);
       const portraitFactor = aspect < 1.0 ? (1.0 - aspect) : 0;
-      const baseFov = 44 + Math.min(20, portraitFactor * 32);
-      const targetFov = (keys.boost && Math.abs(carState.speed) > 0.35) ? (baseFov + 8) : baseFov;
+      const baseFov = 44 + camCfg.fovDelta + Math.min(20, portraitFactor * 30);
+      const targetFov = (keys.boost && Math.abs(carState.speed) > 0.35) ? (baseFov + 9) : baseFov;
       if (Math.abs(camera.fov - targetFov) > 0.1) {
         camera.fov += (targetFov - camera.fov) * 0.12;
         camera.updateProjectionMatrix();
       }
 
       updateSpeedometerHUD(carState.speed, keys.boost);
+      updateZoneTelemetryHUD(carState.x, carState.z);
       updateEngineSound(carState.speed, keys.boost);
 
       particleSpawnTimer += dt;
-      if (Math.abs(carState.speed) > 0.06 && particleSpawnTimer > (keys.boost ? 0.025 : 0.065)) {
+      if (Math.abs(carState.speed) > 0.06 && particleSpawnTimer > (keys.boost ? 0.022 : 0.065)) {
         particleSpawnTimer = 0;
         spawnExhaustParticle(carState, keys.boost);
       }
       updateExhaustParticles(dt);
 
-      // 3. Smooth Chase Camera Follow (Adaptive for Portrait & Landscape)
-      const camDist = 21.5 + portraitFactor * 9.5 + Math.abs(carState.speed) * 4.2;
-      const camHeight = 11.8 + portraitFactor * 3.4 + Math.abs(carState.speed) * 1.5;
+      // 3. Smooth Multi-Mode Camera Follow
+      const camDist = camCfg.dist + portraitFactor * 9.0 + Math.abs(carState.speed) * 4.2;
+      const camHeight = camCfg.height + portraitFactor * 3.2 + Math.abs(carState.speed) * 1.4;
       const targetCamX = carState.x - Math.sin(carState.heading) * camDist;
       const targetCamZ = carState.z - Math.cos(carState.heading) * camDist;
 
@@ -1026,10 +1119,10 @@
       camPos.z += (targetCamZ - camPos.z) * 0.095;
       camera.position.copy(camPos);
 
-      const targetLookX = carState.x + Math.sin(carState.heading) * 6.8;
-      const targetLookZ = carState.z + Math.cos(carState.heading) * 6.8;
+      const targetLookX = carState.x + Math.sin(carState.heading) * camCfg.lookAhead;
+      const targetLookZ = carState.z + Math.cos(carState.heading) * camCfg.lookAhead;
       camLook.x += (targetLookX - camLook.x) * 0.15;
-      camLook.y += (2.3 - camLook.y) * 0.15;
+      camLook.y += (camCfg.lookY - camLook.y) * 0.15;
       camLook.z += (targetLookZ - camLook.z) * 0.15;
       camera.lookAt(camLook);
 
@@ -1085,6 +1178,26 @@
 
       const waveScale1 = 1 + Math.sin(elapsed * 1.8) * 0.014;
       foamRing1.scale.set(waveScale1, waveScale1, 1);
+      const waveScale2 = 1 + Math.cos(elapsed * 1.35) * 0.018;
+      foamRing2.scale.set(waveScale2, waveScale2, 1);
+
+      // Gentle Ocean Surface Wave Swells
+      for (let i = 0; i < oceanPosAttr.count; i++) {
+        const ox = oceanBaseX[i];
+        const oz = oceanBaseZ[i];
+        const wy = Math.sin(ox * 0.025 + elapsed * 1.15) * 0.35 + Math.cos(oz * 0.025 + elapsed * 0.9) * 0.3;
+        oceanPosAttr.setY(i, wy);
+      }
+      oceanPosAttr.needsUpdate = true;
+
+      // Ambient Fireflies Gentle Float
+      const ffAttr = fireflyGeo.attributes.position;
+      for (let i = 0; i < fireflyCount; i++) {
+        const s = fireflySeeds[i];
+        ffAttr.setY(i, s.y + Math.sin(elapsed * 1.3 + s.phase) * 1.1);
+        ffAttr.setX(i, s.x + Math.cos(elapsed * 0.6 + s.phase) * 0.8);
+      }
+      ffAttr.needsUpdate = true;
 
       cloudsGroup.rotation.y = elapsed * 0.01;
 
@@ -1120,7 +1233,7 @@
 
       const metaMap = {
         about: { badge: 'NORTH ISLAND • TECH LAB', title: 'Executive Profile, About, Services & Tech Stack' },
-        projects: { badge: 'MAIN CIRCUIT • 12 CASE STUDIES', title: 'Complete Portfolio & Technical Case Studies (12)' },
+        projects: { badge: 'MAIN CIRCUIT • ALL 23 PROJECTS', title: 'Complete Portfolio & Technical Case Studies (23)' },
         stories: { badge: 'EAST ISLAND • PHOTOGRAPHY VISTA', title: 'Urban Stories & Perspectives Gallery (9 Stories)' },
         journey: { badge: 'SOUTH ISLAND • HALL OF JOURNEY', title: 'Experience, Universitas Gunadarma & Certifications' },
         contact: { badge: 'WEST ISLAND • DISPATCH TOWER', title: 'Direct Contact & Collaboration Transmission' }
@@ -1209,7 +1322,19 @@
       const kmh = Math.min(220, Math.round(Math.abs(speed) * 165));
       const speedValEl = document.getElementById('drivefolio-speed-val');
       const gearEl = document.getElementById('drivefolio-gear-badge');
+      const rpmFillEl = document.getElementById('df-rpm-fill');
+      const speedFxEl = document.getElementById('df-speed-fx');
+
       if (speedValEl) speedValEl.textContent = kmh;
+      if (rpmFillEl) {
+        const pct = Math.max(4, Math.min(100, Math.round((kmh / 215) * 100)));
+        rpmFillEl.style.width = `${pct}%`;
+        rpmFillEl.classList.toggle('nitro', Boolean(isBoost && Math.abs(speed) > 0.1));
+      }
+      if (speedFxEl) {
+        speedFxEl.classList.toggle('boost', Boolean(isBoost && Math.abs(speed) > 0.35));
+        speedFxEl.classList.toggle('high-speed', !isBoost && kmh > 105);
+      }
       if (gearEl) {
         if (isBoost && Math.abs(speed) > 0.1) {
           gearEl.textContent = 'NITRO';
@@ -1225,6 +1350,40 @@
           gearEl.className = 'drivefolio-gear-badge';
         }
       }
+    }
+
+    function updateZoneTelemetryHUD(x, z) {
+      const el = document.getElementById('df-zone-telemetry');
+      if (!el) return;
+      let label = 'MAIN CIRCUIT';
+      if (Math.hypot(x, z) > 136) {
+        if (Math.abs(z) > Math.abs(x)) {
+          label = z < 0 ? 'NORTH · TECH LAB' : 'SOUTH · JOURNEY';
+        } else {
+          label = x > 0 ? 'EAST · STORIES' : 'WEST · CONTACT';
+        }
+      } else if (Math.hypot(x, z) < 38) {
+        label = 'CENTRAL ROTUNDA';
+      }
+      if (el.textContent !== label) el.textContent = label;
+    }
+
+    function cycleCameraMode() {
+      cameraModeIndex = (cameraModeIndex + 1) % CAMERA_MODES.length;
+      const mode = CAMERA_MODES[cameraModeIndex];
+      const camBtn = document.getElementById('df-cam-btn');
+      if (camBtn) {
+        camBtn.innerHTML = `<i class="fa-solid ${mode.icon}" aria-hidden="true"></i> ${mode.label}`;
+      }
+    }
+
+    function resetVehiclePosition() {
+      cancelAutopilotOnManualInput();
+      carState.x = startPt.x;
+      carState.z = startPt.z;
+      carState.heading = Math.atan2(startPt.tx, startPt.tz);
+      carState.speed = 0;
+      carState.steerAngle = 0;
     }
 
     function updateProximityHUDCard(stop) {
@@ -1352,6 +1511,8 @@
         streetLampBulbs.forEach(b => b.material.emissiveIntensity = 0.1);
         streetLampLights.forEach(l => l.intensity = 0);
         stopObjects.forEach(so => so.faceMat.emissiveIntensity = 0.16);
+        fireflyMat.opacity = 0.15;
+        fireflyMat.color.setHex(0xE0F2FE);
         if (btn) btn.innerHTML = `<i class="fa-solid fa-sun me-1"></i> Day`;
       } else if (mode === 'sunset') {
         scene.background.setHex(0xF97316);
@@ -1372,6 +1533,8 @@
         streetLampBulbs.forEach(b => b.material.emissiveIntensity = 0.9);
         streetLampLights.forEach(l => l.intensity = 0.8);
         stopObjects.forEach(so => so.faceMat.emissiveIntensity = 0.36);
+        fireflyMat.opacity = 0.68;
+        fireflyMat.color.setHex(0xFDE047);
         if (btn) btn.innerHTML = `<i class="fa-solid fa-cloud-sun me-1"></i> Sunset`;
       } else {
         scene.background.setHex(0x090D16);
@@ -1392,6 +1555,8 @@
         streetLampBulbs.forEach(b => b.material.emissiveIntensity = 1.5);
         streetLampLights.forEach(l => l.intensity = 1.45);
         stopObjects.forEach(so => so.faceMat.emissiveIntensity = 0.6);
+        fireflyMat.opacity = 0.85;
+        fireflyMat.color.setHex(0x38BDF8);
         if (btn) btn.innerHTML = `<i class="fa-solid fa-moon me-1"></i> Night`;
       }
     }
@@ -1515,6 +1680,16 @@
           timeModeIndex = (timeModeIndex + 1) % TIME_MODES.length;
           applyTimeOfDay(TIME_MODES[timeModeIndex]);
         });
+      }
+
+      const camBtn = document.getElementById('df-cam-btn');
+      if (camBtn) {
+        camBtn.addEventListener('click', cycleCameraMode);
+      }
+
+      const resetBtn = document.getElementById('df-reset-btn');
+      if (resetBtn) {
+        resetBtn.addEventListener('click', resetVehiclePosition);
       }
 
       const modelBtn = document.getElementById('df-car-model-btn');
@@ -1976,10 +2151,25 @@
       wheels.push(wObj);
     });
 
+    const underGlowMat = new THREE.MeshBasicMaterial({
+      color: hexColor,
+      transparent: true,
+      opacity: 0.14,
+      side: THREE.DoubleSide
+    });
+    const underGlow = new THREE.Mesh(
+      new THREE.PlaneGeometry(3.2, 5.4).rotateX(-Math.PI / 2),
+      underGlowMat
+    );
+    underGlow.position.set(0, 0.08, 0);
+    group.add(underGlow);
+
     return {
       group,
       bodyPivot,
       paintMat,
+      tlMat,
+      underGlowMat,
       wheels,
       headLightLeft,
       headLightRight
@@ -2780,20 +2970,28 @@
     texture.anisotropy = 4;
 
     function drawCard(loadedImg) {
-      ctx.fillStyle = '#FAF8F1';
+      // Swiss Darkroom Atelier Exhibition Lightbox
+      ctx.fillStyle = '#0B1120';
       ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      ctx.strokeStyle = '#18181B';
-      ctx.lineWidth = 10;
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.22)';
+      ctx.lineWidth = 4;
       ctx.strokeRect(14, 14, canvas.width - 28, canvas.height - 28);
 
-      const imgX = 36;
-      const imgY = 38;
-      const imgW = 450;
-      const imgH = canvas.height - 76;
+      // Top accent bar
+      ctx.fillStyle = stop.accent || '#3B82F6';
+      ctx.fillRect(14, 14, canvas.width - 28, 7);
 
-      ctx.fillStyle = '#18181B';
-      ctx.fillRect(imgX - 4, imgY - 4, imgW + 8, imgH + 8);
+      const imgX = 36;
+      const imgY = 44;
+      const imgW = 458;
+      const imgH = canvas.height - 88;
+
+      ctx.fillStyle = '#070B14';
+      ctx.fillRect(imgX - 2, imgY - 2, imgW + 4, imgH + 4);
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.14)';
+      ctx.lineWidth = 2;
+      ctx.strokeRect(imgX - 2, imgY - 2, imgW + 4, imgH + 4);
 
       if (loadedImg) {
         const imgRatio = loadedImg.width / loadedImg.height;
@@ -2809,64 +3007,66 @@
         ctx.drawImage(loadedImg, sx, sy, sw, sh, imgX, imgY, imgW, imgH);
       } else {
         const grad = ctx.createLinearGradient(imgX, imgY, imgX + imgW, imgY + imgH);
-        grad.addColorStop(0, stop.accent);
-        grad.addColorStop(1, '#18181B');
+        grad.addColorStop(0, '#111827');
+        grad.addColorStop(1, stop.accent || '#3B82F6');
         ctx.fillStyle = grad;
         ctx.fillRect(imgX, imgY, imgW, imgH);
       }
 
-      ctx.fillStyle = '#18181B';
-      ctx.fillRect(imgX + 14, imgY + 14, 130, 44);
-      ctx.fillStyle = '#E8B931';
-      ctx.font = 'bold 22px "Space Grotesk", sans-serif';
-      const label = stop.type === 'island-hub' ? stop.compass : `STOP #${String(stopNumber).padStart(2, '0')}`;
-      ctx.fillText(label, imgX + 22, imgY + 43);
+      const rx = 524;
+      const rw = canvas.width - rx - 38;
 
-      const rx = 516;
-      const rw = canvas.width - rx - 42;
+      // Top Kicker + Stop Index
+      const label = stop.type === 'island-hub' ? stop.compass : `PLATE #${String(stopNumber).padStart(2, '0')}`;
+      ctx.fillStyle = '#60A5FA';
+      ctx.font = 'bold 20px "Geist Mono", monospace';
+      ctx.fillText(`${label}  ·  ${stop.badge.toUpperCase()}`, rx, 70);
 
-      ctx.fillStyle = stop.accent;
-      ctx.fillRect(rx, 46, Math.min(rw, 390), 42);
+      // Divider rule
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.14)';
+      ctx.fillRect(rx, 86, rw, 2);
+
+      // Title
       ctx.fillStyle = '#FFFFFF';
-      ctx.font = 'bold 21px "Space Grotesk", sans-serif';
-      ctx.fillText(stop.badge.toUpperCase(), rx + 16, 74);
+      ctx.font = 'bold 38px "Geist", "Inter", sans-serif';
+      const nextY = wrapCanvasText(ctx, stop.title, rx, 134, rw, 44, 2);
 
-      ctx.fillStyle = '#18181B';
-      ctx.font = 'bold 40px "Space Grotesk", sans-serif';
-      const nextY = wrapCanvasText(ctx, stop.title, rx, 140, rw, 46, 2);
+      // Subtitle
+      ctx.fillStyle = '#93C5FD';
+      ctx.font = '500 20px "Geist Mono", monospace';
+      const subY = wrapCanvasText(ctx, stop.subtitle, rx, nextY + 10, rw, 28, 2);
 
-      ctx.fillStyle = '#D9624A';
-      ctx.font = '600 21px "DM Sans", sans-serif';
-      const subY = wrapCanvasText(ctx, stop.subtitle, rx, nextY + 12, rw, 28, 2);
+      // Description
+      ctx.fillStyle = '#CBD5E1';
+      ctx.font = '20px "Inter", sans-serif';
+      wrapCanvasText(ctx, stop.desc, rx, subY + 16, rw, 28, 4);
 
-      ctx.fillStyle = '#4A463F';
-      ctx.font = '21px "DM Sans", sans-serif';
-      wrapCanvasText(ctx, stop.desc, rx, subY + 18, rw, 29, 4);
-
+      // Minimal hairline spec tags
       let tx = rx;
       const ty = canvas.height - 122;
-      ctx.font = 'bold 18px "Space Grotesk", sans-serif';
+      ctx.font = '500 17px "Geist Mono", monospace';
       (stop.tags || []).slice(0, 3).forEach(tag => {
-        const tw = ctx.measureText(tag).width + 24;
+        const tw = ctx.measureText(tag).width + 22;
         if (tx + tw < canvas.width - 36) {
-          ctx.fillStyle = '#F2EBDD';
-          ctx.fillRect(tx, ty, tw, 34);
-          ctx.strokeStyle = '#18181B';
-          ctx.lineWidth = 2;
-          ctx.strokeRect(tx, ty, tw, 34);
-          ctx.fillStyle = '#18181B';
-          ctx.fillText(tag, tx + 12, ty + 23);
+          ctx.fillStyle = '#111827';
+          ctx.fillRect(tx, ty, tw, 32);
+          ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+          ctx.lineWidth = 1.5;
+          ctx.strokeRect(tx, ty, tw, 32);
+          ctx.fillStyle = '#E2E8F0';
+          ctx.fillText(tag, tx + 11, ty + 22);
           tx += tw + 10;
         }
       });
 
-      ctx.fillStyle = '#18181B';
+      // Architectural Action Footer
+      ctx.fillStyle = '#FFFFFF';
       ctx.fillRect(rx, canvas.height - 74, rw, 42);
-      ctx.fillStyle = '#E8B931';
-      ctx.font = 'bold 20px "Space Grotesk", sans-serif';
+      ctx.fillStyle = '#0B1120';
+      ctx.font = 'bold 18px "Geist Mono", monospace';
       const cta = stop.type === 'island-hub'
-        ? `PARK IN RING & PRESS [E] TO ENTER ${stop.compass} HUB ➔`
-        : 'PARK IN RING & PRESS [E] TO OPEN CASE STUDY ➔';
+        ? `PRESS [E] TO ENTER ${stop.compass} HUB ->`
+        : 'PARK & PRESS [E] FOR CASE STUDY ->';
       ctx.fillText(cta, rx + 16, canvas.height - 46);
 
       texture.needsUpdate = true;
@@ -2943,29 +3143,37 @@
     const scale = (Math.min(w, h) * 0.45) / 240;
 
     ctx.save();
+    // Subtle coordinate crosshair grid
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.06)';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(cx, 6);
+    ctx.lineTo(cx, h - 6);
+    ctx.moveTo(6, cy);
+    ctx.lineTo(w - 6, cy);
+    ctx.stroke();
+
     // Main Circular Island
     ctx.beginPath();
     ctx.arc(cx, cy, MAIN_ISLAND_RADIUS * scale, 0, Math.PI * 2);
-    ctx.fillStyle = 'rgba(78, 168, 96, 0.35)';
+    ctx.fillStyle = 'rgba(16, 185, 129, 0.16)';
     ctx.fill();
-    ctx.strokeStyle = 'rgba(243, 223, 182, 0.75)';
-    ctx.lineWidth = 1.5;
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.28)';
+    ctx.lineWidth = 1.25;
     ctx.stroke();
 
     // 4 Satellite Islands & Bridges
     SATELLITE_ISLANDS.forEach(sat => {
-      // Bridge line
       ctx.beginPath();
       ctx.moveTo(cx, cy);
       ctx.lineTo(cx + sat.cx * scale, cy + sat.cz * scale);
-      ctx.strokeStyle = '#334155';
-      ctx.lineWidth = 3;
+      ctx.strokeStyle = 'rgba(148, 163, 184, 0.4)';
+      ctx.lineWidth = 2.5;
       ctx.stroke();
 
-      // Satellite island circle
       ctx.beginPath();
       ctx.arc(cx + sat.cx * scale, cy + sat.cz * scale, SAT_ISLAND_RADIUS * scale, 0, Math.PI * 2);
-      ctx.fillStyle = 'rgba(78, 168, 96, 0.45)';
+      ctx.fillStyle = 'rgba(15, 23, 42, 0.72)';
       ctx.fill();
       ctx.strokeStyle = sat.accent;
       ctx.lineWidth = 1.5;
@@ -2975,8 +3183,8 @@
     // Main Circular Highway
     ctx.beginPath();
     ctx.arc(cx, cy, OUTER_ROAD_RADIUS * scale, 0, Math.PI * 2);
-    ctx.strokeStyle = '#1E293B';
-    ctx.lineWidth = 4.5;
+    ctx.strokeStyle = 'rgba(59, 130, 246, 0.5)';
+    ctx.lineWidth = 3.5;
     ctx.stroke();
 
     // All 16 Stop Pins
@@ -2985,10 +3193,10 @@
       const sy = cy + so.parkZ * scale;
       const isCurrent = activeStop === so;
       ctx.beginPath();
-      ctx.arc(sx, sy, isCurrent ? 4.8 : 2.9, 0, Math.PI * 2);
-      ctx.fillStyle = isCurrent ? '#E8B931' : so.stop.accent;
+      ctx.arc(sx, sy, isCurrent ? 4.6 : 2.6, 0, Math.PI * 2);
+      ctx.fillStyle = isCurrent ? '#FFFFFF' : so.stop.accent;
       ctx.fill();
-      ctx.strokeStyle = '#0F172A';
+      ctx.strokeStyle = '#0B1120';
       ctx.lineWidth = 1;
       ctx.stroke();
     });
@@ -2999,14 +3207,14 @@
     ctx.translate(px, py);
     ctx.rotate(-carState.heading + Math.PI);
     ctx.beginPath();
-    ctx.moveTo(0, -6.0);
+    ctx.moveTo(0, -6.2);
     ctx.lineTo(4.4, 4.8);
     ctx.lineTo(0, 2.5);
     ctx.lineTo(-4.4, 4.8);
     ctx.closePath();
-    ctx.fillStyle = '#E11D48';
+    ctx.fillStyle = '#38BDF8';
     ctx.fill();
-    ctx.strokeStyle = '#FAF8F1';
+    ctx.strokeStyle = '#FFFFFF';
     ctx.lineWidth = 1.4;
     ctx.stroke();
     ctx.restore();
@@ -3018,34 +3226,33 @@
     out.height = 820;
     const ctx = out.getContext('2d');
 
-    ctx.fillStyle = '#FAF8F1';
+    ctx.fillStyle = '#0B1120';
     ctx.fillRect(0, 0, out.width, out.height);
 
-    ctx.strokeStyle = '#18181B';
-    ctx.lineWidth = 8;
-    ctx.strokeRect(16, 16, out.width - 32, out.height - 32);
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.25)';
+    ctx.lineWidth = 3;
+    ctx.strokeRect(20, 20, out.width - 40, out.height - 40);
 
     ctx.drawImage(glCanvas, 44, 44, out.width - 88, out.height - 190);
+    ctx.strokeStyle = 'rgba(255, 255, 255, 0.35)';
+    ctx.lineWidth = 2;
     ctx.strokeRect(44, 44, out.width - 88, out.height - 190);
 
-    ctx.fillStyle = '#18181B';
-    ctx.font = 'bold 30px "Space Grotesk", sans-serif';
-    ctx.fillText(`📍 ${stopTitle}`, 52, out.height - 88);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.font = '600 29px "Geist", "Inter", sans-serif';
+    ctx.fillText(stopTitle, 52, out.height - 88);
 
-    ctx.fillStyle = '#D9624A';
-    ctx.font = '600 21px "DM Sans", sans-serif';
-    ctx.fillText(`Rikkardo L. Tobing — Interactive 3D Drivefolio Archipelago (${timeMode.toUpperCase()} EDITION)`, 52, out.height - 48);
+    ctx.fillStyle = '#60A5FA';
+    ctx.font = '500 18px "Geist Mono", monospace';
+    ctx.fillText(`RIKKARDO L. TOBING · DRIVEFOLIO ARCHIPELAGO (${timeMode.toUpperCase()} EDITION)`, 52, out.height - 50);
 
-    ctx.fillStyle = '#E8B931';
-    ctx.fillRect(out.width - 280, out.height - 118, 226, 68);
-    ctx.strokeStyle = '#18181B';
-    ctx.lineWidth = 3;
-    ctx.strokeRect(out.width - 280, out.height - 118, 226, 68);
-    ctx.fillStyle = '#18181B';
-    ctx.font = 'bold 20px "Space Grotesk", sans-serif';
-    ctx.fillText('JAKARTA • ID 🇮🇩', out.width - 252, out.height - 86);
-    ctx.font = '16px "DM Sans", sans-serif';
-    ctx.fillText('rikkardotobing.my.id', out.width - 248, out.height - 62);
+    ctx.fillStyle = '#FFFFFF';
+    ctx.fillRect(out.width - 284, out.height - 118, 240, 68);
+    ctx.fillStyle = '#0B1120';
+    ctx.font = 'bold 18px "Geist Mono", monospace';
+    ctx.fillText('JAKARTA · INDONESIA', out.width - 266, out.height - 86);
+    ctx.font = '15px "Geist Mono", monospace';
+    ctx.fillText('rikkardotobing.my.id', out.width - 266, out.height - 62);
 
     return out.toDataURL('image/png');
   }

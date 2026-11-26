@@ -1,5 +1,5 @@
 /* ==========================================================================
-   DRIVEFOLIO 3D ARCHIPELAGO HUD & INTERACTIVE WORLD STYLESHEET
+   DRIVEFOLIO 3D ARCHIPELAGO HUD & ATELIER DARKROOM WORLD STYLESHEET
    Loaded only on drivefolio.html for optimal homepage performance.
    ========================================================================== */
 
@@ -9,9 +9,14 @@
   --df-white: #FFFFFF;
   --df-offwhite: #F7F8FA;
   --df-blue: #3B82F6;
-  --df-border: rgba(148, 163, 184, 0.28);
+  --df-blue-light: #60A5FA;
+  --df-border: rgba(255, 255, 255, 0.14);
+  --df-border-strong: rgba(255, 255, 255, 0.28);
   --df-font-sans: 'Inter', 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+  --df-font-display: 'Geist', 'Inter', sans-serif;
+  --df-font-serif: 'Cormorant Garamond', Georgia, serif;
   --df-font-mono: 'Geist Mono', ui-monospace, SFMono-Regular, monospace;
+  --df-ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 * { box-sizing: border-box; }
@@ -27,6 +32,7 @@ html, body.drivefolio-body {
   background: var(--df-navy);
   font-family: var(--df-font-sans);
   color: var(--df-white);
+  -webkit-font-smoothing: antialiased;
 }
 
 .drivefolio-stage {
@@ -51,6 +57,28 @@ html, body.drivefolio-body {
 #drivefolio-canvas-wrap:active { cursor: grabbing; }
 #drivefolio-canvas-wrap canvas { display: block; width: 100% !important; height: 100% !important; }
 
+/* ── Nitro & Velocity Radial Vignette Overlay ── */
+.df-speed-fx {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 12;
+  opacity: 0;
+  background:
+    radial-gradient(ellipse at center, transparent 52%, rgba(59, 130, 246, 0.16) 86%, rgba(11, 17, 32, 0.42) 100%);
+  transition: opacity 0.28s var(--df-ease);
+}
+
+.df-speed-fx.high-speed {
+  opacity: 0.52;
+}
+
+.df-speed-fx.boost {
+  opacity: 1;
+  background:
+    radial-gradient(ellipse at center, transparent 46%, rgba(56, 189, 248, 0.24) 82%, rgba(59, 130, 246, 0.38) 100%);
+}
+
 /* ── Top HUD Bar ── */
 .drivefolio-hud-top {
   position: absolute;
@@ -64,6 +92,12 @@ html, body.drivefolio-body {
   flex-wrap: wrap;
   gap: 8px;
   pointer-events: none;
+  animation: dfHudEnter 0.65s var(--df-ease) both;
+}
+
+@keyframes dfHudEnter {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
 }
 
 .drivefolio-hud-top > * { pointer-events: auto; }
@@ -72,39 +106,60 @@ html, body.drivefolio-body {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 6px;
 }
 
 .df-pill {
-  background: rgba(17, 24, 39, 0.9);
-  backdrop-filter: blur(10px);
+  background: rgba(11, 17, 32, 0.84);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
   color: var(--df-white);
   border: 1px solid var(--df-border);
-  border-radius: 6px;
-  padding: 7px 12px;
-  font-size: 0.76rem;
-  font-weight: 600;
+  border-radius: 3px;
+  padding: 6px 11px;
+  font-family: var(--df-font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
+  letter-spacing: 0.02em;
   display: inline-flex;
   align-items: center;
   gap: 6px;
   text-decoration: none;
-  transition: all 0.2s ease;
+  transition: border-color 0.22s var(--df-ease), background-color 0.22s var(--df-ease), color 0.22s var(--df-ease), transform 0.2s var(--df-ease);
 }
 
 .df-brand-pill {
+  background: var(--df-white);
+  border-color: var(--df-white);
+  color: var(--df-navy);
+  font-weight: 600;
+}
+
+.df-brand-pill:hover {
   background: var(--df-blue);
   border-color: var(--df-blue);
   color: var(--df-white);
 }
 
 .df-btn { cursor: pointer; }
-.df-btn:hover { background: var(--df-blue); border-color: var(--df-blue); color: var(--df-white); }
-.df-btn.active { background: var(--df-blue); border-color: var(--df-white); color: var(--df-white); }
+.df-btn:hover {
+  background: rgba(59, 130, 246, 0.16);
+  border-color: var(--df-border-strong);
+  color: var(--df-white);
+}
+
+.df-btn.active {
+  background: var(--df-blue);
+  border-color: var(--df-blue);
+  color: var(--df-white);
+}
+
+.df-btn:active { transform: scale(0.97); }
 
 .df-visited-bar-wrap {
-  width: 50px;
-  height: 6px;
-  background: rgba(255, 255, 255, 0.16);
+  width: 46px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.14);
   border-radius: 99px;
   overflow: hidden;
 }
@@ -113,49 +168,52 @@ html, body.drivefolio-body {
   height: 100%;
   width: 0%;
   background: #10B981;
-  transition: width 0.35s ease;
+  transition: width 0.45s var(--df-ease);
 }
 
 .df-gps-select {
-  background: rgba(17, 24, 39, 0.94);
+  background: rgba(11, 17, 32, 0.88);
+  backdrop-filter: blur(14px);
   color: var(--df-white);
   border: 1px solid var(--df-border);
-  border-radius: 6px;
-  padding: 7px 12px;
-  font-size: 0.76rem;
-  font-weight: 600;
+  border-radius: 3px;
+  padding: 6px 10px;
+  font-family: var(--df-font-mono);
+  font-size: 0.72rem;
+  font-weight: 500;
   cursor: pointer;
   max-width: 215px;
 }
 
 .df-color-swatch {
-  width: 12px;
-  height: 12px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  border: 1px solid #fff;
+  border: 1px solid rgba(255, 255, 255, 0.85);
   display: inline-block;
 }
 
 /* ── Autopilot Banner ── */
 .df-autopilot-banner {
   position: absolute;
-  top: 68px;
+  top: 64px;
   left: 50%;
-  transform: translateX(-50%) translateY(-12px);
+  transform: translateX(-50%) translateY(-10px);
   z-index: 24;
-  background: rgba(11, 17, 32, 0.94);
+  background: rgba(11, 17, 32, 0.92);
+  backdrop-filter: blur(12px);
   color: var(--df-white);
   border: 1px solid var(--df-blue);
-  border-radius: 6px;
-  padding: 7px 14px;
+  border-radius: 3px;
+  padding: 6px 14px;
   font-family: var(--df-font-mono);
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   display: flex;
   align-items: center;
   gap: 8px;
   opacity: 0;
   visibility: hidden;
-  transition: all 0.22s ease;
+  transition: all 0.25s var(--df-ease);
   pointer-events: none;
 }
 
@@ -166,16 +224,22 @@ html, body.drivefolio-body {
 }
 
 .df-pulse-dot {
-  width: 8px;
-  height: 8px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #10B981;
+  animation: dfPulse 1.4s ease-in-out infinite;
 }
 
-/* ── Bottom-Left HUD: Minimap & Speedometer ── */
+@keyframes dfPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(1.35); }
+}
+
+/* ── Bottom-Left HUD: Minimap & Telemetry Speedometer ── */
 .drivefolio-hud-bottom-left {
   position: absolute;
-  bottom: 18px;
+  bottom: 16px;
   left: 16px;
   z-index: 25;
   display: flex;
@@ -184,60 +248,93 @@ html, body.drivefolio-body {
 }
 
 .df-minimap-card {
-  background: rgba(11, 17, 32, 0.92);
+  background: rgba(11, 17, 32, 0.88);
+  backdrop-filter: blur(14px);
   border: 1px solid var(--df-border);
-  border-radius: 8px;
-  padding: 6px;
-  width: 168px;
+  border-radius: 3px;
+  padding: 7px;
+  width: 172px;
 }
 
 .df-minimap-header {
   display: flex;
   justify-content: space-between;
   font-family: var(--df-font-mono);
-  font-size: 0.64rem;
-  color: #CBD5E1;
-  margin-bottom: 4px;
+  font-size: 0.61rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #94A3B8;
+  margin-bottom: 5px;
+}
+
+.df-minimap-header span:last-child {
+  color: var(--df-blue-light);
 }
 
 #drivefolio-minimap {
-  width: 154px;
+  width: 156px;
   height: 132px;
   display: block;
-  border-radius: 4px;
+  border-radius: 2px;
   cursor: crosshair;
+  background: rgba(7, 11, 20, 0.72);
+  border: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .df-speedometer-card {
-  background: rgba(17, 24, 39, 0.92);
+  background: rgba(11, 17, 32, 0.88);
+  backdrop-filter: blur(14px);
   border: 1px solid var(--df-border);
-  border-radius: 8px;
-  padding: 8px 12px;
-  min-width: 86px;
+  border-radius: 3px;
+  padding: 10px 12px;
+  min-width: 96px;
   text-align: center;
 }
 
 .df-speed-num {
-  font-family: var(--df-font-mono);
-  font-size: 1.45rem;
+  font-family: var(--df-font-display);
+  font-size: 1.65rem;
   font-weight: 700;
+  letter-spacing: -0.04em;
   line-height: 1;
 }
 
 .df-speed-unit {
   font-family: var(--df-font-mono);
-  font-size: 0.6rem;
+  font-size: 0.58rem;
+  letter-spacing: 0.14em;
   color: #94A3B8;
+  margin-top: 2px;
+}
+
+.df-rpm-track {
+  width: 100%;
+  height: 3px;
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 99px;
+  overflow: hidden;
+  margin: 7px 0 6px;
+}
+
+.df-rpm-fill {
+  height: 100%;
+  width: 4%;
+  background: linear-gradient(90deg, #10B981 0%, #3B82F6 65%, #38BDF8 100%);
+  transition: width 0.09s linear;
+}
+
+.df-rpm-fill.nitro {
+  background: linear-gradient(90deg, #3B82F6 0%, #38BDF8 55%, #F97316 100%);
 }
 
 .drivefolio-gear-badge {
-  margin-top: 4px;
   display: inline-block;
-  padding: 2px 7px;
+  padding: 2px 8px;
   font-family: var(--df-font-mono);
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   font-weight: 700;
-  border-radius: 4px;
+  letter-spacing: 0.08em;
+  border-radius: 2px;
   background: #1E293B;
   color: #E2E8F0;
 }
@@ -246,27 +343,28 @@ html, body.drivefolio-body {
 .drivefolio-gear-badge.turbo { background: #EF4444; color: #fff; }
 .drivefolio-gear-badge.rev { background: #F59E0B; color: #0B1120; }
 
-/* ── Proximity Billboard Card ── */
+/* ── Proximity Billboard Card (Swiss Editorial Exhibition Plate) ── */
 .drivefolio-proximity-card {
   position: absolute;
   bottom: 62px;
   left: 50%;
-  transform: translateX(-50%) translateY(24px);
+  transform: translateX(-50%) translateY(20px);
   z-index: 30;
-  width: min(630px, 92vw);
-  background: var(--df-white);
+  width: min(650px, 92vw);
+  background: rgba(255, 255, 255, 0.98);
   color: var(--df-navy);
-  border: 1px solid #CBD5E1;
-  border-radius: 10px;
-  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.45);
-  padding: 14px;
+  border: 1px solid #E2E8F0;
+  border-top: 3px solid var(--df-navy);
+  border-radius: 3px;
+  box-shadow: 0 24px 54px rgba(0, 0, 0, 0.52);
+  padding: 15px;
   display: flex;
-  gap: 14px;
+  gap: 15px;
   align-items: center;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: all 0.24s ease;
+  transition: all 0.28s var(--df-ease);
 }
 
 .drivefolio-proximity-card.active {
@@ -282,73 +380,82 @@ html, body.drivefolio-body {
   right: 8px;
   width: 26px;
   height: 26px;
-  border-radius: 50%;
-  background: #F1F5F9;
+  border-radius: 2px;
+  background: var(--df-offwhite);
   border: 1px solid #CBD5E1;
   color: var(--df-navy);
   cursor: pointer;
 }
 
-.df-card-thumb {
-  width: 158px;
-  height: 118px;
-  flex-shrink: 0;
-  border-radius: 6px;
-  overflow: hidden;
-  border: 1px solid #E2E8F0;
+.df-card-dismiss-btn:hover {
+  background: var(--df-navy);
+  color: var(--df-white);
 }
 
-.df-card-thumb img { width: 100%; height: 100%; object-fit: cover; }
+.df-card-thumb {
+  width: 164px;
+  height: 112px;
+  flex-shrink: 0;
+  border-radius: 2px;
+  overflow: hidden;
+  border: 1px solid #E2E8F0;
+  background: #070B14;
+}
+
+.df-card-thumb img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 
 .df-card-body { flex: 1; min-width: 0; }
-.df-card-meta-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 4px; }
-.df-card-badge { font-family: var(--df-font-mono); font-size: 0.66rem; font-weight: 700; color: #fff; padding: 2px 8px; border-radius: 4px; }
+.df-card-meta-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 5px; }
+.df-card-badge { font-family: var(--df-font-mono); font-size: 0.64rem; font-weight: 700; color: #fff; padding: 2px 7px; border-radius: 2px; letter-spacing: 0.04em; text-transform: uppercase; }
 .df-card-zone { font-family: var(--df-font-mono); font-size: 0.68rem; color: #64748B; }
-.df-card-title { font-size: 1.06rem; font-weight: 700; margin: 0 0 2px; color: var(--df-navy); }
-.df-card-sub { font-size: 0.76rem; font-weight: 600; color: #2563EB; margin-bottom: 5px; }
-.df-card-desc { font-size: 0.78rem; color: #475569; margin: 0 0 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.df-card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 8px; }
-.df-tag-pill { font-family: var(--df-font-mono); font-size: 0.64rem; padding: 2px 6px; background: #F1F5F9; border: 1px solid #E2E8F0; border-radius: 4px; color: #334155; }
+.df-card-title { font-family: var(--df-font-display); font-size: 1.08rem; font-weight: 600; letter-spacing: -0.02em; margin: 0 0 2px; color: var(--df-navy); }
+.df-card-sub { font-family: var(--df-font-mono); font-size: 0.72rem; font-weight: 500; color: #2563EB; margin-bottom: 5px; }
+.df-card-desc { font-size: 0.8rem; line-height: 1.5; color: #475569; margin: 0 0 9px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.df-card-tags { display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: 9px; }
+.df-tag-pill { font-family: var(--df-font-mono); font-size: 0.63rem; padding: 2px 6px; background: var(--df-offwhite); border: 1px solid #E2E8F0; border-radius: 2px; color: #334155; }
 .df-card-actions { display: flex; flex-wrap: wrap; gap: 7px; }
 
 .df-action-btn {
-  font-size: 0.75rem;
+  font-size: 0.74rem;
   font-weight: 600;
   padding: 6px 12px;
-  border-radius: 6px;
+  border-radius: 2px;
   border: 1px solid #CBD5E1;
   text-decoration: none;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
   gap: 5px;
+  transition: all 0.2s var(--df-ease);
 }
 
 .df-action-btn.primary { background: var(--df-navy); color: #fff; border-color: var(--df-navy); }
 .df-action-btn.primary:hover { background: var(--df-blue); border-color: var(--df-blue); }
 .df-action-btn.secondary { background: #fff; color: var(--df-navy); }
-.df-action-btn.secondary:hover { border-color: var(--df-blue); color: #2563EB; }
+.df-action-btn.secondary:hover { border-color: var(--df-navy); background: var(--df-offwhite); }
 
 .df-key-hint {
   font-family: var(--df-font-mono);
-  font-size: 0.65rem;
+  font-size: 0.64rem;
   background: rgba(255, 255, 255, 0.16);
   padding: 1px 4px;
-  border-radius: 3px;
+  border-radius: 2px;
 }
 
 /* ── Desktop Controls Hint Bar ── */
 .drivefolio-controls-bar {
   position: absolute;
-  bottom: 14px;
+  bottom: 16px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 22;
-  background: rgba(11, 17, 32, 0.9);
+  background: rgba(11, 17, 32, 0.86);
+  backdrop-filter: blur(12px);
   border: 1px solid var(--df-border);
-  border-radius: 99px;
-  padding: 6px 16px;
-  font-size: 0.74rem;
+  border-radius: 3px;
+  padding: 6px 14px;
+  font-family: var(--df-font-mono);
+  font-size: 0.7rem;
   display: flex;
   gap: 14px;
   white-space: nowrap;
@@ -356,11 +463,11 @@ html, body.drivefolio-body {
 
 .df-kbd {
   font-family: var(--df-font-mono);
-  font-size: 0.68rem;
+  font-size: 0.66rem;
   background: #1E293B;
   border: 1px solid rgba(148, 163, 184, 0.35);
   padding: 1px 5px;
-  border-radius: 3px;
+  border-radius: 2px;
   margin-right: 3px;
 }
 
@@ -382,7 +489,7 @@ html, body.drivefolio-body {
   height: 88px;
   border-radius: 50%;
   background: rgba(11, 17, 32, 0.78);
-  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -403,9 +510,10 @@ html, body.drivefolio-body {
   width: 52px;
   height: 52px;
   border-radius: 50%;
-  border: 1px solid #fff;
+  border: 1px solid rgba(255, 255, 255, 0.8);
   color: #fff;
-  font-size: 0.62rem;
+  font-family: var(--df-font-mono);
+  font-size: 0.6rem;
   font-weight: 700;
   display: flex;
   flex-direction: column;
@@ -425,8 +533,8 @@ html, body.drivefolio-body {
   position: fixed;
   inset: 0;
   z-index: 950;
-  background: rgba(6, 10, 20, 0.84);
-  backdrop-filter: blur(8px);
+  background: rgba(6, 10, 20, 0.86);
+  backdrop-filter: blur(10px);
   display: none;
   align-items: center;
   justify-content: center;
@@ -436,18 +544,25 @@ html, body.drivefolio-body {
 .df-district-overlay.active,
 .modal-backdrop-custom.active {
   display: flex;
+  animation: dfFadeIn 0.25s var(--df-ease) both;
+}
+
+@keyframes dfFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .df-district-window,
 .modal-dialog-custom {
-  width: min(960px, 100%);
+  width: min(1020px, 100%);
   max-height: 88vh;
   background: var(--df-midnight);
-  border: 1px solid var(--df-border);
-  border-radius: 12px;
+  border: 1px solid var(--df-border-strong);
+  border-radius: 4px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
+  box-shadow: 0 28px 64px rgba(0, 0, 0, 0.6);
 }
 
 .df-district-header,
@@ -483,24 +598,53 @@ html, body.drivefolio-body {
 
 .df-directory-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   gap: 14px;
 }
 
 .df-dir-card {
   background: var(--df-navy);
   border: 1px solid var(--df-border);
-  border-radius: 8px;
-  padding: 14px;
+  border-radius: 3px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 7px;
+  transition: border-color 0.22s var(--df-ease), transform 0.22s var(--df-ease);
 }
 
-.df-dir-card h4 { margin: 0; font-size: 0.96rem; color: #fff; }
-.df-dir-card p { margin: 0; font-size: 0.8rem; color: #94A3B8; }
+.df-dir-card:hover {
+  border-color: rgba(255, 255, 255, 0.34);
+  transform: translateY(-2px);
+}
 
-.postcard-preview-frame img { width: 100%; border-radius: 6px; border: 1px solid var(--df-border); }
+.df-dir-thumb {
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #070B14;
+  border-radius: 2px;
+}
+
+.df-dir-thumb img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+}
+
+.df-dir-kicker {
+  font-family: var(--df-font-mono);
+  font-size: 0.67rem;
+  color: var(--df-blue-light);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.df-dir-card h4 { margin: 0; font-size: 0.96rem; color: #fff; font-weight: 600; }
+.df-dir-card p { margin: 0; font-size: 0.8rem; color: #94A3B8; line-height: 1.5; }
+
+.postcard-preview-frame img { width: 100%; border-radius: 3px; border: 1px solid var(--df-border); }
 
 @media (max-width: 991px), (hover: none) and (pointer: coarse) {
   .drivefolio-controls-bar { display: none; }
