@@ -78,18 +78,7 @@ window.PORTFOLIO_DATA = {
         'CMS Management',
         'Website Optimization',
         'Technical SEO'
-      ],
-      blueprintTitle: 'Web Architecture & CMS Engineering',
-      blueprintSubtitle: 'Enterprise Multisite WordPress, High-Traffic Custom Themes, Core Web Vitals Optimization & CDN Networks',
-      blueprintTags: ['WordPress Multisite', 'PHP 8.2+', 'Custom CMS', 'Core Web Vitals 95+', 'Cloudflare CDN', 'Nginx Cache'],
-      blueprintOverview: `
-        <p>I architect scalable corporate websites and multi-site CMS ecosystems that handle traffic spikes during regional trade exhibition dates. Every build incorporates clean semantic HTML5, async script loading, CSS containment, and responsive mobile architecture.</p>
-        <ul class="blueprint-list">
-          <li>Sub-second page load times on 3G/4G networks</li>
-          <li>Zero-downtime database and asset backups</li>
-          <li>Custom Gutenberg blocks and bespoke PHP templates</li>
-        </ul>
-      `
+      ]
     },
     {
       id: 'service-ops',
@@ -105,13 +94,7 @@ window.PORTFOLIO_DATA = {
         'Printer and Peripheral Support',
         'Technical Incident Resolution',
         'Enterprise IT Operations'
-      ],
-      blueprintTitle: 'Tech Operations & Infrastructure Support',
-      blueprintSubtitle: 'WebSocket Live Telemetry, Multi-Device Fleet Monitoring & Event-Day Technical Incident Support',
-      blueprintTags: ['WebSocket Streams', 'Hardware Telemetry', 'Fleet Management', 'Incident Response', 'CRM Sync'],
-      blueprintOverview: `
-        <p>Delivering on-site and remote technical operations for international exhibition events and corporate environments. Managing device fleets, network troubleshooting, OS provisioning, telemetry streams, and database synchronizations with rapid incident resolution.</p>
-      `
+      ]
     },
     {
       id: 'service-cloud',
@@ -126,13 +109,7 @@ window.PORTFOLIO_DATA = {
         'Business Application Support',
         'System Integration',
         'Data and Reporting Operations'
-      ],
-      blueprintTitle: 'Cloud Administration & Business Systems',
-      blueprintSubtitle: 'Microsoft Azure, Mimecast Security Operations, CRM Synchronization & Enterprise Legacy Modernization',
-      blueprintTags: ['Microsoft Azure', 'Mimecast', 'Cloud Administration', 'CRM Sync', 'Data Reporting', 'System Integration'],
-      blueprintOverview: `
-        <p>Supporting enterprise cloud environments, email gateway administration with Mimecast, and Microsoft Azure operational workflows alongside data reporting pipelines and CRM synchronization across regional exhibition teams.</p>
-      `
+      ]
     },
     {
       id: 'service-ai',
@@ -149,13 +126,7 @@ window.PORTFOLIO_DATA = {
         'IoT Solutions',
         'AI Integration',
         'Application Development'
-      ],
-      blueprintTitle: 'Software Engineering, AI & Legacy Integration',
-      blueprintSubtitle: 'FastAPI Microservices, Autonomous ReAct Loops, IoT Fleet Telemetry & Enterprise Application Engineering',
-      blueprintTags: ['Python 3.10+', 'FastAPI', 'MySQL / SQLite', 'REST APIs', 'IoT / ESP8266', 'AI Integration'],
-      blueprintOverview: `
-        <p>Engineering practical software solutions including FastAPI REST and WebSocket services, automated developer and business workflows, IoT monitoring systems, and LLM-powered tools with transparent token cost metering.</p>
-      `
+      ]
     }
   ],
 
@@ -271,34 +242,145 @@ window.PORTFOLIO_DATA = {
           { src: 'assets/images/project-pamerindo.png', webp: 'assets/images/webp/project-pamerindo.webp', caption: 'PT Pamerindo Indonesia Corporate Portal' }
         ]
       },
-      tabs: {
-        overview: `
-          <div class="bp-section">
-            <h5><i class="fa-solid fa-compass"></i> Corporate Showcase</h5>
-            <p><strong>PT Pamerindo Indonesia</strong> is the corporate gateway connecting 200+ global trade exhibitions and over 500,000 yearly trade visitors across Southeast Asia. Designed for exceptional load speeds, high security, and high-volume event registrations.</p>
-          </div>
-          <div class="bp-media">
-            <img src="assets/images/project-pamerindo.png" alt="PT Pamerindo Indonesia" loading="lazy" />
-          </div>
-          <div class="bp-footer-bar">
-            <span>Status: Live in Production</span>
-            <a href="https://www.pamerindo.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit Live Site <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-          </div>
-        `,
-        architecture: `
-          <div class="bp-card">
-            <h6><i class="fa-solid fa-server"></i> Enterprise WordPress &amp; Edge Delivery</h6>
-            <p>Engineered on a secure WordPress Enterprise stack with Redis object caching, Cloudflare CDN, JSON-LD structured schemas, and GDPR-compliant visitor tracking.</p>
-          </div>
-        `,
-        features: `
-          <div class="bp-grid">
-            <div class="bp-card"><h6>Multilingual Content Architecture</h6><p>Centralized corporate updates linking 200+ international B2B trade events across Indonesia and Asia.</p></div>
-            <div class="bp-card"><h6>Peak Traffic Resilience</h6><p>Optimized asset delivery and caching rules supporting concurrent registration campaigns.</p></div>
-          </div>
-        `,
-        specs: `<p class="bp-note">WordPress Enterprise • PHP 8.x • Technical SEO JSON-LD • Cloudflare CDN • 99.9% Uptime SLA.</p>`
-      }
+    },
+    {
+      id: 'tixlantra',
+      title: 'Tixlantra',
+      badge: 'Vercel Full-Stack • Event SaaS',
+      metaLine: 'Next.js 16 • Supabase RLS • Resend • QR Check-In',
+      categories: ['vercel', 'enterprise', 'web'],
+      categoryLabel: 'Vercel App • Event Ticketing SaaS',
+      featured: false,
+      shortDesc: 'Multi-event registration and cryptographic QR e-ticket platform with white-label client branding, payment proof confirmation, atomic check-in validation, and Excel export.',
+      img: 'assets/images/project-tixlantra.png',
+      webp: 'assets/images/webp/project-tixlantra.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: 'https://tixlantra.vercel.app',
+      repoUrl: 'https://github.com/rikkardochaplin/tixlantra',
+      tags: ['Next.js 16', 'React 19', 'Supabase RLS', 'Resend', 'html5-qrcode', 'ExcelJS'],
+      caseStudy: {
+        overview: 'Tixlantra (part of the Lantra ecosystem) is a mobile-first multi-event registration and QR e-ticket platform built with Next.js 16 App Router, React 19, TypeScript, Supabase PostgreSQL with Row-Level Security, and Resend.',
+        background: 'Built to serve multi-day B2B/B2C events requiring customizable client branding, both free instant tickets and paid manual-transfer verification, and reliable gate check-in.',
+        problem: 'Event organizers struggle with race conditions at entrance scanners, inconsistent white-label registration flows, and manual Excel tracking across multi-gate venues.',
+        role: 'Sole Full-Stack Engineer — designed the PostgreSQL schema & RLS policies, RPC check-in functions, Resend inline QR email delivery, and Tixlantra Scan camera portal.',
+        approach: 'Used 32-byte base64url cryptographic ticket tokens, atomic Postgres partial unique indexes (1x check-in per paid event day), and Signed URL payment proof review.',
+        implementation: 'Implemented /e/[slug] registration, /payment/[token] transfer upload, /ticket/[token] pass page, /admin/scan camera validator (html5-qrcode), and 2-sheet ExcelJS export.',
+        results: 'Complete production-structured Next.js + Supabase repository verified on GitHub; public live deployment URL and event attendee metrics are not publicly documented.',
+        screenshots: [{ src: 'assets/images/project-tixlantra.png', webp: 'assets/images/webp/project-tixlantra.webp', caption: 'Tixlantra Multi-Event Ticketing Architecture' }]
+      },
+    },
+    {
+      id: 'kelantra',
+      title: 'Kelantra',
+      badge: 'Vercel Full-Stack • B2B SaaS',
+      metaLine: 'Next.js 15 • Supabase RLS • Multi-Tenant Procurement',
+      categories: ['vercel', 'enterprise'],
+      categoryLabel: 'Vercel App • Procurement SaaS',
+      featured: false,
+      shortDesc: 'Multi-tenant B2B procurement and vendor management SaaS with strict PostgreSQL Row-Level Security, multi-tier approval workflows, and Vitest tenant isolation tests.',
+      img: 'assets/images/project-kelantra.png',
+      webp: 'assets/images/webp/project-kelantra.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: 'https://kelantra.vercel.app',
+      repoUrl: 'https://github.com/rikkardochaplin/kelantra',
+      tags: ['Next.js 15', 'React 19', 'TypeScript', 'Supabase RLS', 'Vitest', 'Zod'],
+      caseStudy: {
+        overview: 'Kelantra ("Control Every Purchase") is an enterprise multi-tenant B2B procurement and vendor management SaaS engineered with Next.js 15 App Router, TypeScript strict mode, and Supabase PostgreSQL.',
+        background: 'Organizations running multi-department purchasing need strict tenant isolation, unique document numbering per company, and auditable approval hierarchies.',
+        problem: 'Standard multi-tenant apps risk cross-organization data leaks if authorization only checks client-submitted organization IDs.',
+        role: 'Lead Full-Stack Engineer — architected dual-layer authorization (Database RLS + Server Action guards), RBAC role matrix, and Vitest tenant isolation test suite.',
+        approach: 'Every transactional table carries organization_id enforced by PostgreSQL RLS helpers (is_member_of_org, has_org_roles) alongside server-side getTenantContext() verification.',
+        implementation: 'Built multi-tier purchase approval flows, private tenant Supabase Storage buckets, Platform Superadmin governance (/platform-admin), and React Hook Form + Zod validation.',
+        results: 'Verified Next.js 15 multi-tenant architecture with Vitest isolation tests on GitHub; production tenant counts are not publicly documented.',
+        screenshots: [{ src: 'assets/images/project-kelantra.png', webp: 'assets/images/webp/project-kelantra.webp', caption: 'Kelantra Multi-Tenant Procurement Architecture' }]
+      },
+    },
+    {
+      id: 'fhi',
+      title: 'Food & Hospitality Indonesia (FHI)',
+      badge: 'B2B Exhibition',
+      metaLine: 'JIEXPO Jakarta • 40,000+ Trade Attendees',
+      categories: ['web'],
+      categoryLabel: 'Web Development • B2B Exhibition',
+      featured: false,
+      shortDesc: 'Premier trade platform for the F&B and HoReCa sectors, featuring digital exhibitor discovery, seminar schedules, and business matchmaking.',
+      img: 'assets/images/project-fhi.png',
+      webp: 'assets/images/webp/project-fhi.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: 'https://www.foodhospitalityindonesia.com',
+      repoUrl: null,
+      tags: ['WordPress Multisite', 'Event Engine', 'Exhibitor Directory'],
+      caseStudy: {
+        overview: 'Food & Hospitality Indonesia (FHI) is the flagship international B2B trade platform for the food, beverage, and HoReCa industries at JIEXPO Kemayoran, Jakarta.',
+        background: 'Serving 700+ international exhibitors and 40,000+ trade attendees, FHI acts as the primary pre-show discovery and visitor registration hub.',
+        problem: 'Large-scale trade expos experience intense registration spikes ahead of show dates and require accurate exhibitor directory search, seminar schedules, and responsive mobile access.',
+        role: 'Web Development & Technical Support — managing CMS architecture, content updates, exhibitor modules, performance optimization, and live show readiness.',
+        approach: 'Maintained on WordPress Multisite with structured exhibitor/matchmaking templates, lead capture integrations, and high-traffic caching tuning.',
+        implementation: 'Executed continuous page updates, landing page rollouts, SEO metadata improvements, and pre-event load readiness checks.',
+        results: 'Supports 40,000+ trade attendees and 700+ exhibitors per cycle at JIEXPO Jakarta.',
+        screenshots: [
+          { src: 'assets/images/project-fhi.png', webp: 'assets/images/webp/project-fhi.webp', caption: 'Food & Hospitality Indonesia (FHI) Portal' }
+        ]
+      },
+    },
+    {
+      id: 'labindo',
+      title: 'Lab Indonesia',
+      badge: 'Scientific B2B',
+      metaLine: 'ICE BSD • 22,000+ Attendees',
+      categories: ['web'],
+      categoryLabel: 'Web Development • Scientific B2B',
+      featured: false,
+      shortDesc: 'Southeast Asia’s largest trade platform for laboratory technology and scientific instrumentation, equipped with searchable exhibitor catalogues.',
+      img: 'assets/images/project-labindo.png',
+      webp: 'assets/images/webp/project-labindo.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: 'https://www.lab-indo.com',
+      repoUrl: null,
+      tags: ['CMS Architecture', 'Exhibitor Directory', 'Technical SEO'],
+      caseStudy: {
+        overview: 'Lab Indonesia is Southeast Asia’s benchmark trade exhibition website for laboratory equipment, analytical systems, and scientific instrumentation at ICE BSD.',
+        background: 'Connects over 22,000 researchers, laboratory managers, and international scientific manufacturers across regional markets.',
+        problem: 'Technical buyers and scientific delegates need fast, structured search across specialized instrumentation categories alongside bilingual event information.',
+        role: 'Web Developer — developed and maintained the modern site build for Lab Indonesia (as well as contributing to Lab Vietnam) with CMS customization and SEO tuning.',
+        approach: 'Structured WordPress CMS architecture with searchable exhibitor directories, technical SEO schema, and optimized media pipelines.',
+        implementation: 'Delivered new site updates, responsive layouts, exhibitor catalogue integration, and visitor analytics tracking.',
+        results: 'Serves 22,000+ trade attendees and regional scientific exhibitors; contributed to overall 30% load speed improvement across managed event sites.',
+        screenshots: [
+          { src: 'assets/images/project-labindo.png', webp: 'assets/images/webp/project-labindo.webp', caption: 'Lab Indonesia Exhibition Platform' }
+        ]
+      },
+    },
+    {
+      id: 'seolantra',
+      title: 'Seolantra',
+      badge: 'Vercel Full-Stack • Website Intelligence',
+      metaLine: 'Next.js 16 • PageSpeed Insights API v5 • Inngest',
+      categories: ['vercel', 'web', 'ai'],
+      categoryLabel: 'Vercel App • SEO & Performance SaaS',
+      featured: false,
+      shortDesc: 'Website performance, SEO, accessibility, and best-practices audit SaaS powered by Google PageSpeed Insights API v5, Inngest durable workflows, Recharts, and PDF reports.',
+      img: 'assets/images/project-seolantra.png',
+      webp: 'assets/images/webp/project-seolantra.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: 'https://seolantra.vercel.app',
+      repoUrl: 'https://github.com/rikkardochaplin/seolantra',
+      tags: ['Next.js 16', 'PageSpeed API v5', 'Inngest', 'Firebase', 'React-PDF'],
+      caseStudy: {
+        overview: 'Seolantra ("See deeper. Build better.") is a website intelligence SaaS running automated Mobile & Desktop Core Web Vitals, SEO, accessibility, and best-practices audits.',
+        background: 'Created to streamline technical SEO and Lighthouse diagnostics across multiple managed exhibition and corporate domains.',
+        problem: 'Manual PageSpeed checks across dozens of URLs are repetitive, hard to track over time, and difficult to package into executive PDF reports.',
+        role: 'Full-Stack Developer — built the Next.js 16 App Router dashboard, Firebase Auth HttpOnly session cookie handling, Inngest background job orchestration, and PDF generator.',
+        approach: 'Offloaded long-running PageSpeed Insights v5 API polling to durable Inngest workflows (/api/inngest) while persisting audit snapshots in Cloud Firestore.',
+        implementation: 'Integrated OpenTelemetry instrumentation, Recharts trend graphs, @react-pdf/renderer executive reports, and accessible Zod-validated audit triggers.',
+        results: 'Complete Next.js 16 + Inngest + PageSpeed SaaS codebase on GitHub; public live domain metrics are not publicly documented.',
+        screenshots: [{ src: 'assets/images/project-seolantra.png', webp: 'assets/images/webp/project-seolantra.webp', caption: 'Seolantra Website Intelligence Architecture' }]
+      },
     },
     {
       id: 'nexusagent',
@@ -335,454 +417,6 @@ window.PORTFOLIO_DATA = {
           { src: 'assets/images/project-nexusagent.png', webp: 'assets/images/webp/project-nexusagent.webp', caption: 'NexusAgent Real-Time Observability Web Dashboard & Token Analytics' }
         ]
       },
-      tabs: {
-        overview: `
-          <div class="bp-section">
-            <h5><i class="fa-solid fa-compass"></i> System Overview</h5>
-            <p><strong>NexusAgent &amp; PamerAi</strong> is an end-to-end AI platform built to streamline engineering workflows, provide granular transparency over LLM token consumption in dual currencies (USD $ and IDR Rp), and serve automated event intelligence to trade visitors via WhatsApp and PDF RAG retrieval.</p>
-          </div>
-          <div class="bp-media">
-            <img src="assets/images/project-nexusagent.png" alt="NexusAgent Web Dashboard" loading="lazy" />
-          </div>
-          <div class="bp-grid">
-            <div class="bp-card"><h6>Autonomous Reasoning</h6><p>ReAct execution loop breaks complex goals into subtasks with self-reflection and error recovery.</p></div>
-            <div class="bp-card"><h6>USD ($) &amp; IDR (Rp) Cost Meter</h6><p>Tracks prompt/completion tokens per request with live currency conversion and time-series charts.</p></div>
-            <div class="bp-card"><h6>Live @ai File Watcher</h6><p>Monitors code comments in real time, synthesizes implementations, and runs whitelisted CLI checks.</p></div>
-            <div class="bp-card"><h6>PamerAi WhatsApp Assistant</h6><p>Grounds inquiries across 7 exhibition industry clusters using extracted PDF schedules and exhibitor data.</p></div>
-          </div>
-        `,
-        architecture: `
-          <div class="bp-stack-list">
-            <div class="bp-card"><h6>1. Client Interfaces &amp; Channels</h6><p>Glassmorphism Web Dashboard • Standalone Desktop GUI (Tkinter) • Floating Copilot (Ctrl+Shift+A) • Inline @ai File Watcher • WhatsApp Bot (whatsapp-web.js).</p></div>
-            <div class="bp-card"><h6>2. Asynchronous API Gateway (FastAPI &amp; Uvicorn)</h6><p>ASGI runtime with lifespan connection pooling, Pydantic v2 validation, and SSE streaming.</p></div>
-            <div class="bp-card"><h6>3. Core NexusAgent Intelligence Engine</h6><p>ReAct Cycle (Thought → Action → Observation → Answer), Autonomous Goal Planner, and Persistent Memory Manager.</p></div>
-            <div class="bp-card"><h6>4. Tool Registry &amp; Observability</h6><p>File I/O diff engine, whitelisted CLI runner, psutil/Win32 hardware telemetry, and SQLite/SQLAlchemy token tracker.</p></div>
-          </div>
-        `,
-        features: `
-          <div class="bp-grid">
-            <div class="bp-card"><h6>1. Autonomous ReAct Engine</h6><p>Evaluates execution results step-by-step across multi-phase engineering tasks.</p></div>
-            <div class="bp-card"><h6>2. Token &amp; Cost Metering</h6><p>Measures prompt tokens, completion tokens, latency (ms), and USD/IDR cost per API call.</p></div>
-            <div class="bp-card"><h6>3. Live File Watcher (watcher.py)</h6><p>Detects <code># @ai</code> comments in source files and generates working implementations in place.</p></div>
-            <div class="bp-card"><h6>4. Event WhatsApp Assistant</h6><p>Bilingual (ID/EN) assistant grounded in Pamerindo exhibition PDFs with auto-cleaning session locks.</p></div>
-          </div>
-        `,
-        specs: `
-          <div class="bp-table-wrap">
-            <table class="bp-table">
-              <thead><tr><th>Method</th><th>Endpoint</th><th>Description</th></tr></thead>
-              <tbody>
-                <tr><td><span class="badge-method post">POST</span></td><td><code>/api/agent/chat</code></td><td>Executes ReAct reasoning steps with tool execution</td></tr>
-                <tr><td><span class="badge-method post">POST</span></td><td><code>/api/agent/autonomous</code></td><td>Launches multi-step goal decomposition</td></tr>
-                <tr><td><span class="badge-method get">GET</span></td><td><code>/api/stats/overview</code></td><td>Retrieves token KPIs, total costs ($/Rp), and latency averages</td></tr>
-                <tr><td><span class="badge-method get">GET</span></td><td><code>/api/stats/charts</code></td><td>Provides time-series datasets and model distribution for Chart.js</td></tr>
-              </tbody>
-            </table>
-          </div>
-        `
-      }
-    },
-    {
-      id: 'fhi',
-      title: 'Food & Hospitality Indonesia (FHI)',
-      badge: 'B2B Exhibition',
-      metaLine: 'JIEXPO Jakarta • 40,000+ Trade Attendees',
-      categories: ['web'],
-      categoryLabel: 'Web Development • B2B Exhibition',
-      featured: false,
-      shortDesc: 'Premier trade platform for the F&B and HoReCa sectors, featuring digital exhibitor discovery, seminar schedules, and business matchmaking.',
-      img: 'assets/images/project-fhi.png',
-      webp: 'assets/images/webp/project-fhi.webp',
-      width: 1280,
-      height: 720,
-      liveUrl: 'https://www.foodhospitalityindonesia.com',
-      repoUrl: null,
-      tags: ['WordPress Multisite', 'Event Engine', 'Exhibitor Directory'],
-      caseStudy: {
-        overview: 'Food & Hospitality Indonesia (FHI) is the flagship international B2B trade platform for the food, beverage, and HoReCa industries at JIEXPO Kemayoran, Jakarta.',
-        background: 'Serving 700+ international exhibitors and 40,000+ trade attendees, FHI acts as the primary pre-show discovery and visitor registration hub.',
-        problem: 'Large-scale trade expos experience intense registration spikes ahead of show dates and require accurate exhibitor directory search, seminar schedules, and responsive mobile access.',
-        role: 'Web Development & Technical Support — managing CMS architecture, content updates, exhibitor modules, performance optimization, and live show readiness.',
-        approach: 'Maintained on WordPress Multisite with structured exhibitor/matchmaking templates, lead capture integrations, and high-traffic caching tuning.',
-        implementation: 'Executed continuous page updates, landing page rollouts, SEO metadata improvements, and pre-event load readiness checks.',
-        results: 'Supports 40,000+ trade attendees and 700+ exhibitors per cycle at JIEXPO Jakarta.',
-        screenshots: [
-          { src: 'assets/images/project-fhi.png', webp: 'assets/images/webp/project-fhi.webp', caption: 'Food & Hospitality Indonesia (FHI) Portal' }
-        ]
-      },
-      tabs: {
-        overview: `
-          <div class="bp-section">
-            <h5><i class="fa-solid fa-utensils"></i> Event Overview</h5>
-            <p><strong>Food &amp; Hospitality Indonesia (FHI)</strong> gathers over 40,000 trade attendees and 700+ international exhibitors. The portal features interactive exhibitor directories, seminar registration, and automated VIP badges.</p>
-          </div>
-          <div class="bp-media"><img src="assets/images/project-fhi.png" alt="Food & Hospitality Indonesia" loading="lazy" /></div>
-          <div class="bp-footer-bar">
-            <span>JIEXPO Jakarta • 40,000+ Trade Attendees</span>
-            <a href="https://www.foodhospitalityindonesia.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit Live Platform <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-          </div>
-        `
-      }
-    },
-    {
-      id: 'labindo',
-      title: 'Lab Indonesia',
-      badge: 'Scientific B2B',
-      metaLine: 'ICE BSD • 22,000+ Attendees',
-      categories: ['web'],
-      categoryLabel: 'Web Development • Scientific B2B',
-      featured: false,
-      shortDesc: 'Southeast Asia’s largest trade platform for laboratory technology and scientific instrumentation, equipped with searchable exhibitor catalogues.',
-      img: 'assets/images/project-labindo.png',
-      webp: 'assets/images/webp/project-labindo.webp',
-      width: 1280,
-      height: 720,
-      liveUrl: 'https://www.lab-indo.com',
-      repoUrl: null,
-      tags: ['CMS Architecture', 'Exhibitor Directory', 'Technical SEO'],
-      caseStudy: {
-        overview: 'Lab Indonesia is Southeast Asia’s benchmark trade exhibition website for laboratory equipment, analytical systems, and scientific instrumentation at ICE BSD.',
-        background: 'Connects over 22,000 researchers, laboratory managers, and international scientific manufacturers across regional markets.',
-        problem: 'Technical buyers and scientific delegates need fast, structured search across specialized instrumentation categories alongside bilingual event information.',
-        role: 'Web Developer — developed and maintained the modern site build for Lab Indonesia (as well as contributing to Lab Vietnam) with CMS customization and SEO tuning.',
-        approach: 'Structured WordPress CMS architecture with searchable exhibitor directories, technical SEO schema, and optimized media pipelines.',
-        implementation: 'Delivered new site updates, responsive layouts, exhibitor catalogue integration, and visitor analytics tracking.',
-        results: 'Serves 22,000+ trade attendees and regional scientific exhibitors; contributed to overall 30% load speed improvement across managed event sites.',
-        screenshots: [
-          { src: 'assets/images/project-labindo.png', webp: 'assets/images/webp/project-labindo.webp', caption: 'Lab Indonesia Exhibition Platform' }
-        ]
-      },
-      tabs: {
-        overview: `
-          <div class="bp-section">
-            <h5><i class="fa-solid fa-flask"></i> Event Overview</h5>
-            <p><strong>Lab Indonesia</strong> is the benchmark exhibition for scientific instrumentation in Southeast Asia, connecting over 22,000 researchers, lab managers, and global manufacturers.</p>
-          </div>
-          <div class="bp-media"><img src="assets/images/project-labindo.png" alt="Lab Indonesia" loading="lazy" /></div>
-          <div class="bp-footer-bar">
-            <span>ICE BSD • 22,000+ Attendees</span>
-            <a href="https://www.lab-indo.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit Live Platform <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-          </div>
-        `
-      }
-    },
-    {
-      id: 'fhtbali',
-      title: 'Food, Hotel & Tourism Bali (FHTB)',
-      badge: 'Tourism B2B',
-      metaLine: 'BNDCC Bali • Asia-Pacific Hub',
-      categories: ['web'],
-      categoryLabel: 'Web Development • Hospitality & Tourism',
-      featured: false,
-      shortDesc: 'High-traffic hospitality and tourism trade platform connecting international suppliers with resort operators across Bali and the Asia-Pacific.',
-      img: 'assets/images/project-fhtbali.png',
-      webp: 'assets/images/webp/project-fhtbali.webp',
-      width: 1280,
-      height: 720,
-      liveUrl: 'https://www.fhtbali.com',
-      repoUrl: null,
-      tags: ['WordPress', 'UI/UX', 'Speed Tuning'],
-      caseStudy: {
-        overview: 'Food, Hotel & Tourism Bali (FHTB) serves as the eastern Indonesian and Asia-Pacific procurement hub for hospitality, resort operations, and culinary technology at BNDCC Nusa Dua, Bali.',
-        background: 'Designed for international hospitality buyers, hoteliers, and F&B suppliers across Bali and the wider Asia-Pacific region.',
-        problem: 'Required responsive mobile UX and fast page delivery for international visitors accessing exhibitor info and registration funnels on varied mobile networks.',
-        role: 'Web Developer — managed CMS operations, responsive UX refinements, speed optimization, and lead funnel integrations.',
-        approach: 'Enterprise WordPress setup with asset compression, caching optimization, and clear exhibitor/visitor registration pathways.',
-        implementation: 'Maintained bilingual schedules, sponsor showcases, and conversion-focused registration pages.',
-        results: 'Active regional hospitality trade gateway serving Bali and Asia-Pacific delegates; specific private conversion metrics are not publicly documented.',
-        screenshots: [
-          { src: 'assets/images/project-fhtbali.png', webp: 'assets/images/webp/project-fhtbali.webp', caption: 'Food, Hotel & Tourism Bali Portal' }
-        ]
-      },
-      tabs: {
-        overview: `
-          <div class="bp-section">
-            <h5><i class="fa-solid fa-hotel"></i> Event Overview</h5>
-            <p><strong>FHT Bali</strong> serves as the eastern Indonesian and Asia-Pacific hub for hospitality procurement, connecting luxury resort operators and culinary experts with global food &amp; hotel tech brands.</p>
-          </div>
-          <div class="bp-media"><img src="assets/images/project-fhtbali.png" alt="FHT Bali" loading="lazy" /></div>
-          <div class="bp-footer-bar">
-            <span>BNDCC Bali • Asia-Pacific Hub</span>
-            <a href="https://www.fhtbali.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit Live Platform <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-          </div>
-        `
-      }
-    },
-    {
-      id: 'cosmobeaute',
-      title: 'Cosmobeauté Indonesia',
-      badge: 'Beauty B2B',
-      metaLine: 'ICE BSD • Aesthetic Tech Hub',
-      categories: ['web'],
-      categoryLabel: 'Web Development • Beauty & Aesthetics',
-      featured: false,
-      shortDesc: 'The nation’s largest B2B beauty and aesthetic trade portal, tailored for supplier networking, brand showcases, and visitor registration.',
-      img: 'assets/images/project-cosmobeaute.png',
-      webp: 'assets/images/webp/project-cosmobeaute.webp',
-      width: 1280,
-      height: 720,
-      liveUrl: 'https://www.cosmobeauteasia.com/indonesia/',
-      repoUrl: null,
-      tags: ['CMS Customization', 'Lead Capture', 'B2B Directory'],
-      caseStudy: {
-        overview: 'Cosmobeauté Indonesia is Indonesia’s largest B2B beauty, aesthetic technology, and salon distribution exhibition portal hosted at ICE BSD.',
-        background: 'Connects aesthetic medical specialists, spa operators, and beauty distributors with international OEM/ODM manufacturers and equipment brands.',
-        problem: 'Needed a dedicated, modernized Indonesian regional edition portal integrated with exhibitor lead capture and brand showcase workflows.',
-        role: 'Web Developer — contributed to building and maintaining the Cosmobeauté Indonesia site, CMS templates, and lead capture workflows.',
-        approach: 'Custom WordPress CMS modules supporting brand directories, exhibitor inquiries, and responsive visitor registration flows.',
-        implementation: 'Deployed tailored page templates, optimized visual showcases, and coordinated multi-team content updates ahead of annual editions.',
-        results: 'Successfully launched and maintained for annual ICE BSD editions; private commercial lead totals are not publicly documented.',
-        screenshots: [
-          { src: 'assets/images/project-cosmobeaute.png', webp: 'assets/images/webp/project-cosmobeaute.webp', caption: 'Cosmobeauté Indonesia Portal' }
-        ]
-      },
-      tabs: {
-        overview: `
-          <div class="bp-section">
-            <h5><i class="fa-solid fa-spa"></i> Event Overview</h5>
-            <p><strong>Cosmobeauté Indonesia</strong> connects aesthetic medical specialists, spa owners, and beauty distributors with international brands and equipment manufacturers.</p>
-          </div>
-          <div class="bp-media"><img src="assets/images/project-cosmobeaute.png" alt="Cosmobeauté Indonesia" loading="lazy" /></div>
-          <div class="bp-footer-bar">
-            <span>ICE BSD • Aesthetic Tech Hub</span>
-            <a href="https://www.cosmobeauteasia.com/indonesia/" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit Live Platform <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-          </div>
-        `
-      }
-    },
-    {
-      id: 'vapefair',
-      title: 'Vape Fair Indonesia',
-      badge: 'Industry Hub',
-      metaLine: 'Jakarta • Trade & Consumer Expo',
-      categories: ['web'],
-      categoryLabel: 'Web Development • Industry Expo',
-      featured: false,
-      shortDesc: 'Dedicated international trade portal for manufacturers, distributors, and consumers, featuring age-verified digital ticketing.',
-      img: 'assets/images/project-vapefair.png',
-      webp: 'assets/images/webp/project-vapefair.webp',
-      width: 1280,
-      height: 720,
-      liveUrl: 'https://www.vapefair.id',
-      repoUrl: null,
-      tags: ['WordPress', 'Age Verification', 'B2B Directory'],
-      caseStudy: {
-        overview: 'Vape Fair Indonesia is a dedicated international exhibition portal connecting alternative consumer product manufacturers, distributors, and adult attendees in Jakarta.',
-        background: 'Requires regulatory age-gate compliance alongside seamless digital ticketing and exhibitor showcase pages.',
-        problem: 'Balancing strict age-verification gating with fast mobile load times and high-traffic ticketing flows during event announcements.',
-        role: 'Web Developer — maintained WordPress platform, age-verification UI flow, ticketing links, and performance tuning.',
-        approach: 'WordPress implementation featuring lightweight client-side age-gate persistence, B2B directory layout, and mobile-first optimization.',
-        implementation: 'Updated annual event branding, exhibitor listings, and high-traffic ticket funnel links.',
-        results: 'Live production portal at vapefair.id; internal ticket conversion metrics are not publicly documented.',
-        screenshots: [
-          { src: 'assets/images/project-vapefair.png', webp: 'assets/images/webp/project-vapefair.webp', caption: 'Vape Fair Indonesia Website' }
-        ]
-      },
-      tabs: {
-        overview: `
-          <div class="bp-section">
-            <h5><i class="fa-solid fa-wind"></i> Event Overview</h5>
-            <p><strong>Vape Fair Indonesia</strong> is an international exhibition portal connecting manufacturers, distributors, and consumers, featuring age-verified digital ticket booking.</p>
-          </div>
-          <div class="bp-media"><img src="assets/images/project-vapefair.png" alt="Vape Fair Indonesia" loading="lazy" /></div>
-          <div class="bp-footer-bar">
-            <span>Jakarta • Industry Exhibition</span>
-            <a href="https://www.vapefair.id" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit Live Platform <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-          </div>
-        `
-      }
-    },
-    {
-      id: 'cloudsfest',
-      title: 'Clouds Fest',
-      badge: 'Lifestyle Trade',
-      metaLine: 'Southeast Asia • Pamerindo · Informa',
-      categories: ['web'],
-      categoryLabel: 'Web Development • Lifestyle Trade',
-      featured: false,
-      shortDesc: 'Dynamic lifestyle and trade showcase platform for alternative consumer products across Southeast Asia.',
-      img: 'assets/images/project-cloudsfest.png',
-      webp: 'assets/images/webp/project-cloudsfest.webp',
-      width: 1280,
-      height: 720,
-      liveUrl: 'https://www.cloudsfest.com',
-      repoUrl: null,
-      tags: ['WordPress CMS', 'Event Engine', 'Ticketing'],
-      caseStudy: {
-        overview: 'Clouds Fest is a regional lifestyle and trade showcase platform under PT Pamerindo Indonesia / Informa Markets serving Southeast Asian audiences.',
-        background: 'Combines trade exhibition directories with festival lineups, stage schedules, and ticket booking workflows.',
-        problem: 'Delivering rich visual festival lineups on mobile devices without degrading scroll smoothness or page speed.',
-        role: 'Web Developer — managed CMS modules, responsive mobile tuning, event schedule sections, and ticketing integrations.',
-        approach: 'WordPress CMS setup with modular schedule components, mobile viewport optimization, and fast media loading.',
-        implementation: 'Maintained lineup schedules, brand exhibitor blocks, and cross-linked ticketing CTAs.',
-        results: 'Live production festival portal at cloudsfest.com; attendance figures are not publicly documented.',
-        screenshots: [
-          { src: 'assets/images/project-cloudsfest.png', webp: 'assets/images/webp/project-cloudsfest.webp', caption: 'Clouds Fest Portal' }
-        ]
-      },
-      tabs: {
-        overview: `
-          <div class="bp-section">
-            <h5><i class="fa-solid fa-cloud"></i> Event Overview</h5>
-            <p><strong>Clouds Fest</strong> offers interactive event schedules, musical performer lineups, and exhibitor booths for regional lifestyle trade audiences.</p>
-          </div>
-          <div class="bp-media"><img src="assets/images/project-cloudsfest.png" alt="Clouds Fest" loading="lazy" /></div>
-          <div class="bp-footer-bar">
-            <span>Southeast Asia • Informa Markets</span>
-            <a href="https://www.cloudsfest.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit Live Platform <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-          </div>
-        `
-      }
-    },
-    {
-      id: 'beautefestival',
-      title: 'Beauté Festival',
-      badge: 'Beauty Lifestyle',
-      metaLine: 'Jakarta • Retail & Activations',
-      categories: ['web'],
-      categoryLabel: 'Web Development • D2C Festival',
-      featured: false,
-      shortDesc: 'Consumer-facing beauty and wellness festival portal blending digital registration, brand activations, and influencer schedules.',
-      img: 'assets/images/project-beautefestival.png',
-      webp: 'assets/images/webp/project-beautefestival.webp',
-      width: 1280,
-      height: 720,
-      liveUrl: 'https://www.beautefestival.com',
-      repoUrl: null,
-      tags: ['WordPress', 'D2C Portal', 'Brand Activations'],
-      caseStudy: {
-        overview: 'Beauté Festival is a consumer-facing beauty and wellness festival portal in Jakarta uniting skincare brands, influencers, workshop bookings, and live masterclass schedules.',
-        background: 'Created as a D2C complement to Pamerindo’s B2B beauty trade portfolio.',
-        problem: 'High mobile social-media referral traffic requiring instant schedule browsing, brand activation highlights, and frictionless registration.',
-        role: 'Web Developer — managed WordPress theme customization, D2C registration links, and mobile visual polish.',
-        approach: 'Responsive WordPress architecture structured around brand activation grids and masterclass timetables.',
-        implementation: 'Deployed editorial event blocks, influencer schedule modules, and campaign tracking.',
-        results: 'Live production portal at beautefestival.com; private registration numbers are not publicly documented.',
-        screenshots: [
-          { src: 'assets/images/project-beautefestival.png', webp: 'assets/images/webp/project-beautefestival.webp', caption: 'Beauté Festival Portal' }
-        ]
-      },
-      tabs: {
-        overview: `
-          <div class="bp-section">
-            <h5><i class="fa-solid fa-heart"></i> Event Overview</h5>
-            <p><strong>Beauté Festival</strong> brings together beauty enthusiasts, influencers, and leading skincare brands with interactive workshop bookings and live masterclass schedules.</p>
-          </div>
-          <div class="bp-media"><img src="assets/images/project-beautefestival.png" alt="Beauté Festival" loading="lazy" /></div>
-          <div class="bp-footer-bar">
-            <span>Jakarta • Retail &amp; Activations</span>
-            <a href="https://www.beautefestival.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm">Visit Live Platform <i class="fa-solid fa-arrow-up-right-from-square"></i></a>
-          </div>
-        `
-      }
-    },
-    {
-      id: 'orion-erp',
-      title: 'Orion ERP & IBM iSeries Simulator',
-      badge: 'Enterprise ERP',
-      metaLine: 'IBM AS/400 • DB2 • RPG IV Free Format',
-      categories: ['enterprise'],
-      categoryLabel: 'Enterprise Systems • ERP & Mainframe',
-      featured: false,
-      shortDesc: 'Enterprise manufacturing ERP platform featuring live IBM AS/400 DB2 terminal connectivity, multi-level BOM explosion, MRP engine, and WRKSPLF/WRKACTJOB emulators.',
-      img: 'assets/images/project-orion-erp.png',
-      webp: 'assets/images/webp/project-orion-erp.webp',
-      width: 1280,
-      height: 720,
-      liveUrl: null,
-      repoUrl: null,
-      docFile: 'Project-ERP.md',
-      tags: ['IBM AS/400 DB2', 'RPG IV Free', 'MRP & BOM', '5250 Terminal'],
-      caseStudy: {
-        overview: 'Orion ERP & IBM iSeries Simulator is an enterprise manufacturing ERP platform and AS/400 RPG simulator designed around real manufacturing & supply-chain workflows (Inventory, MES, MRP, Purchasing, Sales, General Ledger, and OS/400 Security).',
-        background: 'Built as a comprehensive candidate engineering portfolio package demonstrating IBM iSeries (AS/400), RPG IV Free Format (**FREE), DB2 for i relational modeling, and modern web UI integration.',
-        problem: 'Legacy AS/400 ERP environments often lack accessible modern interfaces for cross-departmental visibility while requiring strict transactional integrity, RBAC, and audit journaling.',
-        role: 'Sole Designer & Full-Stack Engineer — modeled DB2 relational tables (INVMSTP, BOMMSTP, MRPMSTP, WKHEDP, POHEDP, VCHDTLP, SECAUDP), authored RPG Free simulation modules, and built the 5250 terminal & executive dashboard UI.',
-        approach: 'Combined a modern web operations frontend (HTML5, CSS3, Vanilla JS, LocalStorage persistence) with authentic IBM i workflows including WRKSPLF 132-column green-bar print spooling, WRKACTJOB subsystem control, STRSQL console, and 5250 sign-on lock screen.',
-        implementation: 'Implemented BOM explosion (BOM_EXPLODE.RPGLE), net-demand MRP planning (MRP_ENGINE.RPGLE), auto-reorder triggers (INV_REORDER_AUTO), batch GL voucher posting (GL_POST_BATCH.RPGLE), and RBAC enforcement blocking destructive SQL statements.',
-        results: 'Complete interactive 12-module ERP & AS/400 simulation verified with screenshots and technical documentation in portfolio_presentation.md. Designed as a technical showcase/simulator rather than a live factory deployment.',
-        screenshots: [
-          { src: 'assets/images/project-orion-erp.png', webp: 'assets/images/webp/project-orion-erp.webp', caption: 'Orion ERP Executive Operations & AS/400 Dashboard' }
-        ]
-      },
-      tabs: {
-        overview: `
-          <div class="bp-section">
-            <h5><i class="fa-solid fa-compass"></i> System Overview</h5>
-            <p><strong>Orion ERP</strong> is an enterprise manufacturing and IBM iSeries (AS/400) RPG simulator unifying Inventory (<code>INVMSTP</code>), MES &amp; BOM explosion, Material Requirements Planning (MRP), Purchasing/Sales, General Ledger (AR/AP/GL), and OS/400 Security Journaling (<code>QAUDJRN</code>).</p>
-          </div>
-          <div class="bp-media"><img src="assets/images/project-orion-erp.png" alt="Orion ERP Dashboard" loading="lazy" /></div>
-        `,
-        architecture: `
-          <div class="bp-card">
-            <h6><i class="fa-solid fa-server"></i> IBM AS/400 DB2 &amp; OS/400 Subsystem Emulation</h6>
-            <p>Structured around DB2 for i physical files (<code>INVMSTP</code>, <code>BOMMSTP</code>, <code>WKHEDP</code>, <code>VCHDTLP</code>, <code>SECAUDP</code>) with WRKSPLF print queues (<code>QPRINT</code>, <code>ORIONPRT</code>), WRKACTJOB subsystem controls (<code>QINTER</code>, <code>QBATCH</code>), and interactive STRSQL query console.</p>
-          </div>
-        `,
-        features: `
-          <div class="bp-grid">
-            <div class="bp-card"><h6>MRP &amp; BOM Explosion</h6><p>Multi-level BOM allocation (<code>BOM_EXPLODE.RPGLE</code>) and net demand calculation against safety stock.</p></div>
-            <div class="bp-card"><h6>Finance &amp; General Ledger</h6><p>Batch voucher posting (<code>GL_POST_BATCH.RPGLE</code>) validating debit/credit balance integrity to <code>GLMSTP</code>.</p></div>
-            <div class="bp-card"><h6>WRKSPLF &amp; WRKACTJOB</h6><p>132-column green-bar spooled file viewer and active job subsystem management emulator.</p></div>
-            <div class="bp-card"><h6>RBAC &amp; 5250 Lock Screen</h6><p>Role-based user profiles (<code>QSECOFR</code>, <code>FIN_MGR</code>, <code>WHS_OPER</code>) with SQL injection blocking.</p></div>
-          </div>
-        `,
-        specs: `<p class="bp-note">Simulated IBM iSeries AS/400 • RPG IV Free Format (**FREE) • CLP • DB2 for i / STRSQL • Modern HTML5/CSS3/JS UI.</p>`
-      }
-    },
-    {
-      id: 'cv-examiner',
-      title: 'CV Examiner AI Pro Platform',
-      badge: 'AI SaaS',
-      metaLine: 'GPT-4o Engine • Career Intelligence SaaS',
-      categories: ['ai'],
-      categoryLabel: 'AI & Automation • Career SaaS',
-      featured: false,
-      shortDesc: 'AI-powered recruitment SaaS providing automated resume parsing, ATS keyword gap analysis, STAR-method suggestions, and candidate scoring.',
-      img: 'assets/images/project-cv-examiner.png',
-      webp: 'assets/images/webp/project-cv-examiner.webp',
-      width: 1280,
-      height: 720,
-      liveUrl: null,
-      repoUrl: null,
-      docFile: 'Project-CV.md',
-      tags: ['GPT-4o', 'FastAPI', 'React 18', 'ATS Analyzer'],
-      caseStudy: {
-        overview: 'CV Examiner AI Pro is a bilingual (Indonesian / English) SaaS platform powered by GPT-4o via FastAPI and React 18 that audits resumes, computes ATS scores (0–100), rewrites bullet points into STAR format, and conducts LinkedIn profile & interview preparation.',
-        background: 'Built to help professionals and hiring workflows systematically identify keyword gaps, resume weaknesses, and interview readiness.',
-        problem: 'Manual CV review is time-consuming and inconsistent, and job seekers rarely receive structured feedback on ATS keyword alignment or measurable STAR phrasing.',
-        role: 'Full-Stack & AI Engineer — architected the React 18 / Vite frontend components (AtsAudit, LinkedInAudit, InterviewPrepStudio, StarRewriter, WeaknessFixer, ExportModal) and FastAPI GPT-4o SSE backend.',
-        approach: 'Modular React 18 UI with i18n translations (ID/EN) and Dark/Light themes paired with a FastAPI server integrating Informa AI Engine / AWS Cognito OAuth2 token flows.',
-        implementation: 'Built multi-format file upload (PDF/DOCX/TXT), structured JSON/Text/PDF-ready export, automated Puppeteer screenshot capture pipeline, and 6 specialized analysis studios.',
-        results: 'Complete full-stack SaaS application documented in Project-CV.md with 9 verified UI module captures. External public usage metrics are not publicly documented.',
-        screenshots: [
-          { src: 'assets/images/project-cv-examiner.png', webp: 'assets/images/webp/project-cv-examiner.webp', caption: 'CV Examiner AI Pro Dashboard' }
-        ]
-      },
-      tabs: {
-        overview: `
-          <div class="bp-section">
-            <h5><i class="fa-solid fa-compass"></i> System Overview</h5>
-            <p><strong>CV Examiner AI Pro</strong> parses PDF, DOCX, and TXT resumes, benchmarks qualifications against target job descriptions, computes ATS scores (0–100), and delivers actionable STAR rewrites, LinkedIn audits, and AI interview prep.</p>
-          </div>
-          <div class="bp-media"><img src="assets/images/project-cv-examiner.png" alt="CV Examiner AI Pro" loading="lazy" /></div>
-        `,
-        architecture: `
-          <div class="bp-card">
-            <h6><i class="fa-solid fa-sitemap"></i> React 18 + Vite Frontend &amp; FastAPI GPT-4o Backend</h6>
-            <p>Frontend state orchestrates <code>CVUploadForm</code>, <code>AnalysisDashboard</code>, and 6 modular audit views with bilingual <code>translations.js</code> (ID/EN), backed by Python FastAPI (<code>server.py</code>) and Cognito OAuth2 SSE streaming.</p>
-          </div>
-        `,
-        features: `
-          <div class="bp-grid">
-            <div class="bp-card"><h6>ATS Smart Keyword Audit</h6><p>Detects missing target keywords and scores ATS readability (0–100).</p></div>
-            <div class="bp-card"><h6>STAR Rewriter Engine</h6><p>Rewrites experience bullets into Situation, Task, Action, and Result impact statements.</p></div>
-            <div class="bp-card"><h6>AI Interview Prep Studio</h6><p>Generates role-specific technical and behavioral questions with ideal answer guides.</p></div>
-            <div class="bp-card"><h6>LinkedIn &amp; Weakness Fixer</h6><p>Audits CV-to-LinkedIn alignment and surfaces prioritized fixes with multi-format export.</p></div>
-          </div>
-        `,
-        specs: `<p class="bp-note">React 18 • Vite 5 • FastAPI 0.111 • Python 3.11+ • GPT-4o • Bilingual (ID/EN).</p>`
-      }
     },
     {
       id: 'monitor-tablet',
@@ -816,157 +450,35 @@ window.PORTFOLIO_DATA = {
           { src: 'assets/images/project-monitor-tablet-4.png', webp: 'assets/images/webp/project-monitor-tablet-4.webp', caption: 'Android Tablet Client & Connectivity State' }
         ]
       },
-      tabs: {
-        overview: `
-          <div class="bp-section">
-            <h5><i class="fa-solid fa-tablet-screen-button"></i> System Overview</h5>
-            <p><strong>Enterprise IoT &amp; Multi-Device Remote Hub</strong> monitors battery, RAM, CPU, and live screen state across 30+ Android exhibition tablets and Windows kiosks with sub-200ms latency and non-root remote control.</p>
-          </div>
-          <div class="bp-media"><img src="assets/images/project-monitor-tablet.png" alt="Enterprise IoT Hub" loading="lazy" /></div>
-        `,
-        architecture: `
-          <div class="bp-card">
-            <h6><i class="fa-solid fa-network-wired"></i> Asynchronous Hub + Android Kotlin &amp; Windows Python Clients</h6>
-            <p>Central FastAPI hub exposes <code>/api/report</code>, <code>/api/command</code>, <code>/api/upload_screenshot</code> (in-memory RAM cache), and <code>/api/devices</code> with 7-second heartbeat timeout detection.</p>
-          </div>
-        `,
-        features: `
-          <div class="bp-grid">
-            <div class="bp-card"><h6>Non-Root Android Control</h6><p>Uses Android <code>AccessibilityService</code> + <code>MediaProjection</code> with <code>Channel.CONFLATED</code> to drop stale frames on busy Wi-Fi.</p></div>
-            <div class="bp-card"><h6>Thread-Isolated PC Client</h6><p>Decouples command loop (100ms), JPEG capture loop, and <code>psutil</code> CPU sampler (&lt;2% CPU usage) with DPI-safe 0–100% click mapping.</p></div>
-          </div>
-        `,
-        specs: `<p class="bp-note">Python 3.10+ • FastAPI • Uvicorn • Kotlin &amp; Jetpack Compose • PyAutoGUI • psutil • Sub-200ms Streaming.</p>`
-      }
     },
     {
-      id: 'tixlantra',
-      title: 'Tixlantra',
-      badge: 'Vercel Full-Stack • Event SaaS',
-      metaLine: 'Next.js 16 • Supabase RLS • Resend • QR Check-In',
-      categories: ['vercel', 'enterprise', 'web'],
-      categoryLabel: 'Vercel App • Event Ticketing SaaS',
+      id: 'cosmobeaute',
+      title: 'Cosmobeauté Indonesia',
+      badge: 'Beauty B2B',
+      metaLine: 'ICE BSD • Aesthetic Tech Hub',
+      categories: ['web'],
+      categoryLabel: 'Web Development • Beauty & Aesthetics',
       featured: false,
-      shortDesc: 'Multi-event registration and cryptographic QR e-ticket platform with white-label client branding, payment proof confirmation, atomic check-in validation, and Excel export.',
-      img: 'assets/images/project-tixlantra.png',
-      webp: 'assets/images/webp/project-tixlantra.webp',
+      shortDesc: 'The nation’s largest B2B beauty and aesthetic trade portal, tailored for supplier networking, brand showcases, and visitor registration.',
+      img: 'assets/images/project-cosmobeaute.png',
+      webp: 'assets/images/webp/project-cosmobeaute.webp',
       width: 1280,
       height: 720,
-      liveUrl: null,
-      repoUrl: 'https://github.com/rikkardochaplin/tixlantra',
-      tags: ['Next.js 16', 'React 19', 'Supabase RLS', 'Resend', 'html5-qrcode', 'ExcelJS'],
+      liveUrl: 'https://www.cosmobeauteasia.com/indonesia/',
+      repoUrl: null,
+      tags: ['CMS Customization', 'Lead Capture', 'B2B Directory'],
       caseStudy: {
-        overview: 'Tixlantra (part of the Lantra ecosystem) is a mobile-first multi-event registration and QR e-ticket platform built with Next.js 16 App Router, React 19, TypeScript, Supabase PostgreSQL with Row-Level Security, and Resend.',
-        background: 'Built to serve multi-day B2B/B2C events requiring customizable client branding, both free instant tickets and paid manual-transfer verification, and reliable gate check-in.',
-        problem: 'Event organizers struggle with race conditions at entrance scanners, inconsistent white-label registration flows, and manual Excel tracking across multi-gate venues.',
-        role: 'Sole Full-Stack Engineer — designed the PostgreSQL schema & RLS policies, RPC check-in functions, Resend inline QR email delivery, and Tixlantra Scan camera portal.',
-        approach: 'Used 32-byte base64url cryptographic ticket tokens, atomic Postgres partial unique indexes (1x check-in per paid event day), and Signed URL payment proof review.',
-        implementation: 'Implemented /e/[slug] registration, /payment/[token] transfer upload, /ticket/[token] pass page, /admin/scan camera validator (html5-qrcode), and 2-sheet ExcelJS export.',
-        results: 'Complete production-structured Next.js + Supabase repository verified on GitHub; public live deployment URL and event attendee metrics are not publicly documented.',
-        screenshots: [{ src: 'assets/images/project-tixlantra.png', webp: 'assets/images/webp/project-tixlantra.webp', caption: 'Tixlantra Multi-Event Ticketing Architecture' }]
+        overview: 'Cosmobeauté Indonesia is Indonesia’s largest B2B beauty, aesthetic technology, and salon distribution exhibition portal hosted at ICE BSD.',
+        background: 'Connects aesthetic medical specialists, spa operators, and beauty distributors with international OEM/ODM manufacturers and equipment brands.',
+        problem: 'Needed a dedicated, modernized Indonesian regional edition portal integrated with exhibitor lead capture and brand showcase workflows.',
+        role: 'Web Developer — contributed to building and maintaining the Cosmobeauté Indonesia site, CMS templates, and lead capture workflows.',
+        approach: 'Custom WordPress CMS modules supporting brand directories, exhibitor inquiries, and responsive visitor registration flows.',
+        implementation: 'Deployed tailored page templates, optimized visual showcases, and coordinated multi-team content updates ahead of annual editions.',
+        results: 'Successfully launched and maintained for annual ICE BSD editions; private commercial lead totals are not publicly documented.',
+        screenshots: [
+          { src: 'assets/images/project-cosmobeaute.png', webp: 'assets/images/webp/project-cosmobeaute.webp', caption: 'Cosmobeauté Indonesia Portal' }
+        ]
       },
-      tabs: {
-        overview: `<div class="bp-section"><h5><i class="fa-solid fa-ticket"></i> Tixlantra Event Ticketing SaaS</h5><p>Multi-event &amp; multi-day ticketing platform featuring white-label branding, free instant QR passes, paid manual transfer confirmation, and atomic Postgres check-in rules.</p></div><div class="bp-media"><img src="assets/images/project-tixlantra.png" alt="Tixlantra" loading="lazy" /></div>`,
-        architecture: `<div class="bp-card"><h6>Next.js 16 App Router + Supabase PostgreSQL RLS</h6><p>Server-side QR generation (<code>qrcode</code>), Resend inline CID email delivery, private Storage buckets with Signed URLs, and atomic check-in RPCs.</p></div>`,
-        features: `<div class="bp-grid"><div class="bp-card"><h6>White-Label Events</h6><p>Custom brand title, logo, and theme tokens per event slug with automatic fallback.</p></div><div class="bp-card"><h6>Tixlantra Scan</h6><p>Camera + hardware barcode validation reporting VALID, ALREADY USED, UNPAID, or WRONG DAY.</p></div></div>`,
-        specs: `<p class="bp-note">Next.js 16 • React 19 • TypeScript • Tailwind CSS v4 • Supabase SSR/RLS • Resend • ExcelJS • Zod.</p>`
-      }
-    },
-    {
-      id: 'kelantra',
-      title: 'Kelantra',
-      badge: 'Vercel Full-Stack • B2B SaaS',
-      metaLine: 'Next.js 15 • Supabase RLS • Multi-Tenant Procurement',
-      categories: ['vercel', 'enterprise'],
-      categoryLabel: 'Vercel App • Procurement SaaS',
-      featured: false,
-      shortDesc: 'Multi-tenant B2B procurement and vendor management SaaS with strict PostgreSQL Row-Level Security, multi-tier approval workflows, and Vitest tenant isolation tests.',
-      img: 'assets/images/project-kelantra.png',
-      webp: 'assets/images/webp/project-kelantra.webp',
-      width: 1280,
-      height: 720,
-      liveUrl: null,
-      repoUrl: 'https://github.com/rikkardochaplin/kelantra',
-      tags: ['Next.js 15', 'React 19', 'TypeScript', 'Supabase RLS', 'Vitest', 'Zod'],
-      caseStudy: {
-        overview: 'Kelantra ("Control Every Purchase") is an enterprise multi-tenant B2B procurement and vendor management SaaS engineered with Next.js 15 App Router, TypeScript strict mode, and Supabase PostgreSQL.',
-        background: 'Organizations running multi-department purchasing need strict tenant isolation, unique document numbering per company, and auditable approval hierarchies.',
-        problem: 'Standard multi-tenant apps risk cross-organization data leaks if authorization only checks client-submitted organization IDs.',
-        role: 'Lead Full-Stack Engineer — architected dual-layer authorization (Database RLS + Server Action guards), RBAC role matrix, and Vitest tenant isolation test suite.',
-        approach: 'Every transactional table carries organization_id enforced by PostgreSQL RLS helpers (is_member_of_org, has_org_roles) alongside server-side getTenantContext() verification.',
-        implementation: 'Built multi-tier purchase approval flows, private tenant Supabase Storage buckets, Platform Superadmin governance (/platform-admin), and React Hook Form + Zod validation.',
-        results: 'Verified Next.js 15 multi-tenant architecture with Vitest isolation tests on GitHub; production tenant counts are not publicly documented.',
-        screenshots: [{ src: 'assets/images/project-kelantra.png', webp: 'assets/images/webp/project-kelantra.webp', caption: 'Kelantra Multi-Tenant Procurement Architecture' }]
-      },
-      tabs: {
-        overview: `<div class="bp-section"><h5><i class="fa-solid fa-boxes-packing"></i> Kelantra B2B Procurement</h5><p>Multi-tenant SaaS handling purchase requisitions, vendor management, multi-tier approvals, and strict PostgreSQL RLS tenant isolation.</p></div><div class="bp-media"><img src="assets/images/project-kelantra.png" alt="Kelantra" loading="lazy" /></div>`,
-        architecture: `<div class="bp-card"><h6>Dual-Layer Tenant Security</h6><p>Combines database-level RLS policies (<code>is_member_of_org()</code>) with server-side <code>requireTenantAuth()</code> guards in Next.js Server Actions.</p></div>`,
-        features: `<div class="bp-grid"><div class="bp-card"><h6>Multi-Tier Approvals</h6><p>Role-based workflow across Owner, Procurement, Finance, and Platform Superadmin.</p></div><div class="bp-card"><h6>Vitest Isolation Suite</h6><p>Automated unit/integration tests verifying tenant boundaries in happy-dom.</p></div></div>`,
-        specs: `<p class="bp-note">Next.js 15 • React 19 • TypeScript • Supabase SSR &amp; RLS • React Hook Form • Zod • Vitest.</p>`
-      }
-    },
-    {
-      id: 'seolantra',
-      title: 'Seolantra',
-      badge: 'Vercel Full-Stack • Website Intelligence',
-      metaLine: 'Next.js 16 • PageSpeed Insights API v5 • Inngest',
-      categories: ['vercel', 'web', 'ai'],
-      categoryLabel: 'Vercel App • SEO & Performance SaaS',
-      featured: false,
-      shortDesc: 'Website performance, SEO, accessibility, and best-practices audit SaaS powered by Google PageSpeed Insights API v5, Inngest durable workflows, Recharts, and PDF reports.',
-      img: 'assets/images/project-seolantra.png',
-      webp: 'assets/images/webp/project-seolantra.webp',
-      width: 1280,
-      height: 720,
-      liveUrl: null,
-      repoUrl: 'https://github.com/rikkardochaplin/seolantra',
-      tags: ['Next.js 16', 'PageSpeed API v5', 'Inngest', 'Firebase', 'React-PDF'],
-      caseStudy: {
-        overview: 'Seolantra ("See deeper. Build better.") is a website intelligence SaaS running automated Mobile & Desktop Core Web Vitals, SEO, accessibility, and best-practices audits.',
-        background: 'Created to streamline technical SEO and Lighthouse diagnostics across multiple managed exhibition and corporate domains.',
-        problem: 'Manual PageSpeed checks across dozens of URLs are repetitive, hard to track over time, and difficult to package into executive PDF reports.',
-        role: 'Full-Stack Developer — built the Next.js 16 App Router dashboard, Firebase Auth HttpOnly session cookie handling, Inngest background job orchestration, and PDF generator.',
-        approach: 'Offloaded long-running PageSpeed Insights v5 API polling to durable Inngest workflows (/api/inngest) while persisting audit snapshots in Cloud Firestore.',
-        implementation: 'Integrated OpenTelemetry instrumentation, Recharts trend graphs, @react-pdf/renderer executive reports, and accessible Zod-validated audit triggers.',
-        results: 'Complete Next.js 16 + Inngest + PageSpeed SaaS codebase on GitHub; public live domain metrics are not publicly documented.',
-        screenshots: [{ src: 'assets/images/project-seolantra.png', webp: 'assets/images/webp/project-seolantra.webp', caption: 'Seolantra Website Intelligence Architecture' }]
-      },
-      tabs: {
-        overview: `<div class="bp-section"><h5><i class="fa-solid fa-gauge-high"></i> Seolantra Website Intelligence</h5><p>Deep performance, SEO, accessibility, and best-practices audit SaaS powered by Google PageSpeed Insights API v5 and Cloud Firestore.</p></div><div class="bp-media"><img src="assets/images/project-seolantra.png" alt="Seolantra" loading="lazy" /></div>`,
-        architecture: `<div class="bp-card"><h6>Durable Workflow &amp; Session Auth</h6><p>Inngest background functions (<code>/api/inngest</code>) execute mobile/desktop PageSpeed scans asynchronously with Firebase Admin HttpOnly cookie sessions.</p></div>`,
-        specs: `<p class="bp-note">Next.js 16 • React 19 • TypeScript • Firebase Admin • Inngest • Recharts • @react-pdf/renderer.</p>`
-      }
-    },
-    {
-      id: 'lemburyukk',
-      title: 'Lemburyukk',
-      badge: 'Vercel Full-Stack • Enterprise Operations',
-      metaLine: 'Next.js 16 • Firebase • ExcelJS • jsPDF',
-      categories: ['vercel', 'enterprise'],
-      categoryLabel: 'Vercel App • Overtime & Reporting',
-      featured: false,
-      shortDesc: 'Overtime tracking and official PT Pamerindo Indonesia report generator featuring dual canvas digital signatures, multi-session duration logic, and A4 PDF / Excel exports.',
-      img: 'assets/images/project-lemburyukk.png',
-      webp: 'assets/images/webp/project-lemburyukk.webp',
-      width: 1280,
-      height: 720,
-      liveUrl: null,
-      repoUrl: 'https://github.com/rikkardochaplin/lemburyukk',
-      tags: ['Next.js 16', 'Tailwind v4', 'Firebase', 'ExcelJS', 'jsPDF'],
-      caseStudy: {
-        overview: 'Lemburyukk is a minimalist overtime record and official report generator built around PT Pamerindo Indonesia’s official spreadsheet and A4 printable form specifications.',
-        background: 'Replaced manual spreadsheet formatting and physical paper signing for daily/weekend overtime claims during exhibition setups.',
-        problem: 'Calculating multi-session overtime hours, weekend/holiday break deductions, and formatting compliant Excel/PDF forms with signatures took significant administrative time.',
-        role: 'Creator & Full-Stack Engineer — built the Next.js 16 interface, dual HTML5 canvas/upload signature pad, ExcelJS corporate template exporter, and jsPDF A4 renderer.',
-        approach: 'Supports both Cloud Firestore multi-device sync and a standalone local/offline mode with tabular monospace time displays and automatic dark/light theming.',
-        implementation: 'Implemented 24-hour multi-session calculations, configurable 1-hour weekend/holiday break deductions (>4h), national holiday markers, and toast notifications.',
-        results: 'Verified Next.js 16 repository on GitHub producing pixel-accurate PT Pamerindo Excel (.xlsx) and A4 Landscape PDF overtime forms.',
-        screenshots: [{ src: 'assets/images/project-lemburyukk.png', webp: 'assets/images/webp/project-lemburyukk.webp', caption: 'Lemburyukk Overtime & Reporting Architecture' }]
-      },
-      tabs: {
-        overview: `<div class="bp-section"><h5><i class="fa-solid fa-clock"></i> Lemburyukk Overtime Generator</h5><p>Tracks multi-session overtime hours, applies weekend/holiday rest deductions, captures dual employee/manager signatures, and exports official PT Pamerindo Excel &amp; A4 PDFs.</p></div><div class="bp-media"><img src="assets/images/project-lemburyukk.png" alt="Lemburyukk" loading="lazy" /></div>`,
-        specs: `<p class="bp-note">Next.js 16 • React 19 • Tailwind CSS v4 • Firebase • ExcelJS • jsPDF + AutoTable.</p>`
-      }
     },
     {
       id: 'pinjam-barang',
@@ -981,7 +493,7 @@ window.PORTFOLIO_DATA = {
       webp: 'assets/images/webp/project-pinjam-barang.webp',
       width: 1280,
       height: 720,
-      liveUrl: null,
+      liveUrl: 'https://pinjaminpamerindo.vercel.app',
       repoUrl: 'https://github.com/rikkardochaplin/pinjaminpamerindo',
       tags: ['React 18', 'Vite', 'Firebase', 'QR Scanner', 'ExcelJS', 'Docker'],
       caseStudy: {
@@ -994,10 +506,33 @@ window.PORTFOLIO_DATA = {
         results: 'Complete dual-portal asset management web app verified on GitHub; internal deployment metrics are not publicly documented.',
         screenshots: [{ src: 'assets/images/project-pinjam-barang.png', webp: 'assets/images/webp/project-pinjam-barang.webp', caption: 'AssetFlow IT Dual-Portal Lending System' }]
       },
-      tabs: {
-        overview: `<div class="bp-section"><h5><i class="fa-solid fa-laptop-file"></i> AssetFlow IT Lending System</h5><p>Manages IT equipment loans for PT Pamerindo Indonesia with employee/admin dual portals, QR scanning, Excel exports, and printable A4 handover letters.</p></div><div class="bp-media"><img src="assets/images/project-pinjam-barang.png" alt="AssetFlow IT" loading="lazy" /></div>`,
-        specs: `<p class="bp-note">React 18 • Vite 5 • React Router 7 • Firebase • qrcode • html5-qrcode • jsPDF • ExcelJS • Vercel / Docker.</p>`
-      }
+    },
+    {
+      id: 'lemburyukk',
+      title: 'Lemburyukk',
+      badge: 'Vercel Full-Stack • Enterprise Operations',
+      metaLine: 'Next.js 16 • Firebase • ExcelJS • jsPDF',
+      categories: ['vercel', 'enterprise'],
+      categoryLabel: 'Vercel App • Overtime & Reporting',
+      featured: false,
+      shortDesc: 'Overtime tracking and official PT Pamerindo Indonesia report generator featuring dual canvas digital signatures, multi-session duration logic, and A4 PDF / Excel exports.',
+      img: 'assets/images/project-lemburyukk.png',
+      webp: 'assets/images/webp/project-lemburyukk.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: 'https://lemburyukk.vercel.app',
+      repoUrl: 'https://github.com/rikkardochaplin/lemburyukk',
+      tags: ['Next.js 16', 'Tailwind v4', 'Firebase', 'ExcelJS', 'jsPDF'],
+      caseStudy: {
+        overview: 'Lemburyukk is a minimalist overtime record and official report generator built around PT Pamerindo Indonesia’s official spreadsheet and A4 printable form specifications.',
+        background: 'Replaced manual spreadsheet formatting and physical paper signing for daily/weekend overtime claims during exhibition setups.',
+        problem: 'Calculating multi-session overtime hours, weekend/holiday break deductions, and formatting compliant Excel/PDF forms with signatures took significant administrative time.',
+        role: 'Creator & Full-Stack Engineer — built the Next.js 16 interface, dual HTML5 canvas/upload signature pad, ExcelJS corporate template exporter, and jsPDF A4 renderer.',
+        approach: 'Supports both Cloud Firestore multi-device sync and a standalone local/offline mode with tabular monospace time displays and automatic dark/light theming.',
+        implementation: 'Implemented 24-hour multi-session calculations, configurable 1-hour weekend/holiday break deductions (>4h), national holiday markers, and toast notifications.',
+        results: 'Verified Next.js 16 repository on GitHub producing pixel-accurate PT Pamerindo Excel (.xlsx) and A4 Landscape PDF overtime forms.',
+        screenshots: [{ src: 'assets/images/project-lemburyukk.png', webp: 'assets/images/webp/project-lemburyukk.webp', caption: 'Lemburyukk Overtime & Reporting Architecture' }]
+      },
     },
     {
       id: 'reportlantra',
@@ -1012,7 +547,7 @@ window.PORTFOLIO_DATA = {
       webp: 'assets/images/webp/project-reportlantra.webp',
       width: 1280,
       height: 720,
-      liveUrl: null,
+      liveUrl: 'https://reportlantra.vercel.app',
       repoUrl: 'https://github.com/rikkardochaplin/reportlantra',
       tags: ['Next.js 15', 'TypeScript', 'Firebase', 'Recharts', 'SheetJS'],
       caseStudy: {
@@ -1025,10 +560,6 @@ window.PORTFOLIO_DATA = {
         results: 'Complete multi-brand analytics platform verified on GitHub; internal adoption counts are not publicly documented.',
         screenshots: [{ src: 'assets/images/project-reportlantra.png', webp: 'assets/images/webp/project-reportlantra.webp', caption: 'Reportlantra Multi-Brand Analytics Architecture' }]
       },
-      tabs: {
-        overview: `<div class="bp-section"><h5><i class="fa-solid fa-chart-area"></i> Reportlantra Social Analytics</h5><p>Multi-brand LinkedIn, Instagram, and TikTok reporting dashboard with .xlsx import/export, ER leaderboards, content calendars, and A4 print reports.</p></div><div class="bp-media"><img src="assets/images/project-reportlantra.png" alt="Reportlantra" loading="lazy" /></div>`,
-        specs: `<p class="bp-note">Next.js 15 • React 19 • TypeScript • Firebase Auth &amp; Firestore • Recharts • SheetJS (xlsx).</p>`
-      }
     },
     {
       id: 'email-check',
@@ -1043,7 +574,7 @@ window.PORTFOLIO_DATA = {
       webp: 'assets/images/webp/project-email-check.webp',
       width: 1280,
       height: 720,
-      liveUrl: null,
+      liveUrl: 'https://emaildetector.vercel.app',
       repoUrl: 'https://github.com/rikkardochaplin/emaildetector',
       tags: ['Next.js 16', 'React 19', 'Gemini 2.5 Flash', 'TypeScript', 'Web Audio API'],
       caseStudy: {
@@ -1056,10 +587,182 @@ window.PORTFOLIO_DATA = {
         results: 'Complete Next.js 16 + Tailwind v4 cybersecurity tool verified on GitHub; external deployment usage is not publicly documented.',
         screenshots: [{ src: 'assets/images/project-email-check.png', webp: 'assets/images/webp/project-email-check.webp', caption: 'XP MailShield Pro 2006 Inspection Architecture' }]
       },
-      tabs: {
-        overview: `<div class="bp-section"><h5><i class="fa-solid fa-shield-virus"></i> XP MailShield Pro 2006</h5><p>Dual-engine email threat analyzer combining local Heuristic v2.6 rules with Google Gemini 2.5 Flash inside a responsive Windows XP Luna UI.</p></div><div class="bp-media"><img src="assets/images/project-email-check.png" alt="XP MailShield Pro" loading="lazy" /></div>`,
-        specs: `<p class="bp-note">Next.js 16 • React 19 • TypeScript • Tailwind CSS v4 • Google Gemini 2.5 Flash • Web Audio API.</p>`
-      }
+    },
+    {
+      id: 'orion-erp',
+      title: 'Orion ERP & IBM iSeries Simulator',
+      badge: 'Enterprise ERP',
+      metaLine: 'IBM AS/400 • DB2 • RPG IV Free Format',
+      categories: ['enterprise'],
+      categoryLabel: 'Enterprise Systems • ERP & Mainframe',
+      featured: false,
+      shortDesc: 'Enterprise manufacturing ERP platform featuring live IBM AS/400 DB2 terminal connectivity, multi-level BOM explosion, MRP engine, and WRKSPLF/WRKACTJOB emulators.',
+      img: 'assets/images/project-orion-erp.png',
+      webp: 'assets/images/webp/project-orion-erp.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: null,
+      repoUrl: null,
+      docFile: 'Project-ERP.md',
+      tags: ['IBM AS/400 DB2', 'RPG IV Free', 'MRP & BOM', '5250 Terminal'],
+      caseStudy: {
+        overview: 'Orion ERP & IBM iSeries Simulator is an enterprise manufacturing ERP platform and AS/400 RPG simulator designed around real manufacturing & supply-chain workflows (Inventory, MES, MRP, Purchasing, Sales, General Ledger, and OS/400 Security).',
+        background: 'Built as a comprehensive candidate engineering portfolio package demonstrating IBM iSeries (AS/400), RPG IV Free Format (**FREE), DB2 for i relational modeling, and modern web UI integration.',
+        problem: 'Legacy AS/400 ERP environments often lack accessible modern interfaces for cross-departmental visibility while requiring strict transactional integrity, RBAC, and audit journaling.',
+        role: 'Sole Designer & Full-Stack Engineer — modeled DB2 relational tables (INVMSTP, BOMMSTP, MRPMSTP, WKHEDP, POHEDP, VCHDTLP, SECAUDP), authored RPG Free simulation modules, and built the 5250 terminal & executive dashboard UI.',
+        approach: 'Combined a modern web operations frontend (HTML5, CSS3, Vanilla JS, LocalStorage persistence) with authentic IBM i workflows including WRKSPLF 132-column green-bar print spooling, WRKACTJOB subsystem control, STRSQL console, and 5250 sign-on lock screen.',
+        implementation: 'Implemented BOM explosion (BOM_EXPLODE.RPGLE), net-demand MRP planning (MRP_ENGINE.RPGLE), auto-reorder triggers (INV_REORDER_AUTO), batch GL voucher posting (GL_POST_BATCH.RPGLE), and RBAC enforcement blocking destructive SQL statements.',
+        results: 'Complete interactive 12-module ERP & AS/400 simulation verified with screenshots and technical documentation in portfolio_presentation.md. Designed as a technical showcase/simulator rather than a live factory deployment.',
+        screenshots: [
+          { src: 'assets/images/project-orion-erp.png', webp: 'assets/images/webp/project-orion-erp.webp', caption: 'Orion ERP Executive Operations & AS/400 Dashboard' }
+        ]
+      },
+    },
+    {
+      id: 'cv-examiner',
+      title: 'CV Examiner AI Pro Platform',
+      badge: 'AI SaaS',
+      metaLine: 'GPT-4o Engine • Career Intelligence SaaS',
+      categories: ['ai'],
+      categoryLabel: 'AI & Automation • Career SaaS',
+      featured: false,
+      shortDesc: 'AI-powered recruitment SaaS providing automated resume parsing, ATS keyword gap analysis, STAR-method suggestions, and candidate scoring.',
+      img: 'assets/images/project-cv-examiner.png',
+      webp: 'assets/images/webp/project-cv-examiner.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: null,
+      repoUrl: null,
+      docFile: 'Project-CV.md',
+      tags: ['GPT-4o', 'FastAPI', 'React 18', 'ATS Analyzer'],
+      caseStudy: {
+        overview: 'CV Examiner AI Pro is a bilingual (Indonesian / English) SaaS platform powered by GPT-4o via FastAPI and React 18 that audits resumes, computes ATS scores (0–100), rewrites bullet points into STAR format, and conducts LinkedIn profile & interview preparation.',
+        background: 'Built to help professionals and hiring workflows systematically identify keyword gaps, resume weaknesses, and interview readiness.',
+        problem: 'Manual CV review is time-consuming and inconsistent, and job seekers rarely receive structured feedback on ATS keyword alignment or measurable STAR phrasing.',
+        role: 'Full-Stack & AI Engineer — architected the React 18 / Vite frontend components (AtsAudit, LinkedInAudit, InterviewPrepStudio, StarRewriter, WeaknessFixer, ExportModal) and FastAPI GPT-4o SSE backend.',
+        approach: 'Modular React 18 UI with i18n translations (ID/EN) and Dark/Light themes paired with a FastAPI server integrating Informa AI Engine / AWS Cognito OAuth2 token flows.',
+        implementation: 'Built multi-format file upload (PDF/DOCX/TXT), structured JSON/Text/PDF-ready export, automated Puppeteer screenshot capture pipeline, and 6 specialized analysis studios.',
+        results: 'Complete full-stack SaaS application documented in Project-CV.md with 9 verified UI module captures. External public usage metrics are not publicly documented.',
+        screenshots: [
+          { src: 'assets/images/project-cv-examiner.png', webp: 'assets/images/webp/project-cv-examiner.webp', caption: 'CV Examiner AI Pro Dashboard' }
+        ]
+      },
+    },
+    {
+      id: 'fhtbali',
+      title: 'Food, Hotel & Tourism Bali (FHTB)',
+      badge: 'Tourism B2B',
+      metaLine: 'BNDCC Bali • Asia-Pacific Hub',
+      categories: ['web'],
+      categoryLabel: 'Web Development • Hospitality & Tourism',
+      featured: false,
+      shortDesc: 'High-traffic hospitality and tourism trade platform connecting international suppliers with resort operators across Bali and the Asia-Pacific.',
+      img: 'assets/images/project-fhtbali.png',
+      webp: 'assets/images/webp/project-fhtbali.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: 'https://www.fhtbali.com',
+      repoUrl: null,
+      tags: ['WordPress', 'UI/UX', 'Speed Tuning'],
+      caseStudy: {
+        overview: 'Food, Hotel & Tourism Bali (FHTB) serves as the eastern Indonesian and Asia-Pacific procurement hub for hospitality, resort operations, and culinary technology at BNDCC Nusa Dua, Bali.',
+        background: 'Designed for international hospitality buyers, hoteliers, and F&B suppliers across Bali and the wider Asia-Pacific region.',
+        problem: 'Required responsive mobile UX and fast page delivery for international visitors accessing exhibitor info and registration funnels on varied mobile networks.',
+        role: 'Web Developer — managed CMS operations, responsive UX refinements, speed optimization, and lead funnel integrations.',
+        approach: 'Enterprise WordPress setup with asset compression, caching optimization, and clear exhibitor/visitor registration pathways.',
+        implementation: 'Maintained bilingual schedules, sponsor showcases, and conversion-focused registration pages.',
+        results: 'Active regional hospitality trade gateway serving Bali and Asia-Pacific delegates; specific private conversion metrics are not publicly documented.',
+        screenshots: [
+          { src: 'assets/images/project-fhtbali.png', webp: 'assets/images/webp/project-fhtbali.webp', caption: 'Food, Hotel & Tourism Bali Portal' }
+        ]
+      },
+    },
+    {
+      id: 'vapefair',
+      title: 'Vape Fair Indonesia',
+      badge: 'Industry Hub',
+      metaLine: 'Jakarta • Trade & Consumer Expo',
+      categories: ['web'],
+      categoryLabel: 'Web Development • Industry Expo',
+      featured: false,
+      shortDesc: 'Dedicated international trade portal for manufacturers, distributors, and consumers, featuring age-verified digital ticketing.',
+      img: 'assets/images/project-vapefair.png',
+      webp: 'assets/images/webp/project-vapefair.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: 'https://www.vapefair.id',
+      repoUrl: null,
+      tags: ['WordPress', 'Age Verification', 'B2B Directory'],
+      caseStudy: {
+        overview: 'Vape Fair Indonesia is a dedicated international exhibition portal connecting alternative consumer product manufacturers, distributors, and adult attendees in Jakarta.',
+        background: 'Requires regulatory age-gate compliance alongside seamless digital ticketing and exhibitor showcase pages.',
+        problem: 'Balancing strict age-verification gating with fast mobile load times and high-traffic ticketing flows during event announcements.',
+        role: 'Web Developer — maintained WordPress platform, age-verification UI flow, ticketing links, and performance tuning.',
+        approach: 'WordPress implementation featuring lightweight client-side age-gate persistence, B2B directory layout, and mobile-first optimization.',
+        implementation: 'Updated annual event branding, exhibitor listings, and high-traffic ticket funnel links.',
+        results: 'Live production portal at vapefair.id; internal ticket conversion metrics are not publicly documented.',
+        screenshots: [
+          { src: 'assets/images/project-vapefair.png', webp: 'assets/images/webp/project-vapefair.webp', caption: 'Vape Fair Indonesia Website' }
+        ]
+      },
+    },
+    {
+      id: 'cloudsfest',
+      title: 'Clouds Fest',
+      badge: 'Lifestyle Trade',
+      metaLine: 'Southeast Asia • Pamerindo · Informa',
+      categories: ['web'],
+      categoryLabel: 'Web Development • Lifestyle Trade',
+      featured: false,
+      shortDesc: 'Dynamic lifestyle and trade showcase platform for alternative consumer products across Southeast Asia.',
+      img: 'assets/images/project-cloudsfest.png',
+      webp: 'assets/images/webp/project-cloudsfest.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: 'https://www.cloudsfest.com',
+      repoUrl: null,
+      tags: ['WordPress CMS', 'Event Engine', 'Ticketing'],
+      caseStudy: {
+        overview: 'Clouds Fest is a regional lifestyle and trade showcase platform under PT Pamerindo Indonesia / Informa Markets serving Southeast Asian audiences.',
+        background: 'Combines trade exhibition directories with festival lineups, stage schedules, and ticket booking workflows.',
+        problem: 'Delivering rich visual festival lineups on mobile devices without degrading scroll smoothness or page speed.',
+        role: 'Web Developer — managed CMS modules, responsive mobile tuning, event schedule sections, and ticketing integrations.',
+        approach: 'WordPress CMS setup with modular schedule components, mobile viewport optimization, and fast media loading.',
+        implementation: 'Maintained lineup schedules, brand exhibitor blocks, and cross-linked ticketing CTAs.',
+        results: 'Live production festival portal at cloudsfest.com; attendance figures are not publicly documented.',
+        screenshots: [
+          { src: 'assets/images/project-cloudsfest.png', webp: 'assets/images/webp/project-cloudsfest.webp', caption: 'Clouds Fest Portal' }
+        ]
+      },
+    },
+    {
+      id: 'beautefestival',
+      title: 'Beauté Festival',
+      badge: 'Beauty Lifestyle',
+      metaLine: 'Jakarta • Retail & Activations',
+      categories: ['web'],
+      categoryLabel: 'Web Development • D2C Festival',
+      featured: false,
+      shortDesc: 'Consumer-facing beauty and wellness festival portal blending digital registration, brand activations, and influencer schedules.',
+      img: 'assets/images/project-beautefestival.png',
+      webp: 'assets/images/webp/project-beautefestival.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: 'https://www.beautefestival.com',
+      repoUrl: null,
+      tags: ['WordPress', 'D2C Portal', 'Brand Activations'],
+      caseStudy: {
+        overview: 'Beauté Festival is a consumer-facing beauty and wellness festival portal in Jakarta uniting skincare brands, influencers, workshop bookings, and live masterclass schedules.',
+        background: 'Created as a D2C complement to Pamerindo’s B2B beauty trade portfolio.',
+        problem: 'High mobile social-media referral traffic requiring instant schedule browsing, brand activation highlights, and frictionless registration.',
+        role: 'Web Developer — managed WordPress theme customization, D2C registration links, and mobile visual polish.',
+        approach: 'Responsive WordPress architecture structured around brand activation grids and masterclass timetables.',
+        implementation: 'Deployed editorial event blocks, influencer schedule modules, and campaign tracking.',
+        results: 'Live production portal at beautefestival.com; private registration numbers are not publicly documented.',
+        screenshots: [
+          { src: 'assets/images/project-beautefestival.png', webp: 'assets/images/webp/project-beautefestival.webp', caption: 'Beauté Festival Portal' }
+        ]
+      },
     },
     {
       id: 'online-invitation',
@@ -1087,41 +790,6 @@ window.PORTFOLIO_DATA = {
         results: 'Complete Next.js 16 + Supabase SaaS repository verified on GitHub; public live customer numbers are not publicly documented.',
         screenshots: [{ src: 'assets/images/project-online-invitation.png', webp: 'assets/images/webp/project-online-invitation.webp', caption: 'Online Invitation SaaS Architecture' }]
       },
-      tabs: {
-        overview: `<div class="bp-section"><h5><i class="fa-solid fa-envelope-open-text"></i> Online Invitation SaaS</h5><p>Multi-template invitation builder with live viewport preview, 80-bit personalized guest links, bulk CSV import, WhatsApp templates, and QR check-in passes.</p></div><div class="bp-media"><img src="assets/images/project-online-invitation.png" alt="Online Invitation" loading="lazy" /></div>`,
-        specs: `<p class="bp-note">Next.js 16 • React 19 • TypeScript • Supabase SSR &amp; RLS • QRCode • Zod • Sonner.</p>`
-      }
-    },
-    {
-      id: 'absenlantra',
-      title: 'Absenlantra',
-      badge: 'Vercel Stack • Biometric & IoT',
-      metaLine: 'Next.js 14 • ONNX SFace • AES-256-GCM • Firebase',
-      categories: ['vercel', 'iot', 'ai'],
-      categoryLabel: 'Vercel App • Biometric Attendance',
-      featured: false,
-      shortDesc: 'Decentralized mobile & web office attendance system using 128-dim OpenCV SFace ONNX facial verification, AES-256-GCM template encryption, and Haversine geofence radius validation.',
-      img: 'assets/images/project-absenlantra.png',
-      webp: 'assets/images/webp/project-absenlantra.webp',
-      width: 1280,
-      height: 720,
-      liveUrl: null,
-      repoUrl: null,
-      tags: ['Next.js 14', 'ONNX Runtime', 'AES-256-GCM', 'Firebase Admin', 'TypeScript'],
-      caseStudy: {
-        overview: 'Absenlantra is a local-first mobile + web attendance platform combining Android facial enrollment/check-in with a 7-module Next.js App Router administration dashboard.',
-        background: 'Designed to run reliably over local LAN Wi-Fi using Firebase Emulator Suite without paid cloud dependencies.',
-        problem: 'Attendance systems must verify real identity and physical office presence while preventing photo replay attacks and protecting biometric templates.',
-        role: 'System Architect & Developer — built the Next.js 14 admin/API backend (onnxruntime-node, sharp, firebase-admin, zod) and biometric verification pipeline.',
-        approach: 'Extracts 128-dimensional SFace ONNX embeddings server-side, encrypts templates with AES-256-GCM, verifies Cosine Similarity (>= 0.363), and enforces Haversine geofencing + 60s anti-replay nonces.',
-        implementation: 'Delivered 7 admin modules (Stats, Employees, Attendance Logs, Leave/Correction Approvals, Face Review, Formula-Injection-Safe CSV Export, Office Schedule Config).',
-        results: 'Documented local LAN prototype with atomic Firestore transactions and disk persistence; external production metrics are not publicly documented.',
-        screenshots: [{ src: 'assets/images/project-absenlantra.png', webp: 'assets/images/webp/project-absenlantra.webp', caption: 'Absenlantra Biometric Attendance Architecture' }]
-      },
-      tabs: {
-        overview: `<div class="bp-section"><h5><i class="fa-solid fa-face-viewfinder"></i> Absenlantra Biometric Attendance</h5><p>Decentralized attendance platform with 128-dim SFace ONNX face verification, AES-256-GCM encryption, Haversine geofence check, and 7-module Next.js admin console.</p></div><div class="bp-media"><img src="assets/images/project-absenlantra.png" alt="Absenlantra" loading="lazy" /></div>`,
-        specs: `<p class="bp-note">Next.js 14 • React 18 • TypeScript • onnxruntime-node • Sharp • Firebase Admin • Zod.</p>`
-      }
     },
     {
       id: 'meeting-registrasi',
@@ -1149,10 +817,33 @@ window.PORTFOLIO_DATA = {
         results: 'Complete workspace Next.js 14 + Firebase implementation; public live deployment URL is not publicly documented.',
         screenshots: [{ src: 'assets/images/project-meeting-registrasi.png', webp: 'assets/images/webp/project-meeting-registrasi.webp', caption: 'Meeting-Registrasi Multi-Gate Architecture' }]
       },
-      tabs: {
-        overview: `<div class="bp-section"><h5><i class="fa-solid fa-qrcode"></i> Meeting-Registrasi QR System</h5><p>Supports parent/sub-event hierarchies, instant or manual approval workflows, 48-char cryptographic QR tickets, and role-scoped gate scanning.</p></div><div class="bp-media"><img src="assets/images/project-meeting-registrasi.png" alt="Meeting-Registrasi" loading="lazy" /></div>`,
-        specs: `<p class="bp-note">Next.js 14 • React 18 • Firebase &amp; Firebase Admin SDK • QRCode • html5-qrcode.</p>`
-      }
+    },
+    {
+      id: 'absenlantra',
+      title: 'Absenlantra',
+      badge: 'Vercel Stack • Biometric & IoT',
+      metaLine: 'Next.js 14 • ONNX SFace • AES-256-GCM • Firebase',
+      categories: ['vercel', 'iot', 'ai'],
+      categoryLabel: 'Vercel App • Biometric Attendance',
+      featured: false,
+      shortDesc: 'Decentralized mobile & web office attendance system using 128-dim OpenCV SFace ONNX facial verification, AES-256-GCM template encryption, and Haversine geofence radius validation.',
+      img: 'assets/images/project-absenlantra.png',
+      webp: 'assets/images/webp/project-absenlantra.webp',
+      width: 1280,
+      height: 720,
+      liveUrl: null,
+      repoUrl: null,
+      tags: ['Next.js 14', 'ONNX Runtime', 'AES-256-GCM', 'Firebase Admin', 'TypeScript'],
+      caseStudy: {
+        overview: 'Absenlantra is a local-first mobile + web attendance platform combining Android facial enrollment/check-in with a 7-module Next.js App Router administration dashboard.',
+        background: 'Designed to run reliably over local LAN Wi-Fi using Firebase Emulator Suite without paid cloud dependencies.',
+        problem: 'Attendance systems must verify real identity and physical office presence while preventing photo replay attacks and protecting biometric templates.',
+        role: 'System Architect & Developer — built the Next.js 14 admin/API backend (onnxruntime-node, sharp, firebase-admin, zod) and biometric verification pipeline.',
+        approach: 'Extracts 128-dimensional SFace ONNX embeddings server-side, encrypts templates with AES-256-GCM, verifies Cosine Similarity (>= 0.363), and enforces Haversine geofencing + 60s anti-replay nonces.',
+        implementation: 'Delivered 7 admin modules (Stats, Employees, Attendance Logs, Leave/Correction Approvals, Face Review, Formula-Injection-Safe CSV Export, Office Schedule Config).',
+        results: 'Documented local LAN prototype with atomic Firestore transactions and disk persistence; external production metrics are not publicly documented.',
+        screenshots: [{ src: 'assets/images/project-absenlantra.png', webp: 'assets/images/webp/project-absenlantra.webp', caption: 'Absenlantra Biometric Attendance Architecture' }]
+      },
     },
     {
       id: 'ai-elysia',
@@ -1180,10 +871,6 @@ window.PORTFOLIO_DATA = {
         results: 'Verified Vercel serverless proxy implementation in local workspace; live production URL status is not verified in this audit.',
         screenshots: [{ src: 'assets/images/project-ai-elysia.png', webp: 'assets/images/webp/project-ai-elysia.webp', caption: 'Elysia AI Serverless Proxy Architecture' }]
       },
-      tabs: {
-        overview: `<div class="bp-section"><h5><i class="fa-solid fa-comments"></i> Elysia AI Serverless Proxy</h5><p>Protects AWS Cognito credentials inside Vercel environment variables, caches OAuth tokens, and provides a 1-line embeddable WordPress chatbot widget.</p></div><div class="bp-media"><img src="assets/images/project-ai-elysia.png" alt="Elysia AI Proxy" loading="lazy" /></div>`,
-        specs: `<p class="bp-note">Node.js ES Modules • Vercel Serverless Functions • AWS Cognito OAuth2 • Embeddable JS Widget.</p>`
-      }
     }
   ],
 

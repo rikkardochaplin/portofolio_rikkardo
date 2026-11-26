@@ -678,8 +678,7 @@
         return;
       }
 
-      const anyModalOpen = document.getElementById('arch-modal-backdrop')?.classList.contains('active') ||
-                           document.getElementById('lightbox-backdrop')?.classList.contains('active') ||
+      const anyModalOpen = document.getElementById('lightbox-backdrop')?.classList.contains('active') ||
                            document.getElementById('postcard-modal-backdrop')?.classList.contains('active') ||
                            districtOverlay?.classList.contains('active');
       if (anyModalOpen) return;

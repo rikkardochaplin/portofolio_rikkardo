@@ -18,11 +18,11 @@ This repository powers the personal engineering portfolio of **Rikkardo L. Tobin
 ## Architecture & Pages
 
 - [`index.html`](index.html) — Primary Hybrid Dark & Light editorial portfolio (Sections 01–11: Hero, About, Engineering Philosophy, Core Expertise, Technical Stack, Featured Projects, Visual Stories, 3D Drivefolio Preview, Experience, Education & Certifications, Contact).
-- [`project.html`](project.html) — Dedicated case study reader (`?id=<slug>`) for all 12 projects.
+- [`project.html`](project.html) — Dedicated case study reader (`?id=<slug>`) for all 23 projects.
 - [`article.html`](article.html) — Visual Story & Photography reader (`?id=<slug>`) for all 9 Jakarta photo essays.
 - [`drivefolio.html`](drivefolio.html) — Optional lazy-loaded Three.js (`r128`) 5-island 3D Drivefolio experience with autopilot, day/sunset/night lighting, postcard PNG export, mobile touch controls, and a static WebGL fallback directory.
-- [`js/data.js`](js/data.js) — Centralized data layer for projects, stories, expertise, stack, experience, education, and certifications.
-- [`js/main.js`](js/main.js) — Navigation drawer, category filters, Quick View Blueprint modal, Photography Lightbox, reveal animations, and validated contact form (FormSubmit AJAX + `mailto:` fallback).
+- [`js/data.js`](js/data.js) — Centralized priority-ranked data layer for projects, stories, expertise, stack, experience, education, and certifications.
+- [`js/main.js`](js/main.js) — Navigation drawer, category filters, compact Top-9 / Expand-23 project toggle, Photography Lightbox, reveal animations, and validated contact form (FormSubmit AJAX + `mailto:` fallback).
 - [`css/style.css`](css/style.css) & [`css/drivefolio.css`](css/drivefolio.css) — Hybrid Dark & Light design tokens (`#0B1120`, `#111827`, `#F7F8FA`, `#FFFFFF`, `#3B82F6`, `#64748B`, `#E2E8F0`) and isolated 3D HUD styles.
 
 ---
@@ -56,4 +56,5 @@ Documentation:
 - [`docs/REDESIGN_PLAN.md`](docs/REDESIGN_PLAN.md)
 - [`docs/IMPLEMENTATION_CHECKLIST.md`](docs/IMPLEMENTATION_CHECKLIST.md)
 - [`docs/TESTING_REPORT.md`](docs/TESTING_REPORT.md)
+- [`docs/PROJECT_PRIORITY_AUDIT.md`](docs/PROJECT_PRIORITY_AUDIT.md)
 - [`docs/DEPLOYMENT_GUIDE.md`](docs/DEPLOYMENT_GUIDE.md)

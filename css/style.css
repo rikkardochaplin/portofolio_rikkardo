@@ -34,7 +34,7 @@
 
   /* Spacing & Layout */
   --container-max: 1220px;
-  --section-pad: clamp(68px, 8vw, 108px);
+  --section-pad: clamp(42px, 4.8vw, 64px);
   --radius-xs: 4px;
   --radius-sm: 6px;
   --radius-md: 10px;
@@ -174,7 +174,7 @@ ul {
 /* Typography & Section Headings */
 .section-header {
   max-width: 760px;
-  margin-bottom: clamp(36px, 5vw, 56px);
+  margin-bottom: clamp(24px, 3.2vw, 36px);
 }
 
 .section-header-center {
@@ -499,8 +499,8 @@ ul {
 .hero-section {
   background-color: var(--navy-deep);
   color: var(--text-on-dark);
-  padding-top: clamp(92px, 8.5vw, 114px);
-  padding-bottom: clamp(48px, 5vw, 72px);
+  padding-top: clamp(78px, 6.5vw, 92px);
+  padding-bottom: clamp(32px, 3.5vw, 48px);
   position: relative;
   overflow: hidden;
   border-bottom: 1px solid var(--border-dark);
@@ -918,18 +918,18 @@ ul {
 .expertise-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 24px;
+  gap: 18px;
 }
 
 .expertise-card {
   background: var(--off-white);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  padding: 28px;
+  padding: 20px 22px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: 20px;
+  gap: 14px;
   transition: border-color var(--transition), box-shadow var(--transition);
 }
 
@@ -996,15 +996,15 @@ ul {
 /* ── SECTION 05: TECHNICAL STACK (Off White) ── */
 .stack-grid {
   display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 20px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
 }
 
 .stack-card {
   background: var(--pure-white);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  padding: 22px;
+  padding: 16px;
 }
 
 .stack-card-head {
@@ -1240,7 +1240,7 @@ ul {
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
+  gap: 18px;
 }
 
 .project-card {
@@ -1258,7 +1258,8 @@ ul {
   transform: translateY(-3px);
 }
 
-.project-card.is-hidden {
+.project-card.is-hidden,
+.project-card.is-compact-hidden {
   display: none;
 }
 
@@ -1292,11 +1293,11 @@ ul {
 }
 
 .project-card-body {
-  padding: 20px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 12px;
+  gap: 10px;
 }
 
 .project-meta {
@@ -1306,16 +1307,20 @@ ul {
 }
 
 .project-card-body h4 {
-  font-size: 1.1rem;
+  font-size: 1.04rem;
   color: var(--pure-white);
   margin: 0;
 }
 
 .project-card-body p {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--text-on-dark-muted);
   margin: 0;
   flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .project-card-footer {
@@ -1340,7 +1345,7 @@ ul {
 .stories-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 22px;
+  gap: 18px;
 }
 
 .story-card {
@@ -1365,7 +1370,7 @@ ul {
 
 .story-media {
   position: relative;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 16 / 10;
   background: #0F172A;
   overflow: hidden;
 }
@@ -1433,11 +1438,11 @@ ul {
 }
 
 .story-body {
-  padding: 20px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   flex: 1;
-  gap: 10px;
+  gap: 8px;
 }
 
 .story-meta {
@@ -1450,16 +1455,20 @@ ul {
 }
 
 .story-body h4 {
-  font-size: 1.06rem;
+  font-size: 1.02rem;
   color: var(--text-on-light);
   margin: 0;
 }
 
 .story-body p {
-  font-size: 0.88rem;
+  font-size: 0.85rem;
   color: var(--text-on-light-muted);
   margin: 0;
   flex: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .story-actions {
@@ -1475,10 +1484,10 @@ ul {
   background: var(--navy-deep);
   border: 1px solid var(--border-dark-strong);
   border-radius: var(--radius-lg);
-  padding: clamp(28px, 4vw, 44px);
+  padding: clamp(22px, 3vw, 32px);
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.95fr);
-  gap: clamp(24px, 4vw, 48px);
+  gap: clamp(20px, 3vw, 36px);
   align-items: center;
 }
 
@@ -1539,7 +1548,7 @@ ul {
 /* ── SECTION 09: PROFESSIONAL EXPERIENCE (Pure White) ── */
 .experience-timeline {
   display: grid;
-  gap: 20px;
+  gap: 16px;
   max-width: 960px;
 }
 
@@ -1548,10 +1557,10 @@ ul {
   border: 1px solid var(--border-light);
   border-left: 3px solid var(--electric-blue);
   border-radius: var(--radius-md);
-  padding: 26px 28px;
+  padding: 20px 22px;
   display: grid;
   grid-template-columns: 220px minmax(0, 1fr);
-  gap: 24px;
+  gap: 20px;
 }
 
 .timeline-period {
@@ -1618,7 +1627,7 @@ ul {
   background: var(--pure-white);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  padding: 24px;
+  padding: 18px 20px;
 }
 
 .edu-top {
@@ -1681,16 +1690,17 @@ ul {
   background: var(--pure-white);
   border: 1px solid var(--border-light);
   border-radius: var(--radius-md);
-  padding: 24px;
+  padding: 18px 20px;
 }
 
 .certs-panel h3 {
   font-size: 1.15rem;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .certs-grid {
   display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 10px;
 }
 
@@ -1928,7 +1938,7 @@ a.contact-channel-card:hover {
   border-color: var(--electric-blue);
 }
 
-/* ── Modals (Blueprint & Lightbox) ── */
+/* ── Modal & Lightbox ── */
 .modal-backdrop-custom {
   position: fixed;
   inset: 0;
@@ -1985,33 +1995,6 @@ a.contact-channel-card:hover {
   background: var(--electric-blue);
 }
 
-.modal-tabs-custom {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 12px 24px;
-  background: var(--navy-deep);
-  border-bottom: 1px solid var(--border-dark);
-}
-
-.modal-tab-btn {
-  font-family: var(--font-mono);
-  font-size: 0.76rem;
-  font-weight: 600;
-  padding: 7px 12px;
-  border-radius: var(--radius-xs);
-  border: 1px solid var(--border-dark);
-  background: transparent;
-  color: var(--text-on-dark-muted);
-  cursor: pointer;
-}
-
-.modal-tab-btn.active {
-  background: var(--electric-blue);
-  border-color: var(--electric-blue);
-  color: var(--pure-white);
-}
-
 .modal-body-custom {
   padding: 24px;
   overflow-y: auto;
@@ -2027,118 +2010,6 @@ a.contact-channel-card:hover {
   justify-content: space-between;
   align-items: center;
   gap: 12px;
-}
-
-/* Blueprint inner styles */
-.bp-section h5 {
-  color: var(--electric-blue-light);
-  font-size: 1rem;
-  margin-bottom: 8px;
-}
-
-.bp-section p {
-  color: var(--text-on-dark-muted);
-  font-size: 0.94rem;
-}
-
-.bp-media {
-  border-radius: var(--radius-sm);
-  overflow: hidden;
-  border: 1px solid var(--border-dark);
-  margin: 16px 0;
-}
-
-.bp-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 12px;
-}
-
-.bp-stack-list {
-  display: grid;
-  gap: 12px;
-}
-
-.bp-card {
-  background: var(--navy-deep);
-  border: 1px solid var(--border-dark);
-  border-radius: var(--radius-sm);
-  padding: 14px 16px;
-}
-
-.bp-card h6 {
-  font-size: 0.92rem;
-  color: var(--pure-white);
-  margin-bottom: 6px;
-}
-
-.bp-card p {
-  font-size: 0.85rem;
-  color: var(--text-on-dark-muted);
-  margin: 0;
-}
-
-.bp-list {
-  padding-left: 18px;
-  color: var(--text-on-dark-muted);
-  font-size: 0.9rem;
-  display: grid;
-  gap: 6px;
-}
-
-.bp-footer-bar {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-  margin-top: 14px;
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  color: var(--text-on-dark-subtle);
-}
-
-.bp-table-wrap {
-  overflow-x: auto;
-}
-
-.bp-table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: 0.84rem;
-}
-
-.bp-table th,
-.bp-table td {
-  padding: 10px 12px;
-  border: 1px solid var(--border-dark);
-  text-align: left;
-}
-
-.bp-table th {
-  background: var(--navy-deep);
-  color: var(--pure-white);
-}
-
-.bp-table td {
-  color: var(--text-on-dark-muted);
-}
-
-.badge-method {
-  font-family: var(--font-mono);
-  font-size: 0.7rem;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 3px;
-}
-
-.badge-method.get { background: rgba(59, 130, 246, 0.2); color: #93C5FD; }
-.badge-method.post { background: rgba(16, 185, 129, 0.2); color: #6EE7B7; }
-
-.bp-note {
-  font-family: var(--font-mono);
-  font-size: 0.85rem;
-  color: var(--text-on-dark-muted);
 }
 
 /* Lightbox */
@@ -2404,7 +2275,7 @@ html.js-ready [data-reveal].revealed {
   .stack-grid,
   .projects-grid,
   .stories-grid,
-  .bp-grid,
+  .certs-grid,
   .form-grid,
   .expertise-list,
   .drivefolio-features-list,

@@ -12,7 +12,6 @@ document.addEventListener('DOMContentLoaded', () => {
   initRevealAnimations();
   initProjectFilters();
   initStoryFilters();
-  initArchitectureModal();
   initPhotoLightbox();
   initContactForm();
 });
@@ -127,32 +126,70 @@ function initRevealAnimations() {
   revealVisible();
 }
 
-/* ── 5. Project Category Filtering ── */
+/* ── 5. Project Category Filtering & Compact Toggle ── */
 function initProjectFilters() {
   const filterGroup = document.getElementById('project-filters');
-  const cards = document.querySelectorAll('#projects-grid .project-card');
+  const cards = Array.from(document.querySelectorAll('#projects-grid .project-card'));
   const countLabel = document.getElementById('projects-count-label');
+  const toggleBtn = document.getElementById('projects-expand-btn');
   if (!filterGroup || !cards.length) return;
+
+  let activeFilter = 'all';
+  let expandedAll = false;
+  const COMPACT_LIMIT = 9;
+
+  function applyState() {
+    let visible = 0;
+    let totalMatching = 0;
+
+    cards.forEach((card, idx) => {
+      const cats = (card.getAttribute('data-category') || '').split(/\s+/);
+      const matchesFilter = activeFilter === 'all' || cats.includes(activeFilter);
+      if (matchesFilter) totalMatching += 1;
+
+      const hiddenByCompact = activeFilter === 'all' && !expandedAll && idx >= COMPACT_LIMIT;
+      const show = matchesFilter && !hiddenByCompact;
+      card.classList.toggle('is-hidden', !matchesFilter);
+      card.classList.toggle('is-compact-hidden', hiddenByCompact);
+      if (show) visible += 1;
+    });
+
+    if (countLabel) {
+      countLabel.textContent = activeFilter === 'all' && !expandedAll
+        ? `Showing top ${visible} flagship of ${cards.length} projects`
+        : `Showing ${visible} of ${cards.length} projects`;
+    }
+
+    if (toggleBtn) {
+      if (activeFilter === 'all' && cards.length > COMPACT_LIMIT) {
+        toggleBtn.style.display = 'inline-flex';
+        toggleBtn.innerHTML = expandedAll
+          ? `<i class="fa-solid fa-compress" aria-hidden="true"></i> Show Compact View (Top ${COMPACT_LIMIT})`
+          : `<i class="fa-solid fa-layer-group" aria-hidden="true"></i> Show All ${cards.length} Projects (+${cards.length - COMPACT_LIMIT} more)`;
+      } else {
+        toggleBtn.style.display = 'none';
+      }
+    }
+  }
 
   const buttons = filterGroup.querySelectorAll('.filter-btn');
   buttons.forEach(btn => {
     btn.addEventListener('click', () => {
       buttons.forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const filter = btn.getAttribute('data-filter');
-
-      let visible = 0;
-      cards.forEach(card => {
-        const cats = (card.getAttribute('data-category') || '').split(/\s+/);
-        const match = filter === 'all' || cats.includes(filter);
-        card.classList.toggle('is-hidden', !match);
-        if (match) visible += 1;
-      });
-      if (countLabel) {
-        countLabel.textContent = `Showing ${visible} of ${cards.length} projects`;
-      }
+      activeFilter = btn.getAttribute('data-filter') || 'all';
+      applyState();
     });
   });
+
+  if (toggleBtn) {
+    toggleBtn.addEventListener('click', () => {
+      expandedAll = !expandedAll;
+      applyState();
+    });
+  }
+
+  applyState();
 }
 
 /* ── 6. Visual Stories Category Filtering ── */
@@ -176,138 +213,7 @@ function initStoryFilters() {
   });
 }
 
-/* ── 7. Quick View Technical Blueprint Modal ── */
-function initArchitectureModal() {
-  const backdrop = document.getElementById('arch-modal-backdrop');
-  const modalBody = document.getElementById('modal-body');
-  if (!backdrop || !modalBody || !window.PORTFOLIO_DATA) return;
-
-  const badgeEl = document.getElementById('modal-badge');
-  const titleEl = document.getElementById('modal-title');
-  const subtitleEl = document.getElementById('modal-subtitle');
-  const footerTagsEl = document.getElementById('modal-footer-tags');
-  const caseStudyLink = document.getElementById('modal-case-study-link');
-  const closeBtn = document.getElementById('modal-close-btn');
-  const closeBtnBottom = document.getElementById('modal-close-btn-bottom');
-  const tabBtns = backdrop.querySelectorAll('.modal-tab-btn');
-
-  let currentEntry = null;
-  let lastTrigger = null;
-
-  function resolveEntry(key) {
-    const data = window.PORTFOLIO_DATA;
-    const proj = data.projects.find(p => p.id === key);
-    if (proj) {
-      return {
-        kind: 'project',
-        id: proj.id,
-        badge: proj.badge,
-        title: proj.title,
-        subtitle: proj.metaLine,
-        tags: proj.tags,
-        tabs: proj.tabs || { overview: `<p>${proj.shortDesc}</p>` }
-      };
-    }
-
-    const exp = data.expertise.find(e => e.id === key);
-    if (exp) {
-      return {
-        kind: 'service',
-        id: exp.id,
-        badge: `Core Expertise ${exp.code}`,
-        title: exp.blueprintTitle,
-        subtitle: exp.blueprintSubtitle,
-        tags: exp.blueprintTags,
-        tabs: { overview: exp.blueprintOverview }
-      };
-    }
-
-    const pillar = data.aboutPillars.find(a => a.id === key);
-    if (pillar) {
-      return {
-        kind: 'about',
-        id: pillar.id,
-        badge: 'Core Engineering Pillar',
-        title: pillar.title,
-        subtitle: pillar.subtitle,
-        tags: pillar.tags,
-        tabs: { overview: pillar.overview }
-      };
-    }
-
-    return null;
-  }
-
-  function renderTab(tabKey) {
-    if (!currentEntry) return;
-    const content = currentEntry.tabs[tabKey] || currentEntry.tabs.overview || '<p class="bp-note">Detailed documentation is available on the full case study page.</p>';
-    modalBody.innerHTML = content;
-    tabBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-tab') === tabKey));
-  }
-
-  function openModal(key, trigger) {
-    const entry = resolveEntry(key);
-    if (!entry) return;
-    currentEntry = entry;
-    lastTrigger = trigger || null;
-
-    if (badgeEl) badgeEl.textContent = entry.badge;
-    if (titleEl) titleEl.textContent = entry.title;
-    if (subtitleEl) subtitleEl.textContent = entry.subtitle;
-    if (footerTagsEl) {
-      footerTagsEl.innerHTML = (entry.tags || []).map(t => `<span class="tech-tag">${t}</span>`).join('');
-    }
-    if (caseStudyLink) {
-      if (entry.kind === 'project') {
-        caseStudyLink.style.display = 'inline-flex';
-        caseStudyLink.href = `project.html?id=${encodeURIComponent(entry.id)}`;
-      } else {
-        caseStudyLink.style.display = 'none';
-      }
-    }
-
-    renderTab('overview');
-    backdrop.classList.add('active');
-    backdrop.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-    if (closeBtn) closeBtn.focus();
-  }
-
-  function closeModal() {
-    backdrop.classList.remove('active');
-    backdrop.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    if (lastTrigger && typeof lastTrigger.focus === 'function') {
-      lastTrigger.focus();
-    }
-  }
-
-  document.addEventListener('click', (e) => {
-    const trigger = e.target.closest('.btn-open-modal[data-project], .btn-open-modal[data-service], .btn-open-modal[data-about]');
-    if (!trigger) return;
-    e.preventDefault();
-    const key = trigger.getAttribute('data-project') || trigger.getAttribute('data-service') || trigger.getAttribute('data-about');
-    openModal(key, trigger);
-  });
-
-  tabBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const tab = btn.getAttribute('data-tab');
-      if (tab) renderTab(tab);
-    });
-  });
-
-  if (closeBtn) closeBtn.addEventListener('click', closeModal);
-  if (closeBtnBottom) closeBtnBottom.addEventListener('click', closeModal);
-  backdrop.addEventListener('click', (e) => {
-    if (e.target === backdrop) closeModal();
-  });
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape' && backdrop.classList.contains('active')) closeModal();
-  });
-}
-
-/* ── 8. Fullscreen Photography Lightbox ── */
+/* ── 7. Fullscreen Photography Lightbox ── */
 function initPhotoLightbox() {
   const backdrop = document.getElementById('lightbox-backdrop');
   const imgEl = document.getElementById('lightbox-img');

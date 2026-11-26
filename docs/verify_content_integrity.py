@@ -136,13 +136,30 @@ def verify():
         "https://www.cloudsfest.com",
         "https://www.beautefestival.com",
         "https://id.linkedin.com/in/rikkardo-l-tobing",
-        "https://github.com/rikkardochaplin"
+        "https://github.com/rikkardochaplin",
+        "https://tixlantra.vercel.app/",
+        "https://kelantra.vercel.app/",
+        "https://seolantra.vercel.app/",
+        "https://lemburyukk.vercel.app/",
+        "https://pinjaminpamerindo.vercel.app/",
+        "https://reportlantra.vercel.app/",
+        "https://emaildetector.vercel.app/"
     ]
     for c in contact_items:
         if c in index_html:
             checks.append(f"LINK/CONTACT PRESERVED: {c}")
         else:
             errors.append(f"MISSING LINK/CONTACT: {c}")
+
+    # 5b. Check Blueprint removal & Compact toggle presence
+    if "arch-modal-backdrop" not in index_html and "btn-open-modal" not in index_html:
+        checks.append("BLUEPRINT REMOVED: Zero arch-modal-backdrop or btn-open-modal in index.html")
+    else:
+        errors.append("BLUEPRINT LEFTOVER FOUND IN index.html")
+    if 'id="projects-expand-btn"' in index_html:
+        checks.append("COMPACT EXPAND TOGGLE PRESENT IN index.html")
+    else:
+        errors.append("MISSING projects-expand-btn IN index.html")
 
     # 6. Check All Referenced Images & WebP variants Exist on Disk
     all_html = index_html + "\n" + article_html + "\n" + project_html + "\n" + drivefolio_html
